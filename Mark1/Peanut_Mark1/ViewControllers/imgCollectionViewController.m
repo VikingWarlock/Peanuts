@@ -12,6 +12,15 @@
 
 @end
 
+/**
+ *
+ *UITableView+extra里面两个方法可以快速的达到avatar的效果😳
+ *
+ *
+ */
+
+
+
 @implementation imgCollectionViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
