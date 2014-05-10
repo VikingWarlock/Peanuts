@@ -1,0 +1,592 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		27C402CF34354145A3818596 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A474C76991743418E0AA42B /* libPods.a */; };
+		887F20E7191D4051009250D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E6191D4051009250D2 /* Foundation.framework */; };
+		887F20E9191D4051009250D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E8191D4051009250D2 /* CoreGraphics.framework */; };
+		887F20EB191D4051009250D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20EA191D4051009250D2 /* UIKit.framework */; };
+		887F20F1191D4051009250D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 887F20EF191D4051009250D2 /* InfoPlist.strings */; };
+		887F20F3191D4051009250D2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F20F2191D4051009250D2 /* main.m */; };
+		887F20F7191D4051009250D2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F20F6191D4051009250D2 /* AppDelegate.m */; };
+		887F20F9191D4051009250D2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 887F20F8191D4051009250D2 /* Images.xcassets */; };
+		887F2100191D4052009250D2 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20FF191D4052009250D2 /* XCTest.framework */; };
+		887F2101191D4052009250D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E6191D4051009250D2 /* Foundation.framework */; };
+		887F2102191D4052009250D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20EA191D4051009250D2 /* UIKit.framework */; };
+		887F210A191D4052009250D2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 887F2108191D4052009250D2 /* InfoPlist.strings */; };
+		887F210C191D4052009250D2 /* Peanut_Mark1Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F210B191D4052009250D2 /* Peanut_Mark1Tests.m */; };
+		887F2116191D411D009250D2 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 887F2115191D411D009250D2 /* Podfile */; };
+		887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F211D191DB85D009250D2 /* BaseNaviViewController.m */; };
+		887F2121191DB88B009250D2 /* BaseUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2120191DB88B009250D2 /* BaseUIViewController.m */; };
+		887F2125191DB91B009250D2 /* NetworkStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2124191DB91B009250D2 /* NetworkStack.m */; };
+		887F2128191DB934009250D2 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 887F2126191DB934009250D2 /* CoreDataModel.xcdatamodeld */; };
+		887F212B191DB97E009250D2 /* PeanutTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F212A191DB97E009250D2 /* PeanutTopViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		887F2103191D4052009250D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 887F20DB191D4051009250D2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 887F20E2191D4051009250D2;
+			remoteInfo = Peanut_Mark1;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5A474C76991743418E0AA42B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		887F20E3191D4051009250D2 /* Peanut_Mark1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peanut_Mark1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		887F20E6191D4051009250D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		887F20E8191D4051009250D2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		887F20EA191D4051009250D2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		887F20EE191D4051009250D2 /* Peanut_Mark1-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Peanut_Mark1-Info.plist"; sourceTree = "<group>"; };
+		887F20F0191D4051009250D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		887F20F2191D4051009250D2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		887F20F4191D4051009250D2 /* Peanut_Mark1-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Peanut_Mark1-Prefix.pch"; sourceTree = "<group>"; };
+		887F20F5191D4051009250D2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		887F20F6191D4051009250D2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		887F20F8191D4051009250D2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		887F20FE191D4052009250D2 /* Peanut_Mark1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Peanut_Mark1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		887F20FF191D4052009250D2 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		887F2107191D4052009250D2 /* Peanut_Mark1Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Peanut_Mark1Tests-Info.plist"; sourceTree = "<group>"; };
+		887F2109191D4052009250D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		887F210B191D4052009250D2 /* Peanut_Mark1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Peanut_Mark1Tests.m; sourceTree = "<group>"; };
+		887F2115191D411D009250D2 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		887F211C191DB85D009250D2 /* BaseNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseNaviViewController.h; path = BaseModel/BaseNaviViewController.h; sourceTree = "<group>"; };
+		887F211D191DB85D009250D2 /* BaseNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseNaviViewController.m; path = BaseModel/BaseNaviViewController.m; sourceTree = "<group>"; };
+		887F211F191DB88B009250D2 /* BaseUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseUIViewController.h; path = BaseModel/BaseUIViewController.h; sourceTree = "<group>"; };
+		887F2120191DB88B009250D2 /* BaseUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseUIViewController.m; path = BaseModel/BaseUIViewController.m; sourceTree = "<group>"; };
+		887F2122191DB8D7009250D2 /* PublicLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PublicLib.h; path = PublicLibrary/PublicLib.h; sourceTree = "<group>"; };
+		887F2123191DB91B009250D2 /* NetworkStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkStack.h; path = Networks/NetworkStack.h; sourceTree = "<group>"; };
+		887F2124191DB91B009250D2 /* NetworkStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkStack.m; path = Networks/NetworkStack.m; sourceTree = "<group>"; };
+		887F2127191DB934009250D2 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
+		887F2129191DB97E009250D2 /* PeanutTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeanutTopViewController.h; path = ViewControllers/PeanutTopViewController.h; sourceTree = "<group>"; };
+		887F212A191DB97E009250D2 /* PeanutTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PeanutTopViewController.m; path = ViewControllers/PeanutTopViewController.m; sourceTree = "<group>"; };
+		C2AAB9293F12492E8B381615 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		887F20E0191D4051009250D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				887F20E9191D4051009250D2 /* CoreGraphics.framework in Frameworks */,
+				887F20EB191D4051009250D2 /* UIKit.framework in Frameworks */,
+				887F20E7191D4051009250D2 /* Foundation.framework in Frameworks */,
+				27C402CF34354145A3818596 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		887F20FB191D4052009250D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				887F2100191D4052009250D2 /* XCTest.framework in Frameworks */,
+				887F2102191D4052009250D2 /* UIKit.framework in Frameworks */,
+				887F2101191D4052009250D2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		887F20DA191D4051009250D2 = {
+			isa = PBXGroup;
+			children = (
+				887F20EC191D4051009250D2 /* Peanut_Mark1 */,
+				887F2105191D4052009250D2 /* Peanut_Mark1Tests */,
+				887F20E5191D4051009250D2 /* Frameworks */,
+				887F20E4191D4051009250D2 /* Products */,
+				C2AAB9293F12492E8B381615 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		887F20E4191D4051009250D2 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				887F20E3191D4051009250D2 /* Peanut_Mark1.app */,
+				887F20FE191D4052009250D2 /* Peanut_Mark1Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		887F20E5191D4051009250D2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				887F20E6191D4051009250D2 /* Foundation.framework */,
+				887F20E8191D4051009250D2 /* CoreGraphics.framework */,
+				887F20EA191D4051009250D2 /* UIKit.framework */,
+				887F20FF191D4052009250D2 /* XCTest.framework */,
+				5A474C76991743418E0AA42B /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		887F20EC191D4051009250D2 /* Peanut_Mark1 */ = {
+			isa = PBXGroup;
+			children = (
+				887F211B191DB7A3009250D2 /* PublicLibrary */,
+				887F211A191DB79A009250D2 /* Networks */,
+				887F2119191DB792009250D2 /* CoreData */,
+				887F2118191DB787009250D2 /* ViewControllers */,
+				887F2117191DB777009250D2 /* BaseModel */,
+				887F20F5191D4051009250D2 /* AppDelegate.h */,
+				887F20F6191D4051009250D2 /* AppDelegate.m */,
+				887F20F8191D4051009250D2 /* Images.xcassets */,
+				887F20ED191D4051009250D2 /* Supporting Files */,
+				887F2115191D411D009250D2 /* Podfile */,
+			);
+			path = Peanut_Mark1;
+			sourceTree = "<group>";
+		};
+		887F20ED191D4051009250D2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				887F20EE191D4051009250D2 /* Peanut_Mark1-Info.plist */,
+				887F20EF191D4051009250D2 /* InfoPlist.strings */,
+				887F20F2191D4051009250D2 /* main.m */,
+				887F20F4191D4051009250D2 /* Peanut_Mark1-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		887F2105191D4052009250D2 /* Peanut_Mark1Tests */ = {
+			isa = PBXGroup;
+			children = (
+				887F210B191D4052009250D2 /* Peanut_Mark1Tests.m */,
+				887F2106191D4052009250D2 /* Supporting Files */,
+			);
+			path = Peanut_Mark1Tests;
+			sourceTree = "<group>";
+		};
+		887F2106191D4052009250D2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				887F2107191D4052009250D2 /* Peanut_Mark1Tests-Info.plist */,
+				887F2108191D4052009250D2 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		887F2117191DB777009250D2 /* BaseModel */ = {
+			isa = PBXGroup;
+			children = (
+				887F211C191DB85D009250D2 /* BaseNaviViewController.h */,
+				887F211D191DB85D009250D2 /* BaseNaviViewController.m */,
+				887F211F191DB88B009250D2 /* BaseUIViewController.h */,
+				887F2120191DB88B009250D2 /* BaseUIViewController.m */,
+			);
+			name = BaseModel;
+			sourceTree = "<group>";
+		};
+		887F2118191DB787009250D2 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				887F2129191DB97E009250D2 /* PeanutTopViewController.h */,
+				887F212A191DB97E009250D2 /* PeanutTopViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		887F2119191DB792009250D2 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				887F2126191DB934009250D2 /* CoreDataModel.xcdatamodeld */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		887F211A191DB79A009250D2 /* Networks */ = {
+			isa = PBXGroup;
+			children = (
+				887F2123191DB91B009250D2 /* NetworkStack.h */,
+				887F2124191DB91B009250D2 /* NetworkStack.m */,
+			);
+			name = Networks;
+			sourceTree = "<group>";
+		};
+		887F211B191DB7A3009250D2 /* PublicLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				887F2122191DB8D7009250D2 /* PublicLib.h */,
+			);
+			name = PublicLibrary;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		887F20E2191D4051009250D2 /* Peanut_Mark1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 887F210F191D4052009250D2 /* Build configuration list for PBXNativeTarget "Peanut_Mark1" */;
+			buildPhases = (
+				740CABCA8ADF41748452A2F4 /* Check Pods Manifest.lock */,
+				887F20DF191D4051009250D2 /* Sources */,
+				887F20E0191D4051009250D2 /* Frameworks */,
+				887F20E1191D4051009250D2 /* Resources */,
+				1856C3953B12465DB2B8DC88 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Peanut_Mark1;
+			productName = Peanut_Mark1;
+			productReference = 887F20E3191D4051009250D2 /* Peanut_Mark1.app */;
+			productType = "com.apple.product-type.application";
+		};
+		887F20FD191D4052009250D2 /* Peanut_Mark1Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 887F2112191D4052009250D2 /* Build configuration list for PBXNativeTarget "Peanut_Mark1Tests" */;
+			buildPhases = (
+				887F20FA191D4052009250D2 /* Sources */,
+				887F20FB191D4052009250D2 /* Frameworks */,
+				887F20FC191D4052009250D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				887F2104191D4052009250D2 /* PBXTargetDependency */,
+			);
+			name = Peanut_Mark1Tests;
+			productName = Peanut_Mark1Tests;
+			productReference = 887F20FE191D4052009250D2 /* Peanut_Mark1Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		887F20DB191D4051009250D2 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "viking warlock";
+				TargetAttributes = {
+					887F20E2191D4051009250D2 = {
+						DevelopmentTeam = 2T5DSP2WAH;
+					};
+					887F20FD191D4052009250D2 = {
+						TestTargetID = 887F20E2191D4051009250D2;
+					};
+				};
+			};
+			buildConfigurationList = 887F20DE191D4051009250D2 /* Build configuration list for PBXProject "Peanut_Mark1" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 887F20DA191D4051009250D2;
+			productRefGroup = 887F20E4191D4051009250D2 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				887F20E2191D4051009250D2 /* Peanut_Mark1 */,
+				887F20FD191D4052009250D2 /* Peanut_Mark1Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		887F20E1191D4051009250D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				887F2116191D411D009250D2 /* Podfile in Resources */,
+				887F20F1191D4051009250D2 /* InfoPlist.strings in Resources */,
+				887F20F9191D4051009250D2 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		887F20FC191D4052009250D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				887F210A191D4052009250D2 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1856C3953B12465DB2B8DC88 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		740CABCA8ADF41748452A2F4 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		887F20DF191D4051009250D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				887F20F7191D4051009250D2 /* AppDelegate.m in Sources */,
+				887F2121191DB88B009250D2 /* BaseUIViewController.m in Sources */,
+				887F2128191DB934009250D2 /* CoreDataModel.xcdatamodeld in Sources */,
+				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
+				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
+				887F212B191DB97E009250D2 /* PeanutTopViewController.m in Sources */,
+				887F20F3191D4051009250D2 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		887F20FA191D4052009250D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				887F210C191D4052009250D2 /* Peanut_Mark1Tests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		887F2104191D4052009250D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 887F20E2191D4051009250D2 /* Peanut_Mark1 */;
+			targetProxy = 887F2103191D4052009250D2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		887F20EF191D4051009250D2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				887F20F0191D4051009250D2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		887F2108191D4052009250D2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				887F2109191D4052009250D2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		887F210D191D4052009250D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos7.0;
+			};
+			name = Debug;
+		};
+		887F210E191D4052009250D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos7.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		887F2110191D4052009250D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2AAB9293F12492E8B381615 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
+				INFOPLIST_FILE = "Peanut_Mark1/Peanut_Mark1-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		887F2111191D4052009250D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C2AAB9293F12492E8B381615 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
+				INFOPLIST_FILE = "Peanut_Mark1/Peanut_Mark1-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		887F2113191D4052009250D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Peanut_Mark1.app/Peanut_Mark1";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Peanut_Mark1Tests/Peanut_Mark1Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		887F2114191D4052009250D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Peanut_Mark1.app/Peanut_Mark1";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
+				INFOPLIST_FILE = "Peanut_Mark1Tests/Peanut_Mark1Tests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		887F20DE191D4051009250D2 /* Build configuration list for PBXProject "Peanut_Mark1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				887F210D191D4052009250D2 /* Debug */,
+				887F210E191D4052009250D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		887F210F191D4052009250D2 /* Build configuration list for PBXNativeTarget "Peanut_Mark1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				887F2110191D4052009250D2 /* Debug */,
+				887F2111191D4052009250D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		887F2112191D4052009250D2 /* Build configuration list for PBXNativeTarget "Peanut_Mark1Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				887F2113191D4052009250D2 /* Debug */,
+				887F2114191D4052009250D2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		887F2126191DB934009250D2 /* CoreDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				887F2127191DB934009250D2 /* CoreDataModel.xcdatamodel */,
+			);
+			currentVersion = 887F2127191DB934009250D2 /* CoreDataModel.xcdatamodel */;
+			name = CoreDataModel.xcdatamodeld;
+			path = CoreData/CoreDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 887F20DB191D4051009250D2 /* Project object */;
+}

@@ -1,0 +1,1 @@
+PODS_UIIMAGE_FILTER_OTHER_LDFLAGS = -framework Foundation
