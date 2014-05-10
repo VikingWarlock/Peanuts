@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (extra)
-
+/**
+ *捕捉指定View的图像，返回UIImage
+ *
+ */
 -(UIImage*)captureView;
 
 

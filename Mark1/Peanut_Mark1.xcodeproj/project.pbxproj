@@ -33,6 +33,11 @@
 		887F2140191E200D009250D2 /* NSString+extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F213F191E200D009250D2 /* NSString+extra.m */; };
 		887F2143191E2EBF009250D2 /* UITableView+extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2142191E2EBF009250D2 /* UITableView+extra.m */; };
 		887F2146191E310A009250D2 /* AMPAvatarView+helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2145191E310A009250D2 /* AMPAvatarView+helper.m */; };
+		887F214D191E4590009250D2 /* 1.png in Resources */ = {isa = PBXBuildFile; fileRef = 887F2148191E4590009250D2 /* 1.png */; };
+		887F214E191E4590009250D2 /* 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 887F2149191E4590009250D2 /* 2.png */; };
+		887F214F191E4590009250D2 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 887F214A191E4590009250D2 /* 3.png */; };
+		887F2150191E4590009250D2 /* iron.png in Resources */ = {isa = PBXBuildFile; fileRef = 887F214B191E4590009250D2 /* iron.png */; };
+		887F2151191E4590009250D2 /* pic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 887F214C191E4590009250D2 /* pic.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +93,11 @@
 		887F2142191E2EBF009250D2 /* UITableView+extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UITableView+extra.m"; path = "PublicLibrary/UITableView+extra.m"; sourceTree = "<group>"; };
 		887F2144191E310A009250D2 /* AMPAvatarView+helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AMPAvatarView+helper.h"; path = "PublicLibrary/Private_Enhanced/AMPAvatarView+helper.h"; sourceTree = "<group>"; };
 		887F2145191E310A009250D2 /* AMPAvatarView+helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AMPAvatarView+helper.m"; path = "PublicLibrary/Private_Enhanced/AMPAvatarView+helper.m"; sourceTree = "<group>"; };
+		887F2148191E4590009250D2 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 1.png; path = img/1.png; sourceTree = "<group>"; };
+		887F2149191E4590009250D2 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 2.png; path = img/2.png; sourceTree = "<group>"; };
+		887F214A191E4590009250D2 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 3.png; path = img/3.png; sourceTree = "<group>"; };
+		887F214B191E4590009250D2 /* iron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iron.png; path = img/iron.png; sourceTree = "<group>"; };
+		887F214C191E4590009250D2 /* pic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = pic.jpg; path = img/pic.jpg; sourceTree = "<group>"; };
 		C2AAB9293F12492E8B381615 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,6 +161,7 @@
 		887F20EC191D4051009250D2 /* Peanut_Mark1 */ = {
 			isa = PBXGroup;
 			children = (
+				887F2147191E4585009250D2 /* img */,
 				887F211B191DB7A3009250D2 /* PublicLibrary */,
 				887F211A191DB79A009250D2 /* Networks */,
 				887F2119191DB792009250D2 /* CoreData */,
@@ -301,6 +312,18 @@
 			name = BaseSmallOutlet;
 			sourceTree = "<group>";
 		};
+		887F2147191E4585009250D2 /* img */ = {
+			isa = PBXGroup;
+			children = (
+				887F2148191E4590009250D2 /* 1.png */,
+				887F2149191E4590009250D2 /* 2.png */,
+				887F214A191E4590009250D2 /* 3.png */,
+				887F214B191E4590009250D2 /* iron.png */,
+				887F214C191E4590009250D2 /* pic.jpg */,
+			);
+			name = img;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -382,6 +405,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				887F2116191D411D009250D2 /* Podfile in Resources */,
+				887F214D191E4590009250D2 /* 1.png in Resources */,
+				887F2151191E4590009250D2 /* pic.jpg in Resources */,
+				887F214E191E4590009250D2 /* 2.png in Resources */,
+				887F2150191E4590009250D2 /* iron.png in Resources */,
+				887F214F191E4590009250D2 /* 3.png in Resources */,
 				887F20F1191D4051009250D2 /* InfoPlist.strings in Resources */,
 				887F20F9191D4051009250D2 /* Images.xcassets in Resources */,
 			);

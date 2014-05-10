@@ -13,4 +13,8 @@
 
 @property(nonatomic,readonly)BaseNaviViewController *NavigationController;
 
+@property(nonatomic,weak) UIImage*bkImage;
+
+-(void)setBackgroundImage:(UIImage*)bkimage andBlurEnable:(BOOL)enable;
+
 @end

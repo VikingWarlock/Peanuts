@@ -18,6 +18,8 @@
 {
     CGFloat height=self.tableHeaderView.frame.size.height;
     AMPAvatarView *avatar=[[AMPAvatarView alloc]initWithFrame:CGRectMake(asix, height, size.width, size.height)];
+    [avatar setImage:avatarImage];
+
     [self addSubview:avatar];
     
 }
@@ -26,11 +28,17 @@
 {
     CGFloat height=self.tableHeaderView.frame.size.height;
     AMPAvatarView *avatar=[[AMPAvatarView alloc]initWithFrame:CGRectMake(asix, height, size.width, size.height)];
+    [avatar setImage:avatarImage];
     [self addSubview:avatar];
     [avatar addTarget:target select:selector andParameter:parameter];
     
 
 }
 
+-(void)setup:(UIImage*)img :(AMPAvatarView*)avatar
+{
+
+    avatar.image=img;
+}
 
 @end

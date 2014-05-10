@@ -11,8 +11,19 @@
 
 @interface UITableView (extra)
 
+/**
+ * 给UITableView直接添加Avatar
+ *
+ *
+ */
 -(void)updateWithAvatar:(UIImage *)avatarImage And_X_Offset:(CGFloat)asix AndSize:(CGSize)size ;
 
+
+/**
+ *给UITableView直接添加Avatar,并且添加点击Avatar之后的效果
+ *
+ *
+ */
 -(void)updateWithAvatar:(UIImage *)avatarImage And_X_Offset:(CGFloat)asix AndSize:(CGSize)size AndAddTarget:(id)target AndSelector:(SEL)selector AndParameter:(NSDictionary*)parameter;
 
 

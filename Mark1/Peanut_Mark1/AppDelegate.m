@@ -22,15 +22,20 @@
     
     [MagicalRecord setupCoreDataStack];
     
+    
+//    [application setStatusBarStyle:UIStatusBarStyleLightContent];
 
     PeanutTopViewController *TopVC=[[PeanutTopViewController alloc]init];
-    //张众根据需要修改这句话;
+    
+    
     
     BaseNaviViewController *TopNavi=[[BaseNaviViewController alloc]initWithRootViewController:TopVC];
 
     [TopNavi.navigationBar setBarTintColor:[UIColor redColor]];
-    [TopNavi.navigationBar setTranslucent:NO];
+    [TopNavi.navigationBar setTranslucent:YES];
+//    [self.window setBounds:CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
     
+//    [TopNavi.navigationBar setTintColor:[UIColor clearColor]];
     
     
     self.window.rootViewController=TopNavi;

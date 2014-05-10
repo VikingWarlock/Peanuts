@@ -7,6 +7,7 @@
 //
 
 #import "BaseUIViewController.h"
+#import <UIImage+BlurAndDarken.h>
 
 @interface BaseUIViewController ()
 
@@ -49,6 +50,22 @@
     [super viewWillAppear:animated];
     
 }
+
+
+-(void)setBackgroundImage:(UIImage *)bkimage andBlurEnable:(BOOL)enable
+{
+    UIImageView *backgroundView=[[UIImageView alloc]init];
+    [self.view addSubview:backgroundView];
+    [backgroundView setFrame:self.view.frame];
+    if (enable) {
+        self.bkImage=[bkimage darkened:0.5f andBlurredImage:16.f];
+    }else
+        self.bkImage=bkimage;
+    
+    [backgroundView setImage:self.bkImage];
+
+}
+
 
 /*
 #pragma mark - Navigation

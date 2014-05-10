@@ -10,6 +10,10 @@
 
 @interface NSString (extra)
 
+/**
+ *调用花生米语言包
+ *
+ */
 -(NSString*)PeanutString;
 
 @end

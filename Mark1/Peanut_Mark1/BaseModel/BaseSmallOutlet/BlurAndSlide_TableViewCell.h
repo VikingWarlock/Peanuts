@@ -25,13 +25,16 @@ typedef NS_ENUM(NSInteger, Cell_Init_Direction) {
 @interface BlurAndSlide_TableViewCell : UITableViewCell
 
 @property(nonatomic,weak)id<Delegate_BlurCellSlide> Delegate_Blur;
-@property(nonatomic,assign)NSIndexPath* indexpath;
-@property(nonatomic,readonly)UIImage *image;
+@property(nonatomic,strong)NSIndexPath* indexpath;
+@property(nonatomic,strong)UIImage *BKImage;
 
 
 
 
 -(id)initWithBackImage:(UIImage*)bkImage AtIndexpath:(NSIndexPath*)indexpath AndInitPosition:(Cell_Init_Direction)position AndDelegate:(id<Delegate_BlurCellSlide>)delegate;
+
+-(void)SetupWithBackImage:(UIImage*)bkImage AtIndexpath:(NSIndexPath*)indexpath AndInitPosition:(Cell_Init_Direction)position AndDelegate:(id<Delegate_BlurCellSlide>)delegate;
+
 
 
 @end

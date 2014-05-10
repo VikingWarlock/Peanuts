@@ -10,6 +10,5 @@
 #define Peanut_Mark1_PublicLib_h
 
 
-#define PeanutString(string)  NSLocalizedString(key, @"")
 
 #endif
