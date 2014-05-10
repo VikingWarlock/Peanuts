@@ -7,6 +7,7 @@
 //
 
 #import "PeanutTopViewController.h"
+#import "PublicLib.h"
 
 @interface PeanutTopViewController ()
 
@@ -38,7 +39,7 @@
     [btn setFrame: CGRectMake(70, 70, 100, 100)];
     [btn addTarget:self action:@selector(pushTest) forControlEvents:UIControlEventTouchUpInside];
     [btn setTitle:@"hello" forState:UIControlStateNormal];
-       
+    btn.titleLabel.text=pea
     // Do any additional setup after loading the view.
 }
 

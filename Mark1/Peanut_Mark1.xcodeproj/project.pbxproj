@@ -26,6 +26,10 @@
 		887F2125191DB91B009250D2 /* NetworkStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2124191DB91B009250D2 /* NetworkStack.m */; };
 		887F2128191DB934009250D2 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 887F2126191DB934009250D2 /* CoreDataModel.xcdatamodeld */; };
 		887F212B191DB97E009250D2 /* PeanutTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F212A191DB97E009250D2 /* PeanutTopViewController.m */; };
+		887F2133191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2132191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m */; };
+		887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2136191DF9D2009250D2 /* UIImage+extra.m */; };
+		887F213C191DF9D2009250D2 /* UIView+extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2138191DF9D2009250D2 /* UIView+extra.m */; };
+		887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F213A191DF9D2009250D2 /* VKLiveBlur.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +71,14 @@
 		887F2127191DB934009250D2 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
 		887F2129191DB97E009250D2 /* PeanutTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeanutTopViewController.h; path = ViewControllers/PeanutTopViewController.h; sourceTree = "<group>"; };
 		887F212A191DB97E009250D2 /* PeanutTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PeanutTopViewController.m; path = ViewControllers/PeanutTopViewController.m; sourceTree = "<group>"; };
+		887F2131191DF5D5009250D2 /* BlurAndSlide_TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlurAndSlide_TableViewCell.h; path = BaseModel/BaseSmallOutlet/BlurAndSlide_TableViewCell.h; sourceTree = "<group>"; };
+		887F2132191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlurAndSlide_TableViewCell.m; path = BaseModel/BaseSmallOutlet/BlurAndSlide_TableViewCell.m; sourceTree = "<group>"; };
+		887F2135191DF9D2009250D2 /* UIImage+extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+extra.h"; path = "PublicLibrary/UIImage+extra.h"; sourceTree = "<group>"; };
+		887F2136191DF9D2009250D2 /* UIImage+extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+extra.m"; path = "PublicLibrary/UIImage+extra.m"; sourceTree = "<group>"; };
+		887F2137191DF9D2009250D2 /* UIView+extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+extra.h"; path = "PublicLibrary/UIView+extra.h"; sourceTree = "<group>"; };
+		887F2138191DF9D2009250D2 /* UIView+extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+extra.m"; path = "PublicLibrary/UIView+extra.m"; sourceTree = "<group>"; };
+		887F2139191DF9D2009250D2 /* VKLiveBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VKLiveBlur.h; path = PublicLibrary/VKLiveBlur.h; sourceTree = "<group>"; };
+		887F213A191DF9D2009250D2 /* VKLiveBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VKLiveBlur.m; path = PublicLibrary/VKLiveBlur.m; sourceTree = "<group>"; };
 		C2AAB9293F12492E8B381615 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -176,6 +188,7 @@
 		887F2117191DB777009250D2 /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
+				887F2134191DF5D9009250D2 /* BaseSmallOutlet */,
 				887F211C191DB85D009250D2 /* BaseNaviViewController.h */,
 				887F211D191DB85D009250D2 /* BaseNaviViewController.m */,
 				887F211F191DB88B009250D2 /* BaseUIViewController.h */,
@@ -187,8 +200,11 @@
 		887F2118191DB787009250D2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				887F2129191DB97E009250D2 /* PeanutTopViewController.h */,
-				887F212A191DB97E009250D2 /* PeanutTopViewController.m */,
+				887F2130191DF569009250D2 /* SquareViewController */,
+				887F212F191DF55F009250D2 /* MustReadViewController */,
+				887F212E191DF3CC009250D2 /* imgCollection */,
+				887F212D191DF3A0009250D2 /* ActivityViewController */,
+				887F212C191DF386009250D2 /* TopViewController */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -213,9 +229,61 @@
 		887F211B191DB7A3009250D2 /* PublicLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				887F2135191DF9D2009250D2 /* UIImage+extra.h */,
+				887F2136191DF9D2009250D2 /* UIImage+extra.m */,
+				887F2137191DF9D2009250D2 /* UIView+extra.h */,
+				887F2138191DF9D2009250D2 /* UIView+extra.m */,
+				887F2139191DF9D2009250D2 /* VKLiveBlur.h */,
+				887F213A191DF9D2009250D2 /* VKLiveBlur.m */,
 				887F2122191DB8D7009250D2 /* PublicLib.h */,
 			);
 			name = PublicLibrary;
+			sourceTree = "<group>";
+		};
+		887F212C191DF386009250D2 /* TopViewController */ = {
+			isa = PBXGroup;
+			children = (
+				887F2129191DB97E009250D2 /* PeanutTopViewController.h */,
+				887F212A191DB97E009250D2 /* PeanutTopViewController.m */,
+			);
+			name = TopViewController;
+			sourceTree = "<group>";
+		};
+		887F212D191DF3A0009250D2 /* ActivityViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ActivityViewController;
+			sourceTree = "<group>";
+		};
+		887F212E191DF3CC009250D2 /* imgCollection */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = imgCollection;
+			sourceTree = "<group>";
+		};
+		887F212F191DF55F009250D2 /* MustReadViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MustReadViewController;
+			sourceTree = "<group>";
+		};
+		887F2130191DF569009250D2 /* SquareViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SquareViewController;
+			sourceTree = "<group>";
+		};
+		887F2134191DF5D9009250D2 /* BaseSmallOutlet */ = {
+			isa = PBXGroup;
+			children = (
+				887F2131191DF5D5009250D2 /* BlurAndSlide_TableViewCell.h */,
+				887F2132191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m */,
+			);
+			name = BaseSmallOutlet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,10 +422,14 @@
 			files = (
 				887F20F7191D4051009250D2 /* AppDelegate.m in Sources */,
 				887F2121191DB88B009250D2 /* BaseUIViewController.m in Sources */,
+				887F2133191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m in Sources */,
+				887F213C191DF9D2009250D2 /* UIView+extra.m in Sources */,
 				887F2128191DB934009250D2 /* CoreDataModel.xcdatamodeld in Sources */,
+				887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */,
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
 				887F212B191DB97E009250D2 /* PeanutTopViewController.m in Sources */,
+				887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */,
 				887F20F3191D4051009250D2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
