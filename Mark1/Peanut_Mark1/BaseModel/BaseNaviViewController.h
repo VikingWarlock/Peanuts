@@ -16,12 +16,22 @@ typedef NS_ENUM(NSInteger, NaivPushDir) {
 
 
 @interface BaseNaviViewController : UINavigationController
-
+/**
+ *暂时不要用
+ *
+ */
 -(void)PushVC:(UIViewController*)vc;
-
+/**
+ *暂时不要用
+ *
+ */
+ 
 -(void)PushVC:(UIViewController*)vc Direction:(NaivPushDir)dir;
 
-
+/**
+ *暂时不要用
+ *
+ */
 -(void)PopVC;
 
 

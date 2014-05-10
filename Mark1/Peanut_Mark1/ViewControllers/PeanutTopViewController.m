@@ -10,6 +10,9 @@
 #import "PublicLib.h"
 #import "BlurAndSlide_TableViewCell.h"
 
+#import "SquareViewController.h"
+#import "MustReadViewController.h"
+#import "ActivityViewController.h"
 
 
 @interface PeanutTopViewController ()<UITableViewDataSource,UITableViewDelegate,Delegate_BlurCellSlide>
@@ -60,18 +63,17 @@
     // Do any additional setup after loading the view.
 }
 
--(void)push
-{
-    UIAlertView *alert=[[UIAlertView alloc]initWithTitle:@"a" message:@"a" delegate:nil cancelButtonTitle:@"a" otherButtonTitles: nil];
-    [alert show];
-    
-}
+
+
+
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
 #pragma mark - Navigation
@@ -117,7 +119,33 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    switch (indexPath.row) {
+        case 0:
+        {
+            SquareViewController *vc=[[SquareViewController alloc]init];
+//            [self.NavigationController PushVC:vc];
+            [self.NavigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case 1:
+        {
+            ActivityViewController *vc=[[ActivityViewController alloc]init];
+            [self.NavigationController pushViewController:vc animated:YES];
+            
+        }
+            break;
+        case 2:
+        {
+            MustReadViewController *vc=[[MustReadViewController alloc]init];
+            [self.NavigationController pushViewController:vc animated:YES];
+        
+        }
+            break;
+            
+        default:
+            break;
+    }
+    
 
 }
 

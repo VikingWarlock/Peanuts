@@ -38,6 +38,10 @@
 		887F214F191E4590009250D2 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 887F214A191E4590009250D2 /* 3.png */; };
 		887F2150191E4590009250D2 /* iron.png in Resources */ = {isa = PBXBuildFile; fileRef = 887F214B191E4590009250D2 /* iron.png */; };
 		887F2151191E4590009250D2 /* pic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 887F214C191E4590009250D2 /* pic.jpg */; };
+		88D02AB4191E721C001ABA96 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB3191E721C001ABA96 /* ActivityViewController.m */; };
+		88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB6191E723B001ABA96 /* MustReadViewController.m */; };
+		88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB9191E724C001ABA96 /* SquareViewController.m */; };
+		88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +102,14 @@
 		887F214A191E4590009250D2 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 3.png; path = img/3.png; sourceTree = "<group>"; };
 		887F214B191E4590009250D2 /* iron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iron.png; path = img/iron.png; sourceTree = "<group>"; };
 		887F214C191E4590009250D2 /* pic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = pic.jpg; path = img/pic.jpg; sourceTree = "<group>"; };
+		88D02AB2191E721C001ABA96 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityViewController.h; path = ViewControllers/ActivityViewController.h; sourceTree = "<group>"; };
+		88D02AB3191E721C001ABA96 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityViewController.m; path = ViewControllers/ActivityViewController.m; sourceTree = "<group>"; };
+		88D02AB5191E723B001ABA96 /* MustReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MustReadViewController.h; path = ViewControllers/MustReadViewController.h; sourceTree = "<group>"; };
+		88D02AB6191E723B001ABA96 /* MustReadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MustReadViewController.m; path = ViewControllers/MustReadViewController.m; sourceTree = "<group>"; };
+		88D02AB8191E724C001ABA96 /* SquareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SquareViewController.h; path = ViewControllers/SquareViewController.h; sourceTree = "<group>"; };
+		88D02AB9191E724C001ABA96 /* SquareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SquareViewController.m; path = ViewControllers/SquareViewController.m; sourceTree = "<group>"; };
+		88D02ABB191E726B001ABA96 /* imgCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgCollectionViewController.h; path = ViewControllers/imgCollectionViewController.h; sourceTree = "<group>"; };
+		88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = imgCollectionViewController.m; path = ViewControllers/imgCollectionViewController.m; sourceTree = "<group>"; };
 		C2AAB9293F12492E8B381615 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -280,6 +292,8 @@
 		887F212D191DF3A0009250D2 /* ActivityViewController */ = {
 			isa = PBXGroup;
 			children = (
+				88D02AB2191E721C001ABA96 /* ActivityViewController.h */,
+				88D02AB3191E721C001ABA96 /* ActivityViewController.m */,
 			);
 			name = ActivityViewController;
 			sourceTree = "<group>";
@@ -287,6 +301,8 @@
 		887F212E191DF3CC009250D2 /* imgCollection */ = {
 			isa = PBXGroup;
 			children = (
+				88D02ABB191E726B001ABA96 /* imgCollectionViewController.h */,
+				88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */,
 			);
 			name = imgCollection;
 			sourceTree = "<group>";
@@ -294,6 +310,8 @@
 		887F212F191DF55F009250D2 /* MustReadViewController */ = {
 			isa = PBXGroup;
 			children = (
+				88D02AB5191E723B001ABA96 /* MustReadViewController.h */,
+				88D02AB6191E723B001ABA96 /* MustReadViewController.m */,
 			);
 			name = MustReadViewController;
 			sourceTree = "<group>";
@@ -301,6 +319,8 @@
 		887F2130191DF569009250D2 /* SquareViewController */ = {
 			isa = PBXGroup;
 			children = (
+				88D02AB8191E724C001ABA96 /* SquareViewController.h */,
+				88D02AB9191E724C001ABA96 /* SquareViewController.m */,
 			);
 			name = SquareViewController;
 			sourceTree = "<group>";
@@ -466,9 +486,12 @@
 				887F20F7191D4051009250D2 /* AppDelegate.m in Sources */,
 				887F2121191DB88B009250D2 /* BaseUIViewController.m in Sources */,
 				887F2133191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m in Sources */,
+				88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */,
 				887F213C191DF9D2009250D2 /* UIView+extra.m in Sources */,
+				88D02AB4191E721C001ABA96 /* ActivityViewController.m in Sources */,
 				887F2128191DB934009250D2 /* CoreDataModel.xcdatamodeld in Sources */,
 				887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */,
+				88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */,
 				887F2146191E310A009250D2 /* AMPAvatarView+helper.m in Sources */,
 				887F2143191E2EBF009250D2 /* UITableView+extra.m in Sources */,
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
@@ -476,6 +499,7 @@
 				887F212B191DB97E009250D2 /* PeanutTopViewController.m in Sources */,
 				887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */,
 				887F2140191E200D009250D2 /* NSString+extra.m in Sources */,
+				88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */,
 				887F20F3191D4051009250D2 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
