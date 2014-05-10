@@ -9,6 +9,11 @@
 #import "BaseNaviViewController.h"
 
 @interface BaseNaviViewController ()
+{
+    NSMutableArray *ScreenShotArray;
+    NSMutableArray *DirectionArray;
+    
+}
 
 @end
 
@@ -21,6 +26,17 @@
         // Custom initialization
     }
     return self;
+}
+
+-(id)init
+{
+    self=[super init];
+    if (self) {
+        ScreenShotArray=[[NSMutableArray alloc]init];
+        DirectionArray=[[NSMutableArray alloc]init];
+    }
+    return self;
+    
 }
 
 - (void)viewDidLoad
@@ -47,5 +63,59 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+
+-(void)PushVC:(UIViewController *)vc
+{
+    
+    UIView *copyView=[vc.view copy];
+    [self.visibleViewController.view addSubview:copyView];
+    [ScreenShotArray addObject:[self.visibleViewController.view captureView]];
+    [DirectionArray addObject:@"Left"];
+    [copyView setFrame:CGRectOffset(copyView.frame, 320, 0)];
+    
+    [UIView animateWithDuration:0.3f animations:^{
+        [copyView setFrame:self.visibleViewController.view.frame];
+    } completion:^(BOOL finished) {
+        [copyView removeFromSuperview];
+        [self pushViewController:vc animated:NO];
+    }];
+    
+}
+
+-(void)PushVC:(UIViewController *)vc Direction:(NaivPushDir)dir
+{
+    
+    
+    [self pushViewController:vc animated:NO];
+}
+
+-(void)PopVC
+{
+    
+    UIImage *lastscreenshot=[ScreenShotArray lastObject];
+    UIImageView *preView=[[UIImageView alloc]initWithImage:lastscreenshot];
+    [self.visibleViewController.view addSubview:preView];
+    if ([[DirectionArray lastObject]isEqualToString:@"Left"]) {
+        [preView setFrame:CGRectOffset(preView.frame, -320, 0)];
+    }else
+    {
+        [preView setFrame:CGRectOffset(preView.frame, 0, 600)];
+    }
+    
+    [UIView animateWithDuration:0.3f animations:^{
+        preView.frame=self.visibleViewController.view.frame;
+    } completion:^(BOOL finished) {
+        [self popViewControllerAnimated:NO];
+        [preView removeFromSuperview];
+        [ScreenShotArray delete:[ScreenShotArray lastObject]];
+        [DirectionArray delete:[DirectionArray lastObject]];
+        
+    }];
+    
+}
+
+
 
 @end

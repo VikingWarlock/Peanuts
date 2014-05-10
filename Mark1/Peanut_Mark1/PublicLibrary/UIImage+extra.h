@@ -12,6 +12,9 @@
 
 
 -(UIImage*)scaleToSize:(CGSize)size;
+//缩放到指定尺寸
+-(UIImage*)getSubImage:(CGRect)rect;
+//截取指定位置的图片
 
 
 @end

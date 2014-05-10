@@ -17,4 +17,8 @@
     #import"NetworkStack.h"
     #import<CoreData+MagicalRecord.h>
     #import"BaseNaviViewController.h"
+    #import"NSString+extra.h"
+    #import"UIImage+extra.h"
+    #import"UITableView+extra.h"
+    #import"UIView+extra.h"
 #endif

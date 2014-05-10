@@ -10,6 +10,18 @@
 #import <UIImage+BlurAndDarken.h>
 #import "UIImage+extra.h"
 
+@interface BlurAndSlide_TableViewCell(){
+
+    UIPanGestureRecognizer *gesture;
+    UIView *Slider;
+    Cell_Init_Direction init_dir;
+    
+
+    
+}
+@end
+
+
 @implementation BlurAndSlide_TableViewCell
 /*
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -48,5 +60,34 @@
 
     // Configure the view for the selected state
 }
+
+
+-(void)GestureHandle:(UIPanGestureRecognizer*)sender
+{
+    switch (sender.state) {
+        case UIGestureRecognizerStateBegan:
+        {
+        
+            
+            
+        }
+            break;
+        case  UIGestureRecognizerStateChanged:
+        {
+        
+        }
+            break;
+        case UIGestureRecognizerStateEnded:
+        {
+        
+        }
+            break;
+        // blow equal state ended;
+        default:
+            break;
+    }
+    
+}
+
 
 @end
