@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "663D46AD154F4188A6444E41"
+               BlueprintIdentifier = "E5EEEE8C27734D0DA3FBFD21"
                BuildableName = "libPods-UIImage-Filter.a"
                BlueprintName = "Pods-UIImage-Filter"
                ReferencedContainer = "container:Pods.xcodeproj">

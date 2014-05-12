@@ -37,13 +37,14 @@ PODS:
   - UIImage-Filter (0.0.1)
   - UIImage-Resize (1.0.1)
   - UIImageView-LVUtils (0.0.1)
+  - ZGPullDragTableView (0.0.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.2.3)
   - AMPAvatarView (~> 1.0.3)
   - MagicalRecord (~> 2.2)
   - Reachability (~> 3.1)
-  - RTAlertView (~> 0.0)
+  - RTAlertView (~> 0.0.6)
   - SDWebImage-ProgressView (~> 0.3.1)
   - UIImage+BlurAndDarken (~> 0.0.1)
   - UIImage+BlurredFrame (~> 0.0.4)
@@ -51,6 +52,7 @@ DEPENDENCIES:
   - UIImage-Filter (~> 0.0.1)
   - UIImage-Resize (~> 1.0.1)
   - UIImageView-LVUtils (~> 0.0.1)
+  - ZGPullDragTableView (~> 0.0.1)
 
 SPEC CHECKSUMS:
   AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
@@ -67,5 +69,6 @@ SPEC CHECKSUMS:
   UIImage-Filter: 4bfad1bf2593826b5b4289025a750688e9fe1ed5
   UIImage-Resize: b71ddbd27e5a29c2776df5c55b766928050437b2
   UIImageView-LVUtils: 2a2d244c44b8cfd7f9484a65bd8ed12b0c28d366
+  ZGPullDragTableView: 16d1157aa8a19730ceff60dd6446d2626a9ec2e2
 
 COCOAPODS: 0.32.1

@@ -138,3 +138,9 @@
 #define COCOAPODS_VERSION_MINOR_UIImageView_LVUtils 0
 #define COCOAPODS_VERSION_PATCH_UIImageView_LVUtils 1
 
+// ZGPullDragTableView
+#define COCOAPODS_POD_AVAILABLE_ZGPullDragTableView
+#define COCOAPODS_VERSION_MAJOR_ZGPullDragTableView 0
+#define COCOAPODS_VERSION_MINOR_ZGPullDragTableView 0
+#define COCOAPODS_VERSION_PATCH_ZGPullDragTableView 1
+

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "68E1AFA9C1D2482C91D7DDFB"
-               BuildableName = "libPods-UIImage+BlurredFrame.a"
-               BlueprintName = "Pods-UIImage+BlurredFrame"
+               BlueprintIdentifier = "6DB21294FA3E4BE58BE73E1F"
+               BuildableName = "libPods-ZGPullDragTableView.a"
+               BlueprintName = "Pods-ZGPullDragTableView"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
