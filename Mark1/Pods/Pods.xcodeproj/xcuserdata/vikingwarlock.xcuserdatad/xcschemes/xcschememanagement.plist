@@ -19,6 +19,21 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-RBBAnimation.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-RTAlertView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Reachability.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SDWebImage-ProgressView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -67,62 +82,77 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>11FFF9F16B2640E7885C6957</key>
+		<key>1B949BECD5B34959A22832D8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>19453D4C3044488390A0DD8C</key>
+		<key>2F7F909F376B4D3BBD1557F8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>45ECAB7BC28541209FDCB80C</key>
+		<key>4BC088F331E4428AA798655F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>559F143441874695A128570A</key>
+		<key>5870C9563B804CC99CF4B7B1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>580729BAB2194766BD308F6B</key>
+		<key>663D46AD154F4188A6444E41</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9BD5D5E422B14A04AAB89D90</key>
+		<key>71AFF4514B2C4268BA576C2B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BC388720FE8241B7AF49E090</key>
+		<key>891A296AF1DD46BDAFC4FF5F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D3DC7E8B6A414F55A33F021D</key>
+		<key>93A9EBC6B04D40FC8C0AE184</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D60F938814D34E84ABFC7CC9</key>
+		<key>97DD843DEA9548BAA1AAB5DB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DAB5D70A6B5149CC8B3C13AD</key>
+		<key>B04B1A4409DE41F9926A8272</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DFAFCD06B8054F32A92F0197</key>
+		<key>CFEA2AF8B364401FB621510E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FC825CCA36064B33B6796962</key>
+		<key>DC513CDE04BD45ADA1C5D5ED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E208DF5F0EC04C31B26B8F0F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E740A758A7BB45AFBDC51B90</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E86AB8F6D962413392C9A1C4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

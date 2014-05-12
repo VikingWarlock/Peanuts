@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		27C402CF34354145A3818596 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A474C76991743418E0AA42B /* libPods.a */; };
+		886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C08931920F1EB00BD7E5F /* NetworkRequest.m */; };
 		887F20E7191D4051009250D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E6191D4051009250D2 /* Foundation.framework */; };
 		887F20E9191D4051009250D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E8191D4051009250D2 /* CoreGraphics.framework */; };
 		887F20EB191D4051009250D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20EA191D4051009250D2 /* UIKit.framework */; };
@@ -56,6 +57,8 @@
 
 /* Begin PBXFileReference section */
 		5A474C76991743418E0AA42B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		886C08921920F1EB00BD7E5F /* NetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkRequest.h; path = CoreData/NetworkRequest.h; sourceTree = "<group>"; };
+		886C08931920F1EB00BD7E5F /* NetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkRequest.m; path = CoreData/NetworkRequest.m; sourceTree = "<group>"; };
 		887F20E3191D4051009250D2 /* Peanut_Mark1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peanut_Mark1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		887F20E6191D4051009250D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		887F20E8191D4051009250D2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -72,7 +75,7 @@
 		887F2107191D4052009250D2 /* Peanut_Mark1Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Peanut_Mark1Tests-Info.plist"; sourceTree = "<group>"; };
 		887F2109191D4052009250D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		887F210B191D4052009250D2 /* Peanut_Mark1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Peanut_Mark1Tests.m; sourceTree = "<group>"; };
-		887F2115191D411D009250D2 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		887F2115191D411D009250D2 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		887F211C191DB85D009250D2 /* BaseNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseNaviViewController.h; path = BaseModel/BaseNaviViewController.h; sourceTree = "<group>"; };
 		887F211D191DB85D009250D2 /* BaseNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseNaviViewController.m; path = BaseModel/BaseNaviViewController.m; sourceTree = "<group>"; };
 		887F211F191DB88B009250D2 /* BaseUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseUIViewController.h; path = BaseModel/BaseUIViewController.h; sourceTree = "<group>"; };
@@ -245,6 +248,8 @@
 			isa = PBXGroup;
 			children = (
 				887F2126191DB934009250D2 /* CoreDataModel.xcdatamodeld */,
+				886C08921920F1EB00BD7E5F /* NetworkRequest.h */,
+				886C08931920F1EB00BD7E5F /* NetworkRequest.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -485,6 +490,7 @@
 			files = (
 				887F20F7191D4051009250D2 /* AppDelegate.m in Sources */,
 				887F2121191DB88B009250D2 /* BaseUIViewController.m in Sources */,
+				886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */,
 				887F2133191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m in Sources */,
 				88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */,
 				887F213C191DF9D2009250D2 /* UIView+extra.m in Sources */,

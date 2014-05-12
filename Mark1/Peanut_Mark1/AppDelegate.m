@@ -21,7 +21,7 @@
     
     
     [MagicalRecord setupCoreDataStack];
-    
+    [NetworkStack setup];
     
 //    [application setStatusBarStyle:UIStatusBarStyleLightContent];
 
