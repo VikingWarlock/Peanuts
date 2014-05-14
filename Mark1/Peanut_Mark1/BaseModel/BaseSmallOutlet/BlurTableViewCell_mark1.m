@@ -256,19 +256,26 @@
 
 
 
--(UIImage*)getSubImage:(CGRect)rect
+-(void)backToOriginWithAnimate:(BOOL)animate
 {
-    CGImageRef subImageRef = CGImageCreateWithImageInRect(bluredImage.CGImage, rect);
-    CGRect smallBounds = CGRectMake(0, 0, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
     
-    UIGraphicsBeginImageContext(smallBounds.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGContextDrawImage(context, smallBounds, subImageRef);
-    UIImage* smallImage = [[UIImage imageWithCGImage:subImageRef]copy];
-    UIGraphicsEndImageContext();
+    if (animate) {
+        [UIView animateWithDuration:0.3f animations:^{
+            Slider.frame=CGRectMake(originPoint.x, originPoint.y, self.frame.size.height, self.frame.size.height);
+            imageInSlider.frame=CGRectMake(-originPoint.x, 0, self.frame.size.width, self.frame.size.height);
+        }];
+        
+        
+    }else
+    {
+        Slider.frame=CGRectMake(originPoint.x, originPoint.y, self.frame.size.height, self.frame.size.height);
+        imageInSlider.frame=CGRectMake(-originPoint.x, 0, self.frame.size.width, self.frame.size.height);
     
-    return smallImage;
+    
+    }
 }
+
+
 
 
 

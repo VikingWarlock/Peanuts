@@ -14,7 +14,7 @@
 #import "SquareViewController.h"
 #import "MustReadViewController.h"
 #import "ActivityViewController.h"
-
+#import "imgCollectionViewController.h"
 
 @interface PeanutTopViewController ()<UITableViewDataSource,UITableViewDelegate,Delegate_BlurCellSlide>
 {
@@ -203,6 +203,14 @@
 
 }
 
+
+-(void)slideHaveBeenDoneAtIndexPath:(NSIndexPath *)indexpath
+{
+    BlurTableViewCell_mark1 *cell=(BlurTableViewCell_mark1*)[tableview cellForRowAtIndexPath:indexpath];
+    imgCollectionViewController *vc=[[imgCollectionViewController alloc]init];
+    [self.NavigationController pushViewController:vc animated:YES];
+    [cell backToOriginWithAnimate:NO];
+}
 
 
 -(void)addTableviewHeadView:(UIImage*)img

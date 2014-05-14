@@ -14,6 +14,7 @@
 
 -(UIImage*)scaleToSize:(CGSize)size
 {
+    return nil;
     CGFloat width = CGImageGetWidth(self.CGImage);
     CGFloat height = CGImageGetHeight(self.CGImage);
     
@@ -46,6 +47,7 @@
 
 -(UIImage*)getSubImage:(CGRect)rect
 {
+    return nil;
     CGImageRef subImageRef = CGImageCreateWithImageInRect(self.CGImage, rect);
     CGRect smallBounds = CGRectMake(0, 0, CGImageGetWidth(subImageRef), CGImageGetHeight(subImageRef));
     
