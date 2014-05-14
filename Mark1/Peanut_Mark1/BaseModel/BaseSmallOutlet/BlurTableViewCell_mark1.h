@@ -30,7 +30,7 @@ typedef NS_ENUM(NSInteger, Cell_Init_Direction) {
 
 
 
-//-(id)initWithBackImage:(UIImage*)bkImage AtIndexpath:(NSIndexPath*)indexpath AndInitPosition:(Cell_Init_Direction)position AndDelegate:(id<Delegate_BlurCellSlide>)delegate;
+-(id)initWithBackImage:(UIImage*)bkImage AtIndexpath:(NSIndexPath*)indexpath AndInitPosition:(Cell_Init_Direction)position AndDelegate:(id<Delegate_BlurCellSlide>)delegate;
 
 -(void)SetupWithBackImage:(UIImage*)bkImage AtIndexpath:(NSIndexPath*)indexpath AndInitPosition:(Cell_Init_Direction)position AndDelegate:(id<Delegate_BlurCellSlide>)delegate;
 

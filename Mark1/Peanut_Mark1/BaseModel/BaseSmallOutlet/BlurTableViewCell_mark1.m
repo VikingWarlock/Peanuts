@@ -92,54 +92,18 @@
 }
 
 
-/*
+
 
 -(id)initWithBackImage:(UIImage *)bkImage AtIndexpath:(NSIndexPath *)indexpath AndInitPosition:(Cell_Init_Direction)position AndDelegate:(id<Delegate_BlurCellSlide>)delegate
 {
     self=[super init];
     
-    self.indexpath=indexpath;
-    self.BKImage=[bkImage copy];
-    [self setupLayout];
-    self.Delegate_Blur=delegate;
+    [self SetupWithBackImage:bkImage AtIndexpath:indexpath AndInitPosition:position AndDelegate:delegate];
     
-    
-    Slider=[[UIImageView alloc]init];
-    [self addSubview:Slider];
-    
-    gestureEnable=YES;
-    
-    
-    switch (position) {
-        case Cell_Init_Direction_At_Left:
-        {
-            Slider.frame=CGRectMake(0, 0, self.frame.size.height, self.frame.size.height);
-        //    [Slider setImage:[self getSubImage:CGRectMake(Slider.frame.origin.x, 0, self.frame.size.height, self.frame.size.height)]];
-            originPoint=CGPointMake(0, 0);
-            donePoint=CGPointMake(self.frame.size.width-self.frame.size.height, 0);
-        }
-            break;
-            
-        default:
-        {
-            Slider.frame=CGRectMake(self.frame.size.width-self.frame.size.height, 0, self.frame.size.height, self.frame.size.height);
-    //        [Slider setImage:[self getSubImage:CGRectMake(Slider.frame.origin.x, 0, self.frame.size.height, self.frame.size.height)]];
-            originPoint=CGPointMake(self.frame.size.width-self.frame.size.height, 0);
-            donePoint=CGPointMake(0, 0);
-        }
-            break;
-    }
-    
-    gesture=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(GestureHandle:)];
-    gesture.delegate=self;
-    [Slider addGestureRecognizer:gesture];
-    
-    [Slider setUserInteractionEnabled:YES];
-    [self sliderConfig];
     return self;
 }
 
-*/
+
  
 -(void)setupLayout
 {

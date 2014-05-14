@@ -26,7 +26,6 @@
 		887F2121191DB88B009250D2 /* BaseUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2120191DB88B009250D2 /* BaseUIViewController.m */; };
 		887F2125191DB91B009250D2 /* NetworkStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2124191DB91B009250D2 /* NetworkStack.m */; };
 		887F2128191DB934009250D2 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 887F2126191DB934009250D2 /* CoreDataModel.xcdatamodeld */; };
-		887F2133191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2132191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m */; };
 		887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2136191DF9D2009250D2 /* UIImage+extra.m */; };
 		887F213C191DF9D2009250D2 /* UIView+extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2138191DF9D2009250D2 /* UIView+extra.m */; };
 		887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F213A191DF9D2009250D2 /* VKLiveBlur.m */; };
@@ -43,6 +42,7 @@
 		88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB9191E724C001ABA96 /* SquareViewController.m */; };
 		88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */; };
 		88E06FDA19232317006B3EAC /* BlurTableViewCell_mark1.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */; };
+		88FF355E1923962B00E76BB2 /* PeanutTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,8 +84,6 @@
 		887F2123191DB91B009250D2 /* NetworkStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkStack.h; path = Networks/NetworkStack.h; sourceTree = "<group>"; };
 		887F2124191DB91B009250D2 /* NetworkStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkStack.m; path = Networks/NetworkStack.m; sourceTree = "<group>"; };
 		887F2127191DB934009250D2 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
-		887F2131191DF5D5009250D2 /* BlurAndSlide_TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlurAndSlide_TableViewCell.h; path = BaseModel/BaseSmallOutlet/BlurAndSlide_TableViewCell.h; sourceTree = "<group>"; };
-		887F2132191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlurAndSlide_TableViewCell.m; path = BaseModel/BaseSmallOutlet/BlurAndSlide_TableViewCell.m; sourceTree = "<group>"; };
 		887F2135191DF9D2009250D2 /* UIImage+extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+extra.h"; path = "PublicLibrary/UIImage+extra.h"; sourceTree = "<group>"; };
 		887F2136191DF9D2009250D2 /* UIImage+extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+extra.m"; path = "PublicLibrary/UIImage+extra.m"; sourceTree = "<group>"; };
 		887F2137191DF9D2009250D2 /* UIView+extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+extra.h"; path = "PublicLibrary/UIView+extra.h"; sourceTree = "<group>"; };
@@ -113,6 +111,8 @@
 		88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = imgCollectionViewController.m; path = ViewControllers/imgCollectionViewController.m; sourceTree = "<group>"; };
 		88E06FD819232317006B3EAC /* BlurTableViewCell_mark1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlurTableViewCell_mark1.h; path = BaseModel/BaseSmallOutlet/BlurTableViewCell_mark1.h; sourceTree = "<group>"; };
 		88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlurTableViewCell_mark1.m; path = BaseModel/BaseSmallOutlet/BlurTableViewCell_mark1.m; sourceTree = "<group>"; };
+		88FF355C1923962B00E76BB2 /* PeanutTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeanutTopViewController.h; path = ViewControllers/PeanutTopViewController.h; sourceTree = "<group>"; };
+		88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PeanutTopViewController.m; path = ViewControllers/PeanutTopViewController.m; sourceTree = "<group>"; };
 		C2AAB9293F12492E8B381615 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -286,8 +286,8 @@
 		887F212C191DF386009250D2 /* TopViewController */ = {
 			isa = PBXGroup;
 			children = (
-				887F2131191DF5D5009250D2 /* BlurAndSlide_TableViewCell.h */,
-				887F2132191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m */,
+				88FF355C1923962B00E76BB2 /* PeanutTopViewController.h */,
+				88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */,
 				88E06FD819232317006B3EAC /* BlurTableViewCell_mark1.h */,
 				88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */,
 			);
@@ -491,7 +491,6 @@
 				887F20F7191D4051009250D2 /* AppDelegate.m in Sources */,
 				887F2121191DB88B009250D2 /* BaseUIViewController.m in Sources */,
 				886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */,
-				887F2133191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m in Sources */,
 				88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */,
 				887F213C191DF9D2009250D2 /* UIView+extra.m in Sources */,
 				88D02AB4191E721C001ABA96 /* ActivityViewController.m in Sources */,
@@ -507,6 +506,7 @@
 				887F2140191E200D009250D2 /* NSString+extra.m in Sources */,
 				88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */,
 				887F20F3191D4051009250D2 /* main.m in Sources */,
+				88FF355E1923962B00E76BB2 /* PeanutTopViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
