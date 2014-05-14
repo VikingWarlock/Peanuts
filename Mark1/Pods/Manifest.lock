@@ -32,11 +32,8 @@ PODS:
     - SDWebImage (~> 3.0)
   - SDWebImage/Core (3.6)
   - UIImage+BlurAndDarken (0.0.1)
-  - UIImage+BlurredFrame (0.0.4)
   - UIImage+ImageCompress (0.0.1)
-  - UIImage-Filter (0.0.1)
   - UIImage-Resize (1.0.1)
-  - UIImageView-LVUtils (0.0.1)
   - ZGPullDragTableView (0.0.1)
 
 DEPENDENCIES:
@@ -47,11 +44,8 @@ DEPENDENCIES:
   - RTAlertView (~> 0.0.6)
   - SDWebImage-ProgressView (~> 0.3.1)
   - UIImage+BlurAndDarken (~> 0.0.1)
-  - UIImage+BlurredFrame (~> 0.0.4)
   - UIImage+ImageCompress (~> 0.0.1)
-  - UIImage-Filter (~> 0.0.1)
   - UIImage-Resize (~> 1.0.1)
-  - UIImageView-LVUtils (~> 0.0.1)
   - ZGPullDragTableView (~> 0.0.1)
 
 SPEC CHECKSUMS:
@@ -64,11 +58,8 @@ SPEC CHECKSUMS:
   SDWebImage: 7eb273e54ca8a2e506ad9bd5e80c35b2a4d7c95e
   SDWebImage-ProgressView: 472d7eb4ed2663109164afc13b936d8e3e5c8cd6
   UIImage+BlurAndDarken: e8624dc1153e8bd73d2eabd36a193741e91d43c1
-  UIImage+BlurredFrame: e604fa605955f47f24aecfbdc013efe5d5aa0b6c
   UIImage+ImageCompress: 9772dde93c0f615c53d2eecd7849797a2afdfd05
-  UIImage-Filter: 4bfad1bf2593826b5b4289025a750688e9fe1ed5
   UIImage-Resize: b71ddbd27e5a29c2776df5c55b766928050437b2
-  UIImageView-LVUtils: 2a2d244c44b8cfd7f9484a65bd8ed12b0c28d366
   ZGPullDragTableView: 16d1157aa8a19730ceff60dd6446d2626a9ec2e2
 
 COCOAPODS: 0.32.1

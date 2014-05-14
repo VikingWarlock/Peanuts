@@ -108,35 +108,17 @@
 #define COCOAPODS_VERSION_MINOR_UIImage_BlurAndDarken 0
 #define COCOAPODS_VERSION_PATCH_UIImage_BlurAndDarken 1
 
-// UIImage+BlurredFrame
-#define COCOAPODS_POD_AVAILABLE_UIImage_BlurredFrame
-#define COCOAPODS_VERSION_MAJOR_UIImage_BlurredFrame 0
-#define COCOAPODS_VERSION_MINOR_UIImage_BlurredFrame 0
-#define COCOAPODS_VERSION_PATCH_UIImage_BlurredFrame 4
-
 // UIImage+ImageCompress
 #define COCOAPODS_POD_AVAILABLE_UIImage_ImageCompress
 #define COCOAPODS_VERSION_MAJOR_UIImage_ImageCompress 0
 #define COCOAPODS_VERSION_MINOR_UIImage_ImageCompress 0
 #define COCOAPODS_VERSION_PATCH_UIImage_ImageCompress 1
 
-// UIImage-Filter
-#define COCOAPODS_POD_AVAILABLE_UIImage_Filter
-#define COCOAPODS_VERSION_MAJOR_UIImage_Filter 0
-#define COCOAPODS_VERSION_MINOR_UIImage_Filter 0
-#define COCOAPODS_VERSION_PATCH_UIImage_Filter 1
-
 // UIImage-Resize
 #define COCOAPODS_POD_AVAILABLE_UIImage_Resize
 #define COCOAPODS_VERSION_MAJOR_UIImage_Resize 1
 #define COCOAPODS_VERSION_MINOR_UIImage_Resize 0
 #define COCOAPODS_VERSION_PATCH_UIImage_Resize 1
-
-// UIImageView-LVUtils
-#define COCOAPODS_POD_AVAILABLE_UIImageView_LVUtils
-#define COCOAPODS_VERSION_MAJOR_UIImageView_LVUtils 0
-#define COCOAPODS_VERSION_MINOR_UIImageView_LVUtils 0
-#define COCOAPODS_VERSION_PATCH_UIImageView_LVUtils 1
 
 // ZGPullDragTableView
 #define COCOAPODS_POD_AVAILABLE_ZGPullDragTableView

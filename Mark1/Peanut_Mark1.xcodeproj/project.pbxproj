@@ -26,7 +26,6 @@
 		887F2121191DB88B009250D2 /* BaseUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2120191DB88B009250D2 /* BaseUIViewController.m */; };
 		887F2125191DB91B009250D2 /* NetworkStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2124191DB91B009250D2 /* NetworkStack.m */; };
 		887F2128191DB934009250D2 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 887F2126191DB934009250D2 /* CoreDataModel.xcdatamodeld */; };
-		887F212B191DB97E009250D2 /* PeanutTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F212A191DB97E009250D2 /* PeanutTopViewController.m */; };
 		887F2133191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2132191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m */; };
 		887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2136191DF9D2009250D2 /* UIImage+extra.m */; };
 		887F213C191DF9D2009250D2 /* UIView+extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 887F2138191DF9D2009250D2 /* UIView+extra.m */; };
@@ -85,8 +84,6 @@
 		887F2123191DB91B009250D2 /* NetworkStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkStack.h; path = Networks/NetworkStack.h; sourceTree = "<group>"; };
 		887F2124191DB91B009250D2 /* NetworkStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkStack.m; path = Networks/NetworkStack.m; sourceTree = "<group>"; };
 		887F2127191DB934009250D2 /* CoreDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataModel.xcdatamodel; sourceTree = "<group>"; };
-		887F2129191DB97E009250D2 /* PeanutTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeanutTopViewController.h; path = ViewControllers/PeanutTopViewController.h; sourceTree = "<group>"; };
-		887F212A191DB97E009250D2 /* PeanutTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PeanutTopViewController.m; path = ViewControllers/PeanutTopViewController.m; sourceTree = "<group>"; };
 		887F2131191DF5D5009250D2 /* BlurAndSlide_TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlurAndSlide_TableViewCell.h; path = BaseModel/BaseSmallOutlet/BlurAndSlide_TableViewCell.h; sourceTree = "<group>"; };
 		887F2132191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlurAndSlide_TableViewCell.m; path = BaseModel/BaseSmallOutlet/BlurAndSlide_TableViewCell.m; sourceTree = "<group>"; };
 		887F2135191DF9D2009250D2 /* UIImage+extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+extra.h"; path = "PublicLibrary/UIImage+extra.h"; sourceTree = "<group>"; };
@@ -291,8 +288,6 @@
 			children = (
 				887F2131191DF5D5009250D2 /* BlurAndSlide_TableViewCell.h */,
 				887F2132191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m */,
-				887F2129191DB97E009250D2 /* PeanutTopViewController.h */,
-				887F212A191DB97E009250D2 /* PeanutTopViewController.m */,
 				88E06FD819232317006B3EAC /* BlurTableViewCell_mark1.h */,
 				88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */,
 			);
@@ -507,7 +502,6 @@
 				887F2143191E2EBF009250D2 /* UITableView+extra.m in Sources */,
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
-				887F212B191DB97E009250D2 /* PeanutTopViewController.m in Sources */,
 				88E06FDA19232317006B3EAC /* BlurTableViewCell_mark1.m in Sources */,
 				887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */,
 				887F2140191E200D009250D2 /* NSString+extra.m in Sources */,

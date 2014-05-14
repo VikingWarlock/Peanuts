@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "964F527E3847423389853D4A"
+               BlueprintIdentifier = "9A254A94430C4593946E1731"
                BuildableName = "libPods-ZGPullDragTableView.a"
                BlueprintName = "Pods-ZGPullDragTableView"
                ReferencedContainer = "container:Pods.xcodeproj">
