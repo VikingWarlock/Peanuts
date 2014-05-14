@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "528442C125EF4A9AAB31E311"
+               BlueprintIdentifier = "C85863D725594623B908D451"
                BuildableName = "libPods-UIImage+BlurAndDarken.a"
                BlueprintName = "Pods-UIImage+BlurAndDarken"
                ReferencedContainer = "container:Pods.xcodeproj">
