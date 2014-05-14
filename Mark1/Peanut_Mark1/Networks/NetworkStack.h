@@ -50,7 +50,7 @@ typedef NS_ENUM(NSInteger,RequestMethod) {
  *
  *添加请求到队列中
  */
--(void)AddRequestToStack:(NSString*)url WithRequestMethod:(RequestMethod)method  AndRequestParameter:(NSDictionary*)parameter_request AndSucceedParameter:(NSDictionary*)parameter_succeed
+-(void)AddRequestToStack:(NSString*)url WithRequestMethod:(RequestMethod)method  AndRequestParameter:(NSDictionary*)parameter_request AndSucceedParameter:(NSDictionary*)parameter_succeed;
 /**
  *
  * 重载所有队列中的请求

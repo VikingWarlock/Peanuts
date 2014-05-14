@@ -43,6 +43,7 @@
 		88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB6191E723B001ABA96 /* MustReadViewController.m */; };
 		88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB9191E724C001ABA96 /* SquareViewController.m */; };
 		88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */; };
+		88E06FDA19232317006B3EAC /* BlurTableViewCell_mark1.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,8 @@
 		88D02AB9191E724C001ABA96 /* SquareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SquareViewController.m; path = ViewControllers/SquareViewController.m; sourceTree = "<group>"; };
 		88D02ABB191E726B001ABA96 /* imgCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgCollectionViewController.h; path = ViewControllers/imgCollectionViewController.h; sourceTree = "<group>"; };
 		88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = imgCollectionViewController.m; path = ViewControllers/imgCollectionViewController.m; sourceTree = "<group>"; };
+		88E06FD819232317006B3EAC /* BlurTableViewCell_mark1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlurTableViewCell_mark1.h; path = BaseModel/BaseSmallOutlet/BlurTableViewCell_mark1.h; sourceTree = "<group>"; };
+		88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlurTableViewCell_mark1.m; path = BaseModel/BaseSmallOutlet/BlurTableViewCell_mark1.m; sourceTree = "<group>"; };
 		C2AAB9293F12492E8B381615 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -290,6 +293,8 @@
 				887F2132191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m */,
 				887F2129191DB97E009250D2 /* PeanutTopViewController.h */,
 				887F212A191DB97E009250D2 /* PeanutTopViewController.m */,
+				88E06FD819232317006B3EAC /* BlurTableViewCell_mark1.h */,
+				88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */,
 			);
 			name = TopViewController;
 			sourceTree = "<group>";
@@ -503,6 +508,7 @@
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
 				887F212B191DB97E009250D2 /* PeanutTopViewController.m in Sources */,
+				88E06FDA19232317006B3EAC /* BlurTableViewCell_mark1.m in Sources */,
 				887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */,
 				887F2140191E200D009250D2 /* NSString+extra.m in Sources */,
 				88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */,
