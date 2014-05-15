@@ -7,8 +7,11 @@
 //
 
 #import "SquareViewController.h"
+#import "imgCollectionViewController.h"
 
 @interface SquareViewController ()
+
+@property (nonatomic,strong) UICollectionView * collectionView;
 
 @end
 
@@ -26,8 +29,49 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.navigationBarHidden = NO;
+    self.title = @"广场";
+    
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
+    [self.view addSubview:self.collectionView];
     // Do any additional setup after loading the view.
 }
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:YES];
+}
+
+-(UICollectionView *)collectionView{
+    if (!_collectionView) {
+        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        flowLayout.minimumInteritemSpacing = 10;
+        flowLayout.minimumLineSpacing = 10;
+        flowLayout.itemSize = CGSizeMake(150, 150);
+        flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 0, 5);
+
+        
+        
+        _collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
+        _collectionView.delegate = self;
+        _collectionView.dataSource = self;
+    
+    }
+    return _collectionView;
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
+    return 5;
+}
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
+    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
+    [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"iron.png"]]];
+    return cell;
+}
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    imgCollectionViewController * VC = [[imgCollectionViewController alloc] init];
+    [self.navigationController pushViewController:VC animated:YES];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

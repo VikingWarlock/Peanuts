@@ -8,6 +8,6 @@
 
 #import "BaseUIViewController.h"
 
-@interface SquareViewController : BaseUIViewController
+@interface SquareViewController : BaseUIViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
 @end
