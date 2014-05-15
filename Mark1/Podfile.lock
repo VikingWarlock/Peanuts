@@ -31,6 +31,8 @@ PODS:
   - SDWebImage-ProgressView (0.3.1):
     - SDWebImage (~> 3.0)
   - SDWebImage/Core (3.6)
+  - UIColor-Utilities (1.0.1)
+  - UIColorCategories (0.1.0)
   - UIImage+BlurAndDarken (0.0.1)
   - UIImage+ImageCompress (0.0.1)
   - UIImage-Resize (1.0.1)
@@ -43,6 +45,8 @@ DEPENDENCIES:
   - Reachability (~> 3.1)
   - RTAlertView (~> 0.0.6)
   - SDWebImage-ProgressView (~> 0.3.1)
+  - UIColor-Utilities (~> 1.0.1)
+  - UIColorCategories (~> 0.1.0)
   - UIImage+BlurAndDarken (~> 0.0.1)
   - UIImage+ImageCompress (~> 0.0.1)
   - UIImage-Resize (~> 1.0.1)
@@ -57,6 +61,8 @@ SPEC CHECKSUMS:
   RTAlertView: 063dc8743ac8acf426cb64c011aa786f22563665
   SDWebImage: 7eb273e54ca8a2e506ad9bd5e80c35b2a4d7c95e
   SDWebImage-ProgressView: 472d7eb4ed2663109164afc13b936d8e3e5c8cd6
+  UIColor-Utilities: 5c2076b975f423097011aeea4012e75857dd9c99
+  UIColorCategories: 3b1153d8e4b97d26f2107f0da5e898e4438b5fc8
   UIImage+BlurAndDarken: e8624dc1153e8bd73d2eabd36a193741e91d43c1
   UIImage+ImageCompress: 9772dde93c0f615c53d2eecd7849797a2afdfd05
   UIImage-Resize: b71ddbd27e5a29c2776df5c55b766928050437b2

@@ -43,6 +43,7 @@
 		88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */; };
 		88E06FDA19232317006B3EAC /* BlurTableViewCell_mark1.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */; };
 		88FF355E1923962B00E76BB2 /* PeanutTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */; };
+		88FF356119239FF500E76BB2 /* Peanut_SNSPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF356019239FF500E76BB2 /* Peanut_SNSPart.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,8 @@
 		88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlurTableViewCell_mark1.m; path = BaseModel/BaseSmallOutlet/BlurTableViewCell_mark1.m; sourceTree = "<group>"; };
 		88FF355C1923962B00E76BB2 /* PeanutTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeanutTopViewController.h; path = ViewControllers/PeanutTopViewController.h; sourceTree = "<group>"; };
 		88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PeanutTopViewController.m; path = ViewControllers/PeanutTopViewController.m; sourceTree = "<group>"; };
+		88FF355F19239FF500E76BB2 /* Peanut_SNSPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Peanut_SNSPart.h; path = BaseModel/Peanut_SNSPart.h; sourceTree = "<group>"; };
+		88FF356019239FF500E76BB2 /* Peanut_SNSPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Peanut_SNSPart.m; path = BaseModel/Peanut_SNSPart.m; sourceTree = "<group>"; };
 		C2AAB9293F12492E8B381615 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -228,6 +231,8 @@
 				887F211D191DB85D009250D2 /* BaseNaviViewController.m */,
 				887F211F191DB88B009250D2 /* BaseUIViewController.h */,
 				887F2120191DB88B009250D2 /* BaseUIViewController.m */,
+				88FF355F19239FF500E76BB2 /* Peanut_SNSPart.h */,
+				88FF356019239FF500E76BB2 /* Peanut_SNSPart.m */,
 			);
 			name = BaseModel;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 		887F2118191DB787009250D2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				88FF3562192486FF00E76BB2 /* SNSPart_Viewcontroller */,
 				887F2130191DF569009250D2 /* SquareViewController */,
 				887F212F191DF55F009250D2 /* MustReadViewController */,
 				887F212E191DF3CC009250D2 /* imgCollection */,
@@ -347,6 +353,13 @@
 				887F214C191E4590009250D2 /* pic.jpg */,
 			);
 			name = img;
+			sourceTree = "<group>";
+		};
+		88FF3562192486FF00E76BB2 /* SNSPart_Viewcontroller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SNSPart_Viewcontroller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -498,6 +511,7 @@
 				887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */,
 				88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */,
 				887F2146191E310A009250D2 /* AMPAvatarView+helper.m in Sources */,
+				88FF356119239FF500E76BB2 /* Peanut_SNSPart.m in Sources */,
 				887F2143191E2EBF009250D2 /* UITableView+extra.m in Sources */,
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,

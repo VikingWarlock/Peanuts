@@ -22,5 +22,7 @@
     #import"UITableView+extra.h"
     #import"UIView+extra.h"
     #import<UITableView+ZGPullDrag.h>
+    #import<UIColor+Modify.h>
+    #import<UIImage+UIColor.h>
 
 #endif

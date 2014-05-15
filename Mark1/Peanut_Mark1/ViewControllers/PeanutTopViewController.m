@@ -45,7 +45,6 @@
     
     NSLog(@"%f\n\n\n\n",self.view.frame.origin.y);
     
-    [self reset_NavigationBar];
     
     
     screen=[UIScreen mainScreen].bounds;
@@ -65,24 +64,42 @@
     [self.view addSubview:tableview];
     [self addTableviewHeadView:[UIImage imageNamed:@"pic.jpg"]];
     
-    backGroundImageColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"pic.jpg"]];
+    [self.view setNeedsDisplay];
+    
+  /*
+    UIImageWriteToSavedPhotosAlbum([[self.view getClipView:CGRectMake(0, 0, 320, 100)]captureView ], self, nil, nil);
+    
+    backGroundImageColor=[[[self.view getClipView:CGRectMake(0, 0, 320, 40)] captureView]averageColor];
+    */
     //[self.NavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: backGroundImageColor}];
+    
+//    [self reset_NavigationBar];
+
     
     // Do any additional setup after loading the view.
 }
 
 -(void)reset_NavigationBar
 {
+    [UIApplication sharedApplication].statusBarStyle=UIStatusBarStyleLightContent;
     [[self.NavigationController navigationBar]setBarTintColor:[UIColor clearColor]];
     [[self.NavigationController navigationBar]setTranslucent:YES];
     [self.NavigationController.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
     [self.NavigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     [self.NavigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
     
+    [self.NavigationController.navigationBar setNeedsDisplay];
+    
     self.title=@"花生米";
-//    [self.NavigationController setTitle:@"花生米"];
     [self.NavigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    [self.NavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+
+    
+ //   UIImageWriteToSavedPhotosAlbum([[self.Peanut_backgroundView getClipView:CGRectMake(0, 0, 320, 100)]captureView ], self, nil, nil);
+    
+    backGroundImageColor=[[[self.view getClipView:CGRectMake(0, 0, 320, 40)] captureView]averageColor];
+    
+    
+    [self.NavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: backGroundImageColor==nil?[UIColor whiteColor]:[backGroundImageColor invertedColor]}];
     
     
     UIBarButtonItem *userButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:nil];
@@ -111,18 +128,18 @@
 }
 
 
--(void)viewWillAppear:(BOOL)animated
+-(void)viewDidAppear:(BOOL)animated
 {
  //   self.NavigationController.navigationBarHidden=YES;
     
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
     [self reset_NavigationBar];
 }
 
--(void)viewWillDisappear:(BOOL)animated
+-(void)viewDidDisappear:(BOOL)animated
 {
 //    self.NavigationController.navigationBarHidden=NO;
-    [super viewWillDisappear:animated];
+    [super viewDidDisappear:animated];
     [self setNavigationBarForOther];
 }
 

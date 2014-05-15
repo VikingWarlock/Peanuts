@@ -102,6 +102,18 @@
 #define COCOAPODS_VERSION_MINOR_SDWebImage_ProgressView 3
 #define COCOAPODS_VERSION_PATCH_SDWebImage_ProgressView 1
 
+// UIColor-Utilities
+#define COCOAPODS_POD_AVAILABLE_UIColor_Utilities
+#define COCOAPODS_VERSION_MAJOR_UIColor_Utilities 1
+#define COCOAPODS_VERSION_MINOR_UIColor_Utilities 0
+#define COCOAPODS_VERSION_PATCH_UIColor_Utilities 1
+
+// UIColorCategories
+#define COCOAPODS_POD_AVAILABLE_UIColorCategories
+#define COCOAPODS_VERSION_MAJOR_UIColorCategories 0
+#define COCOAPODS_VERSION_MINOR_UIColorCategories 1
+#define COCOAPODS_VERSION_PATCH_UIColorCategories 0
+
 // UIImage+BlurAndDarken
 #define COCOAPODS_POD_AVAILABLE_UIImage_BlurAndDarken
 #define COCOAPODS_VERSION_MAJOR_UIImage_BlurAndDarken 0
