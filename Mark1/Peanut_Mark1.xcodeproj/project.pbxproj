@@ -76,7 +76,7 @@
 		887F2107191D4052009250D2 /* Peanut_Mark1Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Peanut_Mark1Tests-Info.plist"; sourceTree = "<group>"; };
 		887F2109191D4052009250D2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		887F210B191D4052009250D2 /* Peanut_Mark1Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Peanut_Mark1Tests.m; sourceTree = "<group>"; };
-		887F2115191D411D009250D2 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; };
+		887F2115191D411D009250D2 /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		887F211C191DB85D009250D2 /* BaseNaviViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseNaviViewController.h; path = BaseModel/BaseNaviViewController.h; sourceTree = "<group>"; };
 		887F211D191DB85D009250D2 /* BaseNaviViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseNaviViewController.m; path = BaseModel/BaseNaviViewController.m; sourceTree = "<group>"; };
 		887F211F191DB88B009250D2 /* BaseUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseUIViewController.h; path = BaseModel/BaseUIViewController.h; sourceTree = "<group>"; };
