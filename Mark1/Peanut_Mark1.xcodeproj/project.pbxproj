@@ -45,6 +45,8 @@
 		F2D8F95519223C5E00102F3F /* imgCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */; };
 		F2D8F95919224DF100102F3F /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95819224DF100102F3F /* CommentViewController.m */; };
 		F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95B19225B2000102F3F /* CommentTableViewCell.m */; };
+		F2F8BF1F1924EFE6000A3CED /* PeanutTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */; };
+		F2F8BF201924F001000A3CED /* BlurTableViewCell_mark1.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -522,6 +524,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2F8BF201924F001000A3CED /* BlurTableViewCell_mark1.m in Sources */,
+				F2F8BF1F1924EFE6000A3CED /* PeanutTopViewController.m in Sources */,
 				887F20F7191D4051009250D2 /* AppDelegate.m in Sources */,
 				887F2121191DB88B009250D2 /* BaseUIViewController.m in Sources */,
 				886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */,
@@ -538,13 +542,11 @@
 				887F2143191E2EBF009250D2 /* UITableView+extra.m in Sources */,
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
-				88E06FDA19232317006B3EAC /* BlurTableViewCell_mark1.m in Sources */,
 				887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */,
 				F2D8F95519223C5E00102F3F /* imgCollectionTableViewCell.m in Sources */,
 				887F2140191E200D009250D2 /* NSString+extra.m in Sources */,
 				88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */,
 				887F20F3191D4051009250D2 /* main.m in Sources */,
-				88FF355E1923962B00E76BB2 /* PeanutTopViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

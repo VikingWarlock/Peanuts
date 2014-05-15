@@ -43,10 +43,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        CGRect rect = self.view.frame;
-        rect.origin.y += 64;
-        rect.size.height -=64;
-        _tableView = [[UITableView alloc] initWithFrame:rect];
+        _tableView = [[UITableView alloc] initWithFrame:self.view.frame];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorColor = [UIColor clearColor];

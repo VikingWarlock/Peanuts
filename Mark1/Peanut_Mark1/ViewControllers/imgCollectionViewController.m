@@ -97,7 +97,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 
 -(UIView *)bottomView{
     if (!_bottomView) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 50, self.view.frame.size.width,50)];
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 114, self.view.frame.size.width,50)];
         [_bottomView setBackgroundColor:[UIColor whiteColor]];
         _bottomView.alpha = 0.7;
         
