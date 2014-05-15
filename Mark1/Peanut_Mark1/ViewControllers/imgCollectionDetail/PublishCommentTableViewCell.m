@@ -31,4 +31,12 @@
     // Configure the view for the selected state
 }
 
+-(AMPAvatarView *)iconView{
+    if (!_iconView) {
+        _iconView = [[AMPAvatarView alloc] initWithFrame:CGRectMake(20, 20, 60, 60)];
+        [_iconView setImage:[UIImage imageNamed:@"iron.png"]];
+    }
+    return _iconView;
+}
+
 @end

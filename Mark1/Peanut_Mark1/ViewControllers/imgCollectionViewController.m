@@ -74,7 +74,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
         _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
         [_tableView.tableHeaderView setBackgroundColor:[UIColor clearColor]];
    
-        UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, _tableView.frame.size.height - 20, 60, 17)];
+        UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, _tableView.tableHeaderView.frame.size.height - 20, 60, 17)];
         nameLabel.text = @"aaaaa";
         nameLabel.textColor = [UIColor whiteColor];
         

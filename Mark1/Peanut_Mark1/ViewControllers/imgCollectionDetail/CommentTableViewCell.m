@@ -5,6 +5,10 @@
 //  Created by 马君 on 14-5-13.
 //  Copyright (c) 2014年 viking warlock. All rights reserved.
 //
+#define gap 5.0
+#define commentTVHeight 40.0
+#define cellHeight_origin 120
+#define cellHeight_changed 140
 
 #import "CommentTableViewCell.h"
 
@@ -22,7 +26,7 @@
         [self.contentView addSubview:self.commentLabel];
         
         CGRect rect = self.commentLabel.frame;
-        rect.origin.y += (rect.size.height + 5);
+        rect.origin.y += (rect.size.height + gap);
         rect.size.height = 20;
         rect.size.width = 40;
         _replayBtn = [[UIButton alloc] initWithFrame:rect];
@@ -49,7 +53,7 @@
         [self.contentView addSubview:_deleteBtn];
         
         rect = self.frame;
-        rect.size.height = 120;
+        rect.size.height = cellHeight_origin;
         self.frame = rect;
     }
     return self;
@@ -65,7 +69,7 @@
 
 -(UILabel *)userName{
     if (!_userName) {
-        _userName = [[UILabel alloc] initWithFrame:CGRectMake(self.iconView.frame.origin.x, self.iconView.frame.origin.y + self.iconView.frame.size.height + 8, self.iconView.frame.size.width, 15)];
+        _userName = [[UILabel alloc] initWithFrame:CGRectMake(self.iconView.frame.origin.x, self.iconView.frame.origin.y + self.iconView.frame.size.height + gap, self.iconView.frame.size.width, 15)];
         _userName.font = [UIFont systemFontOfSize:13.0];
         _userName.textAlignment = NSTextAlignmentCenter;
         [_userName setTextColor:[UIColor whiteColor]];
@@ -86,7 +90,7 @@
 
 -(UILabel *)commentLabel{
     if (!_commentLabel) {
-        _commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.timeLabel.frame.origin.x, self.timeLabel.frame.origin.y + self.timeLabel.frame.size.height + 10, 320 - self.timeLabel.frame.origin.x,20)];
+        _commentLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.timeLabel.frame.origin.x, self.timeLabel.frame.origin.y + self.timeLabel.frame.size.height + gap, self.frame.size.width - self.timeLabel.frame.origin.x,20)];
         [_commentLabel setTextColor:[UIColor whiteColor]];
     }
     return _commentLabel;
@@ -99,8 +103,8 @@
 
 -(void)changeCell{
     CGRect rect = self.commentLabel.frame;
-    rect.origin.y += (rect.size.height + 5);
-    rect.size.height = 40;
+    rect.origin.y += (rect.size.height + gap);
+    rect.size.height = commentTVHeight;
     _commentView = [[UITextView alloc]initWithFrame:rect];
     [_commentView setBackgroundColor:[UIColor clearColor]];
     _commentView.textColor = [UIColor whiteColor];
@@ -109,24 +113,24 @@
     
     [self.contentView addSubview:_commentView];
     rect = self.replayBtn.frame;
-    rect.origin.y += 50;
+    rect.origin.y += commentTVHeight + gap;
     self.replayBtn.frame = rect;
     rect = self.deleteBtn.frame;
-    rect.origin.y += 50;
+    rect.origin.y += commentTVHeight + gap;
     self.deleteBtn.frame = rect;
     [self.deleteBtn setTitle:@"取消" forState:UIControlStateNormal];
     [self.deleteBtn setTitle:@"取消" forState:UIControlStateHighlighted];
     [self.deleteBtn setTitle:@"取消" forState:UIControlStateSelected];
     
     rect = self.frame;
-    rect.size.height = 140;
+    rect.size.height = cellHeight_changed;
     self.frame = rect;
 }
 
 -(void)reChangeCell{
     self.commentView.hidden = YES;
     CGRect rect = self.commentLabel.frame;
-    rect.origin.y += (rect.size.height + 5);
+    rect.origin.y += (rect.size.height + gap);
     rect.size.height = 20;
     rect.size.width = 40;
     self.replayBtn.frame = rect;
@@ -134,11 +138,12 @@
     self.deleteBtn.frame = rect;
     
     rect = self.frame;
-    rect.size.height = 120;
+    rect.size.height = cellHeight_origin;
     self.frame = rect;
 }
 
 -(void)replayBtnClick:(UIButton *)sender{
+    [self changeCell];
     [self.delegate replayBtnClickAtIndexPath:self.indexPath];
 }
 

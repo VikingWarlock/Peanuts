@@ -61,16 +61,13 @@ static NSString * cellIdentifier = @"cellIdentifier";
 }
 
 -(void)tableViewTapped:(UITapGestureRecognizer *)tapGR{
-  /*  if (selectedIndexPath != nil) {
+    if (selectedIndexPath != nil) {
         CommentTableViewCell * cell = (CommentTableViewCell *)[self tableView:self.tableView cellForRowAtIndexPath:selectedIndexPath];
         if ([cell.deleteBtn.titleLabel.text isEqualToString:@"取消"]) {
             [self.tableView reloadData];
         }
 
     }
-*/
-
-    
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -86,19 +83,14 @@ static NSString * cellIdentifier = @"cellIdentifier";
     CommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier atIndexPath:indexPath];
+    }else{
+        [cell reChangeCell];
+        cell.indexPath = indexPath;
     }
     cell.delegate = self;
     if ([indexPath compare:selectedIndexPath] == NSOrderedSame && indexPath.row == selectedIndexPath.row) {
         [cell changeCell];
-//        CGRect rect = cell.frame;
-//        rect.size.height = 140;
-//        cell.frame = rect;
-    }else{
-//        CGRect rect = cell.frame;
-//        rect.size.height = 120;
-//        cell.frame = rect;
     }
-
     cell.timeLabel.text = @"2014-05-14";
     cell.commentLabel.text = @"aaa";
     cell.userName.text = @"王孟琦";
@@ -107,7 +99,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 
 -(void)replayBtnClickAtIndexPath:(NSIndexPath *)indexPath{
     selectedIndexPath = indexPath;
-    NSLog(@"select cell at row:%ld",indexPath.row);
+    NSLog(@"replay at row:%ld",indexPath.row);
     [self.tableView reloadData];
 }
 

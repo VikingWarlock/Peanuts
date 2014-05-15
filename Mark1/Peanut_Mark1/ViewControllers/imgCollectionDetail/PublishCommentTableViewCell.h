@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AMPAvatarView.h"
 
 @interface PublishCommentTableViewCell : UITableViewCell
+
+@property (nonatomic,strong) AMPAvatarView * iconView;
+@property (nonatomic,strong) UITextView * commentView;
+@property (nonatomic,strong) UIButton * commentBtn;
+//@property (nonatomic,strong) 
 
 @end
