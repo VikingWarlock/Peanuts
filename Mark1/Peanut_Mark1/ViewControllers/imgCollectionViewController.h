@@ -8,6 +8,6 @@
 
 #import "BaseUIViewController.h"
 
-@interface imgCollectionViewController : BaseUIViewController
+@interface imgCollectionViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate>
 
 @end

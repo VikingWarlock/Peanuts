@@ -42,6 +42,10 @@
 		88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB6191E723B001ABA96 /* MustReadViewController.m */; };
 		88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB9191E724C001ABA96 /* SquareViewController.m */; };
 		88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */; };
+		F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */; };
+		F2D8F95519223C5E00102F3F /* imgCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */; };
+		F2D8F95919224DF100102F3F /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95819224DF100102F3F /* CommentViewController.m */; };
+		F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95B19225B2000102F3F /* CommentTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +115,14 @@
 		88D02ABB191E726B001ABA96 /* imgCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgCollectionViewController.h; path = ViewControllers/imgCollectionViewController.h; sourceTree = "<group>"; };
 		88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = imgCollectionViewController.m; path = ViewControllers/imgCollectionViewController.m; sourceTree = "<group>"; };
 		C2AAB9293F12492E8B381615 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		F22D8FC819248418005D2A1A /* PublishCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublishCommentTableViewCell.h; path = ViewControllers/imgCollectionDetail/PublishCommentTableViewCell.h; sourceTree = "<group>"; };
+		F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublishCommentTableViewCell.m; path = ViewControllers/imgCollectionDetail/PublishCommentTableViewCell.m; sourceTree = "<group>"; };
+		F2D8F95319223C5E00102F3F /* imgCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgCollectionTableViewCell.h; path = ViewControllers/imgCollectionDetail/imgCollectionTableViewCell.h; sourceTree = "<group>"; };
+		F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = imgCollectionTableViewCell.m; path = ViewControllers/imgCollectionDetail/imgCollectionTableViewCell.m; sourceTree = "<group>"; };
+		F2D8F95719224DF100102F3F /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = ViewControllers/imgCollectionDetail/CommentViewController.h; sourceTree = "<group>"; };
+		F2D8F95819224DF100102F3F /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentViewController.m; path = ViewControllers/imgCollectionDetail/CommentViewController.m; sourceTree = "<group>"; };
+		F2D8F95A19225B2000102F3F /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentTableViewCell.h; path = ViewControllers/imgCollectionDetail/CommentTableViewCell.h; sourceTree = "<group>"; };
+		F2D8F95B19225B2000102F3F /* CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CommentTableViewCell.m; path = ViewControllers/imgCollectionDetail/CommentTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +313,7 @@
 		887F212E191DF3CC009250D2 /* imgCollection */ = {
 			isa = PBXGroup;
 			children = (
+				F2D8F95219223C1600102F3F /* detail */,
 				88D02ABB191E726B001ABA96 /* imgCollectionViewController.h */,
 				88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */,
 			);
@@ -342,6 +355,29 @@
 				887F214C191E4590009250D2 /* pic.jpg */,
 			);
 			name = img;
+			sourceTree = "<group>";
+		};
+		F2D8F95219223C1600102F3F /* detail */ = {
+			isa = PBXGroup;
+			children = (
+				F2D8F95619224D7100102F3F /* cells */,
+				F2D8F95719224DF100102F3F /* CommentViewController.h */,
+				F2D8F95819224DF100102F3F /* CommentViewController.m */,
+			);
+			name = detail;
+			sourceTree = "<group>";
+		};
+		F2D8F95619224D7100102F3F /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				F2D8F95319223C5E00102F3F /* imgCollectionTableViewCell.h */,
+				F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */,
+				F2D8F95A19225B2000102F3F /* CommentTableViewCell.h */,
+				F2D8F95B19225B2000102F3F /* CommentTableViewCell.m */,
+				F22D8FC819248418005D2A1A /* PublishCommentTableViewCell.h */,
+				F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */,
+			);
+			name = cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,17 +523,21 @@
 				887F2121191DB88B009250D2 /* BaseUIViewController.m in Sources */,
 				887F2133191DF5D5009250D2 /* BlurAndSlide_TableViewCell.m in Sources */,
 				88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */,
+				F2D8F95919224DF100102F3F /* CommentViewController.m in Sources */,
 				887F213C191DF9D2009250D2 /* UIView+extra.m in Sources */,
 				88D02AB4191E721C001ABA96 /* ActivityViewController.m in Sources */,
 				887F2128191DB934009250D2 /* CoreDataModel.xcdatamodeld in Sources */,
 				887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */,
 				88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */,
+				F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */,
+				F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */,
 				887F2146191E310A009250D2 /* AMPAvatarView+helper.m in Sources */,
 				887F2143191E2EBF009250D2 /* UITableView+extra.m in Sources */,
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
 				887F212B191DB97E009250D2 /* PeanutTopViewController.m in Sources */,
 				887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */,
+				F2D8F95519223C5E00102F3F /* imgCollectionTableViewCell.m in Sources */,
 				887F2140191E200D009250D2 /* NSString+extra.m in Sources */,
 				88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */,
 				887F20F3191D4051009250D2 /* main.m in Sources */,
@@ -558,7 +598,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Siguang Huang (L3UC9F9BL5)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -596,7 +636,7 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Siguang Huang (L3UC9F9BL5)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -618,7 +658,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Siguang Huang (L3UC9F9BL5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
 				INFOPLIST_FILE = "Peanut_Mark1/Peanut_Mark1-Info.plist";
@@ -634,7 +674,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Siguang Huang (L3UC9F9BL5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
 				INFOPLIST_FILE = "Peanut_Mark1/Peanut_Mark1-Info.plist";

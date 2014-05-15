@@ -17,7 +17,7 @@
 -(void)updateWithAvatar:(UIImage *)avatarImage And_X_Offset:(CGFloat)asix AndSize:(CGSize)size
 {
     CGFloat height=self.tableHeaderView.frame.size.height;
-    AMPAvatarView *avatar=[[AMPAvatarView alloc]initWithFrame:CGRectMake(asix, height, size.width, size.height)];
+    AMPAvatarView *avatar=[[AMPAvatarView alloc]initWithFrame:CGRectMake(asix, height - size.height/2, size.width, size.height)];
     [avatar setImage:avatarImage];
 
     [self addSubview:avatar];
