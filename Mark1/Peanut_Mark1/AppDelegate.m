@@ -21,7 +21,7 @@
     
     
     [MagicalRecord setupCoreDataStack];
-    
+    [NetworkStack setup];
     
 //    [application setStatusBarStyle:UIStatusBarStyleLightContent];
 
@@ -31,8 +31,8 @@
     
     BaseNaviViewController *TopNavi=[[BaseNaviViewController alloc]initWithRootViewController:TopVC];
 
-    [TopNavi.navigationBar setBarTintColor:[UIColor redColor]];
-    [TopNavi.navigationBar setTranslucent:YES];
+ //   [TopNavi.navigationBar setBarTintColor:[UIColor redColor]];
+ //   [TopNavi.navigationBar setTranslucent:YES];
 //    [self.window setBounds:CGRectMake(0,0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
     
 //    [TopNavi.navigationBar setTintColor:[UIColor clearColor]];

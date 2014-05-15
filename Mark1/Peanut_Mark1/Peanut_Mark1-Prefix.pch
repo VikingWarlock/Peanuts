@@ -21,4 +21,6 @@
     #import"UIImage+extra.h"
     #import"UITableView+extra.h"
     #import"UIView+extra.h"
+    #import<UITableView+ZGPullDrag.h>
+
 #endif

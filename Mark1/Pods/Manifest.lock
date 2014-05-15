@@ -1,62 +1,65 @@
 PODS:
-  - AFNetworking (2.2.3):
+  - AFNetworking (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
     - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.2.3):
+  - AFNetworking/NSURLConnection (2.2.4):
     - AFNetworking/Reachability
     - AFNetworking/Security
     - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.2.3):
+  - AFNetworking/NSURLSession (2.2.4):
     - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.2.3)
-  - AFNetworking/Security (2.2.3)
-  - AFNetworking/Serialization (2.2.3)
-  - AFNetworking/UIKit (2.2.3):
+  - AFNetworking/Reachability (2.2.4)
+  - AFNetworking/Security (2.2.4)
+  - AFNetworking/Serialization (2.2.4)
+  - AFNetworking/UIKit (2.2.4):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AMPAvatarView (1.0.3)
   - MagicalRecord (2.2):
     - MagicalRecord/Core
   - MagicalRecord/Core (2.2)
+  - RBBAnimation (0.3.0)
+  - Reachability (3.1.1)
+  - RTAlertView (0.0.6):
+    - RBBAnimation (= 0.3.0)
   - SDWebImage (3.6):
     - SDWebImage/Core
   - SDWebImage-ProgressView (0.3.1):
     - SDWebImage (~> 3.0)
   - SDWebImage/Core (3.6)
   - UIImage+BlurAndDarken (0.0.1)
-  - UIImage+BlurredFrame (0.0.4)
   - UIImage+ImageCompress (0.0.1)
-  - UIImage-Filter (0.0.1)
   - UIImage-Resize (1.0.1)
-  - UIImageView-LVUtils (0.0.1)
+  - ZGPullDragTableView (0.0.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.2.3)
   - AMPAvatarView (~> 1.0.3)
   - MagicalRecord (~> 2.2)
+  - Reachability (~> 3.1)
+  - RTAlertView (~> 0.0.6)
   - SDWebImage-ProgressView (~> 0.3.1)
   - UIImage+BlurAndDarken (~> 0.0.1)
-  - UIImage+BlurredFrame (~> 0.0.4)
   - UIImage+ImageCompress (~> 0.0.1)
-  - UIImage-Filter (~> 0.0.1)
   - UIImage-Resize (~> 1.0.1)
-  - UIImageView-LVUtils (~> 0.0.1)
+  - ZGPullDragTableView (~> 0.0.1)
 
 SPEC CHECKSUMS:
-  AFNetworking: ae513199cca79e9d7af2708ccabe2ed075550c42
+  AFNetworking: 01aa7c3aa9a200b94943e54072a4373f14b3d219
   AMPAvatarView: 473eae59b5d71dfdeed18803917bfc2a9e0a0a42
   MagicalRecord: 95d49d74ef752cd52f6ad87bcb474817fc3978cf
+  RBBAnimation: e7f31ed62f760f3caf120b5d943267bd9a8e1f64
+  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
+  RTAlertView: 063dc8743ac8acf426cb64c011aa786f22563665
   SDWebImage: 7eb273e54ca8a2e506ad9bd5e80c35b2a4d7c95e
   SDWebImage-ProgressView: 472d7eb4ed2663109164afc13b936d8e3e5c8cd6
   UIImage+BlurAndDarken: e8624dc1153e8bd73d2eabd36a193741e91d43c1
-  UIImage+BlurredFrame: e604fa605955f47f24aecfbdc013efe5d5aa0b6c
   UIImage+ImageCompress: 9772dde93c0f615c53d2eecd7849797a2afdfd05
-  UIImage-Filter: 4bfad1bf2593826b5b4289025a750688e9fe1ed5
   UIImage-Resize: b71ddbd27e5a29c2776df5c55b766928050437b2
-  UIImageView-LVUtils: 2a2d244c44b8cfd7f9484a65bd8ed12b0c28d366
+  ZGPullDragTableView: 16d1157aa8a19730ceff60dd6446d2626a9ec2e2
 
 COCOAPODS: 0.32.1
