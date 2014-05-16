@@ -6,9 +6,18 @@
 //  Copyright (c) 2014 viking warlock. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-@interface Peanut_SNSPart : NSObject
+typedef NS_ENUM(NSInteger, BottomSMSType) {
+    BottomSMSType_Activity=0,
+    BottomSMSType_Photoseries,
+    BottomSMSType_SinglePhoto
+};
+
+@interface Peanut_SNSPart : UIView
+
+-(id)initWithType:(BottomSMSType)type andData:(id)data AndDelegate:(id)delegate AndTarget:(UIViewController*)target;
+
 
 
 @end

@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		27C402CF34354145A3818596 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A474C76991743418E0AA42B /* libPods.a */; };
 		886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C08931920F1EB00BD7E5F /* NetworkRequest.m */; };
+		8870BE561924FB7E00233614 /* imgCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */; };
+		8870BE571924FB7E00233614 /* PeanutTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */; };
+		8870BE581924FB7E00233614 /* BlurTableViewCell_mark1.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */; };
+		8870BE591924FB8F00233614 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95B19225B2000102F3F /* CommentTableViewCell.m */; };
+		8870BE5A1924FB8F00233614 /* PublishCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */; };
+		8870BE5B1924FB8F00233614 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95819224DF100102F3F /* CommentViewController.m */; };
 		887F20E7191D4051009250D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E6191D4051009250D2 /* Foundation.framework */; };
 		887F20E9191D4051009250D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E8191D4051009250D2 /* CoreGraphics.framework */; };
 		887F20EB191D4051009250D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20EA191D4051009250D2 /* UIKit.framework */; };
@@ -37,12 +43,11 @@
 		887F214F191E4590009250D2 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 887F214A191E4590009250D2 /* 3.png */; };
 		887F2150191E4590009250D2 /* iron.png in Resources */ = {isa = PBXBuildFile; fileRef = 887F214B191E4590009250D2 /* iron.png */; };
 		887F2151191E4590009250D2 /* pic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 887F214C191E4590009250D2 /* pic.jpg */; };
+		8881AC641925E4A700F9646B /* SNS_Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8881AC631925E4A700F9646B /* SNS_Helper.m */; };
 		88D02AB4191E721C001ABA96 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB3191E721C001ABA96 /* ActivityViewController.m */; };
 		88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB6191E723B001ABA96 /* MustReadViewController.m */; };
 		88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB9191E724C001ABA96 /* SquareViewController.m */; };
 		88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */; };
-		88E06FDA19232317006B3EAC /* BlurTableViewCell_mark1.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */; };
-		88FF355E1923962B00E76BB2 /* PeanutTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */; };
 		88FF356119239FF500E76BB2 /* Peanut_SNSPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF356019239FF500E76BB2 /* Peanut_SNSPart.m */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +107,8 @@
 		887F214A191E4590009250D2 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 3.png; path = img/3.png; sourceTree = "<group>"; };
 		887F214B191E4590009250D2 /* iron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iron.png; path = img/iron.png; sourceTree = "<group>"; };
 		887F214C191E4590009250D2 /* pic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = pic.jpg; path = img/pic.jpg; sourceTree = "<group>"; };
+		8881AC621925E4A700F9646B /* SNS_Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SNS_Helper.h; path = Networks/SNS_Helper.h; sourceTree = "<group>"; };
+		8881AC631925E4A700F9646B /* SNS_Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SNS_Helper.m; path = Networks/SNS_Helper.m; sourceTree = "<group>"; };
 		88D02AB2191E721C001ABA96 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityViewController.h; path = ViewControllers/ActivityViewController.h; sourceTree = "<group>"; };
 		88D02AB3191E721C001ABA96 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityViewController.m; path = ViewControllers/ActivityViewController.m; sourceTree = "<group>"; };
 		88D02AB5191E723B001ABA96 /* MustReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MustReadViewController.h; path = ViewControllers/MustReadViewController.h; sourceTree = "<group>"; };
@@ -152,6 +159,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8870BE5C1924FE1B00233614 /* SNSPartOutlet */ = {
+			isa = PBXGroup;
+			children = (
+				88FF355F19239FF500E76BB2 /* Peanut_SNSPart.h */,
+				88FF356019239FF500E76BB2 /* Peanut_SNSPart.m */,
+			);
+			name = SNSPartOutlet;
+			sourceTree = "<group>";
+		};
 		887F20DA191D4051009250D2 = {
 			isa = PBXGroup;
 			children = (
@@ -234,13 +250,12 @@
 		887F2117191DB777009250D2 /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
+				8870BE5C1924FE1B00233614 /* SNSPartOutlet */,
 				887F2134191DF5D9009250D2 /* BaseSmallOutlet */,
 				887F211C191DB85D009250D2 /* BaseNaviViewController.h */,
 				887F211D191DB85D009250D2 /* BaseNaviViewController.m */,
 				887F211F191DB88B009250D2 /* BaseUIViewController.h */,
 				887F2120191DB88B009250D2 /* BaseUIViewController.m */,
-				88FF355F19239FF500E76BB2 /* Peanut_SNSPart.h */,
-				88FF356019239FF500E76BB2 /* Peanut_SNSPart.m */,
 			);
 			name = BaseModel;
 			sourceTree = "<group>";
@@ -248,7 +263,6 @@
 		887F2118191DB787009250D2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				88FF3562192486FF00E76BB2 /* SNSPart_Viewcontroller */,
 				887F2130191DF569009250D2 /* SquareViewController */,
 				887F212F191DF55F009250D2 /* MustReadViewController */,
 				887F212E191DF3CC009250D2 /* imgCollection */,
@@ -273,6 +287,8 @@
 			children = (
 				887F2123191DB91B009250D2 /* NetworkStack.h */,
 				887F2124191DB91B009250D2 /* NetworkStack.m */,
+				8881AC621925E4A700F9646B /* SNS_Helper.h */,
+				8881AC631925E4A700F9646B /* SNS_Helper.m */,
 			);
 			name = Networks;
 			sourceTree = "<group>";
@@ -364,11 +380,27 @@
 			name = img;
 			sourceTree = "<group>";
 		};
-		88FF3562192486FF00E76BB2 /* SNSPart_Viewcontroller */ = {
+		F2D8F95219223C1600102F3F /* detail */ = {
 			isa = PBXGroup;
 			children = (
+				F2D8F95619224D7100102F3F /* cells */,
+				F2D8F95719224DF100102F3F /* CommentViewController.h */,
+				F2D8F95819224DF100102F3F /* CommentViewController.m */,
 			);
-			name = SNSPart_Viewcontroller;
+			name = detail;
+			sourceTree = "<group>";
+		};
+		F2D8F95619224D7100102F3F /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				F2D8F95319223C5E00102F3F /* imgCollectionTableViewCell.h */,
+				F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */,
+				F2D8F95A19225B2000102F3F /* CommentTableViewCell.h */,
+				F2D8F95B19225B2000102F3F /* CommentTableViewCell.m */,
+				F22D8FC819248418005D2A1A /* PublishCommentTableViewCell.h */,
+				F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */,
+			);
+			name = cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -510,27 +542,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2F8BF201924F001000A3CED /* BlurTableViewCell_mark1.m in Sources */,
-				F2F8BF1F1924EFE6000A3CED /* PeanutTopViewController.m in Sources */,
+				8870BE591924FB8F00233614 /* CommentTableViewCell.m in Sources */,
+				8870BE5A1924FB8F00233614 /* PublishCommentTableViewCell.m in Sources */,
+				8870BE5B1924FB8F00233614 /* CommentViewController.m in Sources */,
+				8870BE561924FB7E00233614 /* imgCollectionTableViewCell.m in Sources */,
+				8870BE571924FB7E00233614 /* PeanutTopViewController.m in Sources */,
+				8870BE581924FB7E00233614 /* BlurTableViewCell_mark1.m in Sources */,
 				887F20F7191D4051009250D2 /* AppDelegate.m in Sources */,
 				887F2121191DB88B009250D2 /* BaseUIViewController.m in Sources */,
 				886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */,
 				88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */,
-				F2D8F95919224DF100102F3F /* CommentViewController.m in Sources */,
 				887F213C191DF9D2009250D2 /* UIView+extra.m in Sources */,
 				88D02AB4191E721C001ABA96 /* ActivityViewController.m in Sources */,
 				887F2128191DB934009250D2 /* CoreDataModel.xcdatamodeld in Sources */,
 				887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */,
 				88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */,
-				F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */,
-				F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */,
 				887F2146191E310A009250D2 /* AMPAvatarView+helper.m in Sources */,
 				88FF356119239FF500E76BB2 /* Peanut_SNSPart.m in Sources */,
 				887F2143191E2EBF009250D2 /* UITableView+extra.m in Sources */,
+				8881AC641925E4A700F9646B /* SNS_Helper.m in Sources */,
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
 				887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */,
-				F2D8F95519223C5E00102F3F /* imgCollectionTableViewCell.m in Sources */,
 				887F2140191E200D009250D2 /* NSString+extra.m in Sources */,
 				88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */,
 				887F20F3191D4051009250D2 /* main.m in Sources */,
@@ -651,7 +684,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Siguang Huang (L3UC9F9BL5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
 				INFOPLIST_FILE = "Peanut_Mark1/Peanut_Mark1-Info.plist";
@@ -667,7 +700,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Siguang Huang (L3UC9F9BL5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
 				INFOPLIST_FILE = "Peanut_Mark1/Peanut_Mark1-Info.plist";

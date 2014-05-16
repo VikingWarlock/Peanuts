@@ -37,6 +37,7 @@
     self.BKImage=[bkImage copy];
     [self setupLayout];
     
+
     
     self.Delegate_Blur=delegate;
     
@@ -135,6 +136,10 @@
         {
             startingPoint=[sender locationInView:self];
             
+            if ([self.Delegate_Blur respondsToSelector:@selector(ThisCellHaveBeenSlide:)]) {
+                [self.Delegate_Blur ThisCellHaveBeenSlide:self.indexpath];
+            }
+            
         }
             break;
         case  UIGestureRecognizerStateChanged:
@@ -160,6 +165,10 @@
             break;
         case UIGestureRecognizerStateEnded:
         {
+            if ([self.Delegate_Blur respondsToSelector:@selector(ThisCellHaveBeenReleased:)]) {
+                [self.Delegate_Blur ThisCellHaveBeenReleased:self.indexpath];
+            }
+            
             startingPoint=CGPointZero;
             BOOL trigger=abs(Slider.frame.origin.x-originPoint.x)/(self.frame.size.width*1.f)>0.4f;
             if (trigger) {
@@ -206,7 +215,7 @@
 -(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer
 {
     //   CGPoint trans=[gestureRecognizer translationInView:self];
-    return gestureEnable;
+    return gestureEnable&&([self.Delegate_Blur respondsToSelector:@selector(SlideCouldBegin:)]?[self.Delegate_Blur SlideCouldBegin:self.indexpath]:1);
     
     
 }

@@ -16,11 +16,14 @@
 #import "ActivityViewController.h"
 #import "imgCollectionViewController.h"
 
+
 @interface PeanutTopViewController ()<UITableViewDataSource,UITableViewDelegate,Delegate_BlurCellSlide>
 {
     UITableView *tableview;
     CGRect screen;
     UIColor *backGroundImageColor;
+    NSIndexPath *havebeenSlide;
+    
 }
 
 
@@ -44,7 +47,7 @@
     [super viewDidLoad];
     
     NSLog(@"%f\n\n\n\n",self.view.frame.origin.y);
-    
+    havebeenSlide=nil;
     
     
     screen=[UIScreen mainScreen].bounds;
@@ -58,6 +61,7 @@
     
     [tableview registerClass:[BlurTableViewCell_mark1 class] forCellReuseIdentifier:@"mark1Cell"];
     
+    
     tableview.delegate=self;
     tableview.dataSource=self;
     
@@ -66,7 +70,7 @@
     
     [self.view setNeedsDisplay];
     
-  /*
+     /*
     UIImageWriteToSavedPhotosAlbum([[self.view getClipView:CGRectMake(0, 0, 320, 100)]captureView ], self, nil, nil);
     
     backGroundImageColor=[[[self.view getClipView:CGRectMake(0, 0, 320, 40)] captureView]averageColor];
@@ -187,8 +191,14 @@
 }
 
 
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath!=nil) {
+        return;
+    }
+    BlurTableViewCell_mark1 *cell=(BlurTableViewCell_mark1*)[tableView cellForRowAtIndexPath:indexPath];
+    [cell setSelected:NO animated:NO];
     switch (indexPath.row) {
         case 0:
         {
@@ -225,10 +235,40 @@
 {
     BlurTableViewCell_mark1 *cell=(BlurTableViewCell_mark1*)[tableview cellForRowAtIndexPath:indexpath];
     imgCollectionViewController *vc=[[imgCollectionViewController alloc]init];
-    [self.NavigationController pushViewController:vc animated:YES];
     [cell backToOriginWithAnimate:NO];
+    havebeenSlide=nil;
+    [self.NavigationController pushViewController:vc animated:YES];
 }
 
+
+-(BOOL)SlideCouldBegin:(NSIndexPath *)indexpath
+{
+    if (havebeenSlide==nil) {
+        return YES;
+    }else
+    {
+        if (havebeenSlide==indexpath) {
+            return YES;
+        }
+    }
+    
+    return NO;
+    
+}
+
+-(void)ThisCellHaveBeenSlide:(NSIndexPath *)indexpath
+{
+
+    havebeenSlide=indexpath;
+    
+}
+
+-(void)ThisCellHaveBeenReleased:(NSIndexPath *)indexpath
+{
+    if (havebeenSlide==indexpath) {
+        havebeenSlide=nil;
+    }
+}
 
 -(void)addTableviewHeadView:(UIImage*)img
 {

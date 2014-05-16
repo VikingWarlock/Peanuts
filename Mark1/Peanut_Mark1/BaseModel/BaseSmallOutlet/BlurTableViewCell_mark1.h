@@ -14,8 +14,14 @@ typedef NS_ENUM(NSInteger, Cell_Init_Direction) {
 
 @protocol Delegate_BlurCellSlide <NSObject>
 
+
+
 @optional
+
+-(BOOL)SlideCouldBegin:(NSIndexPath*)indexpath;
 -(void)slideHaveBeenDoneAtIndexPath:(NSIndexPath*)indexpath;
+-(void)ThisCellHaveBeenSlide:(NSIndexPath*)indexpath;
+-(void)ThisCellHaveBeenReleased:(NSIndexPath *)indexpath;
 //滑动完成后做的事情
 
 @end
@@ -37,6 +43,8 @@ typedef NS_ENUM(NSInteger, Cell_Init_Direction) {
 
 
 -(void)backToOriginWithAnimate:(BOOL)animate;
+
+
 
 
 @end
