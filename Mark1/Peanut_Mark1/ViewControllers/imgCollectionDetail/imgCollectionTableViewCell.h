@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol Delegate_imgCell <NSObject>
+
+-(void)commentBtnClick:(UIButton *)sender;
+
+@end
+
 @interface imgCollectionTableViewCell : UITableViewCell{
     NSInteger praiseCount;
     NSInteger commentCount;
@@ -20,5 +26,9 @@
 @property (nonatomic,strong) UIButton * praiseBtn;
 @property (nonatomic,strong) UIButton * commentBtn;
 @property (nonatomic,strong) UIButton * shareBtn;
+@property (nonatomic,weak)id<Delegate_imgCell>delegate;
+
+-(void)setConstraintsWithBool:(NSInteger)isFirstRow;
+-(void)removeConstraintsWithBool:(NSInteger)isFirstRow;
 
 @end

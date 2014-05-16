@@ -7,6 +7,7 @@
 //
 
 #import "imgCollectionTableViewCell.h"
+#import "CommentViewController.h"
 
 @implementation imgCollectionTableViewCell
 
@@ -15,7 +16,9 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 300, 400)];
+
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(_imgView.frame.origin.x, _imgView.frame.origin.y + _imgView.frame.size.height + 5, 50, 20)];
+
         
         [self.contentView addSubview:_imgView];
         [self.contentView addSubview:_titleLabel];
@@ -23,6 +26,15 @@
         [self.contentView addSubview:self.praiseBtn];
         [self.contentView addSubview:self.commentBtn];
         [self.contentView addSubview:self.shareBtn];
+        
+        NSDictionary * dic = NSDictionaryOfVariableBindings(_imgView,_titleLabel,_detailBtn,_praiseBtn,_commentBtn,_shareBtn);
+        for (UIView * view in [dic allValues]) {
+            [view setTranslatesAutoresizingMaskIntoConstraints:NO];
+        }
+
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_imgView]-10-|" options:0 metrics:nil views:dic]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_titleLabel(==50)]-10-[_detailBtn]-100-[_praiseBtn(==50)]-10-[_commentBtn(==50)]-10-[_shareBtn(==50)]-10-|" options:0 metrics:nil views:dic]];
+
         
         praiseCount = 0;
         commentCount = 0;
@@ -52,6 +64,7 @@
 -(UIButton *)praiseBtn{
     if (!_praiseBtn) {
         _praiseBtn = [[UIButton alloc] initWithFrame:CGRectMake(160, _titleLabel.frame.origin.y, 50, 20)];
+
         [_praiseBtn addTarget:self action:@selector(praiseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         
         [_praiseBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateNormal];
@@ -75,6 +88,7 @@
         CGRect rect = _praiseBtn.frame;
         rect.origin.x += _praiseBtn.frame.size.width;
         _commentBtn = [[UIButton alloc] initWithFrame:rect];
+
         [_commentBtn addTarget:self action:@selector(commentBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [_commentBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateNormal];
         [_commentBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateSelected];
@@ -90,6 +104,8 @@
     [self.commentBtn setTitle:[NSString stringWithFormat:@"%ld",commentCount] forState:UIControlStateNormal];
     [self.commentBtn setTitle:[NSString stringWithFormat:@"%ld",commentCount] forState:UIControlStateSelected];
     [self.commentBtn setTitle:[NSString stringWithFormat:@"%ld",commentCount] forState:UIControlStateHighlighted];
+    [self.delegate commentBtnClick:sender];
+    
 }
 
 -(UIButton *)shareBtn{
@@ -97,6 +113,7 @@
         CGRect rect = _praiseBtn.frame;
         rect.origin.x += 2 * rect.size.width;
         _shareBtn = [[UIButton alloc] initWithFrame:rect];
+
         [_shareBtn addTarget:self action:@selector(shareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         
         [_shareBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateNormal];
@@ -114,6 +131,35 @@
     [self.shareBtn setTitle:[NSString stringWithFormat:@"%ld",shareCount] forState:UIControlStateSelected];
     [self.shareBtn setTitle:[NSString stringWithFormat:@"%ld",shareCount] forState:UIControlStateHighlighted];
 }
+
+-(void)setConstraintsWithBool:(NSInteger)isFirstRow{
+    int height;
+    CGRect rect = self.frame;
+    if (isFirstRow) {
+        rect.size.height = 550;
+        self.frame = rect;
+        height = 60;
+    }else{
+        rect.size.height = 500;
+        self.frame = rect;
+        height = 10;
+    }
+    NSDictionary * dic = NSDictionaryOfVariableBindings(_imgView,_titleLabel,_detailBtn,_praiseBtn,_commentBtn,_shareBtn);
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-%d-[_imgView]-10-[_titleLabel(==20)]-10-|",height] options:0 metrics:nil views:dic]];
+//    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_imgView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:10]];
+//    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_imgView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:400]];
+
+//    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_titleLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_imgView attribute:NSLayoutAttributeBottom multiplier:1 constant:10]];
+//    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_titleLabel attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_imgView attribute:NSLayoutAttributeBottom multiplier:1 constant:30]];
+
+
+
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-%d-[_imgView]-10-[_detailBtn(==20)]-10-|",height] options:0 metrics:nil views:dic]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-%d-[_imgView]-10-[_praiseBtn(==20)]-10-|",height] options:0 metrics:nil views:dic]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-%d-[_imgView]-10-[_commentBtn(==20)]-10-|",height] options:0 metrics:nil views:dic]];
+    [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-%d-[_imgView]-10-[_shareBtn(==20)]-10-|",height] options:0 metrics:nil views:dic]];
+}
+
 
 - (void)awakeFromNib
 {

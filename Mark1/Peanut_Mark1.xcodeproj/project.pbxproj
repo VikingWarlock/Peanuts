@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		27C402CF34354145A3818596 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A474C76991743418E0AA42B /* libPods.a */; };
+		510FD0591925B5BB00CD73AD /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */; };
+		51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */; };
 		886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C08931920F1EB00BD7E5F /* NetworkRequest.m */; };
 		8870BE561924FB7E00233614 /* imgCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */; };
 		8870BE571924FB7E00233614 /* PeanutTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */; };
@@ -62,6 +64,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		510FD0561925B5BB00CD73AD /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailViewController.h; path = ViewControllers/ActivityDetailViewController.h; sourceTree = "<group>"; };
+		510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailViewController.m; path = ViewControllers/ActivityDetailViewController.m; sourceTree = "<group>"; };
+		51EFD0F019252D1600F5CC9D /* ActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityTableViewCell.h; path = ViewControllers/ActivityTableViewCell.h; sourceTree = "<group>"; };
+		51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityTableViewCell.m; path = ViewControllers/ActivityTableViewCell.m; sourceTree = "<group>"; };
 		5A474C76991743418E0AA42B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		886C08921920F1EB00BD7E5F /* NetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkRequest.h; path = CoreData/NetworkRequest.h; sourceTree = "<group>"; };
 		886C08931920F1EB00BD7E5F /* NetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkRequest.m; path = CoreData/NetworkRequest.m; sourceTree = "<group>"; };
@@ -124,6 +130,12 @@
 		88FF355F19239FF500E76BB2 /* Peanut_SNSPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Peanut_SNSPart.h; path = BaseModel/Peanut_SNSPart.h; sourceTree = "<group>"; };
 		88FF356019239FF500E76BB2 /* Peanut_SNSPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Peanut_SNSPart.m; path = BaseModel/Peanut_SNSPart.m; sourceTree = "<group>"; };
 		C2AAB9293F12492E8B381615 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		D2F32F061925D4A900E446D6 /* MustReadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MustReadTableViewCell.h; path = ViewControllers/MustReadTableViewCell.h; sourceTree = "<group>"; };
+		D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MustReadTableViewCell.m; path = ViewControllers/MustReadTableViewCell.m; sourceTree = "<group>"; };
+		D2F32F091925F88B00E446D6 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
+		D2F32F0A1925F88B00E446D6 /* comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment.png; sourceTree = "<group>"; };
+		D2F32F10192607ED00E446D6 /* MustReaddetialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MustReaddetialViewController.h; path = ViewControllers/MustReaddetialViewController.h; sourceTree = "<group>"; };
+		D2F32F11192607ED00E446D6 /* MustReaddetialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MustReaddetialViewController.m; path = ViewControllers/MustReaddetialViewController.m; sourceTree = "<group>"; };
 		F22D8FC819248418005D2A1A /* PublishCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublishCommentTableViewCell.h; path = ViewControllers/imgCollectionDetail/PublishCommentTableViewCell.h; sourceTree = "<group>"; };
 		F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublishCommentTableViewCell.m; path = ViewControllers/imgCollectionDetail/PublishCommentTableViewCell.m; sourceTree = "<group>"; };
 		F2D8F95319223C5E00102F3F /* imgCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgCollectionTableViewCell.h; path = ViewControllers/imgCollectionDetail/imgCollectionTableViewCell.h; sourceTree = "<group>"; };
@@ -329,6 +341,10 @@
 			children = (
 				88D02AB2191E721C001ABA96 /* ActivityViewController.h */,
 				88D02AB3191E721C001ABA96 /* ActivityViewController.m */,
+				51EFD0F019252D1600F5CC9D /* ActivityTableViewCell.h */,
+				51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */,
+				510FD0561925B5BB00CD73AD /* ActivityDetailViewController.h */,
+				510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */,
 			);
 			name = ActivityViewController;
 			sourceTree = "<group>";
@@ -348,6 +364,10 @@
 			children = (
 				88D02AB5191E723B001ABA96 /* MustReadViewController.h */,
 				88D02AB6191E723B001ABA96 /* MustReadViewController.m */,
+				D2F32F061925D4A900E446D6 /* MustReadTableViewCell.h */,
+				D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */,
+				D2F32F10192607ED00E446D6 /* MustReaddetialViewController.h */,
+				D2F32F11192607ED00E446D6 /* MustReaddetialViewController.m */,
 			);
 			name = MustReadViewController;
 			sourceTree = "<group>";
@@ -371,6 +391,8 @@
 		887F2147191E4585009250D2 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				D2F32F091925F88B00E446D6 /* like.png */,
+				D2F32F0A1925F88B00E446D6 /* comment.png */,
 				887F2148191E4590009250D2 /* 1.png */,
 				887F2149191E4590009250D2 /* 2.png */,
 				887F214A191E4590009250D2 /* 3.png */,
@@ -485,10 +507,12 @@
 			files = (
 				887F2116191D411D009250D2 /* Podfile in Resources */,
 				887F214D191E4590009250D2 /* 1.png in Resources */,
+				D2F32F0B1925F88B00E446D6 /* like.png in Resources */,
 				887F2151191E4590009250D2 /* pic.jpg in Resources */,
 				887F214E191E4590009250D2 /* 2.png in Resources */,
 				887F2150191E4590009250D2 /* iron.png in Resources */,
 				887F214F191E4590009250D2 /* 3.png in Resources */,
+				D2F32F0C1925F88B00E446D6 /* comment.png in Resources */,
 				887F20F1191D4051009250D2 /* InfoPlist.strings in Resources */,
 				887F20F9191D4051009250D2 /* Images.xcassets in Resources */,
 			);
@@ -555,6 +579,7 @@
 				887F213C191DF9D2009250D2 /* UIView+extra.m in Sources */,
 				88D02AB4191E721C001ABA96 /* ActivityViewController.m in Sources */,
 				887F2128191DB934009250D2 /* CoreDataModel.xcdatamodeld in Sources */,
+				D2F32F12192607ED00E446D6 /* MustReaddetialViewController.m in Sources */,
 				887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */,
 				88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */,
 				887F2146191E310A009250D2 /* AMPAvatarView+helper.m in Sources */,
@@ -567,6 +592,7 @@
 				887F2140191E200D009250D2 /* NSString+extra.m in Sources */,
 				88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */,
 				887F20F3191D4051009250D2 /* main.m in Sources */,
+				510FD0591925B5BB00CD73AD /* ActivityDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,7 +666,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos7.0;
 			};
@@ -672,7 +698,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos7.0;
 				VALIDATE_PRODUCT = YES;
 			};

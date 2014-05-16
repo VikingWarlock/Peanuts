@@ -55,6 +55,9 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.bottomView];
     
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
+    
     
     // Do any additional setup after loading the view.
 }
@@ -62,7 +65,8 @@ static NSString * cellIdentifier = @"cellIdentifier";
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:self.view.frame style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStylePlain];
+        [_tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorColor = [UIColor whiteColor];
@@ -71,7 +75,8 @@ static NSString * cellIdentifier = @"cellIdentifier";
 //        UIImageView * imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 120)];
 //        imgView.image = [[UIImage imageNamed:@"1.png"] darkened:0.6 andBlurredImage:16.f];
 //        _tableView.tableHeaderView = imgView;
-        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
+        
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
         [_tableView.tableHeaderView setBackgroundColor:[UIColor clearColor]];
    
         UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, _tableView.tableHeaderView.frame.size.height - 20, 60, 17)];
@@ -90,6 +95,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
         
         [_tableView.tableHeaderView addSubview:nameLabel];
         [_tableView.tableHeaderView addSubview:timeLabel];
+        
         
     }
     return _tableView;
@@ -146,25 +152,34 @@ static NSString * cellIdentifier = @"cellIdentifier";
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 5;
+    return 10;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 500.0;
+    imgCollectionTableViewCell * cell = (imgCollectionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+
+    return cell.frame.size.height;
 }
-
-
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     imgCollectionTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[imgCollectionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        if (indexPath.row == 0) {
+            [cell setConstraintsWithBool:YES];
+        }else
+            [cell setConstraintsWithBool:NO];
     }
-    if (indexPath.row == 0) {
-        CGRect rect = cell.imgView.frame;
-        rect.origin.y += 30;
-        cell.imgView.frame = rect;
+    cell.delegate = self;
+    if (indexPath.row != 0) {
+        [cell setConstraintsWithBool:NO];
+    }else{
+        [cell setConstraintsWithBool:YES];
+
     }
+
+    NSLog(@"%lf",cell.frame.size.height);
+
     cell.imgView.image = [UIImage imageNamed:@"pic.jpg"];
     cell.titleLabel.text = @"001";
     return cell;
@@ -173,6 +188,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
