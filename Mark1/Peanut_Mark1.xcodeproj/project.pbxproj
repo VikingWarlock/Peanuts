@@ -43,6 +43,9 @@
 		88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB6191E723B001ABA96 /* MustReadViewController.m */; };
 		88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB9191E724C001ABA96 /* SquareViewController.m */; };
 		88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */; };
+		D2F32F081925D4A900E446D6 /* MustReadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */; };
+		D2F32F0B1925F88B00E446D6 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F091925F88B00E446D6 /* like.png */; };
+		D2F32F0C1925F88B00E446D6 /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F0A1925F88B00E446D6 /* comment.png */; };
 		F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */; };
 		F2D8F95519223C5E00102F3F /* imgCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */; };
 		F2D8F95919224DF100102F3F /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95819224DF100102F3F /* CommentViewController.m */; };
@@ -124,6 +127,10 @@
 		88FF355C1923962B00E76BB2 /* PeanutTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeanutTopViewController.h; path = ViewControllers/PeanutTopViewController.h; sourceTree = "<group>"; };
 		88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PeanutTopViewController.m; path = ViewControllers/PeanutTopViewController.m; sourceTree = "<group>"; };
 		C2AAB9293F12492E8B381615 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		D2F32F061925D4A900E446D6 /* MustReadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MustReadTableViewCell.h; path = ViewControllers/MustReadTableViewCell.h; sourceTree = "<group>"; };
+		D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MustReadTableViewCell.m; path = ViewControllers/MustReadTableViewCell.m; sourceTree = "<group>"; };
+		D2F32F091925F88B00E446D6 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
+		D2F32F0A1925F88B00E446D6 /* comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment.png; sourceTree = "<group>"; };
 		F22D8FC819248418005D2A1A /* PublishCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublishCommentTableViewCell.h; path = ViewControllers/imgCollectionDetail/PublishCommentTableViewCell.h; sourceTree = "<group>"; };
 		F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublishCommentTableViewCell.m; path = ViewControllers/imgCollectionDetail/PublishCommentTableViewCell.m; sourceTree = "<group>"; };
 		F2D8F95319223C5E00102F3F /* imgCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgCollectionTableViewCell.h; path = ViewControllers/imgCollectionDetail/imgCollectionTableViewCell.h; sourceTree = "<group>"; };
@@ -340,6 +347,8 @@
 			children = (
 				88D02AB5191E723B001ABA96 /* MustReadViewController.h */,
 				88D02AB6191E723B001ABA96 /* MustReadViewController.m */,
+				D2F32F061925D4A900E446D6 /* MustReadTableViewCell.h */,
+				D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */,
 			);
 			name = MustReadViewController;
 			sourceTree = "<group>";
@@ -363,6 +372,8 @@
 		887F2147191E4585009250D2 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				D2F32F091925F88B00E446D6 /* like.png */,
+				D2F32F0A1925F88B00E446D6 /* comment.png */,
 				887F2148191E4590009250D2 /* 1.png */,
 				887F2149191E4590009250D2 /* 2.png */,
 				887F214A191E4590009250D2 /* 3.png */,
@@ -477,10 +488,12 @@
 			files = (
 				887F2116191D411D009250D2 /* Podfile in Resources */,
 				887F214D191E4590009250D2 /* 1.png in Resources */,
+				D2F32F0B1925F88B00E446D6 /* like.png in Resources */,
 				887F2151191E4590009250D2 /* pic.jpg in Resources */,
 				887F214E191E4590009250D2 /* 2.png in Resources */,
 				887F2150191E4590009250D2 /* iron.png in Resources */,
 				887F214F191E4590009250D2 /* 3.png in Resources */,
+				D2F32F0C1925F88B00E446D6 /* comment.png in Resources */,
 				887F20F1191D4051009250D2 /* InfoPlist.strings in Resources */,
 				887F20F9191D4051009250D2 /* Images.xcassets in Resources */,
 			);
@@ -548,6 +561,7 @@
 				887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */,
 				88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */,
 				F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */,
+				D2F32F081925D4A900E446D6 /* MustReadTableViewCell.m in Sources */,
 				F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */,
 				887F2146191E310A009250D2 /* AMPAvatarView+helper.m in Sources */,
 				887F2143191E2EBF009250D2 /* UITableView+extra.m in Sources */,
@@ -632,7 +646,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos7.0;
 			};
@@ -664,7 +678,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos7.0;
 				VALIDATE_PRODUCT = YES;
 			};

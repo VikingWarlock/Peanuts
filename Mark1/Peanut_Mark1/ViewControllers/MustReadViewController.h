@@ -8,6 +8,6 @@
 
 #import "BaseUIViewController.h"
 
-@interface MustReadViewController : BaseUIViewController
+@interface MustReadViewController : BaseUIViewController <UITableViewDataSource,UITableViewDelegate>
 
 @end
