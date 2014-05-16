@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		27C402CF34354145A3818596 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A474C76991743418E0AA42B /* libPods.a */; };
 		510FD0591925B5BB00CD73AD /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */; };
+		510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD05C1926032400CD73AD /* ActivityDetailInfoViewController.m */; };
+		510FD060192603BE00CD73AD /* Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD05F192603BE00CD73AD /* Mask.m */; };
 		51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */; };
 		886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C08931920F1EB00BD7E5F /* NetworkRequest.m */; };
 		887F20E7191D4051009250D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E6191D4051009250D2 /* Foundation.framework */; };
@@ -64,6 +66,10 @@
 /* Begin PBXFileReference section */
 		510FD0561925B5BB00CD73AD /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailViewController.h; path = ViewControllers/ActivityDetailViewController.h; sourceTree = "<group>"; };
 		510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailViewController.m; path = ViewControllers/ActivityDetailViewController.m; sourceTree = "<group>"; };
+		510FD05B1926032400CD73AD /* ActivityDetailInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailInfoViewController.h; path = ViewControllers/ActivityDetailInfoViewController.h; sourceTree = "<group>"; };
+		510FD05C1926032400CD73AD /* ActivityDetailInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailInfoViewController.m; path = ViewControllers/ActivityDetailInfoViewController.m; sourceTree = "<group>"; };
+		510FD05E192603BE00CD73AD /* Mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mask.h; path = ViewControllers/Mask.h; sourceTree = "<group>"; };
+		510FD05F192603BE00CD73AD /* Mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mask.m; path = ViewControllers/Mask.m; sourceTree = "<group>"; };
 		51EFD0F019252D1600F5CC9D /* ActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityTableViewCell.h; path = ViewControllers/ActivityTableViewCell.h; sourceTree = "<group>"; };
 		51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityTableViewCell.m; path = ViewControllers/ActivityTableViewCell.m; sourceTree = "<group>"; };
 		5A474C76991743418E0AA42B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -315,12 +321,16 @@
 		887F212D191DF3A0009250D2 /* ActivityViewController */ = {
 			isa = PBXGroup;
 			children = (
+				510FD05E192603BE00CD73AD /* Mask.h */,
+				510FD05F192603BE00CD73AD /* Mask.m */,
 				88D02AB2191E721C001ABA96 /* ActivityViewController.h */,
 				88D02AB3191E721C001ABA96 /* ActivityViewController.m */,
 				51EFD0F019252D1600F5CC9D /* ActivityTableViewCell.h */,
 				51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */,
 				510FD0561925B5BB00CD73AD /* ActivityDetailViewController.h */,
 				510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */,
+				510FD05B1926032400CD73AD /* ActivityDetailInfoViewController.h */,
+				510FD05C1926032400CD73AD /* ActivityDetailInfoViewController.m */,
 			);
 			name = ActivityViewController;
 			sourceTree = "<group>";
@@ -552,11 +562,13 @@
 				887F2146191E310A009250D2 /* AMPAvatarView+helper.m in Sources */,
 				887F2143191E2EBF009250D2 /* UITableView+extra.m in Sources */,
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
+				510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
 				887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */,
 				F2D8F95519223C5E00102F3F /* imgCollectionTableViewCell.m in Sources */,
 				887F2140191E200D009250D2 /* NSString+extra.m in Sources */,
 				88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */,
+				510FD060192603BE00CD73AD /* Mask.m in Sources */,
 				887F20F3191D4051009250D2 /* main.m in Sources */,
 				510FD0591925B5BB00CD73AD /* ActivityDetailViewController.m in Sources */,
 			);

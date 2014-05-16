@@ -7,6 +7,8 @@
 //
 
 #import "ActivityDetailViewController.h"
+#import "Mask.h"
+#import "ActivityDetailInfoViewController.h"
 
 @interface CustomCell : UITableViewCell
 @property (strong,nonatomic) UILabel *label;
@@ -105,14 +107,7 @@
 
 @interface ActivityDetailViewController ()
 @property (nonatomic,strong) UIImageView *picture;
-@property (nonatomic,strong) UIView *mask;
-@property (nonatomic,strong) UIImageView *avatar;
-@property (nonatomic,strong) UIImageView *calendar;
-@property (nonatomic,strong) UIImageView *flag;
-@property (nonatomic,strong) UILabel *headline;
-@property (nonatomic,strong) UILabel *user;
-@property (nonatomic,strong) UILabel *Date;
-@property (nonatomic,strong) UILabel *type;
+@property (strong,nonatomic) Mask *mask;
 @property (nonatomic,strong) UIButton *leftButton;
 @property (nonatomic,strong) UIButton *rightButton;
 @property (nonatomic,strong) UILabel *join;
@@ -145,7 +140,7 @@
     
     [_picture setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_picture]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_picture)]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_picture(==251.5)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_picture)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_picture]-252-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_picture)]];
     
     [_leftButton setTranslatesAutoresizingMaskIntoConstraints:NO];
     [_rightButton setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -155,7 +150,7 @@
     
     [_tableview setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableview)]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_tableview]-42-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableview)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableview)]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableview attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_leftButton attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0 ]];
 
 }
@@ -201,6 +196,26 @@
     return 42;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.row) {
+        case 0:
+        {
+            ActivityDetailInfoViewController *vc = [[ActivityDetailInfoViewController alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+        }
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark lazy initialization
 
 - (UIImageView *)picture
@@ -221,129 +236,12 @@
     return _picture;
 }
 
-- (UIView *)mask
+- (Mask *)mask
 {
     if (!_mask) {
-        _mask = [[UIView alloc] init];
-        _mask.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
-        [_mask addSubview:self.headline];
-        [_mask addSubview:self.user];
-        [_mask addSubview:self.avatar];
-        [_mask addSubview:self.calendar];
-        [_mask addSubview:self.Date];
-        [_mask addSubview:self.flag];
-        [_mask addSubview:self.type];
-        
-        
-        [_headline setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [_mask addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_headline]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_headline)]];
-        [_mask addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=8-[_headline]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_headline)]];
-        
-        [_avatar setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [_mask addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_avatar(>=13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
-        [_mask addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_avatar(>=13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
-        [_mask addConstraint:[NSLayoutConstraint constraintWithItem:_avatar attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:_headline attribute:NSLayoutAttributeBottom multiplier:1.0 constant:8 ]];
-        
-        [_user setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [_mask addConstraint:[NSLayoutConstraint constraintWithItem:_user attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_avatar attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
-        [_mask addConstraint:[NSLayoutConstraint constraintWithItem:_user attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_avatar attribute:NSLayoutAttributeRight multiplier:1.0 constant:6 ]];
-        
-        [_Date setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [_mask addConstraint:[NSLayoutConstraint constraintWithItem:_Date attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:_mask attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:10 ]];
-        [_mask addConstraint:[NSLayoutConstraint constraintWithItem:_Date attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_avatar attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
-
-        [_calendar setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [_mask addConstraint:[NSLayoutConstraint constraintWithItem:_calendar attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_Date attribute:NSLayoutAttributeLeft multiplier:1.0 constant:-6 ]];
-        [_mask addConstraint:[NSLayoutConstraint constraintWithItem:_calendar attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_avatar attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
-        [_mask addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_calendar(>=13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_calendar)]];
-        [_mask addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_calendar(>=13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_calendar)]];
-
-        [_type setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [_mask addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_type]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_type)]];
-        [_mask addConstraint:[NSLayoutConstraint constraintWithItem:_type attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_avatar attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
-        
-        [_flag setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [_mask addConstraint:[NSLayoutConstraint constraintWithItem:_flag attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_type attribute:NSLayoutAttributeLeft multiplier:1.0 constant:-6 ]];
-        [_mask addConstraint:[NSLayoutConstraint constraintWithItem:_flag attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_avatar attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
-        [_mask addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_flag(>=13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_flag)]];
-        [_mask addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_flag(>=13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_flag)]];
+        _mask = [[Mask alloc] init];
     }
     return _mask;
-}
-
-- (UILabel *)user
-{
-    if (!_user) {
-        _user = [[UILabel alloc] init];
-        _user.text = @"ZAKER";
-        _user.textColor = [UIColor whiteColor];
-        _user.font = [UIFont boldSystemFontOfSize:10];
-    }
-    return _user;
-}
-
-- (UILabel *)headline
-{
-    if (!_headline) {
-        _headline = [[UILabel alloc] init];
-        _headline.text = @"活动未定义！";
-        _headline.font = [UIFont boldSystemFontOfSize:15];
-        _headline.textColor = [UIColor whiteColor];
-        
-    }
-    return _headline;
-}
-
-- (UIImageView *)avatar
-{
-    if (!_avatar) {
-        _avatar = [[UIImageView alloc] init];
-        _avatar.image = nil;
-        _avatar.backgroundColor = [UIColor blueColor];
-    }
-    return _avatar;
-}
-
-- (UILabel *)Date
-{
-    if (!_Date) {
-        _Date = [[UILabel alloc] init];
-        _Date.textColor = [UIColor whiteColor];
-        _Date.text = @"2014/05/12 - 2014/11/02";
-        _Date.font = [UIFont boldSystemFontOfSize:10];
-    }
-    return _Date;
-}
-
-- (UIImageView *)calendar
-{
-    if (!_calendar) {
-        _calendar = [[UIImageView alloc] init];
-        _calendar.image = nil;
-        _calendar.backgroundColor = [UIColor orangeColor];
-    }
-    return _calendar;
-}
-
-- (UILabel *)type
-{
-    if (!_type) {
-        _type = [[UILabel alloc] init];
-        _type.textColor = [UIColor whiteColor];
-        _type.text = @"线上活动";
-        _type.font = [UIFont boldSystemFontOfSize:10];
-    }
-    return _type;
-}
-
-- (UIImageView *)flag
-{
-    if (!_flag) {
-        _flag = [[UIImageView alloc] init];
-        _flag.image = nil;
-        _flag.backgroundColor = [UIColor greenColor];
-    }
-    return _flag;
 }
 
 - (UIButton *)leftButton
@@ -442,6 +340,7 @@
         _tableview.backgroundColor = [UIColor whiteColor];
         UIView *v = [[UIView alloc] initWithFrame:CGRectZero];
         [_tableview setTableFooterView:v];
+        [_tableview setContentInset:UIEdgeInsetsMake(0, 0, 42, 0)];
     }
     return _tableview;
 }
