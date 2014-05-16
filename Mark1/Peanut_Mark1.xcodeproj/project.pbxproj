@@ -46,6 +46,7 @@
 		D2F32F081925D4A900E446D6 /* MustReadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */; };
 		D2F32F0B1925F88B00E446D6 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F091925F88B00E446D6 /* like.png */; };
 		D2F32F0C1925F88B00E446D6 /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F0A1925F88B00E446D6 /* comment.png */; };
+		D2F32F12192607ED00E446D6 /* MustReaddetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F32F11192607ED00E446D6 /* MustReaddetialViewController.m */; };
 		F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */; };
 		F2D8F95519223C5E00102F3F /* imgCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */; };
 		F2D8F95919224DF100102F3F /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95819224DF100102F3F /* CommentViewController.m */; };
@@ -131,6 +132,8 @@
 		D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MustReadTableViewCell.m; path = ViewControllers/MustReadTableViewCell.m; sourceTree = "<group>"; };
 		D2F32F091925F88B00E446D6 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
 		D2F32F0A1925F88B00E446D6 /* comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment.png; sourceTree = "<group>"; };
+		D2F32F10192607ED00E446D6 /* MustReaddetialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MustReaddetialViewController.h; path = ViewControllers/MustReaddetialViewController.h; sourceTree = "<group>"; };
+		D2F32F11192607ED00E446D6 /* MustReaddetialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MustReaddetialViewController.m; path = ViewControllers/MustReaddetialViewController.m; sourceTree = "<group>"; };
 		F22D8FC819248418005D2A1A /* PublishCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublishCommentTableViewCell.h; path = ViewControllers/imgCollectionDetail/PublishCommentTableViewCell.h; sourceTree = "<group>"; };
 		F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublishCommentTableViewCell.m; path = ViewControllers/imgCollectionDetail/PublishCommentTableViewCell.m; sourceTree = "<group>"; };
 		F2D8F95319223C5E00102F3F /* imgCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgCollectionTableViewCell.h; path = ViewControllers/imgCollectionDetail/imgCollectionTableViewCell.h; sourceTree = "<group>"; };
@@ -349,6 +352,8 @@
 				88D02AB6191E723B001ABA96 /* MustReadViewController.m */,
 				D2F32F061925D4A900E446D6 /* MustReadTableViewCell.h */,
 				D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */,
+				D2F32F10192607ED00E446D6 /* MustReaddetialViewController.h */,
+				D2F32F11192607ED00E446D6 /* MustReaddetialViewController.m */,
 			);
 			name = MustReadViewController;
 			sourceTree = "<group>";
@@ -558,6 +563,7 @@
 				887F213C191DF9D2009250D2 /* UIView+extra.m in Sources */,
 				88D02AB4191E721C001ABA96 /* ActivityViewController.m in Sources */,
 				887F2128191DB934009250D2 /* CoreDataModel.xcdatamodeld in Sources */,
+				D2F32F12192607ED00E446D6 /* MustReaddetialViewController.m in Sources */,
 				887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */,
 				88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */,
 				F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */,

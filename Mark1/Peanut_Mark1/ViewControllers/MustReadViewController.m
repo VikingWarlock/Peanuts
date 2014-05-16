@@ -8,6 +8,7 @@
 
 #import "MustReadViewController.h"
 #import "MustReadTableViewCell.h"
+#import "MustReaddetialViewController.h"
 @interface MustReadViewController ()
 @property (nonatomic,strong) UIView *dateHeadView;
 @property (nonatomic,strong) UITableView *readTableView;
@@ -50,6 +51,13 @@
     // Dispose of any resources that can be recreated.
 }
 #pragma mark UITableView datasource and delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MustReaddetialViewController *detialView = [[MustReaddetialViewController alloc] init];
+    [self.readTableView deselectRowAtIndexPath: indexPath animated:YES];
+    [self.NavigationController pushViewController:detialView animated:YES];
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
