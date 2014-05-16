@@ -9,6 +9,7 @@
 #import "ActivityViewController.h"
 #import "PublicLib.h"
 #import "ActivityTableViewCell.h"
+#import "ActivityDetailViewController.h"
 @interface ActivityViewController ()
 @property (nonatomic,strong) UITableView *progressingTableView;
 @property (nonatomic,strong) UITableView *ReviewedTableView;
@@ -19,6 +20,8 @@
 @end
 
 @implementation ActivityViewController
+
+#pragma mark vc life cycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,8 +47,8 @@
     
     [_progressingTableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_progressingTableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingTableView)]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_progressingTableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingTableView)]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_progressingTableView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_progressingHeadView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_progressingTableView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_ReviewedFooterView attribute:NSLayoutAttributeTop multiplier:1.0 constant:0]];
     
     [_ReviewedFooterView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_ReviewedFooterView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedFooterView)]];
@@ -97,6 +100,12 @@
     return 205.0;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark lazy initialization
 
 - (UISegmentedControl *)progressingSegmentedControl
@@ -141,7 +150,7 @@
         label.font = [UIFont systemFontOfSize:12];
         [_progressingHeadView addSubview:label];
         [label setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [_progressingHeadView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[label(100)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(label)]];
+        [_progressingHeadView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[label]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(label)]];
         [_progressingHeadView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[label(==_progressingHeadView)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(label,_progressingHeadView)]];
         
         
@@ -168,7 +177,7 @@
         label.font = [UIFont systemFontOfSize:12];
         [_ReviewedFooterView addSubview:label];
         [label setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [_ReviewedFooterView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[label(100)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(label)]];
+        [_ReviewedFooterView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[label]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(label)]];
         [_ReviewedFooterView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[label(==_ReviewedFooterView)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(label,_ReviewedFooterView)]];
         
         

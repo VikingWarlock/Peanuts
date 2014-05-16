@@ -28,7 +28,7 @@
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_picture]-42.5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_picture)]];
         
         [_title setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-7.5-[_title]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_title)]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-7.5-[_title]-7.5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_title)]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_title attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_picture attribute:NSLayoutAttributeBottom multiplier:1.0 constant:6 ]];
         
         [_avatar setTranslatesAutoresizingMaskIntoConstraints:NO];
