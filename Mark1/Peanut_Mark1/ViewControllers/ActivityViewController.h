@@ -2,14 +2,12 @@
 //  ActivityViewController.h
 //  Peanut_Mark1
 //
-//  Created by viking warlock on 5/10/14.
+//  Created by 张众 on 5/15/14.
 //  Copyright (c) 2014 viking warlock. All rights reserved.
 //
 
-#import "BaseUIViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface ActivityViewController : BaseUIViewController
-
-
+@interface ActivityViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
 
 @end
