@@ -7,6 +7,7 @@
 //
 
 #import "CommentViewController.h"
+#import "PublishCommentTableViewCell.h"
 
 @interface CommentViewController (){
     NSIndexPath * selectedIndexPath;
@@ -33,38 +34,42 @@ static NSString * cellIdentifier = @"cellIdentifier";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     count = 15;
     
     [self setBackgroundImage:[UIImage imageNamed:@"1.png"] andBlurEnable:YES];
     
+    [self registerForKeyboardNotification];
+    
     [self.view addSubview:self.tableView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
+
     // Do any additional setup after loading the view.
 }
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.frame];
+//        CGRect rect = self.view.frame;
+//        rect.size.height -= 64;
+        _tableView = [[UITableView alloc] init];
+        [_tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
+
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorColor = [UIColor clearColor];
         _tableView.backgroundColor = [UIColor clearColor];
         
-        UITapGestureRecognizer * tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableViewTapped:)];
-        tapGR.cancelsTouchesInView = NO;
-        [_tableView addGestureRecognizer:tapGR];
+
         _tableView.allowsSelection = NO;
+         
     }
     return _tableView;
 }
 
 -(void)tableViewTapped:(UITapGestureRecognizer *)tapGR{
-    if (selectedIndexPath != nil) {
-        CommentTableViewCell * cell = (CommentTableViewCell *)[self tableView:self.tableView cellForRowAtIndexPath:selectedIndexPath];
-        if ([cell.deleteBtn.titleLabel.text isEqualToString:@"取消"]) {
-            [self.tableView reloadData];
-        }
-
-    }
+    [self.tableView reloadData];
+    [self.tableView removeGestureRecognizer:tapGR];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -77,6 +82,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row) {
     CommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier atIndexPath:indexPath];
@@ -91,7 +97,13 @@ static NSString * cellIdentifier = @"cellIdentifier";
     cell.timeLabel.text = @"2014-05-14";
     cell.commentLabel.text = @"aaa";
     cell.userName.text = @"王孟琦";
-    return cell;
+        return cell;
+
+    }
+    else{
+        PublishCommentTableViewCell * cell = [[PublishCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"publishCommentCell"];
+        return cell;
+    }
 }
 
 -(void)replayBtnClickAtIndexPath:(NSIndexPath *)indexPath{
@@ -116,6 +128,15 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [self.tableView reloadData];
 }
 
+-(void)registerForKeyboardNotification{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+}
+
+-(void)keyboardDidShow:(NSNotification *)aNotification{
+    UITapGestureRecognizer * tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tableViewTapped:)];
+    tapGR.cancelsTouchesInView = NO;
+    [_tableView addGestureRecognizer:tapGR];
+}
 
 
 - (void)didReceiveMemoryWarning

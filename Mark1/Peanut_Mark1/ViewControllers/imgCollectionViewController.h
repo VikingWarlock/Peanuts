@@ -7,7 +7,8 @@
 //
 
 #import "BaseUIViewController.h"
+#import "imgCollectionTableViewCell.h"
 
-@interface imgCollectionViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface imgCollectionViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate,Delegate_imgCell>
 
 @end

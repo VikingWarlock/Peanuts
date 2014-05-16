@@ -12,8 +12,9 @@
 @interface PublishCommentTableViewCell : UITableViewCell
 
 @property (nonatomic,strong) AMPAvatarView * iconView;
+@property (nonatomic,strong) UILabel * userName;
 @property (nonatomic,strong) UITextView * commentView;
-@property (nonatomic,strong) UIButton * commentBtn;
-//@property (nonatomic,strong) 
+@property (nonatomic,strong) UIButton * publishCommentBtn;
+@property (nonatomic,strong) UIButton * confirmBtn;
 
 @end
