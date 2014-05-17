@@ -174,6 +174,7 @@
 {
     [super viewWillAppear:animated];
     self.navigationItem.title = _mask.headline.text;
+    ((UIViewController *)(self.navigationController.viewControllers)[[self.navigationController.viewControllers indexOfObject:self] - 1]).navigationItem.title = @"";
 }
 
 - (void)viewWillDisappear:(BOOL)animated

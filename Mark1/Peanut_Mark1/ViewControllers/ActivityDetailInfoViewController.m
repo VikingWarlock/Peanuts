@@ -55,7 +55,9 @@
                           NSForegroundColorAttributeName : [UIColor whiteColor],
                           NSParagraphStyleAttributeName : paragraphStyle,
                           };
-    _textView.attributedText = [[NSAttributedString alloc] initWithString:string attributes:ats];    
+    _textView.attributedText = [[NSAttributedString alloc] initWithString:string attributes:ats];
+    ((UIViewController *)(self.navigationController.viewControllers)[[self.navigationController.viewControllers indexOfObject:self] - 1]).navigationItem.title = @"";
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
