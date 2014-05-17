@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol Delegate_SNS <NSObject>
+
+@optional
+
+@end
+
 typedef NS_ENUM(NSInteger, BottomSMSType) {
     BottomSMSType_Activity=0,
     BottomSMSType_Photoseries,
@@ -16,8 +22,8 @@ typedef NS_ENUM(NSInteger, BottomSMSType) {
 
 @interface Peanut_SNSPart : UIView
 
--(id)initWithType:(BottomSMSType)type andData:(id)data AndDelegate:(id)delegate AndTarget:(UIViewController*)target;
+-(id)initWithType:(BottomSMSType)type andData:(id)data AndDelegate:(id<Delegate_SNS>)delegate AndTarget:(UIViewController*)target;
 
-
+@property(nonatomic,weak)id<Delegate_SNS> delegate_sns;
 
 @end

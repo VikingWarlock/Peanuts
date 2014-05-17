@@ -11,12 +11,6 @@
 		510FD0591925B5BB00CD73AD /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */; };
 		51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */; };
 		886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C08931920F1EB00BD7E5F /* NetworkRequest.m */; };
-		8870BE561924FB7E00233614 /* imgCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */; };
-		8870BE571924FB7E00233614 /* PeanutTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */; };
-		8870BE581924FB7E00233614 /* BlurTableViewCell_mark1.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */; };
-		8870BE591924FB8F00233614 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95B19225B2000102F3F /* CommentTableViewCell.m */; };
-		8870BE5A1924FB8F00233614 /* PublishCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */; };
-		8870BE5B1924FB8F00233614 /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95819224DF100102F3F /* CommentViewController.m */; };
 		887F20E7191D4051009250D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E6191D4051009250D2 /* Foundation.framework */; };
 		887F20E9191D4051009250D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E8191D4051009250D2 /* CoreGraphics.framework */; };
 		887F20EB191D4051009250D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20EA191D4051009250D2 /* UIKit.framework */; };
@@ -46,11 +40,21 @@
 		887F2150191E4590009250D2 /* iron.png in Resources */ = {isa = PBXBuildFile; fileRef = 887F214B191E4590009250D2 /* iron.png */; };
 		887F2151191E4590009250D2 /* pic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 887F214C191E4590009250D2 /* pic.jpg */; };
 		8881AC641925E4A700F9646B /* SNS_Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8881AC631925E4A700F9646B /* SNS_Helper.m */; };
+		8881AC6519267AF000F9646B /* imgCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */; };
+		8881AC6619267AF000F9646B /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95819224DF100102F3F /* CommentViewController.m */; };
+		8881AC6719267AF000F9646B /* Peanut_SNSPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF356019239FF500E76BB2 /* Peanut_SNSPart.m */; };
 		88D02AB4191E721C001ABA96 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB3191E721C001ABA96 /* ActivityViewController.m */; };
 		88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB6191E723B001ABA96 /* MustReadViewController.m */; };
 		88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB9191E724C001ABA96 /* SquareViewController.m */; };
 		88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */; };
-		88FF356119239FF500E76BB2 /* Peanut_SNSPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF356019239FF500E76BB2 /* Peanut_SNSPart.m */; };
+		D2F32F081925D4A900E446D6 /* MustReadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */; };
+		D2F32F0B1925F88B00E446D6 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F091925F88B00E446D6 /* like.png */; };
+		D2F32F0C1925F88B00E446D6 /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F0A1925F88B00E446D6 /* comment.png */; };
+		D2F32F12192607ED00E446D6 /* MustReaddetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F32F11192607ED00E446D6 /* MustReaddetialViewController.m */; };
+		F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */; };
+		F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95B19225B2000102F3F /* CommentTableViewCell.m */; };
+		F2F8BF1F1924EFE6000A3CED /* PeanutTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */; };
+		F2F8BF201924F001000A3CED /* BlurTableViewCell_mark1.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -566,12 +570,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8870BE591924FB8F00233614 /* CommentTableViewCell.m in Sources */,
-				8870BE5A1924FB8F00233614 /* PublishCommentTableViewCell.m in Sources */,
-				8870BE5B1924FB8F00233614 /* CommentViewController.m in Sources */,
-				8870BE561924FB7E00233614 /* imgCollectionTableViewCell.m in Sources */,
-				8870BE571924FB7E00233614 /* PeanutTopViewController.m in Sources */,
-				8870BE581924FB7E00233614 /* BlurTableViewCell_mark1.m in Sources */,
+				8881AC6519267AF000F9646B /* imgCollectionTableViewCell.m in Sources */,
+				8881AC6619267AF000F9646B /* CommentViewController.m in Sources */,
+				8881AC6719267AF000F9646B /* Peanut_SNSPart.m in Sources */,
+				F2F8BF201924F001000A3CED /* BlurTableViewCell_mark1.m in Sources */,
+				F2F8BF1F1924EFE6000A3CED /* PeanutTopViewController.m in Sources */,
+				51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */,
 				887F20F7191D4051009250D2 /* AppDelegate.m in Sources */,
 				887F2121191DB88B009250D2 /* BaseUIViewController.m in Sources */,
 				886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */,
@@ -582,8 +586,10 @@
 				D2F32F12192607ED00E446D6 /* MustReaddetialViewController.m in Sources */,
 				887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */,
 				88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */,
+				F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */,
+				D2F32F081925D4A900E446D6 /* MustReadTableViewCell.m in Sources */,
+				F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */,
 				887F2146191E310A009250D2 /* AMPAvatarView+helper.m in Sources */,
-				88FF356119239FF500E76BB2 /* Peanut_SNSPart.m in Sources */,
 				887F2143191E2EBF009250D2 /* UITableView+extra.m in Sources */,
 				8881AC641925E4A700F9646B /* SNS_Helper.m in Sources */,
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,

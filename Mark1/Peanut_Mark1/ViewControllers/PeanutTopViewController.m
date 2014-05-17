@@ -194,9 +194,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath!=nil) {
+    if (havebeenSlide!=nil) {
         return;
     }
+    
     BlurTableViewCell_mark1 *cell=(BlurTableViewCell_mark1*)[tableView cellForRowAtIndexPath:indexPath];
     [cell setSelected:NO animated:NO];
     switch (indexPath.row) {

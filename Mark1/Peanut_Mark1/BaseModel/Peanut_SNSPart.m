@@ -8,6 +8,26 @@
 
 #import "Peanut_SNSPart.h"
 
+@interface Peanut_SNSPart(){
+    UIButton *btn1;
+    UIButton *btn2;
+    UIButton *btn3;
+}
+@end
+
+
 @implementation Peanut_SNSPart
+
+-(id)initWithType:(BottomSMSType)type andData:(id)data AndDelegate:(id<Delegate_SNS>)delegate AndTarget:(UIViewController *)target
+{
+    self=[super init];
+    if (self) {
+        
+        
+        
+    }
+    return self;
+}
+
 
 @end
