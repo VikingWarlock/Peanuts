@@ -172,10 +172,10 @@
 
 }
 
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.title = @"";
 }
 
 - (void)didReceiveMemoryWarning

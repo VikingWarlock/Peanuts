@@ -63,13 +63,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.title = @"活动";
+    self.navigationItem.title = @"活动";
+    //self.navigationController.navigationItem.title = @"";
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    self.title = @"";
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -94,7 +94,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    if (tableView.tag == 0) {
+        return 4;
+    }
+    else if(tableView.tag == 1)
+        return 5;
+    else
+        return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -119,6 +125,7 @@
 {
     ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark -some method

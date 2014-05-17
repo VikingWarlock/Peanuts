@@ -79,8 +79,8 @@
     [self.NavigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     [self.NavigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
     
-    self.title=@"花生米";
-//    [self.NavigationController setTitle:@"花生米"];
+    self.navigationItem.title=@"花生米";
+    //[self.NavigationController setTitle:@"花生米"];
     [self.NavigationController.navigationBar setTintColor:[UIColor whiteColor]];
     [self.NavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
     
@@ -101,7 +101,6 @@
 {
     [[self.NavigationController navigationBar]setTranslucent:NO];
     [[self.NavigationController navigationBar]setBarTintColor:[UIColor redColor]];
-    self.title = @"";
 }
 
 

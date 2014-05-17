@@ -54,11 +54,11 @@
 {
     if (!_imageView1) {
         _imageView1 = [[UIImageView alloc] init];
-        _imageView1.image = nil;
+        _imageView1.image = [UIImage imageNamed:@"iron.png"];
         _imageView1.contentMode = UIViewContentModeScaleAspectFill;
         _imageView1.clipsToBounds = YES;
         
-        _imageView1.backgroundColor = [UIColor blueColor];
+        //_imageView1.backgroundColor = [UIColor blueColor];
     }
     return _imageView1;
 }
@@ -173,13 +173,12 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.title = _mask.headline.text;
+    self.navigationItem.title = _mask.headline.text;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
-    self.title = @"";
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -229,7 +228,7 @@
         case 0:
         {
             ActivityDetailInfoViewController *vc = [[ActivityDetailInfoViewController alloc] init];
-            vc.title = self.title;
+            vc.navigationItem.title = self.navigationItem.title;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
@@ -241,7 +240,7 @@
         case 2:
         {
             ActivityDetailUserViewController *vc = [[ActivityDetailUserViewController alloc] init];
-            vc.title = self.title;
+            vc.navigationItem.title = self.navigationItem.title;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
@@ -250,6 +249,7 @@
         default:
             break;
     }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark lazy initialization
