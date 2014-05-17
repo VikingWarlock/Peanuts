@@ -21,7 +21,7 @@
 
 @implementation ActivityViewController
 
-#pragma mark vc life cycle
+#pragma mark -vc life cycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,10 +37,14 @@
 {
     
     [super viewDidLoad];
+    UIBarButtonItem *Button=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:nil];
+    [self.navigationItem setRightBarButtonItem:Button];
+    
     [self.view addSubview:self.progressingTableView];
     [self.view addSubview:self.progressingHeadView];
     [self.view addSubview:self.ReviewedFooterView];
-    
+    [self.progressingTableView registerClass:[ActivityTableViewCell class] forCellReuseIdentifier:@"progressingCell"];
+
     [_progressingHeadView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_progressingHeadView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingHeadView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_progressingHeadView(30)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingHeadView)]];
@@ -54,7 +58,18 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_ReviewedFooterView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedFooterView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_ReviewedFooterView(30)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedFooterView)]];
     
-    [self.progressingTableView registerClass:[ActivityTableViewCell class] forCellReuseIdentifier:@"progressingCell"];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.title = @"活动";
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.title = @"";
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,7 +78,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark UITableView datasource and delegate
+#pragma mark -UITableView datasource and delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -106,35 +121,14 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark lazy initialization
+#pragma mark -some method
 
-- (UISegmentedControl *)progressingSegmentedControl
+- (void)switchStatus
 {
-    if (!_progressingSegmentedControl) {
-        _progressingSegmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"线上",@"线下", nil]];
-        _progressingSegmentedControl.selectedSegmentIndex = 0;
-        
-        UIFont *font = [UIFont systemFontOfSize:9.0f];
-        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
-                                                               forKey:NSFontAttributeName];
-        [_progressingSegmentedControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    }
-    return _progressingSegmentedControl;
+    [_ReviewedFooterView removeConstraints:_ReviewedFooterView.constraints];
 }
 
-- (UISegmentedControl *)ReviewedSegmentedControl
-{
-    if (!_ReviewedSegmentedControl) {
-        _ReviewedSegmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"线上",@"线下", nil]];
-        _ReviewedSegmentedControl.selectedSegmentIndex = 0;
-        
-        UIFont *font = [UIFont systemFontOfSize:9.0f];
-        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
-                                                               forKey:NSFontAttributeName];
-        [_ReviewedSegmentedControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    }
-    return _ReviewedSegmentedControl;
-}
+#pragma mark -lazy initialization
 
 - (UIView *)progressingHeadView
 {
@@ -157,10 +151,36 @@
         [_progressingHeadView addSubview:self.progressingSegmentedControl];
         [_progressingSegmentedControl setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_progressingHeadView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_progressingSegmentedControl(50)]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingSegmentedControl)]];
-        [_progressingHeadView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=7.5-[_progressingSegmentedControl]->=7.5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingSegmentedControl)]];
+        [_progressingHeadView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-7.5-[_progressingSegmentedControl]-7.5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingSegmentedControl)]];
         
     }
     return _progressingHeadView;
+}
+
+- (UISegmentedControl *)progressingSegmentedControl
+{
+    if (!_progressingSegmentedControl) {
+        _progressingSegmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"线上",@"线下", nil]];
+        _progressingSegmentedControl.selectedSegmentIndex = 0;
+        
+        UIFont *font = [UIFont systemFontOfSize:9.0f];
+        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
+                                                               forKey:NSFontAttributeName];
+        [_progressingSegmentedControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
+    }
+    return _progressingSegmentedControl;
+}
+
+- (UITableView *)progressingTableView
+{
+    if(!_progressingTableView)
+    {
+        _progressingTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _progressingTableView.delegate = self;
+        _progressingTableView.dataSource = self;
+        _progressingHeadView.tag = 0;
+    }
+    return _progressingTableView;
 }
 
 - (UIView *)ReviewedFooterView
@@ -184,24 +204,39 @@
         [_ReviewedFooterView addSubview:self.ReviewedSegmentedControl];
         [_ReviewedSegmentedControl setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_ReviewedFooterView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_ReviewedSegmentedControl(50)]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedSegmentedControl)]];
-        [_ReviewedFooterView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=7.5-[_ReviewedSegmentedControl]->=7.5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedSegmentedControl)]];
+        [_ReviewedFooterView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-7.5-[_ReviewedSegmentedControl]-7.5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedSegmentedControl)]];
         
+        [_ReviewedFooterView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchStatus)]];
     }
     return _ReviewedFooterView;
 }
 
-- (UITableView *)progressingTableView
+
+- (UISegmentedControl *)ReviewedSegmentedControl
 {
-    if(!_progressingTableView)
-    {
-        _progressingTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
-        [_progressingTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-        _progressingTableView.delegate = self;
-        _progressingTableView.dataSource = self;
+    if (!_ReviewedSegmentedControl) {
+        _ReviewedSegmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"线上",@"线下", nil]];
+        _ReviewedSegmentedControl.selectedSegmentIndex = 0;
+        
+        UIFont *font = [UIFont systemFontOfSize:9.0f];
+        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
+                                                               forKey:NSFontAttributeName];
+        [_ReviewedSegmentedControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
     }
-    return _progressingTableView;
+    return _ReviewedSegmentedControl;
 }
 
+- (UITableView *)ReviewedTableView
+{
+    if(!_ReviewedTableView)
+    {
+        _ReviewedTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _ReviewedTableView.delegate = self;
+        _ReviewedTableView.dataSource = self;
+        _ReviewedTableView.tag = 1;
+    }
+    return _ReviewedTableView;
+}
 
 
 @end

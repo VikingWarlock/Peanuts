@@ -28,8 +28,8 @@
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-8-[_headline]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_headline)]];
         
         [_avatar setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_avatar(>=13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_avatar(>=13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_avatar(13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_avatar(13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_avatar attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:_headline attribute:NSLayoutAttributeBottom multiplier:1.0 constant:8 ]];
         
         [_user setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -43,8 +43,8 @@
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-93-[_calendar]-6-[_Date]-93-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_calendar,_Date)]];
 
         
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_calendar(>=13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_calendar)]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_calendar(>=13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_calendar)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_calendar(13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_calendar)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_calendar(13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_calendar)]];
         
         [_type setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_type]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_type)]];
@@ -53,8 +53,8 @@
         [_flag setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_flag attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_type attribute:NSLayoutAttributeLeft multiplier:1.0 constant:-6 ]];
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_flag attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_avatar attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_flag(>=13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_flag)]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_flag(>=13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_flag)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_flag(13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_flag)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_flag(13)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_flag)]];
     }
     return self;
 }

@@ -9,7 +9,8 @@
 #import "ActivityDetailViewController.h"
 #import "Mask.h"
 #import "ActivityDetailInfoViewController.h"
-
+#import "ActivityDetailUserViewController.h"
+#import "BottomView.h"
 @interface CustomCell : UITableViewCell
 @property (strong,nonatomic) UILabel *label;
 @property (strong,nonatomic) UIImageView *imageView1;
@@ -108,6 +109,7 @@
 @interface ActivityDetailViewController ()
 @property (nonatomic,strong) UIImageView *picture;
 @property (strong,nonatomic) Mask *mask;
+@property (strong,nonatomic) BottomView *bottomView;
 @property (nonatomic,strong) UIButton *leftButton;
 @property (nonatomic,strong) UIButton *rightButton;
 @property (nonatomic,strong) UILabel *join;
@@ -115,6 +117,7 @@
 @property (nonatomic,strong) UIImageView *interestImage;
 @property (nonatomic,strong) UIImageView *joinImage;
 @property (nonatomic,strong) UITableView *tableview;
+@property (nonatomic,strong) UITabBarController *tabBar;
 
 @end
 
@@ -124,7 +127,15 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        _tabBar = [[UITabBarController alloc] init];
+        _tabBar.delegate = self;
+        ActivityDetailInfoViewController *blueViewController = [[ActivityDetailInfoViewController alloc] init];
+         ActivityDetailUserViewController *yellowViewController = [[ActivityDetailUserViewController alloc] init];
+        NSArray *viewControllerArray = [NSArray arrayWithObjects:blueViewController,yellowViewController,nil];
+        _tabBar.viewControllers = viewControllerArray;
+        _tabBar.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        //[self.view addSubview:_tabBar.view];
+        [self setTabBar:_tabBar];
     }
     return self;
 }
@@ -136,6 +147,7 @@
     [self.view addSubview:self.leftButton];
     [self.view addSubview:self.rightButton];
     [self.view addSubview:self.tableview];
+    [self.view addSubview:self.bottomView];
     [self.tableview registerClass:[CustomCell class] forCellReuseIdentifier:@"cell"];
     
     [_picture setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -152,7 +164,22 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableview)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableview)]];
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_tableview attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_leftButton attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0 ]];
+    
+    [_bottomView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_bottomView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_bottomView)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_bottomView(42)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_bottomView)]];
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.title = _mask.headline.text;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.title = @"";
 }
 
 - (void)didReceiveMemoryWarning
@@ -202,13 +229,22 @@
         case 0:
         {
             ActivityDetailInfoViewController *vc = [[ActivityDetailInfoViewController alloc] init];
+            vc.title = self.title;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 1:
+        {
             break;
+
+        }
         case 2:
+        {
+            ActivityDetailUserViewController *vc = [[ActivityDetailUserViewController alloc] init];
+            vc.title = self.title;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
+        }
         case 3:
             break;
         default:
@@ -231,7 +267,7 @@
         [_picture addSubview:self.mask];
         [_mask setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_picture addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mask]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_mask)]];
-        [_picture addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_mask(>=57)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_mask)]];
+        [_picture addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_mask(57)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_mask)]];
     }
     return _picture;
 }
@@ -343,6 +379,14 @@
         [_tableview setContentInset:UIEdgeInsetsMake(0, 0, 42, 0)];
     }
     return _tableview;
+}
+
+- (BottomView *)bottomView
+{
+    if (!_bottomView) {
+        _bottomView = [[BottomView alloc] init];
+    }
+    return _bottomView;
 }
 
 @end

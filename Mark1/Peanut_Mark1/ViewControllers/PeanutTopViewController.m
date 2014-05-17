@@ -101,6 +101,7 @@
 {
     [[self.NavigationController navigationBar]setTranslucent:NO];
     [[self.NavigationController navigationBar]setBarTintColor:[UIColor redColor]];
+    self.title = @"";
 }
 
 
@@ -125,7 +126,6 @@
     [super viewWillDisappear:animated];
     [self setNavigationBarForOther];
 }
-
 
 /*
 #pragma mark - Navigation
