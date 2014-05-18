@@ -9,6 +9,13 @@
 #define Dark_Red [UIColor colorWithRed:153.0/255.0 green:50.0/255.0 blue:51.0/255.0 alpha:1]
 #ifndef Peanut_Mark1_PublicLib_h
 
+
+
+#define SelfScreenbounds  [UIScreen mainScreen].bounds
+
+
+
+
 #define Peanut_Mark1_PublicLib_h
 
 

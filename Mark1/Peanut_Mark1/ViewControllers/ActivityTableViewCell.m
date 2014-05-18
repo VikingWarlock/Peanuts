@@ -32,8 +32,8 @@
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_title attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_picture attribute:NSLayoutAttributeBottom multiplier:1.0 constant:6 ]];
         
         [_avatar setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-7.5-[_avatar(>=10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_avatar(>=10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-7.5-[_avatar(10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_avatar(10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_avatar attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_title attribute:NSLayoutAttributeBottom multiplier:1.0 constant:6 ]];
         
         [_user setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -47,8 +47,8 @@
         [_calendar setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_calendar attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_Date attribute:NSLayoutAttributeLeft multiplier:1.0 constant:-6 ]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_calendar attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_avatar attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_calendar(>=10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_calendar)]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_calendar(>=10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_calendar)]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_calendar(10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_calendar)]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_calendar(10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_calendar)]];
         
         [_type setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_type]-7.5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_type)]];
@@ -57,8 +57,8 @@
         [_flag setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_flag attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:_type attribute:NSLayoutAttributeLeft multiplier:1.0 constant:-6 ]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_flag attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_avatar attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_flag(>=10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_flag)]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_flag(>=10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_flag)]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_flag(10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_flag)]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_flag(10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_flag)]];
     }
     return self;
 }

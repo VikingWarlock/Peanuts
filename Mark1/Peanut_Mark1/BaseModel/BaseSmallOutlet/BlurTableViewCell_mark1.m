@@ -9,7 +9,7 @@
 #import "BlurTableViewCell_mark1.h"
 #import <UIImage+BlurAndDarken.h>
 
-@interface BlurTableViewCell_mark1()
+@interface BlurTableViewCell_mark1()<UIGestureRecognizerDelegate>
 
 @end
 
@@ -214,7 +214,10 @@
 
 -(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer
 {
-    //   CGPoint trans=[gestureRecognizer translationInView:self];
+    CGPoint trans=[gestureRecognizer translationInView:self];
+    if (abs(trans.x)<abs(trans.y)) {
+        return NO;
+    }
     return gestureEnable&&([self.Delegate_Blur respondsToSelector:@selector(SlideCouldBegin:)]?[self.Delegate_Blur SlideCouldBegin:self.indexpath]:1);
     
     

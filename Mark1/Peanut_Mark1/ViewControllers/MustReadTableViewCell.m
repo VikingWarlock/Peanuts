@@ -24,7 +24,7 @@
         
         [_picture setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-7.5-[_picture]-7.5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_picture)]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_picture]-42.5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_picture)]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-10-[_picture(152.5)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_picture)]];
         
         [_title setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-7.5-[_title]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_title)]];
@@ -32,8 +32,7 @@
 
         [_avatar setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-7.5-[_avatar(10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_avatar(10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_avatar attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_title attribute:NSLayoutAttributeBottom multiplier:1.0 constant:6 ]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_avatar(10)]-8-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
         
         [_user setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_user attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_avatar attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
@@ -76,7 +75,6 @@
         _picture.image = nil;
         _picture.clipsToBounds = YES;
         _picture.contentMode = UIViewContentModeScaleAspectFill;
-        
         _picture.backgroundColor = [UIColor grayColor];
     }
     return _picture;
@@ -134,7 +132,7 @@
 {
     if (!_comment) {
         _comment = [[UIButton alloc] init];
-        [_comment setTitle:@"233" forState:UIControlStateNormal];
+        [_comment setTitle:@"33" forState:UIControlStateNormal];
         [_comment setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         [_comment.titleLabel setFont:[UIFont systemFontOfSize:9.0]];
         [_comment setImage:[UIImage imageNamed:@"comment.png"] forState:UIControlStateNormal];

@@ -8,7 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		27C402CF34354145A3818596 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A474C76991743418E0AA42B /* libPods.a */; };
+		5101B34419270E2900084BCA /* ActivityDetailUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5101B34319270E2900084BCA /* ActivityDetailUserViewController.m */; };
+		5101B3471927370A00084BCA /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5101B3461927370A00084BCA /* BottomView.m */; };
 		510FD0591925B5BB00CD73AD /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */; };
+		510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD05C1926032400CD73AD /* ActivityDetailInfoViewController.m */; };
+		510FD060192603BE00CD73AD /* Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD05F192603BE00CD73AD /* Mask.m */; };
 		51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */; };
 		886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C08931920F1EB00BD7E5F /* NetworkRequest.m */; };
 		887F20E7191D4051009250D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E6191D4051009250D2 /* Foundation.framework */; };
@@ -68,8 +72,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5101B34219270E2900084BCA /* ActivityDetailUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailUserViewController.h; path = ViewControllers/ActivityDetailUserViewController.h; sourceTree = "<group>"; };
+		5101B34319270E2900084BCA /* ActivityDetailUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailUserViewController.m; path = ViewControllers/ActivityDetailUserViewController.m; sourceTree = "<group>"; };
+		5101B3451927370A00084BCA /* BottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BottomView.h; path = ViewControllers/BottomView.h; sourceTree = "<group>"; };
+		5101B3461927370A00084BCA /* BottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BottomView.m; path = ViewControllers/BottomView.m; sourceTree = "<group>"; };
 		510FD0561925B5BB00CD73AD /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailViewController.h; path = ViewControllers/ActivityDetailViewController.h; sourceTree = "<group>"; };
 		510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailViewController.m; path = ViewControllers/ActivityDetailViewController.m; sourceTree = "<group>"; };
+		510FD05B1926032400CD73AD /* ActivityDetailInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailInfoViewController.h; path = ViewControllers/ActivityDetailInfoViewController.h; sourceTree = "<group>"; };
+		510FD05C1926032400CD73AD /* ActivityDetailInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailInfoViewController.m; path = ViewControllers/ActivityDetailInfoViewController.m; sourceTree = "<group>"; };
+		510FD05E192603BE00CD73AD /* Mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mask.h; path = ViewControllers/Mask.h; sourceTree = "<group>"; };
+		510FD05F192603BE00CD73AD /* Mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mask.m; path = ViewControllers/Mask.m; sourceTree = "<group>"; };
 		51EFD0F019252D1600F5CC9D /* ActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityTableViewCell.h; path = ViewControllers/ActivityTableViewCell.h; sourceTree = "<group>"; };
 		51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityTableViewCell.m; path = ViewControllers/ActivityTableViewCell.m; sourceTree = "<group>"; };
 		5A474C76991743418E0AA42B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -343,12 +355,20 @@
 		887F212D191DF3A0009250D2 /* ActivityViewController */ = {
 			isa = PBXGroup;
 			children = (
+				510FD05E192603BE00CD73AD /* Mask.h */,
+				510FD05F192603BE00CD73AD /* Mask.m */,
+				5101B3451927370A00084BCA /* BottomView.h */,
+				5101B3461927370A00084BCA /* BottomView.m */,
 				88D02AB2191E721C001ABA96 /* ActivityViewController.h */,
 				88D02AB3191E721C001ABA96 /* ActivityViewController.m */,
 				51EFD0F019252D1600F5CC9D /* ActivityTableViewCell.h */,
 				51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */,
 				510FD0561925B5BB00CD73AD /* ActivityDetailViewController.h */,
 				510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */,
+				510FD05B1926032400CD73AD /* ActivityDetailInfoViewController.h */,
+				510FD05C1926032400CD73AD /* ActivityDetailInfoViewController.m */,
+				5101B34219270E2900084BCA /* ActivityDetailUserViewController.h */,
+				5101B34319270E2900084BCA /* ActivityDetailUserViewController.m */,
 			);
 			name = ActivityViewController;
 			sourceTree = "<group>";
@@ -574,6 +594,7 @@
 				8881AC6619267AF000F9646B /* CommentViewController.m in Sources */,
 				8881AC6719267AF000F9646B /* Peanut_SNSPart.m in Sources */,
 				F2F8BF201924F001000A3CED /* BlurTableViewCell_mark1.m in Sources */,
+				5101B3471927370A00084BCA /* BottomView.m in Sources */,
 				F2F8BF1F1924EFE6000A3CED /* PeanutTopViewController.m in Sources */,
 				51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */,
 				887F20F7191D4051009250D2 /* AppDelegate.m in Sources */,
@@ -585,6 +606,7 @@
 				887F2128191DB934009250D2 /* CoreDataModel.xcdatamodeld in Sources */,
 				D2F32F12192607ED00E446D6 /* MustReaddetialViewController.m in Sources */,
 				887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */,
+				5101B34419270E2900084BCA /* ActivityDetailUserViewController.m in Sources */,
 				88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */,
 				F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */,
 				D2F32F081925D4A900E446D6 /* MustReadTableViewCell.m in Sources */,
@@ -593,10 +615,12 @@
 				887F2143191E2EBF009250D2 /* UITableView+extra.m in Sources */,
 				8881AC641925E4A700F9646B /* SNS_Helper.m in Sources */,
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
+				510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
 				887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */,
 				887F2140191E200D009250D2 /* NSString+extra.m in Sources */,
 				88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */,
+				510FD060192603BE00CD73AD /* Mask.m in Sources */,
 				887F20F3191D4051009250D2 /* main.m in Sources */,
 				510FD0591925B5BB00CD73AD /* ActivityDetailViewController.m in Sources */,
 			);

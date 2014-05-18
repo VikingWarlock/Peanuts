@@ -119,4 +119,11 @@
 
 
 
+-(void)SNS_appear
+{
+    Peanut_SNSPart *bottom=[[Peanut_SNSPart alloc]initWithType:BottomSMSType_Activity andData:nil AndDelegate:(id<Delegate_SNS>)self.topViewController AndTarget:self.topViewController];
+    [self.view addSubview:bottom];
+    
+}
+
 @end

@@ -70,6 +70,8 @@
     
     [self.view setNeedsDisplay];
     
+    [self.NavigationController SNS_appear];
+    
      /*
     UIImageWriteToSavedPhotosAlbum([[self.view getClipView:CGRectMake(0, 0, 320, 100)]captureView ], self, nil, nil);
     
@@ -91,10 +93,7 @@
     [self.NavigationController.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
     [self.NavigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     [self.NavigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
-    
-    [self.NavigationController.navigationBar setNeedsDisplay];
-    
-    self.title=@"花生米";
+    self.navigationItem.title=@"花生米";
     [self.NavigationController.navigationBar setTintColor:[UIColor whiteColor]];
 
     
@@ -146,7 +145,6 @@
     [super viewDidDisappear:animated];
     [self setNavigationBarForOther];
 }
-
 
 /*
 #pragma mark - Navigation

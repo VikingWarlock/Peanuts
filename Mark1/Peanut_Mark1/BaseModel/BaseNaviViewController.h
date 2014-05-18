@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Peanut_SNSPart.h"
 
 typedef NS_ENUM(NSInteger, NaivPushDir) {
     NaivPushDirFromRight=0,
@@ -34,5 +35,7 @@ typedef NS_ENUM(NSInteger, NaivPushDir) {
  */
 -(void)PopVC;
 
+
+-(void)SNS_appear;
 
 @end
