@@ -180,7 +180,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewWillDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
