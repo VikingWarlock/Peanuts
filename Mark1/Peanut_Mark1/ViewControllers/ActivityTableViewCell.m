@@ -59,6 +59,8 @@
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_flag attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_avatar attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_flag(10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_flag)]];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_flag(10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_flag)]];
+        
+        [self.contentView layoutIfNeeded];
     }
     return self;
 }
