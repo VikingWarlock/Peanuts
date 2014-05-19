@@ -49,7 +49,6 @@
     [super viewDidLoad];
     UIBarButtonItem *Button=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:nil];
     [self.navigationItem setRightBarButtonItem:Button];
-    
     [self.view addSubview:self.progressingTableView];
     [self.view addSubview:self.progressingHeadView];
     [self.view addSubview:self.ReviewedFooterView];
