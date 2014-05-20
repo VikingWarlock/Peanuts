@@ -218,7 +218,6 @@
 			children = (
 				887F2147191E4585009250D2 /* img */,
 				887F211B191DB7A3009250D2 /* PublicLibrary */,
-				887F211A191DB79A009250D2 /* Networks */,
 				887F2119191DB792009250D2 /* CoreData */,
 				887F2118191DB787009250D2 /* ViewControllers */,
 				887F2117191DB777009250D2 /* BaseModel */,
@@ -275,6 +274,7 @@
 		887F2118191DB787009250D2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				887F211A191DB79A009250D2 /* Networks */,
 				887F2130191DF569009250D2 /* SquareViewController */,
 				887F212F191DF55F009250D2 /* MustReadViewController */,
 				887F212E191DF3CC009250D2 /* imgCollection */,
