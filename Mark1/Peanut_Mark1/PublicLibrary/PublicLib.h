@@ -13,6 +13,9 @@
 
 #define SelfScreenbounds  [UIScreen mainScreen].bounds
 
+#define USER_Token @"PHPSESSID"
+
+#define AES_Private_key @"4652b19e09ced75df510bf5a263a2bfe"
 
 
 
