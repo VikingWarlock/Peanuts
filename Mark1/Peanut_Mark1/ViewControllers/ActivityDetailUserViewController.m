@@ -23,12 +23,12 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        
         [self.contentView addSubview:self.avatar];
         [self.contentView addSubview:self.name];
+        [self.contentView addSubview:self.deleteMember];
         [self.contentView addSubview:self.unverified];
         [self.contentView addSubview:self.passVerify];
-        [self.contentView addSubview:self.deleteMember];
+
         
         [_avatar setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_avatar(40)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
@@ -57,7 +57,7 @@
     return self;
 }
 
-#pragma mark lazy initialization
+#pragma mark -lazy initialization
 
 - (AMPAvatarView *)avatar
 {
@@ -104,6 +104,7 @@
         [_passVerify setTitleEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)];
         [_passVerify setTitle:@"通过审核" forState:UIControlStateNormal];
         _passVerify.layer.cornerRadius = 2.0;
+        _passVerify.hidden = YES;
     }
     return _passVerify;
 }
@@ -118,15 +119,9 @@
         [_deleteMember setTitleEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)];
         [_deleteMember setTitle:@"删除成员" forState:UIControlStateNormal];
         _deleteMember.layer.cornerRadius = 2.0;
-        [_deleteMember addTarget:self action:@selector(dayin) forControlEvents:UIControlEventTouchUpInside];
+        _deleteMember.hidden = YES;
     }
     return _deleteMember;
-}
-
-- (void)dayin
-
-{
-    NSLog(@"sajkasjkasjkasjkjkas");
 }
 
 @end
@@ -135,8 +130,19 @@
 
 
 @interface ActivityDetailUserViewController ()
+{
+    NSMutableArray *users;
+    NSIndexPath *deletedIndexPath;
+    NSMutableDictionary *isVerified1;
+    NSMutableDictionary *isVerified2;
+    NSMutableDictionary *isVerified3;
+    NSMutableDictionary *isVerified4;
+    NSMutableDictionary *d;
+    BOOL isEdit;
+}
 @property (strong,nonatomic) UIView *header;
 @property (nonatomic,strong) UITableView *tableview;
+@property (nonatomic,strong) UIAlertView *alertView;
 @end
 
 @implementation ActivityDetailUserViewController
@@ -153,23 +159,31 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:nil];
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showEditButton)];
     [self.navigationItem setRightBarButtonItem:rightButton];
-    
     self.tableview.allowsSelection = NO;
     [self setBackgroundImage:[UIImage imageNamed:@"pic.jpg"] andBlurEnable:YES];
+    isEdit = NO;
+    deletedIndexPath = [[NSIndexPath alloc] init];
+    
+    isVerified1 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"1",@"isVerified", nil];
+    isVerified2 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"0",@"isVerified", nil];
+    isVerified3 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"0",@"isVerified", nil];
+    isVerified4 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"1",@"isVerified", nil];
+    users = [[NSMutableArray alloc] initWithObjects:isVerified1,isVerified2,isVerified3,isVerified4, nil];
+    
     [self.view addSubview:self.header];
     [self.view addSubview:self.tableview];
+    [self.view addSubview:self.alertView];
     [_tableview registerClass:[UserCell class] forCellReuseIdentifier:@"usercell"];
     
     [_header setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_header]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_header)]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_header(30)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_header)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|[_header(%f)]",HEIGHT_OF_HEADER_OR_FOOTER] options:0 metrics:nil views:NSDictionaryOfVariableBindings(_header)]];
     
     [_tableview setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableview)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_header][_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_header,_tableview)]];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -189,29 +203,57 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark -method
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)addMember:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    NSIndexPath *indexPath = [_tableview indexPathForCell:(UserCell *)((UIButton *)sender).superview.superview.superview];
+    ((UserCell *)[_tableview cellForRowAtIndexPath:indexPath]).unverified.hidden = YES;
+    ((UserCell *)[_tableview cellForRowAtIndexPath:indexPath]).passVerify.hidden = YES;
+    [users[indexPath.row] setValue:[NSString stringWithFormat:@"1"] forKey:@"isVerified"];
 }
-*/
 
-#pragma mark tableView datasource and delegate
+- (void)deleteMember
+{
+    [users removeObjectAtIndex:deletedIndexPath.row];
+    [_tableview deleteRowsAtIndexPaths:@[deletedIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+}
+
+- (void)showEditButton
+{
+    isEdit = !isEdit;
+    for (int i = 0; i< [users count]; i++) {
+        if ([[users[i] valueForKey:@"isVerified"] boolValue] == NO && isEdit == YES) {
+            [users[i] setValue:[NSString stringWithFormat:@"%D",!isEdit] forKey:@"isVerified"];
+        }
+    }
+    [_tableview reloadData];
+}
+
+-(void)showAlert:(id)sender
+{
+    deletedIndexPath = [_tableview indexPathForCell:(UserCell *)((UIButton *)sender).superview.superview.superview];
+    [self.alertView show];
+}
+
+#pragma mark -tableView datasource and delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"usercell";
     UserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    [cell.deleteMember addTarget:self action:@selector(showAlert:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.passVerify addTarget:self action:@selector(addMember:) forControlEvents:UIControlEventTouchUpInside];
+    
+    cell.passVerify.hidden = [[users[indexPath.row] valueForKey:@"isVerified"] boolValue] || !isEdit;
+    cell.deleteMember.hidden = !isEdit;
+    cell.unverified.hidden = [[users[indexPath.row] valueForKey:@"isVerified"] boolValue];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return [users count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -219,7 +261,16 @@
     return 70;
 }
 
-#pragma mark lazy initialization
+#pragma mark -UIAlertView delegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        [self deleteMember];
+    }
+}
+
+#pragma mark -lazy initialization
 
 - (UIView *)header
 {
@@ -251,7 +302,15 @@
         _tableview.backgroundColor = [UIColor clearColor];
     }
     return _tableview;
-    
+}
+
+- (UIAlertView *)alertView
+{
+    if (!_alertView) {
+        _alertView = [[UIAlertView alloc] initWithTitle:nil message:@"确认删除该成员？" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        _alertView.alertViewStyle = UIAlertViewStyleDefault;
+    }
+    return _alertView;
 }
 
 @end

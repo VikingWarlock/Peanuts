@@ -11,7 +11,6 @@
 #import "ActivityTableViewCell.h"
 #import "ActivityDetailViewController.h"
 
-#define HEIGHT_OF_HEADER_OR_FOOTER 30.0
 @interface ActivityViewController ()
 {
     NSArray *bindingFooterToBottom;
