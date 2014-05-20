@@ -54,6 +54,12 @@
 #define COCOAPODS_VERSION_MINOR_AMPAvatarView 0
 #define COCOAPODS_VERSION_PATCH_AMPAvatarView 3
 
+// CocoaSecurity
+#define COCOAPODS_POD_AVAILABLE_CocoaSecurity
+#define COCOAPODS_VERSION_MAJOR_CocoaSecurity 1
+#define COCOAPODS_VERSION_MINOR_CocoaSecurity 2
+#define COCOAPODS_VERSION_PATCH_CocoaSecurity 4
+
 // MagicalRecord
 #define COCOAPODS_POD_AVAILABLE_MagicalRecord
 #define COCOAPODS_VERSION_MAJOR_MagicalRecord 2
@@ -65,6 +71,12 @@
 #define COCOAPODS_VERSION_MAJOR_MagicalRecord_Core 2
 #define COCOAPODS_VERSION_MINOR_MagicalRecord_Core 2
 #define COCOAPODS_VERSION_PATCH_MagicalRecord_Core 0
+
+// NSUserDefaults-AESEncryptor
+#define COCOAPODS_POD_AVAILABLE_NSUserDefaults_AESEncryptor
+#define COCOAPODS_VERSION_MAJOR_NSUserDefaults_AESEncryptor 0
+#define COCOAPODS_VERSION_MINOR_NSUserDefaults_AESEncryptor 0
+#define COCOAPODS_VERSION_PATCH_NSUserDefaults_AESEncryptor 4
 
 // RBBAnimation
 #define COCOAPODS_POD_AVAILABLE_RBBAnimation

@@ -137,9 +137,9 @@
     
     [super viewDidAppear:animated];
     if (self.NavigationController.navigationBarHidden) {
-        [self.NavigationController setNavigationBarHidden:YES animated:YES];
+//        [self.NavigationController setNavigationBarHidden:YES animated:YES];
         [self reset_NavigationBar];
-        [self.NavigationController setNavigationBarHidden:NO animated:NO];
+//        [self.NavigationController setNavigationBarHidden:NO animated:NO];
     }else
     {
     [self reset_NavigationBar];
@@ -150,9 +150,9 @@
 {
 //    self.NavigationController.navigationBarHidden=NO;
     [super viewDidDisappear:animated];
-    [self.NavigationController setNavigationBarHidden:YES animated:NO];
+//    [self.NavigationController setNavigationBarHidden:YES animated:NO];
     [self setNavigationBarForOther];
-    [self.NavigationController setNavigationBarHidden:NO animated:YES];
+//    [self.NavigationController setNavigationBarHidden:NO animated:YES];
 }
 
 /*

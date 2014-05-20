@@ -19,9 +19,12 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AMPAvatarView (1.0.3)
+  - CocoaSecurity (1.2.4)
   - MagicalRecord (2.2):
     - MagicalRecord/Core
   - MagicalRecord/Core (2.2)
+  - NSUserDefaults-AESEncryptor (0.0.4):
+    - CocoaSecurity (~> 1.2.2)
   - RBBAnimation (0.3.0)
   - Reachability (3.1.1)
   - RTAlertView (0.0.6):
@@ -42,6 +45,7 @@ DEPENDENCIES:
   - AFNetworking (~> 2.2.3)
   - AMPAvatarView (~> 1.0.3)
   - MagicalRecord (~> 2.2)
+  - NSUserDefaults-AESEncryptor (~> 0.0.4)
   - Reachability (~> 3.1)
   - RTAlertView (~> 0.0.6)
   - SDWebImage-ProgressView (~> 0.3.1)
@@ -55,7 +59,9 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 01aa7c3aa9a200b94943e54072a4373f14b3d219
   AMPAvatarView: 473eae59b5d71dfdeed18803917bfc2a9e0a0a42
+  CocoaSecurity: 7118996ece3493e6dcf2d45006bf0c1d955dbbc8
   MagicalRecord: 95d49d74ef752cd52f6ad87bcb474817fc3978cf
+  NSUserDefaults-AESEncryptor: f53c00dbe0f67ed2c66b4b937c4d2d8b131284e0
   RBBAnimation: e7f31ed62f760f3caf120b5d943267bd9a8e1f64
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   RTAlertView: 063dc8743ac8acf426cb64c011aa786f22563665
