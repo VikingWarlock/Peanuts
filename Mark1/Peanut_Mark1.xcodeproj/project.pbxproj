@@ -57,6 +57,9 @@
 		D2F32F0C1925F88B00E446D6 /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F0A1925F88B00E446D6 /* comment.png */; };
 		D2F32F12192607ED00E446D6 /* MustReaddetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F32F11192607ED00E446D6 /* MustReaddetialViewController.m */; };
 		F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */; };
+		F2B58DCE19264B7F009D6131 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B58DCD19264B7F009D6131 /* ShareViewController.m */; };
+		F2D8F95519223C5E00102F3F /* imgCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */; };
+		F2D8F95919224DF100102F3F /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95819224DF100102F3F /* CommentViewController.m */; };
 		F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95B19225B2000102F3F /* CommentTableViewCell.m */; };
 		F2F8BF1F1924EFE6000A3CED /* PeanutTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */; };
 		F2F8BF201924F001000A3CED /* BlurTableViewCell_mark1.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */; };
@@ -157,6 +160,8 @@
 		D2F32F11192607ED00E446D6 /* MustReaddetialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MustReaddetialViewController.m; path = ViewControllers/MustReaddetialViewController.m; sourceTree = "<group>"; };
 		F22D8FC819248418005D2A1A /* PublishCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublishCommentTableViewCell.h; path = ViewControllers/imgCollectionDetail/PublishCommentTableViewCell.h; sourceTree = "<group>"; };
 		F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublishCommentTableViewCell.m; path = ViewControllers/imgCollectionDetail/PublishCommentTableViewCell.m; sourceTree = "<group>"; };
+		F2B58DCC19264B7F009D6131 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareViewController.h; path = ViewControllers/imgCollectionDetail/ShareViewController.h; sourceTree = "<group>"; };
+		F2B58DCD19264B7F009D6131 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareViewController.m; path = ViewControllers/imgCollectionDetail/ShareViewController.m; sourceTree = "<group>"; };
 		F2D8F95319223C5E00102F3F /* imgCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgCollectionTableViewCell.h; path = ViewControllers/imgCollectionDetail/imgCollectionTableViewCell.h; sourceTree = "<group>"; };
 		F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = imgCollectionTableViewCell.m; path = ViewControllers/imgCollectionDetail/imgCollectionTableViewCell.m; sourceTree = "<group>"; };
 		F2D8F95719224DF100102F3F /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CommentViewController.h; path = ViewControllers/imgCollectionDetail/CommentViewController.h; sourceTree = "<group>"; };
@@ -437,6 +442,8 @@
 				F2D8F95619224D7100102F3F /* cells */,
 				F2D8F95719224DF100102F3F /* CommentViewController.h */,
 				F2D8F95819224DF100102F3F /* CommentViewController.m */,
+				F2B58DCC19264B7F009D6131 /* ShareViewController.h */,
+				F2B58DCD19264B7F009D6131 /* ShareViewController.m */,
 			);
 			name = detail;
 			sourceTree = "<group>";
@@ -621,6 +628,7 @@
 				887F2143191E2EBF009250D2 /* UITableView+extra.m in Sources */,
 				8881AC641925E4A700F9646B /* SNS_Helper.m in Sources */,
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
+				F2B58DCE19264B7F009D6131 /* ShareViewController.m in Sources */,
 				510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
 				887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */,
