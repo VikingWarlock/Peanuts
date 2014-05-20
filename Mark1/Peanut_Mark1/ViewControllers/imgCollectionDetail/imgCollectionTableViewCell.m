@@ -170,6 +170,8 @@
         height = 10;
     }
     NSDictionary * dic = NSDictionaryOfVariableBindings(_imgView,_titleLabel,_detailBtn,_praiseBtn,_commentBtn,_shareBtn);
+
+    
     [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-%d-[_imgView]-10-[_titleLabel(==20)]-10-|",height] options:0 metrics:nil views:dic]];
 //    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_imgView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:10]];
 //    [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_imgView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeTop multiplier:1 constant:400]];

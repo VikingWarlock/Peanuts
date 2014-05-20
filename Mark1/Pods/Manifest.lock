@@ -19,9 +19,12 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AMPAvatarView (1.0.3)
+  - CocoaSecurity (1.2.4)
   - MagicalRecord (2.2):
     - MagicalRecord/Core
   - MagicalRecord/Core (2.2)
+  - NSUserDefaults-AESEncryptor (0.0.4):
+    - CocoaSecurity (~> 1.2.2)
   - RBBAnimation (0.3.0)
   - Reachability (3.1.1)
   - RTAlertView (0.0.6):
@@ -31,6 +34,8 @@ PODS:
   - SDWebImage-ProgressView (0.3.1):
     - SDWebImage (~> 3.0)
   - SDWebImage/Core (3.6)
+  - UIColor-Utilities (1.0.1)
+  - UIColorCategories (0.1.0)
   - UIImage+BlurAndDarken (0.0.1)
   - UIImage+ImageCompress (0.0.1)
   - UIImage-Resize (1.0.1)
@@ -40,9 +45,12 @@ DEPENDENCIES:
   - AFNetworking (~> 2.2.3)
   - AMPAvatarView (~> 1.0.3)
   - MagicalRecord (~> 2.2)
+  - NSUserDefaults-AESEncryptor (~> 0.0.4)
   - Reachability (~> 3.1)
   - RTAlertView (~> 0.0.6)
   - SDWebImage-ProgressView (~> 0.3.1)
+  - UIColor-Utilities (~> 1.0.1)
+  - UIColorCategories (~> 0.1.0)
   - UIImage+BlurAndDarken (~> 0.0.1)
   - UIImage+ImageCompress (~> 0.0.1)
   - UIImage-Resize (~> 1.0.1)
@@ -51,12 +59,16 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: 01aa7c3aa9a200b94943e54072a4373f14b3d219
   AMPAvatarView: 473eae59b5d71dfdeed18803917bfc2a9e0a0a42
+  CocoaSecurity: 7118996ece3493e6dcf2d45006bf0c1d955dbbc8
   MagicalRecord: 95d49d74ef752cd52f6ad87bcb474817fc3978cf
+  NSUserDefaults-AESEncryptor: f53c00dbe0f67ed2c66b4b937c4d2d8b131284e0
   RBBAnimation: e7f31ed62f760f3caf120b5d943267bd9a8e1f64
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   RTAlertView: 063dc8743ac8acf426cb64c011aa786f22563665
   SDWebImage: 7eb273e54ca8a2e506ad9bd5e80c35b2a4d7c95e
   SDWebImage-ProgressView: 472d7eb4ed2663109164afc13b936d8e3e5c8cd6
+  UIColor-Utilities: 5c2076b975f423097011aeea4012e75857dd9c99
+  UIColorCategories: 3b1153d8e4b97d26f2107f0da5e898e4438b5fc8
   UIImage+BlurAndDarken: e8624dc1153e8bd73d2eabd36a193741e91d43c1
   UIImage+ImageCompress: 9772dde93c0f615c53d2eecd7849797a2afdfd05
   UIImage-Resize: b71ddbd27e5a29c2776df5c55b766928050437b2

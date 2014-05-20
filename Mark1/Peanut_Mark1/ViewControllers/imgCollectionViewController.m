@@ -143,6 +143,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     return _bottomView;
 }
 
+
 -(void)praiseBtnClickAtCell:(UITableViewCell *)cell{
     imgCollectionTableViewCell * cell1 = (imgCollectionTableViewCell *)cell;
     NSInteger count = [cell1.praiseBtn.titleLabel.text integerValue];
@@ -178,21 +179,28 @@ static NSString * cellIdentifier = @"cellIdentifier";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    if (indexPath.row==0)return 550;
+    
     imgCollectionTableViewCell * cell = (imgCollectionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
 
     return cell.frame.size.height;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    
+    
+    
     imgCollectionTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[imgCollectionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier atIndexPath:indexPath];
-        if (indexPath.row == 0) {
-            [cell setConstraintsWithBool:YES];
-        }else
-            [cell setConstraintsWithBool:NO];
     }
+    
+    NSInteger row=indexPath.row;
+    
+    
     cell.delegate = self;
+    
     if (indexPath.row != 0) {
         [cell setConstraintsWithBool:NO];
     }else{

@@ -8,7 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		27C402CF34354145A3818596 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A474C76991743418E0AA42B /* libPods.a */; };
+		5101B34419270E2900084BCA /* ActivityDetailUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5101B34319270E2900084BCA /* ActivityDetailUserViewController.m */; };
+		5101B3471927370A00084BCA /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5101B3461927370A00084BCA /* BottomView.m */; };
+		510FD0591925B5BB00CD73AD /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */; };
+		510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD05C1926032400CD73AD /* ActivityDetailInfoViewController.m */; };
+		510FD060192603BE00CD73AD /* Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD05F192603BE00CD73AD /* Mask.m */; };
 		51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */; };
+		885F6341192A4447007BAAE0 /* RequestPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 885F6340192A4447007BAAE0 /* RequestPackage.m */; };
 		886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C08931920F1EB00BD7E5F /* NetworkRequest.m */; };
 		887F20E7191D4051009250D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E6191D4051009250D2 /* Foundation.framework */; };
 		887F20E9191D4051009250D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E8191D4051009250D2 /* CoreGraphics.framework */; };
@@ -38,10 +44,18 @@
 		887F214F191E4590009250D2 /* 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 887F214A191E4590009250D2 /* 3.png */; };
 		887F2150191E4590009250D2 /* iron.png in Resources */ = {isa = PBXBuildFile; fileRef = 887F214B191E4590009250D2 /* iron.png */; };
 		887F2151191E4590009250D2 /* pic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 887F214C191E4590009250D2 /* pic.jpg */; };
+		8881AC641925E4A700F9646B /* SNS_Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8881AC631925E4A700F9646B /* SNS_Helper.m */; };
+		8881AC6519267AF000F9646B /* imgCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */; };
+		8881AC6619267AF000F9646B /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95819224DF100102F3F /* CommentViewController.m */; };
+		8881AC6719267AF000F9646B /* Peanut_SNSPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF356019239FF500E76BB2 /* Peanut_SNSPart.m */; };
 		88D02AB4191E721C001ABA96 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB3191E721C001ABA96 /* ActivityViewController.m */; };
 		88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB6191E723B001ABA96 /* MustReadViewController.m */; };
 		88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB9191E724C001ABA96 /* SquareViewController.m */; };
 		88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */; };
+		D2F32F081925D4A900E446D6 /* MustReadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */; };
+		D2F32F0B1925F88B00E446D6 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F091925F88B00E446D6 /* like.png */; };
+		D2F32F0C1925F88B00E446D6 /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F0A1925F88B00E446D6 /* comment.png */; };
+		D2F32F12192607ED00E446D6 /* MustReaddetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F32F11192607ED00E446D6 /* MustReaddetialViewController.m */; };
 		F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */; };
 		F2B58DCE19264B7F009D6131 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B58DCD19264B7F009D6131 /* ShareViewController.m */; };
 		F2D8F95519223C5E00102F3F /* imgCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */; };
@@ -62,9 +76,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5101B34219270E2900084BCA /* ActivityDetailUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailUserViewController.h; path = ViewControllers/ActivityDetailUserViewController.h; sourceTree = "<group>"; };
+		5101B34319270E2900084BCA /* ActivityDetailUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailUserViewController.m; path = ViewControllers/ActivityDetailUserViewController.m; sourceTree = "<group>"; };
+		5101B3451927370A00084BCA /* BottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BottomView.h; path = ViewControllers/BottomView.h; sourceTree = "<group>"; };
+		5101B3461927370A00084BCA /* BottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BottomView.m; path = ViewControllers/BottomView.m; sourceTree = "<group>"; };
+		510FD0561925B5BB00CD73AD /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailViewController.h; path = ViewControllers/ActivityDetailViewController.h; sourceTree = "<group>"; };
+		510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailViewController.m; path = ViewControllers/ActivityDetailViewController.m; sourceTree = "<group>"; };
+		510FD05B1926032400CD73AD /* ActivityDetailInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailInfoViewController.h; path = ViewControllers/ActivityDetailInfoViewController.h; sourceTree = "<group>"; };
+		510FD05C1926032400CD73AD /* ActivityDetailInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailInfoViewController.m; path = ViewControllers/ActivityDetailInfoViewController.m; sourceTree = "<group>"; };
+		510FD05E192603BE00CD73AD /* Mask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mask.h; path = ViewControllers/Mask.h; sourceTree = "<group>"; };
+		510FD05F192603BE00CD73AD /* Mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mask.m; path = ViewControllers/Mask.m; sourceTree = "<group>"; };
 		51EFD0F019252D1600F5CC9D /* ActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityTableViewCell.h; path = ViewControllers/ActivityTableViewCell.h; sourceTree = "<group>"; };
 		51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityTableViewCell.m; path = ViewControllers/ActivityTableViewCell.m; sourceTree = "<group>"; };
 		5A474C76991743418E0AA42B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		885F633F192A4447007BAAE0 /* RequestPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RequestPackage.h; path = Networks/RequestPackage.h; sourceTree = "<group>"; };
+		885F6340192A4447007BAAE0 /* RequestPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RequestPackage.m; path = Networks/RequestPackage.m; sourceTree = "<group>"; };
 		886C08921920F1EB00BD7E5F /* NetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkRequest.h; path = CoreData/NetworkRequest.h; sourceTree = "<group>"; };
 		886C08931920F1EB00BD7E5F /* NetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkRequest.m; path = CoreData/NetworkRequest.m; sourceTree = "<group>"; };
 		887F20E3191D4051009250D2 /* Peanut_Mark1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peanut_Mark1.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,6 +135,8 @@
 		887F214A191E4590009250D2 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 3.png; path = img/3.png; sourceTree = "<group>"; };
 		887F214B191E4590009250D2 /* iron.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = iron.png; path = img/iron.png; sourceTree = "<group>"; };
 		887F214C191E4590009250D2 /* pic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = pic.jpg; path = img/pic.jpg; sourceTree = "<group>"; };
+		8881AC621925E4A700F9646B /* SNS_Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SNS_Helper.h; path = Networks/SNS_Helper.h; sourceTree = "<group>"; };
+		8881AC631925E4A700F9646B /* SNS_Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SNS_Helper.m; path = Networks/SNS_Helper.m; sourceTree = "<group>"; };
 		88D02AB2191E721C001ABA96 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityViewController.h; path = ViewControllers/ActivityViewController.h; sourceTree = "<group>"; };
 		88D02AB3191E721C001ABA96 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityViewController.m; path = ViewControllers/ActivityViewController.m; sourceTree = "<group>"; };
 		88D02AB5191E723B001ABA96 /* MustReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MustReadViewController.h; path = ViewControllers/MustReadViewController.h; sourceTree = "<group>"; };
@@ -121,7 +149,15 @@
 		88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlurTableViewCell_mark1.m; path = BaseModel/BaseSmallOutlet/BlurTableViewCell_mark1.m; sourceTree = "<group>"; };
 		88FF355C1923962B00E76BB2 /* PeanutTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeanutTopViewController.h; path = ViewControllers/PeanutTopViewController.h; sourceTree = "<group>"; };
 		88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PeanutTopViewController.m; path = ViewControllers/PeanutTopViewController.m; sourceTree = "<group>"; };
+		88FF355F19239FF500E76BB2 /* Peanut_SNSPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Peanut_SNSPart.h; path = BaseModel/Peanut_SNSPart.h; sourceTree = "<group>"; };
+		88FF356019239FF500E76BB2 /* Peanut_SNSPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Peanut_SNSPart.m; path = BaseModel/Peanut_SNSPart.m; sourceTree = "<group>"; };
 		C2AAB9293F12492E8B381615 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		D2F32F061925D4A900E446D6 /* MustReadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MustReadTableViewCell.h; path = ViewControllers/MustReadTableViewCell.h; sourceTree = "<group>"; };
+		D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MustReadTableViewCell.m; path = ViewControllers/MustReadTableViewCell.m; sourceTree = "<group>"; };
+		D2F32F091925F88B00E446D6 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
+		D2F32F0A1925F88B00E446D6 /* comment.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comment.png; sourceTree = "<group>"; };
+		D2F32F10192607ED00E446D6 /* MustReaddetialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MustReaddetialViewController.h; path = ViewControllers/MustReaddetialViewController.h; sourceTree = "<group>"; };
+		D2F32F11192607ED00E446D6 /* MustReaddetialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MustReaddetialViewController.m; path = ViewControllers/MustReaddetialViewController.m; sourceTree = "<group>"; };
 		F22D8FC819248418005D2A1A /* PublishCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublishCommentTableViewCell.h; path = ViewControllers/imgCollectionDetail/PublishCommentTableViewCell.h; sourceTree = "<group>"; };
 		F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublishCommentTableViewCell.m; path = ViewControllers/imgCollectionDetail/PublishCommentTableViewCell.m; sourceTree = "<group>"; };
 		F2B58DCC19264B7F009D6131 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareViewController.h; path = ViewControllers/imgCollectionDetail/ShareViewController.h; sourceTree = "<group>"; };
@@ -159,6 +195,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8870BE5C1924FE1B00233614 /* SNSPartOutlet */ = {
+			isa = PBXGroup;
+			children = (
+				88FF355F19239FF500E76BB2 /* Peanut_SNSPart.h */,
+				88FF356019239FF500E76BB2 /* Peanut_SNSPart.m */,
+			);
+			name = SNSPartOutlet;
+			sourceTree = "<group>";
+		};
 		887F20DA191D4051009250D2 = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +286,7 @@
 		887F2117191DB777009250D2 /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
+				8870BE5C1924FE1B00233614 /* SNSPartOutlet */,
 				887F2134191DF5D9009250D2 /* BaseSmallOutlet */,
 				887F211C191DB85D009250D2 /* BaseNaviViewController.h */,
 				887F211D191DB85D009250D2 /* BaseNaviViewController.m */,
@@ -277,6 +323,10 @@
 			children = (
 				887F2123191DB91B009250D2 /* NetworkStack.h */,
 				887F2124191DB91B009250D2 /* NetworkStack.m */,
+				8881AC621925E4A700F9646B /* SNS_Helper.h */,
+				8881AC631925E4A700F9646B /* SNS_Helper.m */,
+				885F633F192A4447007BAAE0 /* RequestPackage.h */,
+				885F6340192A4447007BAAE0 /* RequestPackage.m */,
 			);
 			name = Networks;
 			sourceTree = "<group>";
@@ -315,10 +365,20 @@
 		887F212D191DF3A0009250D2 /* ActivityViewController */ = {
 			isa = PBXGroup;
 			children = (
+				510FD05E192603BE00CD73AD /* Mask.h */,
+				510FD05F192603BE00CD73AD /* Mask.m */,
+				5101B3451927370A00084BCA /* BottomView.h */,
+				5101B3461927370A00084BCA /* BottomView.m */,
 				88D02AB2191E721C001ABA96 /* ActivityViewController.h */,
 				88D02AB3191E721C001ABA96 /* ActivityViewController.m */,
 				51EFD0F019252D1600F5CC9D /* ActivityTableViewCell.h */,
 				51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */,
+				510FD0561925B5BB00CD73AD /* ActivityDetailViewController.h */,
+				510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */,
+				510FD05B1926032400CD73AD /* ActivityDetailInfoViewController.h */,
+				510FD05C1926032400CD73AD /* ActivityDetailInfoViewController.m */,
+				5101B34219270E2900084BCA /* ActivityDetailUserViewController.h */,
+				5101B34319270E2900084BCA /* ActivityDetailUserViewController.m */,
 			);
 			name = ActivityViewController;
 			sourceTree = "<group>";
@@ -338,6 +398,10 @@
 			children = (
 				88D02AB5191E723B001ABA96 /* MustReadViewController.h */,
 				88D02AB6191E723B001ABA96 /* MustReadViewController.m */,
+				D2F32F061925D4A900E446D6 /* MustReadTableViewCell.h */,
+				D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */,
+				D2F32F10192607ED00E446D6 /* MustReaddetialViewController.h */,
+				D2F32F11192607ED00E446D6 /* MustReaddetialViewController.m */,
 			);
 			name = MustReadViewController;
 			sourceTree = "<group>";
@@ -361,6 +425,8 @@
 		887F2147191E4585009250D2 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				D2F32F091925F88B00E446D6 /* like.png */,
+				D2F32F0A1925F88B00E446D6 /* comment.png */,
 				887F2148191E4590009250D2 /* 1.png */,
 				887F2149191E4590009250D2 /* 2.png */,
 				887F214A191E4590009250D2 /* 3.png */,
@@ -477,10 +543,12 @@
 			files = (
 				887F2116191D411D009250D2 /* Podfile in Resources */,
 				887F214D191E4590009250D2 /* 1.png in Resources */,
+				D2F32F0B1925F88B00E446D6 /* like.png in Resources */,
 				887F2151191E4590009250D2 /* pic.jpg in Resources */,
 				887F214E191E4590009250D2 /* 2.png in Resources */,
 				887F2150191E4590009250D2 /* iron.png in Resources */,
 				887F214F191E4590009250D2 /* 3.png in Resources */,
+				D2F32F0C1925F88B00E446D6 /* comment.png in Resources */,
 				887F20F1191D4051009250D2 /* InfoPlist.strings in Resources */,
 				887F20F9191D4051009250D2 /* Images.xcassets in Resources */,
 			);
@@ -534,31 +602,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8881AC6519267AF000F9646B /* imgCollectionTableViewCell.m in Sources */,
+				8881AC6619267AF000F9646B /* CommentViewController.m in Sources */,
+				8881AC6719267AF000F9646B /* Peanut_SNSPart.m in Sources */,
 				F2F8BF201924F001000A3CED /* BlurTableViewCell_mark1.m in Sources */,
+				5101B3471927370A00084BCA /* BottomView.m in Sources */,
 				F2F8BF1F1924EFE6000A3CED /* PeanutTopViewController.m in Sources */,
 				51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */,
 				887F20F7191D4051009250D2 /* AppDelegate.m in Sources */,
 				887F2121191DB88B009250D2 /* BaseUIViewController.m in Sources */,
 				886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */,
 				88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */,
-				F2D8F95919224DF100102F3F /* CommentViewController.m in Sources */,
 				887F213C191DF9D2009250D2 /* UIView+extra.m in Sources */,
 				88D02AB4191E721C001ABA96 /* ActivityViewController.m in Sources */,
 				887F2128191DB934009250D2 /* CoreDataModel.xcdatamodeld in Sources */,
+				D2F32F12192607ED00E446D6 /* MustReaddetialViewController.m in Sources */,
 				887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */,
+				5101B34419270E2900084BCA /* ActivityDetailUserViewController.m in Sources */,
 				88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */,
 				F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */,
+				D2F32F081925D4A900E446D6 /* MustReadTableViewCell.m in Sources */,
+				885F6341192A4447007BAAE0 /* RequestPackage.m in Sources */,
 				F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */,
 				887F2146191E310A009250D2 /* AMPAvatarView+helper.m in Sources */,
 				887F2143191E2EBF009250D2 /* UITableView+extra.m in Sources */,
+				8881AC641925E4A700F9646B /* SNS_Helper.m in Sources */,
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
 				F2B58DCE19264B7F009D6131 /* ShareViewController.m in Sources */,
+				510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
 				887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */,
-				F2D8F95519223C5E00102F3F /* imgCollectionTableViewCell.m in Sources */,
 				887F2140191E200D009250D2 /* NSString+extra.m in Sources */,
 				88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */,
+				510FD060192603BE00CD73AD /* Mask.m in Sources */,
 				887F20F3191D4051009250D2 /* main.m in Sources */,
+				510FD0591925B5BB00CD73AD /* ActivityDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -632,7 +710,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos7.0;
 			};
@@ -664,7 +742,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos7.0;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -676,7 +754,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Siguang Huang (L3UC9F9BL5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
 				INFOPLIST_FILE = "Peanut_Mark1/Peanut_Mark1-Info.plist";
@@ -692,7 +770,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Siguang Huang (L3UC9F9BL5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
 				INFOPLIST_FILE = "Peanut_Mark1/Peanut_Mark1-Info.plist";

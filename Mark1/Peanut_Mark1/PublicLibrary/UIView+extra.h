@@ -16,4 +16,7 @@
 -(UIImage*)captureView;
 
 
+-(UIView*)getClipView:(CGRect)frame;
+
+
 @end

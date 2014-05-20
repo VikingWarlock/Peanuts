@@ -10,7 +10,9 @@
 #import <UIImage+BlurAndDarken.h>
 
 @interface BaseUIViewController ()
-
+{
+    UIImageView *bkImageView;
+}
 @end
 
 @implementation BaseUIViewController
@@ -32,6 +34,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    backItem.title = @"";
+    self.navigationItem.backBarButtonItem = backItem;
+
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
 
     
@@ -54,18 +62,23 @@
 
 -(void)setBackgroundImage:(UIImage *)bkimage andBlurEnable:(BOOL)enable
 {
-    UIImageView *backgroundView=[[UIImageView alloc]init];
-    [self.view addSubview:backgroundView];
-    [backgroundView setFrame:self.view.frame];
+    bkImageView=[[UIImageView alloc]init];
+    [self.view addSubview:bkImageView];
+    [bkImageView setFrame:self.view.frame];
     if (enable) {
         self.bkImage=[bkimage darkened:0.5f andBlurredImage:16.f];
     }else
         self.bkImage=bkimage;
     
-    [backgroundView setImage:self.bkImage];
-
+    [bkImageView setImage:self.bkImage];
+  
 }
 
+-(UIImageView*)Peanut_backgroundView
+{
+
+    return bkImageView;
+}
 
 /*
 #pragma mark - Navigation
