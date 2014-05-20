@@ -23,4 +23,8 @@
 }
 
 
+-(UIView*)getClipView:(CGRect)frame
+{
+    return [self resizableSnapshotViewFromRect:frame afterScreenUpdates:NO withCapInsets:UIEdgeInsetsZero];
+}
 @end

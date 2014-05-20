@@ -16,11 +16,14 @@
 #import "ActivityViewController.h"
 #import "imgCollectionViewController.h"
 
+
 @interface PeanutTopViewController ()<UITableViewDataSource,UITableViewDelegate,Delegate_BlurCellSlide>
 {
     UITableView *tableview;
     CGRect screen;
     UIColor *backGroundImageColor;
+    NSIndexPath *havebeenSlide;
+    
 }
 
 
@@ -44,8 +47,7 @@
     [super viewDidLoad];
     
     NSLog(@"%f\n\n\n\n",self.view.frame.origin.y);
-    
-    [self reset_NavigationBar];
+    havebeenSlide=nil;
     
     
     screen=[UIScreen mainScreen].bounds;
@@ -59,30 +61,48 @@
     
     [tableview registerClass:[BlurTableViewCell_mark1 class] forCellReuseIdentifier:@"mark1Cell"];
     
+    
     tableview.delegate=self;
     tableview.dataSource=self;
     
     [self.view addSubview:tableview];
     [self addTableviewHeadView:[UIImage imageNamed:@"pic.jpg"]];
     
-    backGroundImageColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"pic.jpg"]];
+    [self.view setNeedsDisplay];
+    
+    [self.NavigationController SNS_appear];
+    
+     /*
+    UIImageWriteToSavedPhotosAlbum([[self.view getClipView:CGRectMake(0, 0, 320, 100)]captureView ], self, nil, nil);
+    
+    backGroundImageColor=[[[self.view getClipView:CGRectMake(0, 0, 320, 40)] captureView]averageColor];
+    */
     //[self.NavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: backGroundImageColor}];
+    
+//    [self reset_NavigationBar];
+
     
     // Do any additional setup after loading the view.
 }
 
 -(void)reset_NavigationBar
 {
+    [UIApplication sharedApplication].statusBarStyle=UIStatusBarStyleLightContent;
     [[self.NavigationController navigationBar]setBarTintColor:[UIColor clearColor]];
     [[self.NavigationController navigationBar]setTranslucent:YES];
     [self.NavigationController.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
     [self.NavigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     [self.NavigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
-    
     self.navigationItem.title=@"花生米";
-    //[self.NavigationController setTitle:@"花生米"];
     [self.NavigationController.navigationBar setTintColor:[UIColor whiteColor]];
-    [self.NavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+
+    
+ //   UIImageWriteToSavedPhotosAlbum([[self.Peanut_backgroundView getClipView:CGRectMake(0, 0, 320, 100)]captureView ], self, nil, nil);
+    
+    backGroundImageColor=[[[self.view getClipView:CGRectMake(0, 0, 320, 40)] captureView]averageColor];
+    
+    
+    [self.NavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: backGroundImageColor==nil?[UIColor whiteColor]:[backGroundImageColor invertedColor]}];
     
     
     UIBarButtonItem *userButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:nil];
@@ -111,19 +131,28 @@
 }
 
 
--(void)viewWillAppear:(BOOL)animated
+-(void)viewDidAppear:(BOOL)animated
 {
  //   self.NavigationController.navigationBarHidden=YES;
     
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
+    if (self.NavigationController.navigationBarHidden) {
+//        [self.NavigationController setNavigationBarHidden:YES animated:YES];
+        [self reset_NavigationBar];
+//        [self.NavigationController setNavigationBarHidden:NO animated:NO];
+    }else
+    {
     [self reset_NavigationBar];
+    }
 }
 
--(void)viewWillDisappear:(BOOL)animated
+-(void)viewDidDisappear:(BOOL)animated
 {
 //    self.NavigationController.navigationBarHidden=NO;
-    [super viewWillDisappear:animated];
+    [super viewDidDisappear:animated];
+//    [self.NavigationController setNavigationBarHidden:YES animated:NO];
     [self setNavigationBarForOther];
+//    [self.NavigationController setNavigationBarHidden:NO animated:YES];
 }
 
 /*
@@ -169,8 +198,15 @@
 }
 
 
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (havebeenSlide!=nil) {
+        return;
+    }
+    
+    BlurTableViewCell_mark1 *cell=(BlurTableViewCell_mark1*)[tableView cellForRowAtIndexPath:indexPath];
+    [cell setSelected:NO animated:NO];
     switch (indexPath.row) {
         case 0:
         {
@@ -207,10 +243,40 @@
 {
     BlurTableViewCell_mark1 *cell=(BlurTableViewCell_mark1*)[tableview cellForRowAtIndexPath:indexpath];
     imgCollectionViewController *vc=[[imgCollectionViewController alloc]init];
-    [self.NavigationController pushViewController:vc animated:YES];
     [cell backToOriginWithAnimate:NO];
+    havebeenSlide=nil;
+    [self.NavigationController pushViewController:vc animated:YES];
 }
 
+
+-(BOOL)SlideCouldBegin:(NSIndexPath *)indexpath
+{
+    if (havebeenSlide==nil) {
+        return YES;
+    }else
+    {
+        if (havebeenSlide==indexpath) {
+            return YES;
+        }
+    }
+    
+    return NO;
+    
+}
+
+-(void)ThisCellHaveBeenSlide:(NSIndexPath *)indexpath
+{
+
+    havebeenSlide=indexpath;
+    
+}
+
+-(void)ThisCellHaveBeenReleased:(NSIndexPath *)indexpath
+{
+    if (havebeenSlide==indexpath) {
+        havebeenSlide=nil;
+    }
+}
 
 -(void)addTableviewHeadView:(UIImage*)img
 {
