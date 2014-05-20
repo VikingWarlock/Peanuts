@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface MustReadTableViewCell : UITableViewCell
-@property (nonatomic,strong) UIImageView *picture;
-@property (nonatomic,strong) UIImageView *avatar;
-@property (nonatomic,strong) UILabel *title;
-@property (nonatomic,strong) UILabel *user;
-@property (nonatomic,strong) UIButton *like;
-@property (nonatomic,strong) UIButton *comment;
+@property (nonatomic,retain) UIImageView *picture;
+@property (nonatomic,retain) UIImageView *avatar;
+@property (nonatomic,retain) UILabel *title;
+@property (nonatomic,retain) UILabel *user;
+@property (nonatomic,retain) UIButton *like;
+@property (nonatomic,retain) UIButton *comment;
 @end

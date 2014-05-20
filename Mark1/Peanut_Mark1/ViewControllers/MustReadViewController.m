@@ -30,6 +30,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"必读";
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    backItem.title = @"";
+    self.navigationItem.backBarButtonItem = backItem;
+    
     [self.view addSubview:self.dateHeadView];
     [self.view addSubview:self.readTableView];
     

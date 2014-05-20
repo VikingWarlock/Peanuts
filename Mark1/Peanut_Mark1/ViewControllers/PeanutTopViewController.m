@@ -46,6 +46,10 @@
     NSLog(@"%f\n\n\n\n",self.view.frame.origin.y);
     
     [self reset_NavigationBar];
+    //设置子叶面返回键按钮标题
+    UIBarButtonItem *backItem = [[UIBarButtonItem alloc] init];
+    backItem.title = @"";
+    self.navigationItem.backBarButtonItem = backItem;
     
     
     screen=[UIScreen mainScreen].bounds;
