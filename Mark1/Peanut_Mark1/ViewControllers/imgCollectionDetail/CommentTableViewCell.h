@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AMPAvatarView.h"
 
-@protocol DeleteCommentDelegate <NSObject>
+@protocol Delegate_CommentCell <NSObject>
 -(void)deleteBtnClickAtIndexPath:(NSIndexPath*)indexPath;
 -(void)replayBtnClickAtIndexPath:(NSIndexPath*)indexPath;
 
@@ -17,7 +17,7 @@
 
 @interface CommentTableViewCell : UITableViewCell
 
-@property (nonatomic,weak) id <DeleteCommentDelegate> delegate;
+@property (nonatomic,assign) id <Delegate_CommentCell> delegate;
 @property (nonatomic,strong) AMPAvatarView * iconView;
 @property (nonatomic,strong) UILabel * userName;
 @property (nonatomic,strong) UILabel * timeLabel;

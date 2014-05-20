@@ -10,12 +10,15 @@
 #import <UIImage+BlurAndDarken.h>
 #import "imgCollectionTableViewCell.h"
 #import "CommentViewController.h"
+#import "ShareViewController.h"
 
 
 @interface imgCollectionViewController (){
     UIButton * praiseBtn;
     UIButton * commentBtn;
     UIButton * shareBtn;
+    
+    NSIndexPath * currentIndexPath;
 }
 
 @property (nonatomic,strong)UITableView * tableView;
@@ -65,12 +68,14 @@ static NSString * cellIdentifier = @"cellIdentifier";
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]init];
         [_tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorColor = [UIColor whiteColor];
         [_tableView setBackgroundColor:[UIColor clearColor]];
+        _tableView.allowsSelection = NO;
+//        [_tableView registerClass:[imgCollectionTableViewCell class] forCellReuseIdentifier:cellIdentifier];
 
 //        UIImageView * imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 120)];
 //        imgView.image = [[UIImage imageNamed:@"1.png"] darkened:0.6 andBlurredImage:16.f];
@@ -138,18 +143,35 @@ static NSString * cellIdentifier = @"cellIdentifier";
     return _bottomView;
 }
 
--(void)praiseBtnClick:(UIButton *)sender{
-    
+-(void)praiseBtnClickAtCell:(UITableViewCell *)cell{
+    imgCollectionTableViewCell * cell1 = (imgCollectionTableViewCell *)cell;
+    NSInteger count = [cell1.praiseBtn.titleLabel.text integerValue];
+    [cell1 setPraiseBtnTitle:++count];
 }
 
--(void)commentBtnClick:(UIButton *)sender{
+-(void)commentBtnClickAtIndexPath:(NSIndexPath *)indexPath{
     CommentViewController * VC = [[CommentViewController alloc] init];
+    VC.delegate = self;
+    currentIndexPath = indexPath;
+    [self.navigationController pushViewController:VC animated:YES];
+}
+-(void)shareBtnClickAtCell:(UITableViewCell *)cell{
+    ShareViewController * VC = [[ShareViewController alloc]init];
     [self.navigationController pushViewController:VC animated:YES];
 }
 
 -(void)shareBtnClick:(UIButton *)sender{
-    
+
 }
+
+
+#pragma mark - commentVC delegate
+-(void)DidPublishOneComment{
+
+}
+
+
+#pragma mark - tableView dataSource
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
@@ -164,7 +186,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     imgCollectionTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[imgCollectionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[imgCollectionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier atIndexPath:indexPath];
         if (indexPath.row == 0) {
             [cell setConstraintsWithBool:YES];
         }else
@@ -178,7 +200,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 
     }
 
-    NSLog(@"%lf",cell.frame.size.height);
+//    NSLog(@"%lf",cell.frame.size.height);
 
     cell.imgView.image = [UIImage imageNamed:@"pic.jpg"];
     cell.titleLabel.text = @"001";

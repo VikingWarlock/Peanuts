@@ -104,7 +104,7 @@
 }
 
 -(void)publishCommentBtnClick:(UIButton *)sender{
-    
+    [self.delegate publishCommentBtnClick];
 }
 
 -(UIButton *)confirmBtn{

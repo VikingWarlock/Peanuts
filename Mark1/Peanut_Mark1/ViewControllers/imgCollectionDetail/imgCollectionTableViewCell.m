@@ -11,7 +11,7 @@
 
 @implementation imgCollectionTableViewCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier atIndexPath:(NSIndexPath *)indexPath
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -39,6 +39,8 @@
         praiseCount = 0;
         commentCount = 0;
         shareCount = 0;
+        
+        currentIndexPath = indexPath;
         
     }
     return self;
@@ -71,16 +73,19 @@
         [_praiseBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateSelected];
         [_praiseBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateHighlighted];
         
-        [_praiseBtn setTitle:[NSString stringWithFormat:@"%ld",praiseCount] forState:UIControlStateNormal];
+        [_praiseBtn setTitle:[NSString stringWithFormat:@"%d",praiseCount] forState:UIControlStateNormal];
     }
     return _praiseBtn;
 }
 
 -(void)praiseBtnClick:(UIButton *)sender{
-    praiseCount++;
-    [self.praiseBtn setTitle:[NSString stringWithFormat:@"%ld",praiseCount] forState:UIControlStateNormal];
-    [self.praiseBtn setTitle:[NSString stringWithFormat:@"%ld",praiseCount] forState:UIControlStateSelected];
-    [self.praiseBtn setTitle:[NSString stringWithFormat:@"%ld",praiseCount] forState:UIControlStateHighlighted];
+    if ([self.delegate respondsToSelector:@selector(praiseBtnClickAtCell:)]) {
+        [self.delegate praiseBtnClickAtCell:self];
+    }
+//    praiseCount++;
+//    [self.praiseBtn setTitle:[NSString stringWithFormat:@"%ld",praiseCount] forState:UIControlStateNormal];
+//    [self.praiseBtn setTitle:[NSString stringWithFormat:@"%ld",praiseCount] forState:UIControlStateSelected];
+//    [self.praiseBtn setTitle:[NSString stringWithFormat:@"%ld",praiseCount] forState:UIControlStateHighlighted];
 }
 
 -(UIButton *)commentBtn{
@@ -94,17 +99,38 @@
         [_commentBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateSelected];
         [_commentBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateHighlighted];
         
-        [_commentBtn setTitle:[NSString stringWithFormat:@"%ld",commentCount] forState:UIControlStateNormal];
+        [_commentBtn setTitle:[NSString stringWithFormat:@"%d",commentCount] forState:UIControlStateNormal];
     }
     return _commentBtn;
 }
 
+-(void)setCommentBtnTitle:(NSInteger)count{
+    commentCount = count;
+    [self.commentBtn setTitle:[NSString stringWithFormat:@"%ld",(long)count] forState:UIControlStateNormal];
+    [self.commentBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateSelected];
+    [self.commentBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateHighlighted];
+}
+-(void)setPraiseBtnTitle:(NSInteger)count{
+    praiseCount = count;
+    [self.praiseBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateNormal];
+    [self.praiseBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateSelected];
+    [self.praiseBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateHighlighted];
+}
+-(void)setShareBtnTitle:(NSInteger)count{
+    shareCount = count;
+    [self.shareBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateNormal];
+    [self.shareBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateSelected];
+    [self.shareBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateHighlighted];
+}
+
+
 -(void)commentBtnClick:(UIButton *)sender{
-    commentCount++;
+/*    commentCount++;
     [self.commentBtn setTitle:[NSString stringWithFormat:@"%ld",commentCount] forState:UIControlStateNormal];
     [self.commentBtn setTitle:[NSString stringWithFormat:@"%ld",commentCount] forState:UIControlStateSelected];
     [self.commentBtn setTitle:[NSString stringWithFormat:@"%ld",commentCount] forState:UIControlStateHighlighted];
-    [self.delegate commentBtnClick:sender];
+*/ 
+    [self.delegate commentBtnClickAtIndexPath:currentIndexPath];
     
 }
 
@@ -120,16 +146,15 @@
         [_shareBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateSelected];
         [_shareBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateHighlighted];
         
-        [_shareBtn setTitle:[NSString stringWithFormat:@"%ld",shareCount] forState:UIControlStateNormal];
+        [_shareBtn setTitle:[NSString stringWithFormat:@"%d",shareCount] forState:UIControlStateNormal];
     }
     return _shareBtn;
 }
 
 -(void)shareBtnClick:(UIButton *)sender{
-    shareCount++;
-    [self.shareBtn setTitle:[NSString stringWithFormat:@"%ld",shareCount] forState:UIControlStateNormal];
-    [self.shareBtn setTitle:[NSString stringWithFormat:@"%ld",shareCount] forState:UIControlStateSelected];
-    [self.shareBtn setTitle:[NSString stringWithFormat:@"%ld",shareCount] forState:UIControlStateHighlighted];
+    if ([self.delegate respondsToSelector:@selector(shareBtnClickAtCell:)]) {
+        [self.delegate shareBtnClickAtCell:self];
+    }
 }
 
 -(void)setConstraintsWithBool:(NSInteger)isFirstRow{
