@@ -5,19 +5,19 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>AB0D5249-A54D-4569-B4B9-9E92186CA8E4</string>
+	<string>6F6E2379-83D7-479D-B469-FA05F178F979</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Peanut_Mark1</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>7A232276-540A-4624-B666-30F8C42A1720</key>
-		<string>https://github.com/VikingWarlock/Peanuts</string>
+		<key>3A009B03-8ADF-43B3-85F3-93C988C39674</key>
+		<string>https://github.com/VikingWarlock/Peanuts.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Mark1/Peanut_Mark1.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>7A232276-540A-4624-B666-30F8C42A1720</key>
+		<key>3A009B03-8ADF-43B3-85F3-93C988C39674</key>
 		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
@@ -25,14 +25,14 @@
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>7A232276-540A-4624-B666-30F8C42A1720</string>
+	<string>3A009B03-8ADF-43B3-85F3-93C988C39674</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>7A232276-540A-4624-B666-30F8C42A1720</string>
+			<string>3A009B03-8ADF-43B3-85F3-93C988C39674</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Peanuts</string>
 		</dict>

@@ -73,7 +73,6 @@
 {
     [super viewWillAppear:animated];
     self.navigationItem.title = @"活动";
-    //self.navigationController.navigationItem.title = @"";
     ((UIViewController *)(self.navigationController.viewControllers)[[self.navigationController.viewControllers indexOfObject:self] - 1]).navigationItem.title = @"";
 }
 
