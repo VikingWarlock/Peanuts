@@ -14,6 +14,8 @@
 		510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD05C1926032400CD73AD /* ActivityDetailInfoViewController.m */; };
 		510FD060192603BE00CD73AD /* Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD05F192603BE00CD73AD /* Mask.m */; };
 		51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */; };
+		51FBFD34192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FBFD33192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m */; };
+		51FBFD37192DF507009089FA /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FBFD36192DF507009089FA /* UserCell.m */; };
 		885F6341192A4447007BAAE0 /* RequestPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 885F6340192A4447007BAAE0 /* RequestPackage.m */; };
 		886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C08931920F1EB00BD7E5F /* NetworkRequest.m */; };
 		887F20E7191D4051009250D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E6191D4051009250D2 /* Foundation.framework */; };
@@ -58,8 +60,6 @@
 		D2F32F12192607ED00E446D6 /* MustReaddetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F32F11192607ED00E446D6 /* MustReaddetialViewController.m */; };
 		F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */; };
 		F2B58DCE19264B7F009D6131 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B58DCD19264B7F009D6131 /* ShareViewController.m */; };
-		F2D8F95519223C5E00102F3F /* imgCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */; };
-		F2D8F95919224DF100102F3F /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95819224DF100102F3F /* CommentViewController.m */; };
 		F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95B19225B2000102F3F /* CommentTableViewCell.m */; };
 		F2F8BF1F1924EFE6000A3CED /* PeanutTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */; };
 		F2F8BF201924F001000A3CED /* BlurTableViewCell_mark1.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */; };
@@ -88,6 +88,10 @@
 		510FD05F192603BE00CD73AD /* Mask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mask.m; path = ViewControllers/Mask.m; sourceTree = "<group>"; };
 		51EFD0F019252D1600F5CC9D /* ActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityTableViewCell.h; path = ViewControllers/ActivityTableViewCell.h; sourceTree = "<group>"; };
 		51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityTableViewCell.m; path = ViewControllers/ActivityTableViewCell.m; sourceTree = "<group>"; };
+		51FBFD32192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivitDetailInterestedPeopleViewController.h; path = ViewControllers/ActivitDetailInterestedPeopleViewController.h; sourceTree = "<group>"; };
+		51FBFD33192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivitDetailInterestedPeopleViewController.m; path = ViewControllers/ActivitDetailInterestedPeopleViewController.m; sourceTree = "<group>"; };
+		51FBFD35192DF507009089FA /* UserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserCell.h; path = ViewControllers/UserCell.h; sourceTree = "<group>"; };
+		51FBFD36192DF507009089FA /* UserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserCell.m; path = ViewControllers/UserCell.m; sourceTree = "<group>"; };
 		5A474C76991743418E0AA42B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		885F633F192A4447007BAAE0 /* RequestPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RequestPackage.h; path = Networks/RequestPackage.h; sourceTree = "<group>"; };
 		885F6340192A4447007BAAE0 /* RequestPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RequestPackage.m; path = Networks/RequestPackage.m; sourceTree = "<group>"; };
@@ -377,8 +381,12 @@
 				510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */,
 				510FD05B1926032400CD73AD /* ActivityDetailInfoViewController.h */,
 				510FD05C1926032400CD73AD /* ActivityDetailInfoViewController.m */,
+				51FBFD35192DF507009089FA /* UserCell.h */,
+				51FBFD36192DF507009089FA /* UserCell.m */,
 				5101B34219270E2900084BCA /* ActivityDetailUserViewController.h */,
 				5101B34319270E2900084BCA /* ActivityDetailUserViewController.m */,
+				51FBFD32192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.h */,
+				51FBFD33192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m */,
 			);
 			name = ActivityViewController;
 			sourceTree = "<group>";
@@ -604,6 +612,7 @@
 			files = (
 				8881AC6519267AF000F9646B /* imgCollectionTableViewCell.m in Sources */,
 				8881AC6619267AF000F9646B /* CommentViewController.m in Sources */,
+				51FBFD37192DF507009089FA /* UserCell.m in Sources */,
 				8881AC6719267AF000F9646B /* Peanut_SNSPart.m in Sources */,
 				F2F8BF201924F001000A3CED /* BlurTableViewCell_mark1.m in Sources */,
 				5101B3471927370A00084BCA /* BottomView.m in Sources */,
@@ -636,6 +645,7 @@
 				88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */,
 				510FD060192603BE00CD73AD /* Mask.m in Sources */,
 				887F20F3191D4051009250D2 /* main.m in Sources */,
+				51FBFD34192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m in Sources */,
 				510FD0591925B5BB00CD73AD /* ActivityDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
