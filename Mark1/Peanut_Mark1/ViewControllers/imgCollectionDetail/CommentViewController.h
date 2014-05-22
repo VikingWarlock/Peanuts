@@ -9,8 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "BaseUIViewController.h"
 #import "CommentTableViewCell.h"
+#import "PublishCommentTableViewCell.h"
 
+@protocol Delegate_commentVC <NSObject>
 
-@interface CommentViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate,DeleteCommentDelegate>
+-(void)DidPublishOneComment;
+@end
+
+@interface CommentViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate,Delegate_CommentCell,Delegate_publishCommentCell>
+
+@property(nonatomic,assign) id<Delegate_commentVC>delegate;
 
 @end

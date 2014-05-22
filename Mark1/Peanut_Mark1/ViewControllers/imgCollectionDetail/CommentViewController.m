@@ -14,7 +14,7 @@
     int count;
 }
 
-@property(nonatomic,strong)UITableView * tableView;
+@property(nonatomic,retain)UITableView * tableView;
 
 @end
 
@@ -35,13 +35,14 @@ static NSString * cellIdentifier = @"cellIdentifier";
 {
     [super viewDidLoad];
     
-    count = 15;
+    count = 5;
     
     [self setBackgroundImage:[UIImage imageNamed:@"1.png"] andBlurEnable:YES];
     
     [self registerForKeyboardNotification];
-    
+
     [self.view addSubview:self.tableView];
+    
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
 
@@ -60,6 +61,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
         _tableView.separatorColor = [UIColor clearColor];
         _tableView.backgroundColor = [UIColor clearColor];
         
+        
 
         _tableView.allowsSelection = NO;
          
@@ -68,7 +70,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 }
 
 -(void)tableViewTapped:(UITapGestureRecognizer *)tapGR{
-    [self.tableView reloadData];
+    [self.tableView endEditing:YES];
     [self.tableView removeGestureRecognizer:tapGR];
 }
 
@@ -83,49 +85,53 @@ static NSString * cellIdentifier = @"cellIdentifier";
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row) {
-    CommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier atIndexPath:indexPath];
-    }else{
-        [cell reChangeCell];
-        cell.indexPath = indexPath;
-    }
-    cell.delegate = self;
-    if ([indexPath compare:selectedIndexPath] == NSOrderedSame && indexPath.row == selectedIndexPath.row) {
-        [cell changeCell];
-    }
-    cell.timeLabel.text = @"2014-05-14";
-    cell.commentLabel.text = @"aaa";
-    cell.userName.text = @"王孟琦";
+        CommentTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+        if (cell == nil) {
+            cell = [[CommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier atIndexPath:indexPath];
+        }else{
+            [cell reChangeCell];
+            cell.indexPath = indexPath;
+        }
+        cell.delegate = self;
+        if ([indexPath compare:selectedIndexPath] == NSOrderedSame && indexPath.row == selectedIndexPath.row) {
+            [cell changeCell];
+        }
+        cell.timeLabel.text = @"2014-05-14";
+        cell.commentLabel.text = @"aaa";
+        cell.userName.text = @"王孟琦";
         return cell;
 
     }
     else{
         PublishCommentTableViewCell * cell = [[PublishCommentTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"publishCommentCell"];
+        cell.delegate = self;
         return cell;
     }
 }
 
 -(void)replayBtnClickAtIndexPath:(NSIndexPath *)indexPath{
     selectedIndexPath = indexPath;
-    NSLog(@"replay at row:%ld",indexPath.row);
     [self.tableView reloadData];
 }
 
 -(void)deleteBtnClickAtIndexPath:(NSIndexPath *)indexPath{
     CommentTableViewCell * cell = (CommentTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     if ([cell.deleteBtn.titleLabel.text isEqualToString:@"删除"]) {
-        [self.tableView beginUpdates];
-        NSLog(@"delete cell at row:%ld",indexPath.row);
+//        [self.tableView beginUpdates];
         count--;
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
-        [self.tableView endUpdates];
+//        [self.tableView endUpdates];
         [self.tableView reloadData];
     }else{
         selectedIndexPath = nil;
         [cell reChangeCell];
     }
     [self.tableView reloadData];
+}
+
+
+-(void)publishCommentBtnClick{
+    [self.delegate DidPublishOneComment];
 }
 
 -(void)registerForKeyboardNotification{

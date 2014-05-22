@@ -14,10 +14,20 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>Pods-CocoaSecurity.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>14</integer>
+		</dict>
 		<key>Pods-MagicalRecord.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>4</integer>
+		</dict>
+		<key>Pods-NSUserDefaults-AESEncryptor.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>15</integer>
 		</dict>
 		<key>Pods-RBBAnimation.xcscheme</key>
 		<dict>
@@ -43,6 +53,16 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>8</integer>
+		</dict>
+		<key>Pods-UIColor-Utilities.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>16</integer>
+		</dict>
+		<key>Pods-UIColorCategories.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>17</integer>
 		</dict>
 		<key>Pods-UIImage+BlurAndDarken.xcscheme</key>
 		<dict>
@@ -72,7 +92,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>054E70A0144149B7BB961524</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>084A9E592740407E967533B3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>09B207CB48FC44DB81086753</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>136223C4D34E4A1DBBF01058</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1B2D7B3D21D547A08C46B934</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,12 +142,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>5493B2B21FFD43BD9B8C31D9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>702DDB0A5EFC4C40AB3ACDCE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>781D8A7C77DB4A5CBAD78ED7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>792A60C9EAE2494190D710E6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>8376D20925EC44F9B0D43C46</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8FE664DBA4184A23B150D320</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,12 +182,57 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B3EEAF7EB55A48FE89BA08D9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>B63C986802D842F89FD27A8E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>C10181545D4449DFB8579B79</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C160212688374E4E82E46AA9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C4148A12E20842F98542F2BD</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D15D463871CA43D6B6438D1A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D1C78C98E98B4B02AC81C540</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D32C7E46C051453C85119966</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>D5E939F4F6FC4BD9A4B849C5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DE418F186E384B709B8C3152</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E07EA07AD14D49809BE3B92E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
