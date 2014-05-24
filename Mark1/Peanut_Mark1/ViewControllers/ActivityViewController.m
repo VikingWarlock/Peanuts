@@ -10,12 +10,19 @@
 #import "PublicLib.h"
 #import "ActivityTableViewCell.h"
 #import "ActivityDetailViewController.h"
+#define PRESENT_TITLE_COLOR [UIColor redColor]
+#define PAST_TITLE_COLOR [UIColor grayColor]
 
 @interface ActivityViewController ()
 {
     NSArray *bindingFooterToBottom;
     NSArray *bindingFooterToTop;
     BOOL isProgressing;
+    BOOL shouldLoadReviewedTableView;
+    CGPoint upPoint;
+    CGPoint downPoint;
+    NSMutableArray *sweepSpeed;
+    NSMutableArray *downSpeed;
 }
 @property (nonatomic,strong) UITableView *progressingTableView;
 @property (nonatomic,strong) UITableView *ReviewedTableView;
@@ -36,8 +43,8 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-        
+        shouldLoadReviewedTableView  = YES;
+        isProgressing = YES;
     }
     return self;
 }
@@ -52,20 +59,22 @@
     [self.view addSubview:self.progressingHeadView];
     [self.view addSubview:self.ReviewedFooterView];
     [self.progressingTableView registerClass:[ActivityTableViewCell class] forCellReuseIdentifier:@"progressingCell"];
+    sweepSpeed = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0", nil];
+    downSpeed = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0" ,nil];
 
-    [_progressingHeadView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_progressingHeadView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingHeadView)]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|[_progressingHeadView(%f)]",HEIGHT_OF_HEADER_OR_FOOTER ] options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingHeadView)]];
+//    [_progressingHeadView setTranslatesAutoresizingMaskIntoConstraints:NO];
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_progressingHeadView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingHeadView)]];
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|[_progressingHeadView(%f)]",HEIGHT_OF_HEADER_OR_FOOTER ] options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingHeadView)]];
 
     [_progressingTableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_progressingTableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingTableView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_progressingTableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingTableView)]];
     
-    [_ReviewedFooterView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    bindingFooterToBottom = [[NSArray alloc] initWithArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_ReviewedFooterView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedFooterView)]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_ReviewedFooterView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedFooterView)]];
-    [self.view addConstraints:bindingFooterToBottom];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat: @"V:[_ReviewedFooterView(%f)]",HEIGHT_OF_HEADER_OR_FOOTER] options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedFooterView)]];
+//    [_ReviewedFooterView setTranslatesAutoresizingMaskIntoConstraints:NO];
+//    bindingFooterToBottom = [[NSArray alloc] initWithArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_ReviewedFooterView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedFooterView)]];
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_ReviewedFooterView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedFooterView)]];
+//    [self.view addConstraints:bindingFooterToBottom];
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat: @"V:[_ReviewedFooterView(%f)]",HEIGHT_OF_HEADER_OR_FOOTER] options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedFooterView)]];
     
 }
 
@@ -139,46 +148,160 @@
 
 #pragma mark -some method
 
-- (void)switchToReviewed
+//- (void)switchToReviewed
+//{
+//    if (!isProgressing) {
+//        [self.view addSubview:self.ReviewedTableView];
+//        [_ReviewedTableView registerClass:[ActivityTableViewCell class] forCellReuseIdentifier:@"progressingCell"];
+//        [_ReviewedTableView setTranslatesAutoresizingMaskIntoConstraints:NO];
+//        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_ReviewedTableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedTableView)]];
+//        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_ReviewedFooterView][_ReviewedTableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedFooterView,_ReviewedTableView)]];
+//        [self.view layoutIfNeeded];
+//        
+//        bindingFooterToTop = [[NSArray alloc] initWithArray :[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_progressingHeadView][_ReviewedFooterView]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingHeadView,_ReviewedFooterView)]];
+//        [self.view removeConstraints:bindingFooterToBottom];
+//        [self.view addConstraints:bindingFooterToTop];
+//        [UIView animateWithDuration:0.25 animations:^{
+//            [self.view layoutSubviews];
+//        }];
+//        isProgressing = !isProgressing;
+//        [self updateTextColor];
+//    }
+//}
+//
+//- (void)switchToProgressing
+//{
+//    if (isProgressing) {
+//        [self.view removeConstraints:bindingFooterToTop];
+//        [self.view addConstraints:bindingFooterToBottom];
+//        [UIView animateWithDuration:0.25 animations:^{
+//            [self.view layoutSubviews];
+//        }];
+//        isProgressing = !isProgressing;
+//        [self updateTextColor];
+//    }
+//}
+
+- (void)handleTap:(UITapGestureRecognizer *)recognizer
 {
-    if (!isProgressing) {
+    upPoint = CGPointMake(self.view.frame.size.width / 2,HEIGHT_OF_HEADER_OR_FOOTER + HEIGHT_OF_HEADER_OR_FOOTER / 2);
+    downPoint = CGPointMake(self.view.frame.size.width / 2,self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER / 2);
+
+    if (shouldLoadReviewedTableView == YES) {
+        shouldLoadReviewedTableView = NO;
         [self.view addSubview:self.ReviewedTableView];
+        _ReviewedTableView.frame = CGRectMake(0, recognizer.view.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
         [_ReviewedTableView registerClass:[ActivityTableViewCell class] forCellReuseIdentifier:@"progressingCell"];
-        [_ReviewedTableView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_ReviewedTableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedTableView)]];
-        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_ReviewedFooterView][_ReviewedTableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedFooterView,_ReviewedTableView)]];
-        [self.view layoutIfNeeded];
-        
-        bindingFooterToTop = [[NSArray alloc] initWithArray :[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_progressingHeadView][_ReviewedFooterView]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingHeadView,_ReviewedFooterView)]];
-        [self.view removeConstraints:bindingFooterToBottom];
-        [self.view addConstraints:bindingFooterToTop];
-        [UIView animateWithDuration:0.25 animations:^{
-            [self.view layoutSubviews];
-        }];
-        isProgressing = !isProgressing;
-        [self updateTextColor];
+    }
+    
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        if (isProgressing == NO) {
+            _ReviewedFooterView.center = downPoint;
+            isProgressing = !isProgressing;
+            _progressing.textColor = PRESENT_TITLE_COLOR;
+            _reviewed.textColor = PAST_TITLE_COLOR;
+            
+        }
+        else
+        {
+            _ReviewedFooterView.center = upPoint;
+            isProgressing = !isProgressing;
+            _progressing.textColor = PAST_TITLE_COLOR;
+            _reviewed.textColor = PRESENT_TITLE_COLOR;
+        }
+        _ReviewedTableView.frame = CGRectMake(0, recognizer.view.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
+    } completion:nil];
+}
+
+- (void)handleTap2:(UITapGestureRecognizer *)recognizer
+{
+    downPoint = CGPointMake(self.view.frame.size.width / 2,self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER / 2);
+    
+    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        if (isProgressing == NO) {
+            _ReviewedFooterView.center = downPoint;
+            isProgressing = !isProgressing;
+            _progressing.textColor = PRESENT_TITLE_COLOR;
+            _reviewed.textColor = PAST_TITLE_COLOR;
+            _ReviewedTableView.frame = CGRectMake(0, _ReviewedFooterView.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
+        }
+    } completion:nil];
+    
+}
+
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer
+{
+    upPoint = CGPointMake(self.view.frame.size.width / 2,HEIGHT_OF_HEADER_OR_FOOTER + HEIGHT_OF_HEADER_OR_FOOTER / 2);
+    downPoint = CGPointMake(self.view.frame.size.width / 2,self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER / 2);
+    static long i = 0;
+    i++;
+    BOOL flag1 = NO;
+    BOOL flag2 = NO;
+    
+    if (shouldLoadReviewedTableView == YES) {
+        shouldLoadReviewedTableView = NO;
+        [self.view addSubview:self.ReviewedTableView];
+        _ReviewedTableView.frame = CGRectMake(0, recognizer.view.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
+        [_ReviewedTableView registerClass:[ActivityTableViewCell class] forCellReuseIdentifier:@"progressingCell"];
+    }
+
+    CGPoint translation = [recognizer translationInView:self.view];
+    if (recognizer.view.center.y + translation.y < upPoint.y) {
+        recognizer.view.center = upPoint;
+    }
+    else if(recognizer.view.center.y + translation.y > downPoint.y)
+    {
+        recognizer.view.center = downPoint;
+    }else
+    {
+        recognizer.view.center = CGPointMake(recognizer.view.center.x,recognizer.view.center.y + translation.y);
+    }
+    
+    sweepSpeed[i%3] = [NSString stringWithFormat:@"%f",translation.y ];
+    [recognizer setTranslation:CGPointMake(0, 0) inView:self.view];
+
+    for (NSString *str in sweepSpeed) {
+        if ([str intValue] < -10) {
+            flag1 = YES;
+            break;
+        }
+        if ([str intValue] > 10) {
+            flag2 = YES;
+            break;
+        }
+    }
+    _ReviewedTableView.frame = CGRectMake(0, recognizer.view.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
+
+    
+    if(recognizer.state == UIGestureRecognizerStateEnded)
+    {
+        [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            if (recognizer.view.center.y < self.view.frame.size.height / 2 || flag1) {
+                recognizer.view.center = upPoint;
+                isProgressing = NO;
+                _progressing.textColor = PAST_TITLE_COLOR;
+                _reviewed.textColor = PRESENT_TITLE_COLOR;
+            }
+            if(recognizer.view.center.y > self.view.frame.size.height / 2 || flag2)
+            {
+                recognizer.view.center = downPoint;
+                isProgressing = YES;
+                _progressing.textColor = PRESENT_TITLE_COLOR;
+                _reviewed.textColor = PAST_TITLE_COLOR;
+            }
+            _ReviewedTableView.frame = CGRectMake(0, recognizer.view.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
+        } completion:nil];
     }
 }
 
-- (void)switchToProgressing
-{
-    if (isProgressing) {
-        [self.view removeConstraints:bindingFooterToTop];
-        [self.view addConstraints:bindingFooterToBottom];
-        [UIView animateWithDuration:0.25 animations:^{
-            [self.view layoutSubviews];
-        }];
-        isProgressing = !isProgressing;
-        [self updateTextColor];
-    }
-}
+//
+//- (void)updateTextColor
+//{
+//    UIColor *temp = _progressing.textColor;
+//    _progressing.textColor = _reviewed.textColor;
+//    _reviewed.textColor = temp;
+//}
 
-- (void)updateTextColor
-{
-    UIColor *temp = _progressing.textColor;
-    _progressing.textColor = _reviewed.textColor;
-    _reviewed.textColor = temp;
-}
 
 #pragma mark -lazy initialization
 
@@ -188,7 +311,7 @@
         _progressing = [[UILabel alloc] init];
         _progressing.text = @"正在进行";
         _progressing.textAlignment = NSTextAlignmentLeft;
-        _progressing.textColor = [UIColor redColor];
+        _progressing.textColor = PRESENT_TITLE_COLOR;
         _progressing.font = [UIFont systemFontOfSize:12];
     }
     return _progressing;
@@ -197,7 +320,7 @@
 - (UIView *)progressingHeadView
 {
     if (!_progressingHeadView) {
-        _progressingHeadView = [[UIView alloc] init];
+        _progressingHeadView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, HEIGHT_OF_HEADER_OR_FOOTER)];
         _progressingHeadView.backgroundColor = [UIColor whiteColor];
         
         [_progressingHeadView addSubview:self.progressing];
@@ -212,7 +335,7 @@
         [_progressingHeadView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=7.5-[_progressingSegmentedControl]->=7.5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingSegmentedControl)]];
         [_progressingHeadView addConstraint:[NSLayoutConstraint constraintWithItem:_progressingSegmentedControl attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_progressingHeadView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
         
-        [_progressingHeadView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchToProgressing)]];
+        [_progressingHeadView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap2:)]];
 
     }
     return _progressingHeadView;
@@ -251,7 +374,7 @@
         _reviewed = [[UILabel alloc] init];
         _reviewed.text = @"往期活动";
         _reviewed.textAlignment = NSTextAlignmentLeft;
-        _reviewed.textColor = [UIColor grayColor];
+        _reviewed.textColor = PAST_TITLE_COLOR;
         _reviewed.font = [UIFont systemFontOfSize:12];
     }
     return _reviewed;
@@ -260,7 +383,7 @@
 - (UIView *)ReviewedFooterView
 {
     if (!_ReviewedFooterView) {
-        _ReviewedFooterView = [[UIView alloc] init];
+        _ReviewedFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 64 - HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, HEIGHT_OF_HEADER_OR_FOOTER)];
         _ReviewedFooterView.backgroundColor = [UIColor whiteColor];
 
         [_ReviewedFooterView addSubview:self.reviewed];
@@ -275,11 +398,11 @@
         [_ReviewedFooterView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=7.5-[_ReviewedSegmentedControl]->=7.5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedSegmentedControl)]];
         [_ReviewedFooterView addConstraint:[NSLayoutConstraint constraintWithItem:_ReviewedSegmentedControl attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_ReviewedFooterView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
         
-        [_ReviewedFooterView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(switchToReviewed)]];
+        [_ReviewedFooterView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)]];
+        [_ReviewedFooterView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)]];
     }
     return _ReviewedFooterView;
 }
-
 
 - (UISegmentedControl *)ReviewedSegmentedControl
 {
