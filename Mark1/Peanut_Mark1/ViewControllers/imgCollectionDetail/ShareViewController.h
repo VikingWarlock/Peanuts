@@ -10,7 +10,14 @@
 #import "PublishCommentTableViewCell.h"
 #import "BaseUIViewController.h"
 
+@protocol Delegate_shareVC <NSObject>
 
-@interface ShareViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate>
+-(void)didShare;
+
+@end
+
+
+@interface ShareViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate,Delegate_publishCommentCell>
+@property (nonatomic,assign) id<Delegate_shareVC>delegate;
 
 @end

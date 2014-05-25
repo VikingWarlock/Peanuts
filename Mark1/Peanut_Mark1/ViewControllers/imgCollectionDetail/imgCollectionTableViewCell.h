@@ -10,9 +10,9 @@
 
 @protocol Delegate_imgCell <NSObject>
 
+-(void)praiseBtnClickAtCell:(UITableViewCell*)cell;
 -(void)commentBtnClickAtIndexPath:(NSIndexPath *)indexPath;
--(void)praiseBtnClickAtCell:(UITableViewCell *)cell;
--(void)shareBtnClickAtCell:(UITableViewCell *)cell;
+-(void)shareBtnClickAtIndexPath:(NSIndexPath *)indexPath;
 
 @end
 
@@ -20,7 +20,6 @@
     NSInteger praiseCount;
     NSInteger commentCount;
     NSInteger shareCount;
-    NSIndexPath *currentIndexPath;
 }
 
 @property (nonatomic,strong) UIImageView * imgView;
@@ -29,12 +28,18 @@
 @property (nonatomic,strong) UIButton * praiseBtn;
 @property (nonatomic,strong) UIButton * commentBtn;
 @property (nonatomic,strong) UIButton * shareBtn;
+@property (nonatomic,strong) NSIndexPath *currentIndexPath;
 @property (nonatomic,assign)id<Delegate_imgCell>delegate;
 
--(void)setConstraintsWithBool:(NSInteger)isFirstRow;
+
+
+-(void)setConstraintsWithBool:(BOOL)isFirstRow;
+-(void)removeConstraintWithBool:(BOOL)isFirstRow;;
 -(void)setCommentBtnTitle:(NSInteger)count;
 -(void)setPraiseBtnTitle:(NSInteger)count;
 -(void)setShareBtnTitle:(NSInteger)count;
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier atIndexPath:(NSIndexPath *)indexPath;
+
+
+//- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier atIndexPath:(NSIndexPath *)indexPath;
 
 @end
