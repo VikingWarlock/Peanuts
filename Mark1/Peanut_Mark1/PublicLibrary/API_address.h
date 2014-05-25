@@ -17,7 +17,9 @@
 
 #define Peanut_User_info_Address @"http://112.124.10.151:82/index.php?app=mobile&mod=User&act=info"
 
+#define Peanut_Dig_Something @"http://112.124.10.151:82/index.php?app=mobile&mod=Feed&act=digg"
 
+#define Peanut_Delete_comment_Address @"http://112.124.10.151:82/index.php?app=mobile&mod=Comment&act=delete_comment"
 
 
 #endif

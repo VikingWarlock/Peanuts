@@ -18,6 +18,8 @@
 #define AES_Private_key @"4652b19e09ced75df510bf5a263a2bfe"
 
 
+#define USER_PHPSESSID [[[NSUserDefaults standardUserDefaults]decryptedValueForKey:USER_Token]length]
+
 
 #define Peanut_Mark1_PublicLib_h
 

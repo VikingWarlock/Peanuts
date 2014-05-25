@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, Cell_Init_Direction) {
 -(void)ThisCellHaveBeenSlide:(NSIndexPath*)indexpath;
 -(void)ThisCellHaveBeenReleased:(NSIndexPath *)indexpath;
 //滑动完成后做的事情
+//After slide
 
 @end
 
@@ -38,10 +39,16 @@ typedef NS_ENUM(NSInteger, Cell_Init_Direction) {
 
 -(id)initWithBackImage:(UIImage*)bkImage AtIndexpath:(NSIndexPath*)indexpath AndInitPosition:(Cell_Init_Direction)position AndDelegate:(id<Delegate_BlurCellSlide>)delegate;
 
-
+/**
+ * setup a cell
+ *
+ */
 -(void)SetupWithBackImage:(UIImage*)bkImage AtIndexpath:(NSIndexPath*)indexpath AndInitPosition:(Cell_Init_Direction)position AndDelegate:(id<Delegate_BlurCellSlide>)delegate;
 
-
+/**
+ *
+ *
+ */
 -(void)backToOriginWithAnimate:(BOOL)animate;
 
 

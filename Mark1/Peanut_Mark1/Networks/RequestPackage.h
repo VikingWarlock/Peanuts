@@ -66,7 +66,7 @@
  *后台删除评论
  *
  **/
--(BOOL)DeleteCommentWithComment_id:(NSString*)comment_id AndFeed_id:(NSString*)feed_id;
+-(void)DeleteCommentWithComment_id:(NSString*)comment_id AndFeed_id:(NSString*)feed_id;
 /**
  *前台获取评论列表
  *

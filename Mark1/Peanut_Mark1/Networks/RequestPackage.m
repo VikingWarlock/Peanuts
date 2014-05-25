@@ -74,9 +74,52 @@ static RequestPackage * PublicObject;
 
 -(void)DigSomething:(NSString *)feed_id
 {
+    
+    if (![self HaveBeenLogin]) {
+        // 提示没有登录;
+    }else
+    {
+    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+    NSDictionary *parameter=@{USER_Token: [[NSUserDefaults standardUserDefaults]decryptedValueForKey:USER_Token],@"feed_id":feed_id};
+    [manager POST:Peanut_Dig_Something parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+    }
+}
+
+-(void)DeleteCommentWithComment_id:(NSString *)comment_id AndFeed_id:(NSString *)feed_id
+{
+    if ([self HaveBeenLogin]) {
+        
+        AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+        NSDictionary *parameter=@{USER_Token: [[NSUserDefaults standardUserDefaults]decryptedValueForKey:USER_Token],@"comment_id":comment_id,@"feed_id":feed_id};
+        [manager POST:Peanut_Delete_comment_Address parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
+        
+    }else
+    {
+    
+    //提示没有登录
+    }
 
     
     
 }
+
+-(BOOL)HaveBeenLogin
+{
+    if ([[[NSUserDefaults standardUserDefaults]decryptedValueForKey:USER_Token]length]<=0) {
+        return NO;
+    }else
+        return YES;
+}
+
 
 @end
