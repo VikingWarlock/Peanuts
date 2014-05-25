@@ -9,8 +9,6 @@
 #import "imgCollectionViewController.h"
 #import <UIImage+BlurAndDarken.h>
 #import "imgCollectionTableViewCell.h"
-#import "CommentViewController.h"
-#import "ShareViewController.h"
 
 
 @interface imgCollectionViewController (){
@@ -56,11 +54,33 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [self setBackgroundImage:[UIImage imageNamed:@"1.png"] andBlurEnable:YES];
     
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.bottomView];
+    
+    
+    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
+    [_tableView.tableHeaderView setBackgroundColor:[UIColor clearColor]];
+    
+    UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, _tableView.tableHeaderView.frame.size.height - 20, 60, 17)];
+    nameLabel.text = @"aaaaa";
+    nameLabel.textColor = [UIColor whiteColor];
+    
+    CGRect rect = nameLabel.frame;
+    rect.origin.x = nameLabel.frame.origin.x + nameLabel.frame.size.width + 20;
+    rect.size.width = 100;
+    UILabel * timeLabel = [[UILabel alloc] initWithFrame:rect];
+    timeLabel.text = @"2014-05-13";
+    timeLabel.textColor = [UIColor whiteColor];
+    
+    [_tableView updateWithAvatar:[UIImage imageNamed:@"iron.png"] And_X_Offset:30.0 AndSize:CGSizeMake(70, 70)];
+    
+    
+    [_tableView.tableHeaderView addSubview:nameLabel];
+    [_tableView.tableHeaderView addSubview:timeLabel];
+
+
+//    [self.view addSubview:self.bottomView];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
-    
     
     // Do any additional setup after loading the view.
 }
@@ -75,31 +95,26 @@ static NSString * cellIdentifier = @"cellIdentifier";
         _tableView.separatorColor = [UIColor whiteColor];
         [_tableView setBackgroundColor:[UIColor clearColor]];
         _tableView.allowsSelection = NO;
-//        [_tableView registerClass:[imgCollectionTableViewCell class] forCellReuseIdentifier:cellIdentifier];
 
-//        UIImageView * imgView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 120)];
-//        imgView.image = [[UIImage imageNamed:@"1.png"] darkened:0.6 andBlurredImage:16.f];
-//        _tableView.tableHeaderView = imgView;
-        
-        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
-        [_tableView.tableHeaderView setBackgroundColor:[UIColor clearColor]];
-   
-        UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, _tableView.tableHeaderView.frame.size.height - 20, 60, 17)];
-        nameLabel.text = @"aaaaa";
-        nameLabel.textColor = [UIColor whiteColor];
-        
-        CGRect rect = nameLabel.frame;
-        rect.origin.x = nameLabel.frame.origin.x + nameLabel.frame.size.width + 20;
-        rect.size.width = 100;
-        UILabel * timeLabel = [[UILabel alloc] initWithFrame:rect];
-        timeLabel.text = @"2014-05-13";
-        timeLabel.textColor = [UIColor whiteColor];
-        
-        [_tableView updateWithAvatar:[UIImage imageNamed:@"iron.png"] And_X_Offset:30.0 AndSize:CGSizeMake(70, 70)];
-
-        
-        [_tableView.tableHeaderView addSubview:nameLabel];
-        [_tableView.tableHeaderView addSubview:timeLabel];
+//        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
+//        [_tableView.tableHeaderView setBackgroundColor:[UIColor clearColor]];
+//   
+//        UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, _tableView.tableHeaderView.frame.size.height - 20, 60, 17)];
+//        nameLabel.text = @"aaaaa";
+//        nameLabel.textColor = [UIColor whiteColor];
+//        
+//        CGRect rect = nameLabel.frame;
+//        rect.origin.x = nameLabel.frame.origin.x + nameLabel.frame.size.width + 20;
+//        rect.size.width = 100;
+//        UILabel * timeLabel = [[UILabel alloc] initWithFrame:rect];
+//        timeLabel.text = @"2014-05-13";
+//        timeLabel.textColor = [UIColor whiteColor];
+//        
+//        [_tableView updateWithAvatar:[UIImage imageNamed:@"iron.png"] And_X_Offset:30.0 AndSize:CGSizeMake(70, 70)];
+//
+//        
+//        [_tableView.tableHeaderView addSubview:nameLabel];
+//        [_tableView.tableHeaderView addSubview:timeLabel];
         
         
     }
@@ -148,6 +163,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     imgCollectionTableViewCell * cell1 = (imgCollectionTableViewCell *)cell;
     NSInteger count = [cell1.praiseBtn.titleLabel.text integerValue];
     [cell1 setPraiseBtnTitle:++count];
+
 }
 
 -(void)commentBtnClickAtIndexPath:(NSIndexPath *)indexPath{
@@ -156,63 +172,77 @@ static NSString * cellIdentifier = @"cellIdentifier";
     currentIndexPath = indexPath;
     [self.navigationController pushViewController:VC animated:YES];
 }
--(void)shareBtnClickAtCell:(UITableViewCell *)cell{
+-(void)shareBtnClickAtIndexPath:(NSIndexPath *)indexPath{
     ShareViewController * VC = [[ShareViewController alloc]init];
+    VC.delegate = self;
+    currentIndexPath = indexPath;
     [self.navigationController pushViewController:VC animated:YES];
 }
 
--(void)shareBtnClick:(UIButton *)sender{
 
-}
 
 
 #pragma mark - commentVC delegate
 -(void)DidPublishOneComment{
+    imgCollectionTableViewCell * cell = (imgCollectionTableViewCell *)[self.tableView cellForRowAtIndexPath:currentIndexPath];
+    int count = [cell.commentBtn.titleLabel.text intValue];
+    [cell.commentBtn setTitle:[NSString stringWithFormat:@"%d",++count] forState:UIControlStateNormal];
+    [cell.commentBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateSelected];
+    [cell.commentBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateHighlighted];
+    
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"评论成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alertView show];
+}
 
+#pragma mark - shareVC delegate
+-(void)didShare{
+    imgCollectionTableViewCell * cell = (imgCollectionTableViewCell *)[self.tableView cellForRowAtIndexPath:currentIndexPath];
+    int count = [cell.shareBtn.titleLabel.text intValue];
+    [cell.shareBtn setTitle:[NSString stringWithFormat:@"%d",++count] forState:UIControlStateNormal];
+    [cell.shareBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateSelected];
+    [cell.shareBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateHighlighted];
+    
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"转发成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alertView show];
 }
 
 
 #pragma mark - tableView dataSource
 
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    imgCollectionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[imgCollectionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+    cell.currentIndexPath = indexPath;
+    
+    cell.delegate = self;
+
+    cell.imgView.image = [UIImage imageNamed:@"pic.jpg"];
+    cell.titleLabel.text = @"001";
+    [cell.praiseBtn setTitle:[NSString stringWithFormat:@"%d",indexPath.row] forState:UIControlStateNormal];
+    [cell.commentBtn setTitle:[NSString stringWithFormat:@"%d",indexPath.row] forState:UIControlStateNormal];
+    [cell.shareBtn setTitle:[NSString stringWithFormat:@"%d",indexPath.row] forState:UIControlStateNormal];
+    NSLog(@"%d",indexPath.row);
+
+    return cell;
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    if (indexPath.row==0)return 550;
-    
-    imgCollectionTableViewCell * cell = (imgCollectionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
-
-    return cell.frame.size.height;
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
-    
-    
-    imgCollectionTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[imgCollectionTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier atIndexPath:indexPath];
-    }
-    
-    NSInteger row=indexPath.row;
-    
-    
-    cell.delegate = self;
-    
-    if (indexPath.row != 0) {
-        [cell setConstraintsWithBool:NO];
-    }else{
-        [cell setConstraintsWithBool:YES];
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 530;
+    imgCollectionTableViewCell * cell = (imgCollectionTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.frame.size.height;
 
-    }
-
-//    NSLog(@"%lf",cell.frame.size.height);
-
-    cell.imgView.image = [UIImage imageNamed:@"pic.jpg"];
-    cell.titleLabel.text = @"001";
-    return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -224,6 +254,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 /*
 #pragma mark - Navigation

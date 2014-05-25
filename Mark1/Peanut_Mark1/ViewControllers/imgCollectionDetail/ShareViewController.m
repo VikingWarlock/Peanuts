@@ -69,7 +69,12 @@
     [cell.publishCommentBtn setTitle:@"转发" forState:UIControlStateNormal];
     [cell.publishCommentBtn setTitle:@"转发" forState:UIControlStateSelected];
     [cell.publishCommentBtn setTitle:@"转发" forState:UIControlStateHighlighted];
+    cell.delegate = self;
     return cell;
+}
+
+-(void)publishCommentBtnClick{
+    [self.delegate didShare];
 }
 
 -(void)registerForKeyboardNotification{
@@ -103,5 +108,6 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 @end

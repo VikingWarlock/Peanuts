@@ -9,7 +9,8 @@
 #import "BaseUIViewController.h"
 #import "imgCollectionTableViewCell.h"
 #import "CommentViewController.h"
+#import "ShareViewController.h"
 
-@interface imgCollectionViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate,Delegate_imgCell,Delegate_commentVC>
+@interface imgCollectionViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate,Delegate_imgCell,Delegate_commentVC,Delegate_shareVC>
 
 @end
