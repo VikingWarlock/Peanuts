@@ -13,6 +13,93 @@
 #define PRESENT_TITLE_COLOR [UIColor redColor]
 #define PAST_TITLE_COLOR [UIColor grayColor]
 
+@interface CustomSegmentedControl : UIView
+@property (strong,nonatomic) UIButton *leftButton;
+@property (strong,nonatomic) UIButton *rightButton;
+@property (nonatomic) BOOL isOnline;
+@property (nonatomic,setter = setIsProgressing:) BOOL isProgressing;
+@end
+
+@implementation CustomSegmentedControl
+#define SELECTED_COLOR [UIColor redColor]
+#define NOT_SELECTED_COLOR [UIColor grayColor]
+#define SELECTED_COLOR_GRAY [UIColor darkGrayColor]
+#define NOT_SELECTED_COLOR_GRAY [UIColor lightGrayColor]
+
+- (id)initWithisProgressing:(BOOL)isProgressing
+{
+    self = [super init];
+    if (self) {
+        _isOnline = YES;
+        [self addSubview:self.leftButton];
+        [self addSubview:self.rightButton];
+        self.isProgressing = isProgressing;
+
+        [_leftButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [_rightButton setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_leftButton]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_leftButton)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_rightButton]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_rightButton)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_leftButton(_rightButton)][_rightButton(_leftButton)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_leftButton,_rightButton)]];
+    }
+    return self;
+}
+
+- (void)switchStatus:(id)sender
+{
+    if (((UIButton *)sender).backgroundColor == NOT_SELECTED_COLOR || ((UIButton *)sender).backgroundColor == NOT_SELECTED_COLOR_GRAY) {
+        UIColor *temp = _leftButton.backgroundColor;
+        _leftButton.backgroundColor = _rightButton.backgroundColor;
+        _rightButton.backgroundColor = temp;
+        _isOnline = ((UIButton *)sender).tag;
+    }
+    NSLog(@"%D",_isOnline);
+}
+
+- (void)setIsProgressing:(BOOL)isProgressing
+{
+    _isProgressing = isProgressing;
+    if (isProgressing) {
+        _leftButton.backgroundColor = SELECTED_COLOR;
+        _rightButton.backgroundColor = NOT_SELECTED_COLOR;
+    }
+    else
+    {
+        _leftButton.backgroundColor = SELECTED_COLOR_GRAY;
+        _rightButton.backgroundColor = NOT_SELECTED_COLOR_GRAY;
+    }
+}
+
+- (UIButton *)leftButton
+{
+    if (!_leftButton) {
+        _leftButton = [[UIButton alloc] init];
+        [_leftButton setTitle:@"线上" forState:UIControlStateNormal];
+        [_leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _leftButton.titleLabel.font = [UIFont systemFontOfSize:9.0f];
+        _leftButton.backgroundColor = SELECTED_COLOR;
+        [_leftButton addTarget:self action:@selector(switchStatus:) forControlEvents:UIControlEventTouchUpInside];
+        _leftButton.tag = 1;
+    }
+    return _leftButton;
+}
+
+- (UIButton *)rightButton
+{
+    if (!_rightButton) {
+        _rightButton = [[UIButton alloc] init];
+        [_rightButton setTitle:@"线下" forState:UIControlStateNormal];
+        [_rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _rightButton.titleLabel.font = [UIFont systemFontOfSize:9.0f];
+        _rightButton.backgroundColor = NOT_SELECTED_COLOR;
+        [_rightButton addTarget:self action:@selector(switchStatus:) forControlEvents:UIControlEventTouchUpInside];
+        _rightButton.tag = 0;
+    }
+    return _rightButton;
+}
+
+@end
+
+
 @interface ActivityViewController ()
 {
     NSArray *bindingFooterToBottom;
@@ -28,8 +115,10 @@
 @property (nonatomic,strong) UITableView *ReviewedTableView;
 @property (nonatomic,strong) UIView *progressingHeadView;
 @property (nonatomic,strong) UIView *ReviewedFooterView;
-@property (nonatomic,strong) UISegmentedControl *progressingSegmentedControl;
-@property (nonatomic,strong) UISegmentedControl *ReviewedSegmentedControl;
+//@property (nonatomic,strong) UISegmentedControl *progressingSegmentedControl;
+//@property (nonatomic,strong) UISegmentedControl *ReviewedSegmentedControl;
+@property (nonatomic,strong) CustomSegmentedControl *progressingSegmentedControl;
+@property (nonatomic,strong) CustomSegmentedControl *ReviewedSegmentedControl;
 @property (nonatomic,strong) UILabel *progressing;
 @property (nonatomic,strong) UILabel *reviewed;
 
@@ -200,7 +289,8 @@
             isProgressing = !isProgressing;
             _progressing.textColor = PRESENT_TITLE_COLOR;
             _reviewed.textColor = PAST_TITLE_COLOR;
-            
+            _progressingSegmentedControl.isProgressing = YES;
+            _ReviewedSegmentedControl.isProgressing = NO;
         }
         else
         {
@@ -208,6 +298,8 @@
             isProgressing = !isProgressing;
             _progressing.textColor = PAST_TITLE_COLOR;
             _reviewed.textColor = PRESENT_TITLE_COLOR;
+            _progressingSegmentedControl.isProgressing = NO;
+            _ReviewedSegmentedControl.isProgressing = YES;
         }
         _ReviewedTableView.frame = CGRectMake(0, recognizer.view.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
     } completion:nil];
@@ -223,6 +315,8 @@
             isProgressing = !isProgressing;
             _progressing.textColor = PRESENT_TITLE_COLOR;
             _reviewed.textColor = PAST_TITLE_COLOR;
+            _progressingSegmentedControl.isProgressing = YES;
+            _ReviewedSegmentedControl.isProgressing = NO;
             _ReviewedTableView.frame = CGRectMake(0, _ReviewedFooterView.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
         }
     } completion:nil];
@@ -281,6 +375,8 @@
                 isProgressing = NO;
                 _progressing.textColor = PAST_TITLE_COLOR;
                 _reviewed.textColor = PRESENT_TITLE_COLOR;
+                _progressingSegmentedControl.isProgressing = NO;
+                _ReviewedSegmentedControl.isProgressing = YES;
             }
             if(recognizer.view.center.y > self.view.frame.size.height / 2 || flag2)
             {
@@ -288,6 +384,8 @@
                 isProgressing = YES;
                 _progressing.textColor = PRESENT_TITLE_COLOR;
                 _reviewed.textColor = PAST_TITLE_COLOR;
+                _progressingSegmentedControl.isProgressing = YES;
+                _ReviewedSegmentedControl.isProgressing = NO;
             }
             _ReviewedTableView.frame = CGRectMake(0, recognizer.view.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
         } completion:nil];
@@ -328,7 +426,7 @@
         [_progressingHeadView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_progressing]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressing)]];
         [_progressingHeadView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_progressing(==_progressingHeadView)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressing,_progressingHeadView)]];
         
-        
+        self.progressingSegmentedControl = [[CustomSegmentedControl alloc] initWithisProgressing:YES];
         [_progressingHeadView addSubview:self.progressingSegmentedControl];
         [_progressingSegmentedControl setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_progressingHeadView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-255-[_progressingSegmentedControl]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingSegmentedControl)]];
@@ -341,19 +439,23 @@
     return _progressingHeadView;
 }
 
-- (UISegmentedControl *)progressingSegmentedControl
-{
-    if (!_progressingSegmentedControl) {
-        _progressingSegmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"线上",@"线下", nil]];
-        _progressingSegmentedControl.selectedSegmentIndex = 0;
-        
-        UIFont *font = [UIFont systemFontOfSize:9.0f];
-        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
-                                                               forKey:NSFontAttributeName];
-        [_progressingSegmentedControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    }
-    return _progressingSegmentedControl;
-}
+//- (UISegmentedControl *)progressingSegmentedControl
+//{
+//    if (!_progressingSegmentedControl) {
+//        _progressingSegmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"线上",@"线下", nil]];
+//        _progressingSegmentedControl.selectedSegmentIndex = 0;
+//        
+//        UIFont *font = [UIFont systemFontOfSize:9.0f];
+//        NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName,[UIColor whiteColor],NSForegroundColorAttributeName, nil];
+//        [_progressingSegmentedControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
+//        [_progressingSegmentedControl setTitleTextAttributes:attributes forState:UIControlStateSelected];
+//
+//        _progressingSegmentedControl.backgroundColor = [UIColor grayColor];
+//        _progressingSegmentedControl.tintColor = [UIColor redColor];
+//        [_progressingSegmentedControl setWidth:0.0 forSegmentAtIndex:1];
+//    }
+//    return _progressingSegmentedControl;
+//}
 
 - (UITableView *)progressingTableView
 {
@@ -391,7 +493,7 @@
         [_ReviewedFooterView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_reviewed]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_reviewed)]];
         [_ReviewedFooterView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_reviewed(==_ReviewedFooterView)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_reviewed,_ReviewedFooterView)]];
         
-        
+        self.ReviewedSegmentedControl = [[CustomSegmentedControl alloc] initWithisProgressing:NO];
         [_ReviewedFooterView addSubview:self.ReviewedSegmentedControl];
         [_ReviewedSegmentedControl setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_ReviewedFooterView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-255-[_ReviewedSegmentedControl]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedSegmentedControl)]];
@@ -404,19 +506,19 @@
     return _ReviewedFooterView;
 }
 
-- (UISegmentedControl *)ReviewedSegmentedControl
-{
-    if (!_ReviewedSegmentedControl) {
-        _ReviewedSegmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"线上",@"线下", nil]];
-        _ReviewedSegmentedControl.selectedSegmentIndex = 0;
-        
-        UIFont *font = [UIFont systemFontOfSize:9.0f];
-        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
-                                                               forKey:NSFontAttributeName];
-        [_ReviewedSegmentedControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
-    }
-    return _ReviewedSegmentedControl;
-}
+//- (UISegmentedControl *)ReviewedSegmentedControl
+//{
+//    if (!_ReviewedSegmentedControl) {
+//        _ReviewedSegmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"线上",@"线下", nil]];
+//        _ReviewedSegmentedControl.selectedSegmentIndex = 0;
+//        
+//        UIFont *font = [UIFont systemFontOfSize:9.0f];
+//        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
+//                                                               forKey:NSFontAttributeName];
+//        [_ReviewedSegmentedControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
+//    }
+//    return _ReviewedSegmentedControl;
+//}
 
 - (UITableView *)ReviewedTableView
 {
