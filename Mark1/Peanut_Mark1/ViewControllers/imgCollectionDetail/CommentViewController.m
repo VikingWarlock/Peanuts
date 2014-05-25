@@ -35,13 +35,14 @@ static NSString * cellIdentifier = @"cellIdentifier";
 {
     [super viewDidLoad];
     
-    count = 5;
+    count = 15;
     
     [self setBackgroundImage:[UIImage imageNamed:@"1.png"] andBlurEnable:YES];
     
     [self registerForKeyboardNotification];
 
     [self.view addSubview:self.tableView];
+//    [self.tableView registerClass:[CommentTableViewCell class] forCellReuseIdentifier:cellIdentifier];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
@@ -79,7 +80,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    CommentTableViewCell * cell = (CommentTableViewCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+    UITableViewCell * cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     return cell.frame.size.height;
 }
 
@@ -150,7 +151,6 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 
 /*

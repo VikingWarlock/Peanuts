@@ -58,8 +58,6 @@
 		D2F32F12192607ED00E446D6 /* MustReaddetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F32F11192607ED00E446D6 /* MustReaddetialViewController.m */; };
 		F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */; };
 		F2B58DCE19264B7F009D6131 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B58DCD19264B7F009D6131 /* ShareViewController.m */; };
-		F2D8F95519223C5E00102F3F /* imgCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */; };
-		F2D8F95919224DF100102F3F /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95819224DF100102F3F /* CommentViewController.m */; };
 		F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95B19225B2000102F3F /* CommentTableViewCell.m */; };
 		F2F8BF1F1924EFE6000A3CED /* PeanutTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */; };
 		F2F8BF201924F001000A3CED /* BlurTableViewCell_mark1.m in Sources */ = {isa = PBXBuildFile; fileRef = 88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */; };
@@ -754,7 +752,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Siguang Huang (L3UC9F9BL5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
 				INFOPLIST_FILE = "Peanut_Mark1/Peanut_Mark1-Info.plist";
@@ -770,7 +768,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Siguang Huang (L3UC9F9BL5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
 				INFOPLIST_FILE = "Peanut_Mark1/Peanut_Mark1-Info.plist";

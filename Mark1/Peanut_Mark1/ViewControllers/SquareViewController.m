@@ -29,29 +29,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationController.navigationBarHidden = NO;
     self.title = @"广场";
     
     [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
     [self.view addSubview:self.collectionView];
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_collectionView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_collectionView)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_collectionView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_collectionView)]];
     // Do any additional setup after loading the view.
 }
 
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:YES];
-}
 
 -(UICollectionView *)collectionView{
     if (!_collectionView) {
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.minimumInteritemSpacing = 10;
-        flowLayout.minimumLineSpacing = 10;
-        flowLayout.itemSize = CGSizeMake(150, 150);
-        flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 0, 5);
+        flowLayout.minimumInteritemSpacing = 4;
+        flowLayout.minimumLineSpacing = 4;
+        flowLayout.itemSize = CGSizeMake(153, 153);
+        flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
 
         
         
         _collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
+        [_collectionView setBackgroundColor:[UIColor whiteColor]];
+        _collectionView.translatesAutoresizingMaskIntoConstraints = NO;
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
     
@@ -60,7 +61,7 @@
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 5;
+    return 15;
 }
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
