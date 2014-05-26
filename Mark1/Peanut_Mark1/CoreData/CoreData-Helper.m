@@ -8,12 +8,6 @@
 
 #import "CoreData-Helper.h"
 
-#import "PhotoDetailEntity.h"
-#import "PhotoSeriesEntity.h"
-#import "UserInfEntity.h"
-#import "ActivityEntity.h"
-#import "MustReadEntity.h"
-#import "PhotoInfoEntity.h"
 
 #import <AFNetworking.h>
 

@@ -27,4 +27,5 @@
     #import<NSUserDefaults+AESEncryptor.h>
     #import"API_address.h"
     #import"RequestPackage.h"
+    #import"CoreData-Helper.h"
 #endif

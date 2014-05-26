@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+
+
+#import "PhotoInfoEntity.h"
+#import "PhotoSeriesEntity.h"
 #import "UserInfEntity.h"
+#import "ActivityEntity.h"
+#import "MustReadEntity.h"
+#import "PhotoDetailEntity.h"
 
 
 @interface CoreData_Helper : NSObject
@@ -23,9 +30,18 @@
 
 +(void)addUserInfoEntity:(NSDictionary*)parameter;
 
+
 +(void)updateUserEntity:(NSString*)user_id;
 
 +(void)updateSelfUserEntity;
+
++(PhotoInfoEntity*)GetPhotoEntity:(NSString*)feed_id;
+
++(PhotoSeriesEntity*)GetPhotoSeriesEntity:(NSString*)feed_id;
+
++(ActivityEntity*)GetActivityEntity:(NSString*)feed_id;
+
++(MustReadEntity*)GetMustReadEntity:(NSString*)feed_id;
 
 +(UserInfEntity*)GetUserInfEntity:(NSString*)uid;
 
