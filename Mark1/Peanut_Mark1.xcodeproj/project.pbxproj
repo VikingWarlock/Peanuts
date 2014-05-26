@@ -19,10 +19,10 @@
 		881DA812192E228B0043AF21 /* ActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA811192E228B0043AF21 /* ActivityEntity.m */; };
 		881DA815192E228B0043AF21 /* MustReadEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA814192E228B0043AF21 /* MustReadEntity.m */; };
 		881DA818192E228B0043AF21 /* PhotoDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA817192E228B0043AF21 /* PhotoDetailEntity.m */; };
-		881DA81B192E228B0043AF21 /* PhotoSeriesEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA81A192E228B0043AF21 /* PhotoSeriesEntity.m */; };
 		885F6341192A4447007BAAE0 /* RequestPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 885F6340192A4447007BAAE0 /* RequestPackage.m */; };
 		886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C08931920F1EB00BD7E5F /* NetworkRequest.m */; };
 		886C5E381932E57D008F885A /* CoreData-Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C5E371932E57D008F885A /* CoreData-Helper.m */; };
+		886C5E3B1932FF49008F885A /* PhotoSeriesEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C5E3A1932FF49008F885A /* PhotoSeriesEntity.m */; };
 		887F20E7191D4051009250D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E6191D4051009250D2 /* Foundation.framework */; };
 		887F20E9191D4051009250D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E8191D4051009250D2 /* CoreGraphics.framework */; };
 		887F20EB191D4051009250D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20EA191D4051009250D2 /* UIKit.framework */; };
@@ -105,8 +105,6 @@
 		881DA814192E228B0043AF21 /* MustReadEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MustReadEntity.m; path = CoreData/MustReadEntity.m; sourceTree = "<group>"; };
 		881DA816192E228B0043AF21 /* PhotoDetailEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoDetailEntity.h; path = CoreData/PhotoDetailEntity.h; sourceTree = "<group>"; };
 		881DA817192E228B0043AF21 /* PhotoDetailEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoDetailEntity.m; path = CoreData/PhotoDetailEntity.m; sourceTree = "<group>"; };
-		881DA819192E228B0043AF21 /* PhotoSeriesEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoSeriesEntity.h; path = CoreData/PhotoSeriesEntity.h; sourceTree = "<group>"; };
-		881DA81A192E228B0043AF21 /* PhotoSeriesEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoSeriesEntity.m; path = CoreData/PhotoSeriesEntity.m; sourceTree = "<group>"; };
 		881DA81C192E27A20043AF21 /* API_address.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = API_address.h; path = PublicLibrary/API_address.h; sourceTree = "<group>"; };
 		885F633F192A4447007BAAE0 /* RequestPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RequestPackage.h; path = Networks/RequestPackage.h; sourceTree = "<group>"; };
 		885F6340192A4447007BAAE0 /* RequestPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RequestPackage.m; path = Networks/RequestPackage.m; sourceTree = "<group>"; };
@@ -114,6 +112,8 @@
 		886C08931920F1EB00BD7E5F /* NetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkRequest.m; path = CoreData/NetworkRequest.m; sourceTree = "<group>"; };
 		886C5E361932E57D008F885A /* CoreData-Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CoreData-Helper.h"; path = "CoreData/CoreData-Helper.h"; sourceTree = "<group>"; };
 		886C5E371932E57D008F885A /* CoreData-Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CoreData-Helper.m"; path = "CoreData/CoreData-Helper.m"; sourceTree = "<group>"; };
+		886C5E391932FF49008F885A /* PhotoSeriesEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoSeriesEntity.h; path = CoreData/PhotoSeriesEntity.h; sourceTree = "<group>"; };
+		886C5E3A1932FF49008F885A /* PhotoSeriesEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoSeriesEntity.m; path = CoreData/PhotoSeriesEntity.m; sourceTree = "<group>"; };
 		887F20E3191D4051009250D2 /* Peanut_Mark1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peanut_Mark1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		887F20E6191D4051009250D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		887F20E8191D4051009250D2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -337,8 +337,6 @@
 				887F2126191DB934009250D2 /* CoreDataModel.xcdatamodeld */,
 				886C08921920F1EB00BD7E5F /* NetworkRequest.h */,
 				886C08931920F1EB00BD7E5F /* NetworkRequest.m */,
-				881DA819192E228B0043AF21 /* PhotoSeriesEntity.h */,
-				881DA81A192E228B0043AF21 /* PhotoSeriesEntity.m */,
 				881DA816192E228B0043AF21 /* PhotoDetailEntity.h */,
 				881DA817192E228B0043AF21 /* PhotoDetailEntity.m */,
 				881DA813192E228B0043AF21 /* MustReadEntity.h */,
@@ -351,6 +349,8 @@
 				881DA80B192E228B0043AF21 /* PhotoInfoEntity.m */,
 				886C5E361932E57D008F885A /* CoreData-Helper.h */,
 				886C5E371932E57D008F885A /* CoreData-Helper.m */,
+				886C5E391932FF49008F885A /* PhotoSeriesEntity.h */,
+				886C5E3A1932FF49008F885A /* PhotoSeriesEntity.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -642,6 +642,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				886C5E3B1932FF49008F885A /* PhotoSeriesEntity.m in Sources */,
 				8881AC6519267AF000F9646B /* imgCollectionTableViewCell.m in Sources */,
 				8881AC6619267AF000F9646B /* CommentViewController.m in Sources */,
 				8881AC6719267AF000F9646B /* Peanut_SNSPart.m in Sources */,
@@ -676,7 +677,6 @@
 				881DA812192E228B0043AF21 /* ActivityEntity.m in Sources */,
 				F2B58DCE19264B7F009D6131 /* ShareViewController.m in Sources */,
 				510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */,
-				881DA81B192E228B0043AF21 /* PhotoSeriesEntity.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
 				887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */,
 				887F2140191E200D009250D2 /* NSString+extra.m in Sources */,
