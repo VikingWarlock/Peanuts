@@ -1,16 +1,14 @@
 //
-//  ActivityDetailUserViewController.m
+//  ActivitDetailInterestedPeopleViewController.m
 //  Peanut_Mark1
 //
-//  Created by 张众 on 5/17/14.
+//  Created by 张众 on 5/22/14.
 //  Copyright (c) 2014 viking warlock. All rights reserved.
 //
 
-#import "ActivityDetailUserViewController.h"
-#import "AMPAvatarView.h"
+#import "ActivitDetailInterestedPeopleViewController.h"
 #import "UserCell.h"
-
-@interface ActivityDetailUserViewController ()
+@interface ActivitDetailInterestedPeopleViewController ()
 {
     NSMutableArray *users;
     NSIndexPath *deletedIndexPath;
@@ -26,7 +24,7 @@
 @property (nonatomic,strong) UIAlertView *alertView;
 @end
 
-@implementation ActivityDetailUserViewController
+@implementation ActivitDetailInterestedPeopleViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -173,7 +171,7 @@
         _header.backgroundColor = [UIColor whiteColor];
         
         UILabel *label = [[UILabel alloc] init];
-        label.text = @"活动用户";
+        label.text = @"感兴趣的人";
         label.textAlignment = NSTextAlignmentLeft;
         label.textColor = [UIColor redColor];
         label.font = [UIFont systemFontOfSize:12];
@@ -181,7 +179,7 @@
         [label setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_header addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[label]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(label)]];
         [_header addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[label(==_header)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(label,_header)]];
-
+        
     }
     return _header;
 }

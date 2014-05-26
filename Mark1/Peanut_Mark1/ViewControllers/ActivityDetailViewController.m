@@ -10,6 +10,7 @@
 #import "Mask.h"
 #import "ActivityDetailInfoViewController.h"
 #import "ActivityDetailUserViewController.h"
+#import "ActivitDetailInterestedPeopleViewController.h"
 #import "BottomView.h"
 @interface CustomCell : UITableViewCell
 @property (strong,nonatomic) UILabel *label;
@@ -246,7 +247,12 @@
             break;
         }
         case 3:
+        {
+            ActivitDetailInterestedPeopleViewController *vc = [[ActivitDetailInterestedPeopleViewController alloc] init];
+            vc.navigationItem.title = self.navigationItem.title;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
+        }
         default:
             break;
     }

@@ -10,5 +10,4 @@
 #import "BaseUIViewController.h"
 
 @interface ActivityDetailUserViewController : BaseUIViewController <UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
-
 @end
