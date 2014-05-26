@@ -9,6 +9,7 @@
 #import "imgCollectionViewController.h"
 #import <UIImage+BlurAndDarken.h>
 #import "imgCollectionTableViewCell.h"
+#import "ImgBottomView.h"
 
 
 @interface imgCollectionViewController (){
@@ -20,7 +21,7 @@
 }
 
 @property (nonatomic,strong)UITableView * tableView;
-@property (nonatomic,strong)UIView * bottomView;
+@property (nonatomic,strong)ImgBottomView * bottomView;
 
 @end
 
@@ -77,7 +78,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [_tableView.tableHeaderView addSubview:timeLabel];
 
 
-//    [self.view addSubview:self.bottomView];
+    [self.view addSubview:self.bottomView];
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
@@ -121,41 +122,30 @@ static NSString * cellIdentifier = @"cellIdentifier";
     return _tableView;
 }
 
--(UIView *)bottomView{
+-(ImgBottomView *)bottomView{
     if (!_bottomView) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height - 114, self.view.frame.size.width,50)];
-        [_bottomView setBackgroundColor:[UIColor whiteColor]];
-        _bottomView.alpha = 0.7;
-        
-        praiseBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, (self.view.frame.size.width - 20)/3, _bottomView.frame.size.height)];
-        praiseBtn.contentEdgeInsets = UIEdgeInsetsMake(10, 35, 10, 35);
-        [praiseBtn setImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateNormal];
-        [praiseBtn setImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateHighlighted];
-        [praiseBtn setImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateSelected];
-        [praiseBtn addTarget:self action:@selector(praiseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        CGRect rect = praiseBtn.frame;
-        rect.origin.x += rect.size.width;
-        commentBtn = [[UIButton alloc] initWithFrame:rect];
-        commentBtn.contentEdgeInsets = praiseBtn.contentEdgeInsets;
-        [commentBtn setImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateNormal];
-        [commentBtn setImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateHighlighted];
-        [commentBtn setImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateSelected];
-        [commentBtn addTarget:self action:@selector(commentBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        rect.origin.x += rect.size.width;
-        shareBtn = [[UIButton alloc] initWithFrame:rect];
-        shareBtn.contentEdgeInsets = praiseBtn.contentEdgeInsets;
-        [shareBtn setImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateNormal];
-        [shareBtn setImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateHighlighted];
-        [shareBtn setImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateSelected];
-        [shareBtn addTarget:self action:@selector(shareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [_bottomView addSubview:praiseBtn];
-        [_bottomView addSubview:commentBtn];
-        [_bottomView addSubview:shareBtn];
+        _bottomView = [[ImgBottomView alloc]init];
+        [_bottomView.praiseBtn addTarget:self action:@selector(bottomPraiseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomView.commentBtn addTarget:self action:@selector(bottomCommentBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomView.shareBtn addTarget:self action:@selector(bottomShareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _bottomView;
+}
+
+-(void)bottomPraiseBtnClick:(UIButton *)sender{
+    self.bottomView.praiseBtn.backgroundColor = [UIColor redColor];
+}
+
+-(void)bottomCommentBtnClick:(UIButton *)sender{
+    CommentViewController * vc = [[CommentViewController alloc]init];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)bottomShareBtnClick:(UIButton *)sender{
+    ShareViewController *vc = [[ShareViewController alloc]init];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -184,14 +174,20 @@ static NSString * cellIdentifier = @"cellIdentifier";
 
 #pragma mark - commentVC delegate
 -(void)DidPublishOneComment{
-    imgCollectionTableViewCell * cell = (imgCollectionTableViewCell *)[self.tableView cellForRowAtIndexPath:currentIndexPath];
-    int count = [cell.commentBtn.titleLabel.text intValue];
-    [cell.commentBtn setTitle:[NSString stringWithFormat:@"%d",++count] forState:UIControlStateNormal];
-    [cell.commentBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateSelected];
-    [cell.commentBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateHighlighted];
-    
-    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"评论成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alertView show];
+    if (currentIndexPath == nil) {
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"评论成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+    }else{
+        imgCollectionTableViewCell * cell = (imgCollectionTableViewCell *)[self.tableView cellForRowAtIndexPath:currentIndexPath];
+        int count = [cell.commentBtn.titleLabel.text intValue];
+        [cell.commentBtn setTitle:[NSString stringWithFormat:@"%d",++count] forState:UIControlStateNormal];
+        [cell.commentBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateSelected];
+        [cell.commentBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateHighlighted];
+        currentIndexPath = nil;
+        
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"评论成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+    }
 }
 
 #pragma mark - shareVC delegate
