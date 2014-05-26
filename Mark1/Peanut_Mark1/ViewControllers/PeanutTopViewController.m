@@ -16,6 +16,7 @@
 #import "ActivityViewController.h"
 #import "imgCollectionViewController.h"
 
+#import "SelfUser_ViewController.h"
 
 @interface PeanutTopViewController ()<UITableViewDataSource,UITableViewDelegate,Delegate_BlurCellSlide>
 {
@@ -105,7 +106,7 @@
     [self.NavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: backGroundImageColor==nil?[UIColor whiteColor]:[backGroundImageColor invertedColor]}];
     
     
-    UIBarButtonItem *userButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:nil];
+    UIBarButtonItem *userButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(LeftButton)];
     
     
     UIBarButtonItem *searchButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:nil];
@@ -114,8 +115,18 @@
     [[self navigationItem]setLeftBarButtonItem:userButton];
     [[self navigationItem]setRightBarButtonItem:searchButton];
     
+    
+    
 
 }
+
+-(void)LeftButton
+{
+    SelfUser_ViewController *vc=[[SelfUser_ViewController alloc]init];
+    [vc setBackgroundImage:[self.view captureView] andBlurEnable:YES];
+    [self.NavigationController pushViewController:vc animated:YES];
+}
+
 
 -(void)setNavigationBarForOther
 {

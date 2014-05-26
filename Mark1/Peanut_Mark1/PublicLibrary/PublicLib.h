@@ -13,8 +13,15 @@
 
 #define SelfScreenbounds  [UIScreen mainScreen].bounds
 
+#define USER_Token @"PHPSESSID"
+#define USER_UID_Fetch @"self_uid"
+
+#define AES_Private_key @"4652b19e09ced75df510bf5a263a2bfe"
 
 
+#define USER_PHPSESSID [[NSUserDefaults standardUserDefaults]decryptedValueForKey:USER_Token]
+
+#define USER_UID [[NSUserDefaults standardUserDefaults]decryptedValueForKey:USER_UID_Fetch]
 
 #define Peanut_Mark1_PublicLib_h
 

@@ -71,6 +71,7 @@
         self.bkImage=bkimage;
     
     [bkImageView setImage:self.bkImage];
+    [self.view sendSubviewToBack:bkImageView];
   
 }
 
