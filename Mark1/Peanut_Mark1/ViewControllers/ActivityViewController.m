@@ -10,6 +10,8 @@
 #import "PublicLib.h"
 #import "ActivityTableViewCell.h"
 #import "ActivityDetailViewController.h"
+#import "PullRefreshTableView.h"
+
 #define PRESENT_TITLE_COLOR [UIColor redColor]
 #define PAST_TITLE_COLOR [UIColor grayColor]
 
@@ -59,13 +61,27 @@
 {
     _isProgressing = isProgressing;
     if (isProgressing) {
-        _leftButton.backgroundColor = SELECTED_COLOR;
-        _rightButton.backgroundColor = NOT_SELECTED_COLOR;
+        if (_isOnline == YES) {
+            _leftButton.backgroundColor = SELECTED_COLOR;
+            _rightButton.backgroundColor = NOT_SELECTED_COLOR;
+        }
+        else
+        {
+            _leftButton.backgroundColor = NOT_SELECTED_COLOR;
+            _rightButton.backgroundColor = SELECTED_COLOR;
+        }
     }
     else
     {
-        _leftButton.backgroundColor = SELECTED_COLOR_GRAY;
-        _rightButton.backgroundColor = NOT_SELECTED_COLOR_GRAY;
+        if (_isOnline == YES) {
+            _leftButton.backgroundColor = SELECTED_COLOR_GRAY;
+            _rightButton.backgroundColor = NOT_SELECTED_COLOR_GRAY;
+        }
+        else
+        {
+            _leftButton.backgroundColor = NOT_SELECTED_COLOR_GRAY;
+            _rightButton.backgroundColor = SELECTED_COLOR_GRAY;
+        }
     }
 }
 
@@ -111,12 +127,10 @@
     NSMutableArray *sweepSpeed;
     NSMutableArray *downSpeed;
 }
-@property (nonatomic,strong) UITableView *progressingTableView;
+@property (nonatomic,strong) PullRefreshTableView *progressingTableView;
 @property (nonatomic,strong) UITableView *ReviewedTableView;
 @property (nonatomic,strong) UIView *progressingHeadView;
 @property (nonatomic,strong) UIView *ReviewedFooterView;
-//@property (nonatomic,strong) UISegmentedControl *progressingSegmentedControl;
-//@property (nonatomic,strong) UISegmentedControl *ReviewedSegmentedControl;
 @property (nonatomic,strong) CustomSegmentedControl *progressingSegmentedControl;
 @property (nonatomic,strong) CustomSegmentedControl *ReviewedSegmentedControl;
 @property (nonatomic,strong) UILabel *progressing;
@@ -236,40 +250,6 @@
 }
 
 #pragma mark -some method
-
-//- (void)switchToReviewed
-//{
-//    if (!isProgressing) {
-//        [self.view addSubview:self.ReviewedTableView];
-//        [_ReviewedTableView registerClass:[ActivityTableViewCell class] forCellReuseIdentifier:@"progressingCell"];
-//        [_ReviewedTableView setTranslatesAutoresizingMaskIntoConstraints:NO];
-//        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_ReviewedTableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedTableView)]];
-//        [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_ReviewedFooterView][_ReviewedTableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedFooterView,_ReviewedTableView)]];
-//        [self.view layoutIfNeeded];
-//        
-//        bindingFooterToTop = [[NSArray alloc] initWithArray :[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_progressingHeadView][_ReviewedFooterView]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingHeadView,_ReviewedFooterView)]];
-//        [self.view removeConstraints:bindingFooterToBottom];
-//        [self.view addConstraints:bindingFooterToTop];
-//        [UIView animateWithDuration:0.25 animations:^{
-//            [self.view layoutSubviews];
-//        }];
-//        isProgressing = !isProgressing;
-//        [self updateTextColor];
-//    }
-//}
-//
-//- (void)switchToProgressing
-//{
-//    if (isProgressing) {
-//        [self.view removeConstraints:bindingFooterToTop];
-//        [self.view addConstraints:bindingFooterToBottom];
-//        [UIView animateWithDuration:0.25 animations:^{
-//            [self.view layoutSubviews];
-//        }];
-//        isProgressing = !isProgressing;
-//        [self updateTextColor];
-//    }
-//}
 
 - (void)handleTap:(UITapGestureRecognizer *)recognizer
 {
@@ -392,15 +372,6 @@
     }
 }
 
-//
-//- (void)updateTextColor
-//{
-//    UIColor *temp = _progressing.textColor;
-//    _progressing.textColor = _reviewed.textColor;
-//    _reviewed.textColor = temp;
-//}
-
-
 #pragma mark -lazy initialization
 
 - (UILabel *)progressing
@@ -439,29 +410,11 @@
     return _progressingHeadView;
 }
 
-//- (UISegmentedControl *)progressingSegmentedControl
-//{
-//    if (!_progressingSegmentedControl) {
-//        _progressingSegmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"线上",@"线下", nil]];
-//        _progressingSegmentedControl.selectedSegmentIndex = 0;
-//        
-//        UIFont *font = [UIFont systemFontOfSize:9.0f];
-//        NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName,[UIColor whiteColor],NSForegroundColorAttributeName, nil];
-//        [_progressingSegmentedControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
-//        [_progressingSegmentedControl setTitleTextAttributes:attributes forState:UIControlStateSelected];
-//
-//        _progressingSegmentedControl.backgroundColor = [UIColor grayColor];
-//        _progressingSegmentedControl.tintColor = [UIColor redColor];
-//        [_progressingSegmentedControl setWidth:0.0 forSegmentAtIndex:1];
-//    }
-//    return _progressingSegmentedControl;
-//}
-
-- (UITableView *)progressingTableView
+- (PullRefreshTableView *)progressingTableView
 {
     if(!_progressingTableView)
     {
-        _progressingTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _progressingTableView = [[PullRefreshTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _progressingTableView.delegate = self;
         _progressingTableView.dataSource = self;
         _progressingTableView.tag = 0;
@@ -505,20 +458,6 @@
     }
     return _ReviewedFooterView;
 }
-
-//- (UISegmentedControl *)ReviewedSegmentedControl
-//{
-//    if (!_ReviewedSegmentedControl) {
-//        _ReviewedSegmentedControl = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"线上",@"线下", nil]];
-//        _ReviewedSegmentedControl.selectedSegmentIndex = 0;
-//        
-//        UIFont *font = [UIFont systemFontOfSize:9.0f];
-//        NSDictionary *attributes = [NSDictionary dictionaryWithObject:font
-//                                                               forKey:NSFontAttributeName];
-//        [_ReviewedSegmentedControl setTitleTextAttributes:attributes forState:UIControlStateNormal];
-//    }
-//    return _ReviewedSegmentedControl;
-//}
 
 - (UITableView *)ReviewedTableView
 {
