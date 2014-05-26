@@ -12,6 +12,7 @@
 		5101B3471927370A00084BCA /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5101B3461927370A00084BCA /* BottomView.m */; };
 		510A5DAA19332AE200D415E4 /* CustomSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 510A5DA919332AE200D415E4 /* CustomSegmentedControl.m */; };
 		510A5DAD19332C0D00D415E4 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 510A5DAC19332C0D00D415E4 /* CustomCell.m */; };
+		510A5DAF19339B6200D415E4 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = 510A5DAE19339B6200D415E4 /* placeholder.png */; };
 		510FD0591925B5BB00CD73AD /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */; };
 		510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD05C1926032400CD73AD /* ActivityDetailInfoViewController.m */; };
 		510FD060192603BE00CD73AD /* Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD05F192603BE00CD73AD /* Mask.m */; };
@@ -99,6 +100,7 @@
 		510A5DA919332AE200D415E4 /* CustomSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomSegmentedControl.m; path = ViewControllers/CustomSegmentedControl.m; sourceTree = "<group>"; };
 		510A5DAB19332C0D00D415E4 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCell.h; path = ViewControllers/CustomCell.h; sourceTree = "<group>"; };
 		510A5DAC19332C0D00D415E4 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCell.m; path = ViewControllers/CustomCell.m; sourceTree = "<group>"; };
+		510A5DAE19339B6200D415E4 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		510FD0561925B5BB00CD73AD /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailViewController.h; path = ViewControllers/ActivityDetailViewController.h; sourceTree = "<group>"; };
 		510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailViewController.m; path = ViewControllers/ActivityDetailViewController.m; sourceTree = "<group>"; };
 		510FD05B1926032400CD73AD /* ActivityDetailInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailInfoViewController.h; path = ViewControllers/ActivityDetailInfoViewController.h; sourceTree = "<group>"; };
@@ -539,6 +541,7 @@
 		887F2147191E4585009250D2 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				510A5DAE19339B6200D415E4 /* placeholder.png */,
 				D2F32F091925F88B00E446D6 /* like.png */,
 				D2F32F0A1925F88B00E446D6 /* comment.png */,
 				887F2148191E4590009250D2 /* 1.png */,
@@ -662,6 +665,7 @@
 				887F214E191E4590009250D2 /* 2.png in Resources */,
 				887F2150191E4590009250D2 /* iron.png in Resources */,
 				887F214F191E4590009250D2 /* 3.png in Resources */,
+				510A5DAF19339B6200D415E4 /* placeholder.png in Resources */,
 				51B47E9F19330925000E47C6 /* MJRefresh.bundle in Resources */,
 				D2F32F0C1925F88B00E446D6 /* comment.png in Resources */,
 				887F20F1191D4051009250D2 /* InfoPlist.strings in Resources */,
