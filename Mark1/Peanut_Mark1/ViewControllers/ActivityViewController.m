@@ -11,110 +11,10 @@
 #import "ActivityTableViewCell.h"
 #import "ActivityDetailViewController.h"
 #import "PullRefreshTableView.h"
+#import "CustomSegmentedControl.h"
 
 #define PRESENT_TITLE_COLOR [UIColor redColor]
 #define PAST_TITLE_COLOR [UIColor grayColor]
-
-@interface CustomSegmentedControl : UIView
-@property (strong,nonatomic) UIButton *leftButton;
-@property (strong,nonatomic) UIButton *rightButton;
-@property (nonatomic) BOOL isOnline;
-@property (nonatomic,setter = setIsProgressing:) BOOL isProgressing;
-@end
-
-@implementation CustomSegmentedControl
-#define SELECTED_COLOR [UIColor redColor]
-#define NOT_SELECTED_COLOR [UIColor grayColor]
-#define SELECTED_COLOR_GRAY [UIColor darkGrayColor]
-#define NOT_SELECTED_COLOR_GRAY [UIColor lightGrayColor]
-
-- (id)initWithisProgressing:(BOOL)isProgressing
-{
-    self = [super init];
-    if (self) {
-        _isOnline = YES;
-        [self addSubview:self.leftButton];
-        [self addSubview:self.rightButton];
-        self.isProgressing = isProgressing;
-
-        [_leftButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [_rightButton setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_leftButton]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_leftButton)]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_rightButton]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_rightButton)]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_leftButton(_rightButton)][_rightButton(_leftButton)]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_leftButton,_rightButton)]];
-    }
-    return self;
-}
-
-- (void)switchStatus:(id)sender
-{
-    if (((UIButton *)sender).backgroundColor == NOT_SELECTED_COLOR || ((UIButton *)sender).backgroundColor == NOT_SELECTED_COLOR_GRAY) {
-        UIColor *temp = _leftButton.backgroundColor;
-        _leftButton.backgroundColor = _rightButton.backgroundColor;
-        _rightButton.backgroundColor = temp;
-        _isOnline = ((UIButton *)sender).tag;
-    }
-    NSLog(@"%D",_isOnline);
-}
-
-- (void)setIsProgressing:(BOOL)isProgressing
-{
-    _isProgressing = isProgressing;
-    if (isProgressing) {
-        if (_isOnline == YES) {
-            _leftButton.backgroundColor = SELECTED_COLOR;
-            _rightButton.backgroundColor = NOT_SELECTED_COLOR;
-        }
-        else
-        {
-            _leftButton.backgroundColor = NOT_SELECTED_COLOR;
-            _rightButton.backgroundColor = SELECTED_COLOR;
-        }
-    }
-    else
-    {
-        if (_isOnline == YES) {
-            _leftButton.backgroundColor = SELECTED_COLOR_GRAY;
-            _rightButton.backgroundColor = NOT_SELECTED_COLOR_GRAY;
-        }
-        else
-        {
-            _leftButton.backgroundColor = NOT_SELECTED_COLOR_GRAY;
-            _rightButton.backgroundColor = SELECTED_COLOR_GRAY;
-        }
-    }
-}
-
-- (UIButton *)leftButton
-{
-    if (!_leftButton) {
-        _leftButton = [[UIButton alloc] init];
-        [_leftButton setTitle:@"线上" forState:UIControlStateNormal];
-        [_leftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _leftButton.titleLabel.font = [UIFont systemFontOfSize:9.0f];
-        _leftButton.backgroundColor = SELECTED_COLOR;
-        [_leftButton addTarget:self action:@selector(switchStatus:) forControlEvents:UIControlEventTouchUpInside];
-        _leftButton.tag = 1;
-    }
-    return _leftButton;
-}
-
-- (UIButton *)rightButton
-{
-    if (!_rightButton) {
-        _rightButton = [[UIButton alloc] init];
-        [_rightButton setTitle:@"线下" forState:UIControlStateNormal];
-        [_rightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _rightButton.titleLabel.font = [UIFont systemFontOfSize:9.0f];
-        _rightButton.backgroundColor = NOT_SELECTED_COLOR;
-        [_rightButton addTarget:self action:@selector(switchStatus:) forControlEvents:UIControlEventTouchUpInside];
-        _rightButton.tag = 0;
-    }
-    return _rightButton;
-}
-
-@end
-
 
 @interface ActivityViewController ()
 {
@@ -128,7 +28,7 @@
     NSMutableArray *downSpeed;
 }
 @property (nonatomic,strong) PullRefreshTableView *progressingTableView;
-@property (nonatomic,strong) UITableView *ReviewedTableView;
+@property (nonatomic,strong) PullRefreshTableView *ReviewedTableView;
 @property (nonatomic,strong) UIView *progressingHeadView;
 @property (nonatomic,strong) UIView *ReviewedFooterView;
 @property (nonatomic,strong) CustomSegmentedControl *progressingSegmentedControl;
@@ -165,20 +65,23 @@
     sweepSpeed = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0", nil];
     downSpeed = [[NSMutableArray alloc] initWithObjects:@"0",@"0",@"0" ,nil];
 
-//    [_progressingHeadView setTranslatesAutoresizingMaskIntoConstraints:NO];
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_progressingHeadView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingHeadView)]];
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|[_progressingHeadView(%f)]",HEIGHT_OF_HEADER_OR_FOOTER ] options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingHeadView)]];
-
     [_progressingTableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_progressingTableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingTableView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_progressingTableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingTableView)]];
     
-//    [_ReviewedFooterView setTranslatesAutoresizingMaskIntoConstraints:NO];
-//    bindingFooterToBottom = [[NSArray alloc] initWithArray: [NSLayoutConstraint constraintsWithVisualFormat:@"V:[_ReviewedFooterView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedFooterView)]];
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_ReviewedFooterView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedFooterView)]];
-//    [self.view addConstraints:bindingFooterToBottom];
-//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat: @"V:[_ReviewedFooterView(%f)]",HEIGHT_OF_HEADER_OR_FOOTER] options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedFooterView)]];
-    
+    __weak ActivityViewController *weakSelf =self;
+    [self.progressingTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
+        [weakSelf pullDownProgressing:refreshView];
+    }];
+    [self.progressingTableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
+        [weakSelf pullUpProgressing:refreshView];
+    }];
+    [self.ReviewedTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
+        [weakSelf pullDownReviewed:refreshView];
+    }];
+    [self.ReviewedTableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
+        [weakSelf pullUpReviewed: refreshView];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -186,6 +89,7 @@
     [super viewWillAppear:animated];
     self.navigationItem.title = @"活动";
     ((UIViewController *)(self.navigationController.viewControllers)[[self.navigationController.viewControllers indexOfObject:self] - 1]).navigationItem.title = @"";
+    [self.progressingTableView beginRefreshing];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -197,6 +101,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [self.progressingTableView freeHeaderFooter];
+    [self.ReviewedTableView freeHeaderFooter];
 }
 
 #pragma mark -UITableView datasource and delegate
@@ -249,7 +159,33 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark -some method
+#pragma mark -Network stuff
+
+-(void)pullDownProgressing:(MJRefreshBaseView*)refreshView
+{
+    NSLog(@"this is pull down progressing");
+    [refreshView endRefreshing];
+}
+
+-(void)pullUpProgressing:(MJRefreshBaseView*)refreshView
+{
+    NSLog(@"this is pull up progressing");
+    [refreshView endRefreshing];
+}
+
+-(void)pullDownReviewed:(MJRefreshBaseView*)refreshView
+{
+    NSLog(@"this is pull down reviewed");
+    [refreshView endRefreshing];
+}
+
+-(void)pullUpReviewed:(MJRefreshBaseView*)refreshView
+{
+    NSLog(@"this is pull up reviewed");
+    [refreshView endRefreshing];
+}
+
+#pragma mark -status switch
 
 - (void)handleTap:(UITapGestureRecognizer *)recognizer
 {
@@ -459,11 +395,11 @@
     return _ReviewedFooterView;
 }
 
-- (UITableView *)ReviewedTableView
+- (PullRefreshTableView *)ReviewedTableView
 {
     if(!_ReviewedTableView)
     {
-        _ReviewedTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _ReviewedTableView = [[PullRefreshTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _ReviewedTableView.delegate = self;
         _ReviewedTableView.dataSource = self;
         _ReviewedTableView.tag = 1;

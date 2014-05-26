@@ -97,9 +97,9 @@
 
 
 -(void)_init{
-        [self addHeader];
-        // 3.2.上拉加载更多
-        [self addFooter];
+    [self addHeader];
+    // 3.2.上拉加载更多
+    [self addFooter];
 }
 
 

@@ -10,6 +10,8 @@
 		27C402CF34354145A3818596 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A474C76991743418E0AA42B /* libPods.a */; };
 		5101B34419270E2900084BCA /* ActivityDetailUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5101B34319270E2900084BCA /* ActivityDetailUserViewController.m */; };
 		5101B3471927370A00084BCA /* BottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5101B3461927370A00084BCA /* BottomView.m */; };
+		510A5DAA19332AE200D415E4 /* CustomSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 510A5DA919332AE200D415E4 /* CustomSegmentedControl.m */; };
+		510A5DAD19332C0D00D415E4 /* CustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 510A5DAC19332C0D00D415E4 /* CustomCell.m */; };
 		510FD0591925B5BB00CD73AD /* ActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */; };
 		510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD05C1926032400CD73AD /* ActivityDetailInfoViewController.m */; };
 		510FD060192603BE00CD73AD /* Mask.m in Sources */ = {isa = PBXBuildFile; fileRef = 510FD05F192603BE00CD73AD /* Mask.m */; };
@@ -22,9 +24,13 @@
 		51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */; };
 		51FBFD34192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FBFD33192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m */; };
 		51FBFD37192DF507009089FA /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FBFD36192DF507009089FA /* UserCell.m */; };
+		881DA80C192E228B0043AF21 /* PhotoInfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA80B192E228B0043AF21 /* PhotoInfoEntity.m */; };
+		881DA80F192E228B0043AF21 /* UserInfEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA80E192E228B0043AF21 /* UserInfEntity.m */; };
+		881DA812192E228B0043AF21 /* ActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA811192E228B0043AF21 /* ActivityEntity.m */; };
+		881DA815192E228B0043AF21 /* MustReadEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA814192E228B0043AF21 /* MustReadEntity.m */; };
+		881DA818192E228B0043AF21 /* PhotoDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA817192E228B0043AF21 /* PhotoDetailEntity.m */; };
 		885F6341192A4447007BAAE0 /* RequestPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 885F6340192A4447007BAAE0 /* RequestPackage.m */; };
 		886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C08931920F1EB00BD7E5F /* NetworkRequest.m */; };
-		886C5E381932E57D008F885A /* CoreData-Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C5E371932E57D008F885A /* CoreData-Helper.m */; };
 		886C5E3B1932FF49008F885A /* PhotoSeriesEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C5E3A1932FF49008F885A /* PhotoSeriesEntity.m */; };
 		887F20E7191D4051009250D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E6191D4051009250D2 /* Foundation.framework */; };
 		887F20E9191D4051009250D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E8191D4051009250D2 /* CoreGraphics.framework */; };
@@ -89,6 +95,10 @@
 		5101B34319270E2900084BCA /* ActivityDetailUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailUserViewController.m; path = ViewControllers/ActivityDetailUserViewController.m; sourceTree = "<group>"; };
 		5101B3451927370A00084BCA /* BottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BottomView.h; path = ViewControllers/BottomView.h; sourceTree = "<group>"; };
 		5101B3461927370A00084BCA /* BottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BottomView.m; path = ViewControllers/BottomView.m; sourceTree = "<group>"; };
+		510A5DA819332AE200D415E4 /* CustomSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomSegmentedControl.h; path = ViewControllers/CustomSegmentedControl.h; sourceTree = "<group>"; };
+		510A5DA919332AE200D415E4 /* CustomSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomSegmentedControl.m; path = ViewControllers/CustomSegmentedControl.m; sourceTree = "<group>"; };
+		510A5DAB19332C0D00D415E4 /* CustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomCell.h; path = ViewControllers/CustomCell.h; sourceTree = "<group>"; };
+		510A5DAC19332C0D00D415E4 /* CustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomCell.m; path = ViewControllers/CustomCell.m; sourceTree = "<group>"; };
 		510FD0561925B5BB00CD73AD /* ActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailViewController.h; path = ViewControllers/ActivityDetailViewController.h; sourceTree = "<group>"; };
 		510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityDetailViewController.m; path = ViewControllers/ActivityDetailViewController.m; sourceTree = "<group>"; };
 		510FD05B1926032400CD73AD /* ActivityDetailInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityDetailInfoViewController.h; path = ViewControllers/ActivityDetailInfoViewController.h; sourceTree = "<group>"; };
@@ -237,6 +247,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		510A5DA719332A8400D415E4 /* customElements */ = {
+			isa = PBXGroup;
+			children = (
+				510FD05E192603BE00CD73AD /* Mask.h */,
+				510FD05F192603BE00CD73AD /* Mask.m */,
+				5101B3451927370A00084BCA /* BottomView.h */,
+				5101B3461927370A00084BCA /* BottomView.m */,
+				510A5DA819332AE200D415E4 /* CustomSegmentedControl.h */,
+				510A5DA919332AE200D415E4 /* CustomSegmentedControl.m */,
+				51EFD0F019252D1600F5CC9D /* ActivityTableViewCell.h */,
+				51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */,
+				510A5DAB19332C0D00D415E4 /* CustomCell.h */,
+				510A5DAC19332C0D00D415E4 /* CustomCell.m */,
+				51FBFD35192DF507009089FA /* UserCell.h */,
+				51FBFD36192DF507009089FA /* UserCell.m */,
+			);
+			name = customElements;
+			sourceTree = "<group>";
+		};
 		51B47EA41933092D000E47C6 /* PullRefreshTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,20 +482,13 @@
 		887F212D191DF3A0009250D2 /* ActivityViewController */ = {
 			isa = PBXGroup;
 			children = (
-				510FD05E192603BE00CD73AD /* Mask.h */,
-				510FD05F192603BE00CD73AD /* Mask.m */,
-				5101B3451927370A00084BCA /* BottomView.h */,
-				5101B3461927370A00084BCA /* BottomView.m */,
+				510A5DA719332A8400D415E4 /* customElements */,
 				88D02AB2191E721C001ABA96 /* ActivityViewController.h */,
 				88D02AB3191E721C001ABA96 /* ActivityViewController.m */,
-				51EFD0F019252D1600F5CC9D /* ActivityTableViewCell.h */,
-				51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */,
 				510FD0561925B5BB00CD73AD /* ActivityDetailViewController.h */,
 				510FD0571925B5BB00CD73AD /* ActivityDetailViewController.m */,
 				510FD05B1926032400CD73AD /* ActivityDetailInfoViewController.h */,
 				510FD05C1926032400CD73AD /* ActivityDetailInfoViewController.m */,
-				51FBFD35192DF507009089FA /* UserCell.h */,
-				51FBFD36192DF507009089FA /* UserCell.m */,
 				5101B34219270E2900084BCA /* ActivityDetailUserViewController.h */,
 				5101B34319270E2900084BCA /* ActivityDetailUserViewController.m */,
 				51FBFD32192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.h */,
@@ -734,6 +756,7 @@
 				881DA812192E228B0043AF21 /* ActivityEntity.m in Sources */,
 				F2B58DCE19264B7F009D6131 /* ShareViewController.m in Sources */,
 				510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */,
+				510A5DAA19332AE200D415E4 /* CustomSegmentedControl.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
 				51B47EA219330925000E47C6 /* MJRefreshFooterView.m in Sources */,
 				887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */,
@@ -744,6 +767,7 @@
 				887F20F3191D4051009250D2 /* main.m in Sources */,
 				51FBFD34192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m in Sources */,
 				510FD0591925B5BB00CD73AD /* ActivityDetailViewController.m in Sources */,
+				510A5DAD19332C0D00D415E4 /* CustomCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -861,7 +885,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Siguang Huang (L3UC9F9BL5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
 				INFOPLIST_FILE = "Peanut_Mark1/Peanut_Mark1-Info.plist";
@@ -877,7 +901,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Siguang Huang (L3UC9F9BL5)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
 				INFOPLIST_FILE = "Peanut_Mark1/Peanut_Mark1-Info.plist";

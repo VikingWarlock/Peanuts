@@ -8,6 +8,7 @@
 
 #import "ActivitDetailInterestedPeopleViewController.h"
 #import "UserCell.h"
+#import "PullRefreshTableView.h"
 @interface ActivitDetailInterestedPeopleViewController ()
 {
     NSMutableArray *users;
@@ -20,7 +21,7 @@
     BOOL isEdit;
 }
 @property (strong,nonatomic) UIView *header;
-@property (nonatomic,strong) UITableView *tableview;
+@property (nonatomic,strong) PullRefreshTableView *tableview;
 @property (nonatomic,strong) UIAlertView *alertView;
 @end
 
@@ -63,6 +64,14 @@
     [_tableview setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableview)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_header][_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_header,_tableview)]];
+    
+    __weak ActivitDetailInterestedPeopleViewController *weakSelf =self;
+    [self.tableview setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
+        [weakSelf pullDown:refreshView];
+    }];
+    [self.tableview setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
+        [weakSelf pullUp:refreshView];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -81,6 +90,25 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [self.tableview freeHeaderFooter];
+}
+
+#pragma mark -Network stuff
+
+-(void)pullDown:(MJRefreshBaseView*)refreshView
+{
+    NSLog(@"this is pull down");
+    [refreshView endRefreshing];
+}
+
+-(void)pullUp:(MJRefreshBaseView*)refreshView
+{
+    NSLog(@"this is pull up");
+    [refreshView endRefreshing];
 }
 
 #pragma mark -method
@@ -184,10 +212,10 @@
     return _header;
 }
 
-- (UITableView *)tableview
+- (PullRefreshTableView *)tableview
 {
     if (!_tableview) {
-        _tableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableview = [[PullRefreshTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         [_tableview setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         _tableview.dataSource = self;
         _tableview.delegate = self;
