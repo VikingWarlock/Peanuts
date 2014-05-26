@@ -19,4 +19,6 @@
 -(UIImageView*)Peanut_backgroundView;
 -(void)setBackgroundImage:(UIImage*)bkimage andBlurEnable:(BOOL)enable;
 
+
+
 @end

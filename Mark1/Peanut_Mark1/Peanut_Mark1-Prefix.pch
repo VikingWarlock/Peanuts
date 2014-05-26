@@ -26,4 +26,5 @@
     #import<UIImage+UIColor.h>
     #import<NSUserDefaults+AESEncryptor.h>
     #import"API_address.h"
+    #import"RequestPackage.h"
 #endif

@@ -9,7 +9,7 @@
 #import "RequestPackage.h"
 #import <AFNetworking.h>
 #import <AFHTTPRequestOperation.h>
-
+#import <RTAlertView.h>
 
 
 static RequestPackage * PublicObject;
@@ -42,11 +42,14 @@ static RequestPackage * PublicObject;
     AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
     NSDictionary *parameter=@{@"username": username,@"password":passwd};
     [manager POST:Peanut_Login_Address parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSError *error;
-        NSDictionary *response=[NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:&error];
+        //NSDictionary *response=[NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:&error];
+        
+        NSDictionary *response=responseObject;
         
         if ([[response objectForKey:@"status"]integerValue]==1) {
             [[NSUserDefaults standardUserDefaults]encryptValue:[[response objectForKey:@"data"]objectForKey:USER_Token] withKey:USER_Token];
+            RTAlertView *alert=[[RTAlertView alloc]initWithTitle:@"Note" message:@"Login Succeed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
@@ -121,5 +124,40 @@ static RequestPackage * PublicObject;
         return YES;
 }
 
+
+-(NSArray*)FetchSquare
+{
+    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+    [manager GET:Peanut_Fetch_Square_Address parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *decoded=[self GetTheInfoFrom:responseObject];
+        if ([[decoded objectForKey:@"status"]integerValue]!=1) {
+            // 错误信息
+            NSLog(@"%@",[decoded objectForKey:@"info"]);
+        }else
+        {
+
+        
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+
+    return nil;
+}
+
+-(NSDictionary*)GetTheInfoFrom:(id)response
+{
+    NSError* error=nil;
+    NSDictionary *dic=[NSJSONSerialization JSONObjectWithData:response options:kNilOptions error:&error];
+    if (error) {
+        NSLog(@"%@",error);
+        return nil;
+    }else
+        return dic;
+        
+}
 
 @end
