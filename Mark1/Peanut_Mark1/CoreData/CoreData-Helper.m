@@ -133,6 +133,10 @@
     item.city=[parameter objectForKey:@"city"];
     item.area=[parameter objectForKey:@"area"];
     item.login=[parameter objectForKey:@"login"];
+    item.avatarPic=[parameter objectForKey:@"avatar_original"];
+    item.avatar_middle=[parameter objectForKey:@"avatar_middle"];
+    item.avatar_small=[parameter objectForKey:@"avatar_small"];
+    item.avatar_tiny=[parameter objectForKey:@"avatar_tiny"];
     
     [[NSManagedObjectContext MR_context]MR_saveToPersistentStoreAndWait];
     
