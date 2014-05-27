@@ -82,6 +82,7 @@
     [self.ReviewedTableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
         [weakSelf pullUpReviewed: refreshView];
     }];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
