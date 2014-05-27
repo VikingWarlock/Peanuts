@@ -70,6 +70,8 @@
 -(void)moveVisiableFrame:(CGRect)frame
 {
     [view setImage: [self getSubImage:frame]];
+
+    
 }
 
 

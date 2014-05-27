@@ -48,12 +48,16 @@ static RequestPackage * PublicObject;
         
         if ([[response objectForKey:@"status"]integerValue]==1) {
             [[NSUserDefaults standardUserDefaults]encryptValue:[[response objectForKey:@"data"]objectForKey:USER_Token] withKey:USER_Token];
+            
+            [CoreData_Helper addUserInfoEntity:[[response objectForKey:@"data"] objectForKey:@"user_info"]];
+            
             RTAlertView *alert=[[RTAlertView alloc]initWithTitle:@"Note" message:@"Login Succeed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alert show];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
     }];
+        
     
 }
 

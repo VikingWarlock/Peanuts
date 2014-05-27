@@ -128,8 +128,6 @@
 		5A474C76991743418E0AA42B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		881DA80A192E228B0043AF21 /* PhotoInfoEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoInfoEntity.h; path = CoreData/PhotoInfoEntity.h; sourceTree = "<group>"; };
 		881DA80B192E228B0043AF21 /* PhotoInfoEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoInfoEntity.m; path = CoreData/PhotoInfoEntity.m; sourceTree = "<group>"; };
-		881DA80D192E228B0043AF21 /* UserInfEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfEntity.h; path = CoreData/UserInfEntity.h; sourceTree = "<group>"; };
-		881DA80E192E228B0043AF21 /* UserInfEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfEntity.m; path = CoreData/UserInfEntity.m; sourceTree = "<group>"; };
 		881DA810192E228B0043AF21 /* ActivityEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityEntity.h; path = CoreData/ActivityEntity.h; sourceTree = "<group>"; };
 		881DA811192E228B0043AF21 /* ActivityEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityEntity.m; path = CoreData/ActivityEntity.m; sourceTree = "<group>"; };
 		881DA813192E228B0043AF21 /* MustReadEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MustReadEntity.h; path = CoreData/MustReadEntity.h; sourceTree = "<group>"; };
@@ -137,6 +135,8 @@
 		881DA816192E228B0043AF21 /* PhotoDetailEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoDetailEntity.h; path = CoreData/PhotoDetailEntity.h; sourceTree = "<group>"; };
 		881DA817192E228B0043AF21 /* PhotoDetailEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoDetailEntity.m; path = CoreData/PhotoDetailEntity.m; sourceTree = "<group>"; };
 		881DA81C192E27A20043AF21 /* API_address.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = API_address.h; path = PublicLibrary/API_address.h; sourceTree = "<group>"; };
+		883E547019345C4C00E8D2CE /* UserInfEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfEntity.h; path = CoreData/UserInfEntity.h; sourceTree = "<group>"; };
+		883E547119345C4C00E8D2CE /* UserInfEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfEntity.m; path = CoreData/UserInfEntity.m; sourceTree = "<group>"; };
 		885F633F192A4447007BAAE0 /* RequestPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RequestPackage.h; path = Networks/RequestPackage.h; sourceTree = "<group>"; };
 		885F6340192A4447007BAAE0 /* RequestPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RequestPackage.m; path = Networks/RequestPackage.m; sourceTree = "<group>"; };
 		886C08921920F1EB00BD7E5F /* NetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkRequest.h; path = CoreData/NetworkRequest.h; sourceTree = "<group>"; };
@@ -414,6 +414,8 @@
 			isa = PBXGroup;
 			children = (
 				887F2126191DB934009250D2 /* CoreDataModel.xcdatamodeld */,
+				883E547019345C4C00E8D2CE /* UserInfEntity.h */,
+				883E547119345C4C00E8D2CE /* UserInfEntity.m */,
 				886C08921920F1EB00BD7E5F /* NetworkRequest.h */,
 				886C08931920F1EB00BD7E5F /* NetworkRequest.m */,
 				881DA816192E228B0043AF21 /* PhotoDetailEntity.h */,
@@ -422,8 +424,6 @@
 				881DA814192E228B0043AF21 /* MustReadEntity.m */,
 				881DA810192E228B0043AF21 /* ActivityEntity.h */,
 				881DA811192E228B0043AF21 /* ActivityEntity.m */,
-				881DA80D192E228B0043AF21 /* UserInfEntity.h */,
-				881DA80E192E228B0043AF21 /* UserInfEntity.m */,
 				881DA80A192E228B0043AF21 /* PhotoInfoEntity.h */,
 				881DA80B192E228B0043AF21 /* PhotoInfoEntity.m */,
 				886C5E361932E57D008F885A /* CoreData-Helper.h */,
@@ -721,6 +721,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				883E546A19339EDF00E8D2CE /* PhotoDetailEntity.m in Sources */,
+				883E547219345C4C00E8D2CE /* UserInfEntity.m in Sources */,
+				883E546B19339EDF00E8D2CE /* MustReadEntity.m in Sources */,
+				883E546C19339EDF00E8D2CE /* ActivityEntity.m in Sources */,
+				883E546E19339EDF00E8D2CE /* PhotoInfoEntity.m in Sources */,
+				883E546F19339EDF00E8D2CE /* CoreData-Helper.m in Sources */,
 				886C5E3B1932FF49008F885A /* PhotoSeriesEntity.m in Sources */,
 				8881AC6519267AF000F9646B /* imgCollectionTableViewCell.m in Sources */,
 				8881AC6619267AF000F9646B /* CommentViewController.m in Sources */,
@@ -732,8 +738,6 @@
 				F2F8BF1F1924EFE6000A3CED /* PeanutTopViewController.m in Sources */,
 				51B47EA71933093C000E47C6 /* PullRefreshTableView.m in Sources */,
 				51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */,
-				881DA80C192E228B0043AF21 /* PhotoInfoEntity.m in Sources */,
-				881DA818192E228B0043AF21 /* PhotoDetailEntity.m in Sources */,
 				887F20F7191D4051009250D2 /* AppDelegate.m in Sources */,
 				51B47EA319330925000E47C6 /* MJRefreshHeaderView.m in Sources */,
 				887F2121191DB88B009250D2 /* BaseUIViewController.m in Sources */,
@@ -749,7 +753,6 @@
 				F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */,
 				88DC9F4B1932D48A00AE9E86 /* SelfUser_ViewController.m in Sources */,
 				D2F32F081925D4A900E446D6 /* MustReadTableViewCell.m in Sources */,
-				881DA815192E228B0043AF21 /* MustReadEntity.m in Sources */,
 				885F6341192A4447007BAAE0 /* RequestPackage.m in Sources */,
 				F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */,
 				887F2146191E310A009250D2 /* AMPAvatarView+helper.m in Sources */,
@@ -757,7 +760,6 @@
 				51B47EA119330925000E47C6 /* MJRefreshConst.m in Sources */,
 				8881AC641925E4A700F9646B /* SNS_Helper.m in Sources */,
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
-				881DA812192E228B0043AF21 /* ActivityEntity.m in Sources */,
 				F2B58DCE19264B7F009D6131 /* ShareViewController.m in Sources */,
 				510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */,
 				510A5DAA19332AE200D415E4 /* CustomSegmentedControl.m in Sources */,
@@ -766,7 +768,6 @@
 				887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */,
 				887F2140191E200D009250D2 /* NSString+extra.m in Sources */,
 				88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */,
-				881DA80F192E228B0043AF21 /* UserInfEntity.m in Sources */,
 				510FD060192603BE00CD73AD /* Mask.m in Sources */,
 				887F20F3191D4051009250D2 /* main.m in Sources */,
 				51FBFD34192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m in Sources */,

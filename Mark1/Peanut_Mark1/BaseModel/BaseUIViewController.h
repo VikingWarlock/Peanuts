@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <AFNetworking.h>
 @interface BaseUIViewController : UIViewController
+{
+    AFHTTPRequestOperationManager *NetworkManager;
 
+}
 
 @property(nonatomic,readonly)BaseNaviViewController *NavigationController;
 

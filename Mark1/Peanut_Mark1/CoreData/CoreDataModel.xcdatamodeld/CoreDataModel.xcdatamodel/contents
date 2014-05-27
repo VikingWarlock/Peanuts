@@ -92,6 +92,10 @@
     </entity>
     <entity name="UserInfEntity" representedClassName="UserInfEntity" syncable="YES">
         <attribute name="area" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="avatar_big" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="avatar_middle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="avatar_small" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="avatar_tiny" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="avatarPic" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="equipment" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -112,6 +116,6 @@
         <element name="PhotoDetailEntity" positionX="-135" positionY="180" width="128" height="178"/>
         <element name="PhotoInfoEntity" positionX="-171" positionY="5" width="128" height="253"/>
         <element name="PhotoSeriesEntity" positionX="-326" positionY="143" width="128" height="255"/>
-        <element name="UserInfEntity" positionX="-0" positionY="26" width="128" height="238"/>
+        <element name="UserInfEntity" positionX="-0" positionY="26" width="128" height="300"/>
     </elements>
 </model>

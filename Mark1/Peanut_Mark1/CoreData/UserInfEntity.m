@@ -2,7 +2,7 @@
 //  UserInfEntity.m
 //  Peanut_Mark1
 //
-//  Created by viking warlock on 5/22/14.
+//  Created by viking warlock on 5/27/14.
 //  Copyright (c) 2014 viking warlock. All rights reserved.
 //
 
@@ -11,18 +11,22 @@
 
 @implementation UserInfEntity
 
+@dynamic area;
 @dynamic avatarPic;
+@dynamic city;
 @dynamic equipment;
 @dynamic followercount;
 @dynamic followingcount;
 @dynamic intro;
+@dynamic login;
 @dynamic photocount;
+@dynamic province;
 @dynamic sex;
 @dynamic uid;
 @dynamic uname;
-@dynamic province;
-@dynamic city;
-@dynamic area;
-@dynamic login;
+@dynamic avatar_small;
+@dynamic avatar_tiny;
+@dynamic avatar_middle;
+@dynamic avatar_big;
 
 @end
