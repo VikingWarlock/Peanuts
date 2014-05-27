@@ -12,5 +12,9 @@
 
 +(StaticDataManager*)sharedObject;
 
+-(void)updateHomePageData:(NSDictionary*)array;
+
+-(NSDictionary*)FetchHomePage;
+
 
 @end

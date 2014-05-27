@@ -26,6 +26,9 @@
 -(void)FetchActivities;
 -(void)FetchMustRead;
 
+-(void)FetchHomePage;
+
+
 /**
  *前台获取广场列表
  *
@@ -57,6 +60,9 @@
  *
  **/
 -(void)DigSomething:(NSString*)feed_id;
+
+-(void)CancelDigSomething:(NSString*)feed_id;
+
 
 /**
  *前台转发

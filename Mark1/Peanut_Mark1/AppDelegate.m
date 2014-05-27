@@ -24,7 +24,10 @@
    
     [NetworkStack setup];
     
+    
+    
     [[NSUserDefaults standardUserDefaults]setAESKey:AES_Private_key];
+    [[RequestPackage shareObject]FetchHomePage];
     
     
     PeanutTopViewController *TopVC=[[PeanutTopViewController alloc]init];

@@ -7,6 +7,7 @@
 //
 
 #import "BlurTableViewCell_mark1.h"
+#import "UIView+extra.h"
 
 @interface BlurTableViewCell_mark1()<UIGestureRecognizerDelegate>
 
@@ -108,9 +109,10 @@
 -(void)setupLayout
 {
     UIImageView *imgView=[[UIImageView alloc]initWithImage:self.BKImage];
+    [imgView setContentMode:UIViewContentModeScaleAspectFill];
     [self addSubview:imgView];
     imgView.frame=CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    bluredImage=[self darkened:0.5f andBlurredImage:18.f blendModeFilterName:@"CIMultiplyBlendMode" :self.BKImage];
+    bluredImage=[self darkened:0.5f andBlurredImage:18.f blendModeFilterName:@"CIMultiplyBlendMode" :[imgView captureView]];
     
 }
 

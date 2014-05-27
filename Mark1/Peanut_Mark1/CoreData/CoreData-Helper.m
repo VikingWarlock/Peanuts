@@ -38,7 +38,7 @@
     PhotoSeriesEntity *item=[PhotoSeriesEntity MR_createEntity];
     item.addr=[parameter objectForKey:@"addr"];
     item.comment_count=[parameter objectForKey:@"comment_count"];
-    item.cover_url=[parameter objectForKey: @"cover_url"];
+    item.cover_url=[parameter objectForKey: @"cover"];
     item.descriptions=[parameter objectForKey:@"description"];
     item.dig_count=[parameter objectForKey:@"digg_count"];
     item.feed_id=[parameter objectForKey:@"feed_id"];

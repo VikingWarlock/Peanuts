@@ -9,14 +9,24 @@
 #import "StaticDataManager.h"
 
 static StaticDataManager * shared;
+
+/*
 static NSMutableArray *ActivityList;
 static NSMutableArray *SquareList;
 static NSMutableArray *MustReadList;
+static NSMutableArray *HomePageList;
+*/
 
 
 
 @implementation StaticDataManager
+{
+    NSMutableArray *ActivitiesList;
+    NSMutableArray *SquareList;
+    NSMutableArray *MustReadList;
+    NSMutableDictionary *HomePageList;
 
+}
 
 +(StaticDataManager*)sharedObject
 {
@@ -28,7 +38,25 @@ static NSMutableArray *MustReadList;
     
 }
 
++(void)refreshStaticData
+{
+    
+    
+    
 
+}
+
+-(void)updateHomePageData:(NSDictionary *)array
+{
+    HomePageList=[NSMutableDictionary dictionaryWithDictionary:array];
+    [[NSNotificationCenter defaultCenter]postNotificationName:@"Home Page Hase Been Update" object:nil];
+    
+}
+
+-(NSDictionary*)FetchHomePage
+{
+    return  HomePageList;
+}
 
 
 @end
