@@ -129,28 +129,6 @@ static RequestPackage * PublicObject;
 }
 
 
--(NSArray*)FetchSquare
-{
-    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
-    [manager GET:Peanut_Fetch_Square_Address parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSDictionary *decoded=[self GetTheInfoFrom:responseObject];
-        if ([[decoded objectForKey:@"status"]integerValue]!=1) {
-            // 错误信息
-            NSLog(@"%@",[decoded objectForKey:@"info"]);
-        }else
-        {
-
-        
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-    }];
-
-    return nil;
-}
 
 -(NSDictionary*)GetTheInfoFrom:(id)response
 {
@@ -163,5 +141,60 @@ static RequestPackage * PublicObject;
         return dic;
         
 }
+
+
+
+
+-(void)FetchActivities
+{
+
+}
+
+-(void)FetchMustRead
+{
+
+}
+
+-(void)FetchSquare
+{
+    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+    [manager GET:Peanut_Fetch_Square_Address parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *decoded=[self GetTheInfoFrom:responseObject];
+        if ([[decoded objectForKey:@"status"]integerValue]!=1) {
+            // 错误信息
+            NSLog(@"%@",[decoded objectForKey:@"info"]);
+        }else
+        {
+            
+            
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+
+    
+    
+    
+}
+
+
+
+
+
+
+-(void)FetchPhotoSeriesList:(NSInteger)page AndCount:(NSInteger)count
+{
+
+
+}
+
+
+
+
+
 
 @end

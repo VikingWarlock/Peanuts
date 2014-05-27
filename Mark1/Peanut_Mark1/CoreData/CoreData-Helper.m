@@ -179,6 +179,18 @@
     return [list objectAtIndex:0];
 }
 
++(PhotoSeriesEntity*)GetPhotoSeriesEntity:(NSString *)feed_id
+{
+    
+
+    return nil;
+}
+
++(PhotoInfoEntity*)GetPhotoEntity:(NSString *)feed_id
+{
+
+    return nil;
+}
 
 +(void)updateStaticData
 {

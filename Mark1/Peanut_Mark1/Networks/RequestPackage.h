@@ -19,10 +19,12 @@
 -(void)Logout;
 
 /**
- *后台某广场列表
+ *后台某广场列表 bla bla bla
  *
  **/
--(NSArray*)FetchSquare;
+-(void)FetchSquare;
+-(void)FetchActivities;
+-(void)FetchMustRead;
 
 /**
  *前台获取广场列表
@@ -34,7 +36,7 @@
  *后台获取组图列表
  *
  **/
--(NSArray*)FetchPhotoSeriesList:(NSInteger)page AndCount:(NSInteger)count;
+-(void)FetchPhotoSeriesList:(NSInteger)page AndCount:(NSInteger)count;
 
 /**
  *前台获取组图列表

@@ -12,6 +12,10 @@
 @implementation UserInfEntity
 
 @dynamic area;
+@dynamic avatar_big;
+@dynamic avatar_middle;
+@dynamic avatar_small;
+@dynamic avatar_tiny;
 @dynamic avatarPic;
 @dynamic city;
 @dynamic equipment;
@@ -24,9 +28,5 @@
 @dynamic sex;
 @dynamic uid;
 @dynamic uname;
-@dynamic avatar_small;
-@dynamic avatar_tiny;
-@dynamic avatar_middle;
-@dynamic avatar_big;
 
 @end
