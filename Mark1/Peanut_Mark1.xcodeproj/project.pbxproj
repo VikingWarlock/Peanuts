@@ -26,14 +26,9 @@
 		51FBFD34192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FBFD33192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m */; };
 		51FBFD37192DF507009089FA /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FBFD36192DF507009089FA /* UserCell.m */; };
 		883E546A19339EDF00E8D2CE /* PhotoDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA817192E228B0043AF21 /* PhotoDetailEntity.m */; };
-		883E546B19339EDF00E8D2CE /* MustReadEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA814192E228B0043AF21 /* MustReadEntity.m */; };
-		883E546C19339EDF00E8D2CE /* ActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA811192E228B0043AF21 /* ActivityEntity.m */; };
-		883E546E19339EDF00E8D2CE /* PhotoInfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA80B192E228B0043AF21 /* PhotoInfoEntity.m */; };
 		883E546F19339EDF00E8D2CE /* CoreData-Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C5E371932E57D008F885A /* CoreData-Helper.m */; };
-		883E547219345C4C00E8D2CE /* UserInfEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 883E547119345C4C00E8D2CE /* UserInfEntity.m */; };
 		885F6341192A4447007BAAE0 /* RequestPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 885F6340192A4447007BAAE0 /* RequestPackage.m */; };
 		886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C08931920F1EB00BD7E5F /* NetworkRequest.m */; };
-		886C5E3B1932FF49008F885A /* PhotoSeriesEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C5E3A1932FF49008F885A /* PhotoSeriesEntity.m */; };
 		887F20E7191D4051009250D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E6191D4051009250D2 /* Foundation.framework */; };
 		887F20E9191D4051009250D2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E8191D4051009250D2 /* CoreGraphics.framework */; };
 		887F20EB191D4051009250D2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20EA191D4051009250D2 /* UIKit.framework */; };
@@ -66,6 +61,12 @@
 		8881AC6519267AF000F9646B /* imgCollectionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95419223C5E00102F3F /* imgCollectionTableViewCell.m */; };
 		8881AC6619267AF000F9646B /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95819224DF100102F3F /* CommentViewController.m */; };
 		8881AC6719267AF000F9646B /* Peanut_SNSPart.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF356019239FF500E76BB2 /* Peanut_SNSPart.m */; };
+		8896667C19347BE900138572 /* StaticDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8896667B19347BE900138572 /* StaticDataManager.m */; };
+		8896667F19348AD500138572 /* MustReadEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8896667E19348AD500138572 /* MustReadEntity.m */; };
+		8896668219348AD600138572 /* PhotoInfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8896668119348AD600138572 /* PhotoInfoEntity.m */; };
+		8896668519348AD600138572 /* PhotoSeriesEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8896668419348AD600138572 /* PhotoSeriesEntity.m */; };
+		8896668819348AD600138572 /* UserInfEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8896668719348AD600138572 /* UserInfEntity.m */; };
+		8896668B19348AD600138572 /* ActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8896668A19348AD600138572 /* ActivityEntity.m */; };
 		88D02AB4191E721C001ABA96 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB3191E721C001ABA96 /* ActivityViewController.m */; };
 		88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB6191E723B001ABA96 /* MustReadViewController.m */; };
 		88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB9191E724C001ABA96 /* SquareViewController.m */; };
@@ -127,25 +128,15 @@
 		51FBFD35192DF507009089FA /* UserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserCell.h; path = ViewControllers/UserCell.h; sourceTree = "<group>"; };
 		51FBFD36192DF507009089FA /* UserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserCell.m; path = ViewControllers/UserCell.m; sourceTree = "<group>"; };
 		5A474C76991743418E0AA42B /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		881DA80A192E228B0043AF21 /* PhotoInfoEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoInfoEntity.h; path = CoreData/PhotoInfoEntity.h; sourceTree = "<group>"; };
-		881DA80B192E228B0043AF21 /* PhotoInfoEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoInfoEntity.m; path = CoreData/PhotoInfoEntity.m; sourceTree = "<group>"; };
-		881DA810192E228B0043AF21 /* ActivityEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityEntity.h; path = CoreData/ActivityEntity.h; sourceTree = "<group>"; };
-		881DA811192E228B0043AF21 /* ActivityEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityEntity.m; path = CoreData/ActivityEntity.m; sourceTree = "<group>"; };
-		881DA813192E228B0043AF21 /* MustReadEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MustReadEntity.h; path = CoreData/MustReadEntity.h; sourceTree = "<group>"; };
-		881DA814192E228B0043AF21 /* MustReadEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MustReadEntity.m; path = CoreData/MustReadEntity.m; sourceTree = "<group>"; };
 		881DA816192E228B0043AF21 /* PhotoDetailEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoDetailEntity.h; path = CoreData/PhotoDetailEntity.h; sourceTree = "<group>"; };
 		881DA817192E228B0043AF21 /* PhotoDetailEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoDetailEntity.m; path = CoreData/PhotoDetailEntity.m; sourceTree = "<group>"; };
 		881DA81C192E27A20043AF21 /* API_address.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = API_address.h; path = PublicLibrary/API_address.h; sourceTree = "<group>"; };
-		883E547019345C4C00E8D2CE /* UserInfEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfEntity.h; path = CoreData/UserInfEntity.h; sourceTree = "<group>"; };
-		883E547119345C4C00E8D2CE /* UserInfEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfEntity.m; path = CoreData/UserInfEntity.m; sourceTree = "<group>"; };
 		885F633F192A4447007BAAE0 /* RequestPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RequestPackage.h; path = Networks/RequestPackage.h; sourceTree = "<group>"; };
 		885F6340192A4447007BAAE0 /* RequestPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RequestPackage.m; path = Networks/RequestPackage.m; sourceTree = "<group>"; };
 		886C08921920F1EB00BD7E5F /* NetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkRequest.h; path = CoreData/NetworkRequest.h; sourceTree = "<group>"; };
 		886C08931920F1EB00BD7E5F /* NetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetworkRequest.m; path = CoreData/NetworkRequest.m; sourceTree = "<group>"; };
 		886C5E361932E57D008F885A /* CoreData-Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CoreData-Helper.h"; path = "CoreData/CoreData-Helper.h"; sourceTree = "<group>"; };
 		886C5E371932E57D008F885A /* CoreData-Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CoreData-Helper.m"; path = "CoreData/CoreData-Helper.m"; sourceTree = "<group>"; };
-		886C5E391932FF49008F885A /* PhotoSeriesEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoSeriesEntity.h; path = CoreData/PhotoSeriesEntity.h; sourceTree = "<group>"; };
-		886C5E3A1932FF49008F885A /* PhotoSeriesEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoSeriesEntity.m; path = CoreData/PhotoSeriesEntity.m; sourceTree = "<group>"; };
 		887F20E3191D4051009250D2 /* Peanut_Mark1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peanut_Mark1.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		887F20E6191D4051009250D2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		887F20E8191D4051009250D2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -190,6 +181,18 @@
 		887F214C191E4590009250D2 /* pic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = pic.jpg; path = img/pic.jpg; sourceTree = "<group>"; };
 		8881AC621925E4A700F9646B /* SNS_Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SNS_Helper.h; path = Networks/SNS_Helper.h; sourceTree = "<group>"; };
 		8881AC631925E4A700F9646B /* SNS_Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SNS_Helper.m; path = Networks/SNS_Helper.m; sourceTree = "<group>"; };
+		8896667A19347BE900138572 /* StaticDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaticDataManager.h; path = CoreData/StaticDataManager.h; sourceTree = "<group>"; };
+		8896667B19347BE900138572 /* StaticDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StaticDataManager.m; path = CoreData/StaticDataManager.m; sourceTree = "<group>"; };
+		8896667D19348AD500138572 /* MustReadEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MustReadEntity.h; path = CoreData/MustReadEntity.h; sourceTree = "<group>"; };
+		8896667E19348AD500138572 /* MustReadEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MustReadEntity.m; path = CoreData/MustReadEntity.m; sourceTree = "<group>"; };
+		8896668019348AD600138572 /* PhotoInfoEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoInfoEntity.h; path = CoreData/PhotoInfoEntity.h; sourceTree = "<group>"; };
+		8896668119348AD600138572 /* PhotoInfoEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoInfoEntity.m; path = CoreData/PhotoInfoEntity.m; sourceTree = "<group>"; };
+		8896668319348AD600138572 /* PhotoSeriesEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoSeriesEntity.h; path = CoreData/PhotoSeriesEntity.h; sourceTree = "<group>"; };
+		8896668419348AD600138572 /* PhotoSeriesEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoSeriesEntity.m; path = CoreData/PhotoSeriesEntity.m; sourceTree = "<group>"; };
+		8896668619348AD600138572 /* UserInfEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfEntity.h; path = CoreData/UserInfEntity.h; sourceTree = "<group>"; };
+		8896668719348AD600138572 /* UserInfEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfEntity.m; path = CoreData/UserInfEntity.m; sourceTree = "<group>"; };
+		8896668919348AD600138572 /* ActivityEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityEntity.h; path = CoreData/ActivityEntity.h; sourceTree = "<group>"; };
+		8896668A19348AD600138572 /* ActivityEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityEntity.m; path = CoreData/ActivityEntity.m; sourceTree = "<group>"; };
 		88D02AB2191E721C001ABA96 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityViewController.h; path = ViewControllers/ActivityViewController.h; sourceTree = "<group>"; };
 		88D02AB3191E721C001ABA96 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityViewController.m; path = ViewControllers/ActivityViewController.m; sourceTree = "<group>"; };
 		88D02AB5191E723B001ABA96 /* MustReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MustReadViewController.h; path = ViewControllers/MustReadViewController.h; sourceTree = "<group>"; };
@@ -415,22 +418,24 @@
 			isa = PBXGroup;
 			children = (
 				887F2126191DB934009250D2 /* CoreDataModel.xcdatamodeld */,
-				883E547019345C4C00E8D2CE /* UserInfEntity.h */,
-				883E547119345C4C00E8D2CE /* UserInfEntity.m */,
+				8896668919348AD600138572 /* ActivityEntity.h */,
+				8896668A19348AD600138572 /* ActivityEntity.m */,
+				8896668619348AD600138572 /* UserInfEntity.h */,
+				8896668719348AD600138572 /* UserInfEntity.m */,
+				8896668319348AD600138572 /* PhotoSeriesEntity.h */,
+				8896668419348AD600138572 /* PhotoSeriesEntity.m */,
+				8896668019348AD600138572 /* PhotoInfoEntity.h */,
+				8896668119348AD600138572 /* PhotoInfoEntity.m */,
+				8896667D19348AD500138572 /* MustReadEntity.h */,
+				8896667E19348AD500138572 /* MustReadEntity.m */,
 				886C08921920F1EB00BD7E5F /* NetworkRequest.h */,
 				886C08931920F1EB00BD7E5F /* NetworkRequest.m */,
 				881DA816192E228B0043AF21 /* PhotoDetailEntity.h */,
 				881DA817192E228B0043AF21 /* PhotoDetailEntity.m */,
-				881DA813192E228B0043AF21 /* MustReadEntity.h */,
-				881DA814192E228B0043AF21 /* MustReadEntity.m */,
-				881DA810192E228B0043AF21 /* ActivityEntity.h */,
-				881DA811192E228B0043AF21 /* ActivityEntity.m */,
-				881DA80A192E228B0043AF21 /* PhotoInfoEntity.h */,
-				881DA80B192E228B0043AF21 /* PhotoInfoEntity.m */,
 				886C5E361932E57D008F885A /* CoreData-Helper.h */,
 				886C5E371932E57D008F885A /* CoreData-Helper.m */,
-				886C5E391932FF49008F885A /* PhotoSeriesEntity.h */,
-				886C5E3A1932FF49008F885A /* PhotoSeriesEntity.m */,
+				8896667A19347BE900138572 /* StaticDataManager.h */,
+				8896667B19347BE900138572 /* StaticDataManager.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -723,12 +728,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				883E546A19339EDF00E8D2CE /* PhotoDetailEntity.m in Sources */,
-				883E547219345C4C00E8D2CE /* UserInfEntity.m in Sources */,
-				883E546B19339EDF00E8D2CE /* MustReadEntity.m in Sources */,
-				883E546C19339EDF00E8D2CE /* ActivityEntity.m in Sources */,
-				883E546E19339EDF00E8D2CE /* PhotoInfoEntity.m in Sources */,
+				8896668B19348AD600138572 /* ActivityEntity.m in Sources */,
 				883E546F19339EDF00E8D2CE /* CoreData-Helper.m in Sources */,
-				886C5E3B1932FF49008F885A /* PhotoSeriesEntity.m in Sources */,
 				8881AC6519267AF000F9646B /* imgCollectionTableViewCell.m in Sources */,
 				8881AC6619267AF000F9646B /* CommentViewController.m in Sources */,
 				51FBFD37192DF507009089FA /* UserCell.m in Sources */,
@@ -737,10 +738,13 @@
 				5101B3471927370A00084BCA /* BottomView.m in Sources */,
 				51B47EA019330925000E47C6 /* MJRefreshBaseView.m in Sources */,
 				F2F8BF1F1924EFE6000A3CED /* PeanutTopViewController.m in Sources */,
+				8896668819348AD600138572 /* UserInfEntity.m in Sources */,
+				8896668519348AD600138572 /* PhotoSeriesEntity.m in Sources */,
 				51B47EA71933093C000E47C6 /* PullRefreshTableView.m in Sources */,
 				51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */,
 				887F20F7191D4051009250D2 /* AppDelegate.m in Sources */,
 				51B47EA319330925000E47C6 /* MJRefreshHeaderView.m in Sources */,
+				8896667F19348AD500138572 /* MustReadEntity.m in Sources */,
 				887F2121191DB88B009250D2 /* BaseUIViewController.m in Sources */,
 				886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */,
 				88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */,
@@ -748,6 +752,7 @@
 				88D02AB4191E721C001ABA96 /* ActivityViewController.m in Sources */,
 				887F2128191DB934009250D2 /* CoreDataModel.xcdatamodeld in Sources */,
 				D2F32F12192607ED00E446D6 /* MustReaddetialViewController.m in Sources */,
+				8896668219348AD600138572 /* PhotoInfoEntity.m in Sources */,
 				887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */,
 				5101B34419270E2900084BCA /* ActivityDetailUserViewController.m in Sources */,
 				88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */,
@@ -766,6 +771,7 @@
 				510A5DAA19332AE200D415E4 /* CustomSegmentedControl.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
 				51B47EA219330925000E47C6 /* MJRefreshFooterView.m in Sources */,
+				8896667C19347BE900138572 /* StaticDataManager.m in Sources */,
 				887F213D191DF9D2009250D2 /* VKLiveBlur.m in Sources */,
 				887F2140191E200D009250D2 /* NSString+extra.m in Sources */,
 				88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */,

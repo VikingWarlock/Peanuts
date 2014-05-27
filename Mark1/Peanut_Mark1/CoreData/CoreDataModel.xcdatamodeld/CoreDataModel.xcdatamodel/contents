@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13D65" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="ActivityEntity" representedClassName="ActivityEntity" syncable="YES">
-        <attribute name="activityType" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="activityType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="avatar_big_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="avatar_middle_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="avatar_original_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="avatar_small_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="avatar_tiny_url" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="begin_time" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="comment_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="begin_time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="comment_count" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cover_url" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="credit_limit" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="credit_limit" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="descriptions" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="dig_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="end_time" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="fee_limit" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="dig_count" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="end_time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fee_limit" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="feed_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image_path_array" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="is_repost" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isCurrent" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="member_audit" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="personNum_limit" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="publish_time" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="repost_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="personNum_limit" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="publish_time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="repost_count" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="MustReadEntity" representedClassName="MustReadEntity" syncable="YES">
         <attribute name="abstraction" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="comment_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="comment_count" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cover_url" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="dig_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="dig_count" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="feed_id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="is_report" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="page_views" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="publish_time" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="repost_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="is_report" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="page_views" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="publish_time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="repost_count" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -59,34 +59,34 @@
         <attribute name="speed" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="PhotoInfoEntity" representedClassName="PhotoInfoEntity" syncable="YES">
-        <attribute name="comment_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="comment_count" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="descriptions" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="dig_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="dig_count" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="feed_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="group_feed_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="is_report" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="is_report" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="local_path" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="publish_time" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="recommend_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="publish_time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recommend_count" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recomment_content" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="repost_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="repost_count" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="details" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PhotoDetailEntity" syncable="YES"/>
     </entity>
     <entity name="PhotoSeriesEntity" representedClassName="PhotoSeriesEntity" syncable="YES">
         <attribute name="addr" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="comment_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="comment_count" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="cover_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="descriptions" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="dig_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="dig_count" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="feed_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="images" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="is_repost" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="publish_time" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="is_repost" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="publish_time" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="recommend_content" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="recommend_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="repost_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="recommend_count" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="repost_count" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="topic" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
@@ -99,22 +99,22 @@
         <attribute name="avatarPic" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="equipment" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="followercount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="followingcount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="followercount" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="followingcount" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="intro" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="login" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="photocount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="photocount" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="province" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="sex" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="sex" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uname" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ActivityEntity" positionX="-144" positionY="171" width="128" height="403"/>
-        <element name="MustReadEntity" positionX="151" positionY="149" width="128" height="223"/>
+        <element name="ActivityEntity" positionX="-144" positionY="171" width="128" height="405"/>
+        <element name="MustReadEntity" positionX="151" positionY="149" width="128" height="225"/>
         <element name="NetworkRequest" positionX="-317" positionY="42" width="128" height="30"/>
         <element name="PhotoDetailEntity" positionX="-135" positionY="180" width="128" height="178"/>
-        <element name="PhotoInfoEntity" positionX="-171" positionY="5" width="128" height="253"/>
+        <element name="PhotoInfoEntity" positionX="-171" positionY="5" width="128" height="255"/>
         <element name="PhotoSeriesEntity" positionX="-326" positionY="143" width="128" height="255"/>
         <element name="UserInfEntity" positionX="-0" positionY="26" width="128" height="300"/>
     </elements>

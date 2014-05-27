@@ -34,7 +34,6 @@
     
     
     
-    
     if ([USER_PHPSESSID length]<=0) {
         Logined=NO;
         control=[[UIControl alloc]init];
