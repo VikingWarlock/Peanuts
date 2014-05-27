@@ -25,11 +25,12 @@
 		51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */; };
 		51FBFD34192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FBFD33192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m */; };
 		51FBFD37192DF507009089FA /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FBFD36192DF507009089FA /* UserCell.m */; };
-		881DA80C192E228B0043AF21 /* PhotoInfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA80B192E228B0043AF21 /* PhotoInfoEntity.m */; };
-		881DA80F192E228B0043AF21 /* UserInfEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA80E192E228B0043AF21 /* UserInfEntity.m */; };
-		881DA812192E228B0043AF21 /* ActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA811192E228B0043AF21 /* ActivityEntity.m */; };
-		881DA815192E228B0043AF21 /* MustReadEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA814192E228B0043AF21 /* MustReadEntity.m */; };
-		881DA818192E228B0043AF21 /* PhotoDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA817192E228B0043AF21 /* PhotoDetailEntity.m */; };
+		883E546A19339EDF00E8D2CE /* PhotoDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA817192E228B0043AF21 /* PhotoDetailEntity.m */; };
+		883E546B19339EDF00E8D2CE /* MustReadEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA814192E228B0043AF21 /* MustReadEntity.m */; };
+		883E546C19339EDF00E8D2CE /* ActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA811192E228B0043AF21 /* ActivityEntity.m */; };
+		883E546E19339EDF00E8D2CE /* PhotoInfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA80B192E228B0043AF21 /* PhotoInfoEntity.m */; };
+		883E546F19339EDF00E8D2CE /* CoreData-Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C5E371932E57D008F885A /* CoreData-Helper.m */; };
+		883E547219345C4C00E8D2CE /* UserInfEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 883E547119345C4C00E8D2CE /* UserInfEntity.m */; };
 		885F6341192A4447007BAAE0 /* RequestPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 885F6340192A4447007BAAE0 /* RequestPackage.m */; };
 		886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C08931920F1EB00BD7E5F /* NetworkRequest.m */; };
 		886C5E3B1932FF49008F885A /* PhotoSeriesEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C5E3A1932FF49008F885A /* PhotoSeriesEntity.m */; };

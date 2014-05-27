@@ -12,12 +12,15 @@
 #import "ActivityDetailViewController.h"
 #import "PullRefreshTableView.h"
 #import "CustomSegmentedControl.h"
+#import "CoreData-Helper.h"
 
 #define PRESENT_TITLE_COLOR [UIColor redColor]
 #define PAST_TITLE_COLOR [UIColor grayColor]
 
 @interface ActivityViewController ()
 {
+    NSMutableArray *onlineArrayPrg;
+    
     NSArray *bindingFooterToBottom;
     NSArray *bindingFooterToTop;
     BOOL isProgressing;
@@ -115,7 +118,27 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"progressingCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    ActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    
+    [cell.picture setImageWithURL:[onlineArrayPrg[indexPath.row] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] ];
+    [cell.avatar setImageWithURL:[onlineArrayPrg[indexPath.row] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+    cell.Date.text = [NSString stringWithFormat:@"%@ - %@",[onlineArrayPrg[indexPath.row] valueForKey:@"begin_time"],[onlineArrayPrg[indexPath.row] valueForKey:@"end_time"] ];
+    cell.title.text = [onlineArrayPrg[indexPath.row] valueForKey:@"topic"];
+    if ([[onlineArrayPrg[indexPath.row] valueForKey:@"activityType"] intValue] == 0)
+    {
+        cell.type.text = @"线上活动";
+    }
+    else if([[onlineArrayPrg[indexPath.row] valueForKey:@"activityType"] intValue] == 1)
+    {
+        cell.type.text = @"线下活动";
+    }
+    else
+    {
+        cell.type.text = @"未知错误";
+    }
+    
+    
     return cell;
 }
 
@@ -127,7 +150,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     if (tableView.tag == 0) {
-        return 4;
+        return [onlineArrayPrg count];
     }
     else if(tableView.tag == 1)
         return 5;
@@ -164,8 +187,20 @@
 
 -(void)pullDownProgressing:(MJRefreshBaseView*)refreshView
 {
-    NSLog(@"this is pull down progressing");
-    [refreshView endRefreshing];
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":@"10",@"activityType":@"0",@"isCurrent":@"0"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
+        {
+            onlineArrayPrg = [responseObject valueForKey:@"data"];
+            for (NSDictionary *dic in onlineArrayPrg) {
+                //[CoreData_Helper addActivityEntity:dic];
+            }
+            [_progressingTableView reloadData];
+            [refreshView endRefreshing];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+        [refreshView endRefreshing];
+    }];
 }
 
 -(void)pullUpProgressing:(MJRefreshBaseView*)refreshView
