@@ -8,126 +8,8 @@
 
 #import "ActivityDetailUserViewController.h"
 #import "AMPAvatarView.h"
-@interface UserCell : UITableViewCell
-@property (strong,nonatomic) AMPAvatarView *avatar;
-@property (strong,nonatomic) UILabel *unverified;
-@property (strong,nonatomic) UILabel *name;
-@property (strong,nonatomic) UIButton *passVerify;
-@property (strong,nonatomic) UIButton *deleteMember;
-@end
-
-@implementation UserCell
-
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        self.backgroundColor = [UIColor clearColor];
-        [self.contentView addSubview:self.avatar];
-        [self.contentView addSubview:self.name];
-        [self.contentView addSubview:self.deleteMember];
-        [self.contentView addSubview:self.unverified];
-        [self.contentView addSubview:self.passVerify];
-
-        
-        [_avatar setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-15-[_avatar(40)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_avatar(40)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_avatar attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0] ];
-        
-        [_name setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_avatar]-15-[_name]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar,_name)]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_name attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0] ];
-        
-        [_unverified setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_name]-6-[_unverified]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_name,_unverified)]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_unverified attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:_name attribute:NSLayoutAttributeTop multiplier:1.0 constant:0] ];
-        
-        [_passVerify setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_passVerify(42)]-7.5-[_deleteMember]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_passVerify,_deleteMember)]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_passVerify(16)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_passVerify)]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_passVerify attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0] ];
-        
-        [_deleteMember setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_deleteMember(42)]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_deleteMember)]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_deleteMember(16)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_deleteMember)]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_deleteMember attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.contentView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0] ];
-        
-    }
-    return self;
-}
-
-#pragma mark -lazy initialization
-
-- (AMPAvatarView *)avatar
-{
-    if (!_avatar) {
-        _avatar = [[AMPAvatarView alloc] init];
-        [_avatar setImage:[UIImage imageNamed:@"iron.png"]];
-        _avatar.borderWith = 0;
-        _avatar.shadowRadius = 0;
-    }
-    return _avatar;
-}
-
-- (UILabel *)name
-{
-    if (!_name) {
-        _name = [[UILabel alloc] init];
-        _name.textColor = [UIColor whiteColor];
-        _name.font = [UIFont systemFontOfSize:12];
-        _name.text = @"马大姐";
-    }
-    return _name;
-}
-
-- (UILabel *)unverified
-{
-    if (!_unverified) {
-        _unverified = [[UILabel alloc] init];
-        _unverified.backgroundColor = [UIColor redColor];
-        _unverified.textColor = [UIColor whiteColor];
-        _unverified.font = [UIFont systemFontOfSize:8];
-        _unverified.text = @"未审核";
-        _unverified.layer.cornerRadius = 2.0;
-    }
-    return _unverified;
-}
-
-- (UIButton *)passVerify
-{
-    if (!_passVerify) {
-        _passVerify = [[UIButton alloc] init];
-        _passVerify.backgroundColor = [UIColor greenColor];
-        _passVerify.titleLabel.textColor = [UIColor whiteColor];
-        _passVerify.titleLabel.font = [UIFont systemFontOfSize:9];
-        [_passVerify setTitleEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)];
-        [_passVerify setTitle:@"通过审核" forState:UIControlStateNormal];
-        _passVerify.layer.cornerRadius = 2.0;
-        _passVerify.hidden = YES;
-    }
-    return _passVerify;
-}
-
-- (UIButton *)deleteMember
-{
-    if (!_deleteMember) {
-        _deleteMember = [[UIButton alloc] init];
-        _deleteMember.backgroundColor = [UIColor grayColor];
-        _deleteMember.titleLabel.font = [UIFont systemFontOfSize:9];
-        _deleteMember.titleLabel.textColor = [UIColor whiteColor];
-        [_deleteMember setTitleEdgeInsets:UIEdgeInsetsMake(2, 2, 2, 2)];
-        [_deleteMember setTitle:@"删除成员" forState:UIControlStateNormal];
-        _deleteMember.layer.cornerRadius = 2.0;
-        _deleteMember.hidden = YES;
-    }
-    return _deleteMember;
-}
-
-@end
-
-
-
+#import "UserCell.h"
+#import "PullRefreshTableView.h"
 
 @interface ActivityDetailUserViewController ()
 {
@@ -141,7 +23,7 @@
     BOOL isEdit;
 }
 @property (strong,nonatomic) UIView *header;
-@property (nonatomic,strong) UITableView *tableview;
+@property (nonatomic,strong) PullRefreshTableView *tableview;
 @property (nonatomic,strong) UIAlertView *alertView;
 @end
 
@@ -184,12 +66,21 @@
     [_tableview setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableview)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_header][_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_header,_tableview)]];
+    
+    __weak ActivityDetailUserViewController *weakSelf =self;
+    [self.tableview setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
+        [weakSelf pullDown:refreshView];
+    }];
+    [self.tableview setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
+        [weakSelf pullUp:refreshView];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     ((UIViewController *)(self.navigationController.viewControllers)[[self.navigationController.viewControllers indexOfObject:self] - 1]).navigationItem.title = @"";
+    [self sortArrayByIsVerified];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -201,6 +92,25 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [self.tableview freeHeaderFooter];
+}
+
+#pragma mark -Network stuff
+
+-(void)pullDown:(MJRefreshBaseView*)refreshView
+{
+    NSLog(@"this is pull down");
+    [refreshView endRefreshing];
+}
+
+-(void)pullUp:(MJRefreshBaseView*)refreshView
+{
+    NSLog(@"this is pull up");
+    [refreshView endRefreshing];
 }
 
 #pragma mark -method
@@ -234,6 +144,18 @@
 {
     deletedIndexPath = [_tableview indexPathForCell:(UserCell *)((UIButton *)sender).superview.superview.superview];
     [self.alertView show];
+}
+
+- (void)sortArrayByIsVerified
+{
+    [users sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        int a = [[obj1 valueForKey:@"isVerified"] intValue];
+        int b = [[obj2 valueForKey:@"isVerified"] intValue];
+        if (a > b)
+            return NSOrderedDescending;
+        else
+            return NSOrderedAscending;
+    }];
 }
 
 #pragma mark -tableView datasource and delegate
@@ -292,10 +214,10 @@
     return _header;
 }
 
-- (UITableView *)tableview
+- (PullRefreshTableView *)tableview
 {
     if (!_tableview) {
-        _tableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableview = [[PullRefreshTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         [_tableview setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         _tableview.dataSource = self;
         _tableview.delegate = self;

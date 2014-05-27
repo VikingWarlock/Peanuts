@@ -8,6 +8,7 @@
 
 #import "Peanut_SNSPart.h"
 
+#import "RequestPackage.h"
 
 #define like_icon @"1.png"
 #define comment_icon @"2.png"
@@ -52,7 +53,9 @@
     [self addSubview:btn3];
     btn3.frame=CGRectMake(SelfScreenbounds.size.width*(2.f/3.f+1.f/15.f), self.frame.size.height*0.2, SelfScreenbounds.size.width*0.2, self.frame.size.height*0.6);
     
+    
 
+    
 }
 
 

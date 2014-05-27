@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "UIImageView+WebCache.h"
 @interface ActivityTableViewCell : UITableViewCell
 @property (nonatomic,strong) UIImageView *picture;
 @property (nonatomic,strong) UIImageView *avatar;

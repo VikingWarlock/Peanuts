@@ -39,6 +39,7 @@
     backItem.title = @"";
     self.navigationItem.backBarButtonItem = backItem;
 
+    NetworkManager=[AFHTTPRequestOperationManager manager];
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
 
@@ -71,6 +72,7 @@
         self.bkImage=bkimage;
     
     [bkImageView setImage:self.bkImage];
+    [self.view sendSubviewToBack:bkImageView];
   
 }
 

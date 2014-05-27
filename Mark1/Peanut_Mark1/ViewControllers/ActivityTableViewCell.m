@@ -93,7 +93,6 @@
         _picture.image = nil;
         _picture.clipsToBounds = YES;
         _picture.contentMode = UIViewContentModeScaleAspectFill;
-        
         _picture.backgroundColor = [UIColor redColor];
     }
     return _picture;

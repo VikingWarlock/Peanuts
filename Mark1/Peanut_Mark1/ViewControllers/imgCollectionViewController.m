@@ -18,20 +18,13 @@
     UIButton * shareBtn;
     
     NSIndexPath * currentIndexPath;
+    NSMutableArray * data;
 }
 
 @property (nonatomic,strong)UITableView * tableView;
 @property (nonatomic,strong)ImgBottomView * bottomView;
 
 @end
-
-/**
- *
- *UITableView+extra里面两个方法可以快速的达到avatar的效果😳
- *
- *
- */
-
 
 
 @implementation imgCollectionViewController
@@ -83,6 +76,9 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
     
+    
+    
+
     // Do any additional setup after loading the view.
 }
 
@@ -216,6 +212,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     
     cell.delegate = self;
 
+    
     cell.imgView.image = [UIImage imageNamed:@"pic.jpg"];
     cell.titleLabel.text = @"001";
     [cell.praiseBtn setTitle:[NSString stringWithFormat:@"%d",indexPath.row] forState:UIControlStateNormal];

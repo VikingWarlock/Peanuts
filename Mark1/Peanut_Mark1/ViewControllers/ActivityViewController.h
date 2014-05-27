@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ActivityViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
+#import "BaseUIViewController.h"
+@interface ActivityViewController : BaseUIViewController <UITableViewDataSource,UITableViewDelegate>
 
 @end

@@ -21,9 +21,12 @@
     
     
     [MagicalRecord setupCoreDataStack];
+   
     [NetworkStack setup];
     
-
+    [[NSUserDefaults standardUserDefaults]setAESKey:AES_Private_key];
+    
+    
     PeanutTopViewController *TopVC=[[PeanutTopViewController alloc]init];
     
     
