@@ -91,7 +91,7 @@
     item.personNum_limit=[parameter objectForKey:@"personNum_limit"];
     
     item.activityType=[parameter objectForKey:@"activityType"];
-    item.isCurrent=[parameter objectForKey:@"isCurrent"];
+    item.isCurrent=[[parameter objectForKey:@"isCurrent"]stringValue];
     
     [[NSManagedObjectContext MR_context]MR_saveToPersistentStoreAndWait];
     

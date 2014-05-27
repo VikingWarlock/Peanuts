@@ -77,7 +77,6 @@
     downloadedImage =[[NSMutableDictionary alloc]init];
     
     
-    
     screen=[UIScreen mainScreen].bounds;
     
     tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, -64, screen.size.width, screen.size.height+64) style:UITableViewStylePlain];

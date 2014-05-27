@@ -29,9 +29,9 @@
 @property (nonatomic, retain) NSString * fee_limit;
 @property (nonatomic, retain) NSString * feed_id;
 @property (nonatomic, retain) id image_path_array;
-@property (nonatomic, retain) NSNumber * is_repost;
-@property (nonatomic, retain) NSNumber * isCurrent;
-@property (nonatomic, retain) NSNumber * member_audit;
+@property (nonatomic, retain) NSString * is_repost;
+@property (nonatomic, retain) NSString * isCurrent;
+@property (nonatomic, retain) NSString * member_audit;
 @property (nonatomic, retain) NSString * personNum_limit;
 @property (nonatomic, retain) NSString * publish_time;
 @property (nonatomic, retain) NSString * repost_count;
