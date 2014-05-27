@@ -11,7 +11,6 @@
 #import "ActivityTableViewCell.h"
 #import "ActivityDetailViewController.h"
 #import "PullRefreshTableView.h"
-#import "CustomSegmentedControl.h"
 #import "CoreData-Helper.h"
 
 #define PRESENT_TITLE_COLOR [UIColor redColor]
@@ -20,10 +19,13 @@
 @interface ActivityViewController ()
 {
     NSMutableArray *onlineArrayPrg;
+    NSMutableArray *onlineArrayReviewed;
+    NSMutableArray *offlineArrayPrg;
+    NSMutableArray *offlineArrayReviewed;
     
     NSArray *bindingFooterToBottom;
     NSArray *bindingFooterToTop;
-    BOOL isProgressing;
+    BOOL status;//1代表展示正在进行的活动，0代表展示往期活动
     BOOL shouldLoadReviewedTableView;
     CGPoint upPoint;
     CGPoint downPoint;
@@ -50,7 +52,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         shouldLoadReviewedTableView  = YES;
-        isProgressing = YES;
+        status = 1;
     }
     return self;
 }
@@ -74,13 +76,13 @@
     
     __weak ActivityViewController *weakSelf =self;
     [self.progressingTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullDownProgressing:refreshView];
+        [weakSelf pullDownProgressing:refreshView IsOnline:YES IsProgressing:YES];
     }];
     [self.progressingTableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
         [weakSelf pullUpProgressing:refreshView];
     }];
     [self.ReviewedTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullDownReviewed:refreshView];
+        [weakSelf pullDownReviewed:refreshView IsOnline:YES IsProgressing:NO];
     }];
     [self.ReviewedTableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
         [weakSelf pullUpReviewed: refreshView];
@@ -120,24 +122,78 @@
     static NSString *CellIdentifier = @"progressingCell";
     ActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    
-    [cell.picture setImageWithURL:[onlineArrayPrg[indexPath.row] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] ];
-    [cell.avatar setImageWithURL:[onlineArrayPrg[indexPath.row] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
-    cell.Date.text = [NSString stringWithFormat:@"%@ - %@",[onlineArrayPrg[indexPath.row] valueForKey:@"begin_time"],[onlineArrayPrg[indexPath.row] valueForKey:@"end_time"] ];
-    cell.title.text = [onlineArrayPrg[indexPath.row] valueForKey:@"topic"];
-    if ([[onlineArrayPrg[indexPath.row] valueForKey:@"activityType"] intValue] == 0)
-    {
-        cell.type.text = @"线上活动";
+    if (tableView.tag == 0 && _progressingSegmentedControl.isOnline) {
+        [cell.picture setImageWithURL:[onlineArrayPrg[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] ];
+        [cell.avatar setImageWithURL:[onlineArrayPrg[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        cell.Date.text = [self DateFromTimestamp:[onlineArrayPrg[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[onlineArrayPrg[indexPath.section] valueForKey:@"end_time"] ];
+        cell.title.text = [onlineArrayPrg[indexPath.section] valueForKey:@"topic"];
+        if ([[onlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
+        {
+            cell.type.text = @"线上活动";
+        }
+        else if([[onlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 1)
+        {
+            cell.type.text = @"线下活动";
+        }
+        else
+        {
+            cell.type.text = @"未知错误";
+        }
     }
-    else if([[onlineArrayPrg[indexPath.row] valueForKey:@"activityType"] intValue] == 1)
-    {
-        cell.type.text = @"线下活动";
+    else if (tableView.tag == 0 && !_progressingSegmentedControl.isOnline) {
+        [cell.picture setImageWithURL:[offlineArrayPrg[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] ];
+        [cell.avatar setImageWithURL:[offlineArrayPrg[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        cell.Date.text = [self DateFromTimestamp:[offlineArrayPrg[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[offlineArrayPrg[indexPath.section] valueForKey:@"end_time"] ];
+        cell.title.text = [offlineArrayPrg[indexPath.section] valueForKey:@"topic"];
+        if ([[offlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
+        {
+            cell.type.text = @"线上活动";
+        }
+        else if([[offlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 1)
+        {
+            cell.type.text = @"线下活动";
+        }
+        else
+        {
+            cell.type.text = @"未知错误";
+        }
     }
-    else
-    {
-        cell.type.text = @"未知错误";
+    else if (tableView.tag == 1 && _ReviewedSegmentedControl.isOnline) {
+        [cell.picture setImageWithURL:[onlineArrayReviewed[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] ];
+        [cell.avatar setImageWithURL:[onlineArrayReviewed[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        cell.Date.text = [self DateFromTimestamp:[onlineArrayReviewed[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[onlineArrayReviewed[indexPath.section] valueForKey:@"end_time"] ];
+        cell.title.text = [onlineArrayReviewed[indexPath.section] valueForKey:@"topic"];
+        if ([[onlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
+        {
+            cell.type.text = @"线上活动";
+        }
+        else if([[onlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 1)
+        {
+            cell.type.text = @"线下活动";
+        }
+        else
+        {
+            cell.type.text = @"未知错误";
+        }
     }
-    
+    else if (tableView.tag == 1 && !_ReviewedSegmentedControl.isOnline) {
+        [cell.picture setImageWithURL:[offlineArrayReviewed[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] ];
+        [cell.avatar setImageWithURL:[offlineArrayReviewed[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        cell.Date.text = [self DateFromTimestamp:[offlineArrayReviewed[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[offlineArrayReviewed[indexPath.section] valueForKey:@"end_time"] ];
+        cell.title.text = [offlineArrayReviewed[indexPath.section] valueForKey:@"topic"];
+        if ([[offlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
+        {
+            cell.type.text = @"线上活动";
+        }
+        else if([[offlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 1)
+        {
+            cell.type.text = @"线下活动";
+        }
+        else
+        {
+            cell.type.text = @"未知错误";
+        }
+    }
     
     return cell;
 }
@@ -149,11 +205,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (tableView.tag == 0) {
+    if (tableView.tag == 0 && _progressingSegmentedControl.isOnline) {
         return [onlineArrayPrg count];
     }
-    else if(tableView.tag == 1)
-        return 5;
+    else if(tableView.tag == 0 && !_progressingSegmentedControl.isOnline)
+    {
+        return [offlineArrayPrg count];
+    }
+    else if(tableView.tag == 1 && _ReviewedSegmentedControl.isOnline)
+    {
+        return [onlineArrayReviewed count];
+    }
+    else if(tableView.tag == 1 && !_ReviewedSegmentedControl.isOnline)
+    {
+        return [offlineArrayReviewed count];
+    }
     else
         return 0;
 }
@@ -185,14 +251,43 @@
 
 #pragma mark -Network stuff
 
--(void)pullDownProgressing:(MJRefreshBaseView*)refreshView
+- (void)ClickedButtonIsOnline:(NSInteger)isOnline IsPresenting:(NSInteger)ispresenting IsProgressing:(NSInteger)isprogressing
 {
-    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":@"10",@"activityType":@"0",@"isCurrent":@"0"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    __weak ActivityViewController *weakSelf =self;
+    if (ispresenting) {
+        if (isprogressing) {
+            [self.progressingTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
+                [weakSelf pullDownProgressing:refreshView IsOnline:isOnline IsProgressing:isprogressing];
+            }];
+            [_progressingTableView beginRefreshing];
+        }
+        else
+        {
+            [self.ReviewedTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
+                [weakSelf pullDownReviewed:refreshView IsOnline:isOnline IsProgressing:isprogressing];
+            }];
+            [_ReviewedTableView beginRefreshing];
+        }
+    }
+}
+
+-(void)pullDownProgressing:(MJRefreshBaseView*)refreshView IsOnline:(BOOL)isOline IsProgressing:(BOOL)isprogressing
+{
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":@"10",@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
-            onlineArrayPrg = [responseObject valueForKey:@"data"];
-            for (NSDictionary *dic in onlineArrayPrg) {
-                //[CoreData_Helper addActivityEntity:dic];
+            if (isOline) {
+                onlineArrayPrg = [responseObject valueForKey:@"data"];
+                for (NSDictionary *dic in onlineArrayPrg) {
+                    //[CoreData_Helper addActivityEntity:dic];
+                }
+            }
+            else
+            {
+                offlineArrayPrg = [responseObject valueForKey:@"data"];
+                for (NSDictionary *dic in offlineArrayPrg) {
+                    //[CoreData_Helper addActivityEntity:dic];
+                }
             }
             [_progressingTableView reloadData];
             [refreshView endRefreshing];
@@ -209,16 +304,48 @@
     [refreshView endRefreshing];
 }
 
--(void)pullDownReviewed:(MJRefreshBaseView*)refreshView
+-(void)pullDownReviewed:(MJRefreshBaseView*)refreshView IsOnline:(BOOL)isOline IsProgressing:(BOOL)isprogressing
 {
-    NSLog(@"this is pull down reviewed");
-    [refreshView endRefreshing];
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":@"10",@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
+        {
+            if (isOline) {
+                onlineArrayReviewed = [responseObject valueForKey:@"data"];
+                for (NSDictionary *dic in onlineArrayReviewed) {
+                    //[CoreData_Helper addActivityEntity:dic];
+                }
+            }
+            else
+            {
+                offlineArrayReviewed = [responseObject valueForKey:@"data"];
+                for (NSDictionary *dic in offlineArrayReviewed) {
+                    //[CoreData_Helper addActivityEntity:dic];
+                }
+            }
+            [_ReviewedTableView reloadData];
+            [refreshView endRefreshing];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+        [refreshView endRefreshing];
+    }];
 }
 
 -(void)pullUpReviewed:(MJRefreshBaseView*)refreshView
 {
     NSLog(@"this is pull up reviewed");
     [refreshView endRefreshing];
+}
+
+- (NSString *)DateFromTimestamp:(NSString *)beginTimestamp endTimestamp:(NSString *)endTimestamp
+{
+    NSDate *begin = [NSDate dateWithTimeIntervalSince1970:[beginTimestamp intValue]];
+    NSDate *end = [NSDate dateWithTimeIntervalSince1970:[endTimestamp intValue]];
+
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy/MM/dd"];
+    NSString *date = [NSString stringWithFormat:@"%@ - %@",[formatter stringFromDate:begin],[formatter stringFromDate:end]];
+    return date;
 }
 
 #pragma mark -status switch
@@ -236,22 +363,24 @@
     }
     
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        if (isProgressing == NO) {
+        if (status == 0) {
             _ReviewedFooterView.center = downPoint;
-            isProgressing = !isProgressing;
+            status = !status;
             _progressing.textColor = PRESENT_TITLE_COLOR;
             _reviewed.textColor = PAST_TITLE_COLOR;
-            _progressingSegmentedControl.isProgressing = YES;
-            _ReviewedSegmentedControl.isProgressing = NO;
+            _progressingSegmentedControl.isPresenting = YES;
+            _ReviewedSegmentedControl.isPresenting = NO;
+            [_progressingTableView beginRefreshing];
         }
         else
         {
             _ReviewedFooterView.center = upPoint;
-            isProgressing = !isProgressing;
+            status = !status;
             _progressing.textColor = PAST_TITLE_COLOR;
             _reviewed.textColor = PRESENT_TITLE_COLOR;
-            _progressingSegmentedControl.isProgressing = NO;
-            _ReviewedSegmentedControl.isProgressing = YES;
+            _progressingSegmentedControl.isPresenting = NO;
+            _ReviewedSegmentedControl.isPresenting = YES;
+            [_ReviewedTableView beginRefreshing];
         }
         _ReviewedTableView.frame = CGRectMake(0, recognizer.view.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
     } completion:nil];
@@ -262,14 +391,15 @@
     downPoint = CGPointMake(self.view.frame.size.width / 2,self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER / 2);
     
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        if (isProgressing == NO) {
+        if (status == NO) {
             _ReviewedFooterView.center = downPoint;
-            isProgressing = !isProgressing;
+            status = !status;
             _progressing.textColor = PRESENT_TITLE_COLOR;
             _reviewed.textColor = PAST_TITLE_COLOR;
-            _progressingSegmentedControl.isProgressing = YES;
-            _ReviewedSegmentedControl.isProgressing = NO;
+            _progressingSegmentedControl.isPresenting = YES;
+            _ReviewedSegmentedControl.isPresenting = NO;
             _ReviewedTableView.frame = CGRectMake(0, _ReviewedFooterView.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
+            [_progressingTableView beginRefreshing];
         }
     } completion:nil];
     
@@ -324,20 +454,21 @@
         [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
             if (recognizer.view.center.y < self.view.frame.size.height / 2 || flag1) {
                 recognizer.view.center = upPoint;
-                isProgressing = NO;
+                status = NO;
                 _progressing.textColor = PAST_TITLE_COLOR;
                 _reviewed.textColor = PRESENT_TITLE_COLOR;
-                _progressingSegmentedControl.isProgressing = NO;
-                _ReviewedSegmentedControl.isProgressing = YES;
+                _progressingSegmentedControl.isPresenting = NO;
+                _ReviewedSegmentedControl.isPresenting = YES;
+                [_ReviewedTableView beginRefreshing];
             }
             if(recognizer.view.center.y > self.view.frame.size.height / 2 || flag2)
             {
                 recognizer.view.center = downPoint;
-                isProgressing = YES;
+                status = YES;
                 _progressing.textColor = PRESENT_TITLE_COLOR;
                 _reviewed.textColor = PAST_TITLE_COLOR;
-                _progressingSegmentedControl.isProgressing = YES;
-                _ReviewedSegmentedControl.isProgressing = NO;
+                _progressingSegmentedControl.isPresenting = YES;
+                _ReviewedSegmentedControl.isPresenting = NO;
             }
             _ReviewedTableView.frame = CGRectMake(0, recognizer.view.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
         } completion:nil];
@@ -371,6 +502,7 @@
         
         self.progressingSegmentedControl = [[CustomSegmentedControl alloc] initWithisProgressing:YES];
         [_progressingHeadView addSubview:self.progressingSegmentedControl];
+        _progressingSegmentedControl.delegate = self;
         [_progressingSegmentedControl setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_progressingHeadView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-255-[_progressingSegmentedControl]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingSegmentedControl)]];
         [_progressingHeadView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=7.5-[_progressingSegmentedControl]->=7.5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingSegmentedControl)]];
@@ -420,6 +552,7 @@
         
         self.ReviewedSegmentedControl = [[CustomSegmentedControl alloc] initWithisProgressing:NO];
         [_ReviewedFooterView addSubview:self.ReviewedSegmentedControl];
+        _ReviewedSegmentedControl.delegate = self;
         [_ReviewedSegmentedControl setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_ReviewedFooterView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-255-[_ReviewedSegmentedControl]-15-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedSegmentedControl)]];
         [_ReviewedFooterView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|->=7.5-[_ReviewedSegmentedControl]->=7.5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_ReviewedSegmentedControl)]];
