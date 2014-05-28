@@ -12,11 +12,14 @@
 #import "PullRefreshTableView.h"
 #import "CoreData-Helper.h"
 #import "PublicLib.h"
+#define COUNT_OF_PAGE 5
 @interface MustReadViewController ()
 {
     NSDateFormatter *formatter;
-    NSString* timeStr;
-    NSString* timeSp;
+    NSString *timeStr;
+    NSString *timeSp;
+    NSMutableArray *data;
+    NSMutableArray *user;
 }
 @property (nonatomic,strong) UIView *dateHeadView;
 @property (nonatomic,strong) PullRefreshTableView *readTableView;
@@ -33,16 +36,23 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.title = @"必读";
+    [self.readTableView beginRefreshing];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title = @"必读";
     formatter = [[NSDateFormatter alloc] init];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
     [formatter setDateFormat:@"YYYY年MM月dd日"];
     timeStr = [formatter stringFromDate:[NSDate date]];
+    timeSp = [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]];
     [self.view addSubview:self.dateHeadView];
     [self.view addSubview:self.readTableView];
     
@@ -57,8 +67,16 @@
     
     [self.readTableView registerClass:[MustReadTableViewCell class] forCellReuseIdentifier:@"mustreadCell"];
     
-    [self.readTableView setPullDownBeginRefreshAction:@selector(pullDownBeginRefreshAction)];
-    [self.readTableView setPullUpBeginRefreshAction:@selector(pullUpBeginRefreshAction)];
+//    [self.readTableView setPullDownBeginRefreshAction:@selector(pullDownBeginRefreshAction)];
+//    [self.readTableView setPullUpBeginRefreshAction:@selector(pullUpBeginRefreshAction)];
+    __weak MustReadViewController *weakSelf =self;
+    [_readTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
+        [weakSelf pullDownBeginRefreshAction:refreshView];
+    }];
+    [_readTableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
+        [weakSelf pullUpBeginRefreshAction:refreshView];
+    }];
+
     [self.readTableView beginRefreshing];
 }
 
@@ -73,14 +91,41 @@
     [self.readTableView freeHeaderFooter];
 }
 
-- (void)pullDownBeginRefreshAction
+- (void)pullDownBeginRefreshAction:(MJRefreshBaseView *)tableView
 {
-    
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Daily&act=dailyread_list" parameters:@{@"page":@"1",@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
+        {
+            data = [[responseObject valueForKey:@"data"] mutableCopy];
+            user = [[[responseObject valueForKey:@"data"] valueForKey:@"user_info"] mutableCopy];
+            [_readTableView reloadData];
+            [tableView endRefreshing];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+        [tableView endRefreshing];
+    }];
 }
 
-- (void)pullUpBeginRefreshAction
+- (void)pullUpBeginRefreshAction:(MJRefreshBaseView *)tableView
 {
-    
+    unsigned int page = [data count]/COUNT_OF_PAGE+1;
+    if ([data count]%COUNT_OF_PAGE == 0) {
+        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Daily&act=dailyread_list" parameters:@{@"page":[NSString stringWithFormat:@"%d",page],@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
+            {
+                [data addObjectsFromArray:[responseObject valueForKey:@"data"]];
+                [user addObjectsFromArray:[[responseObject valueForKey:@"data"] valueForKey:@"user_info"]];
+                [_readTableView reloadData];
+                [tableView endRefreshing];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@",error);
+            [tableView endRefreshing];
+        }];
+    }
+    else
+        [tableView endRefreshing];
 }
 
 #pragma mark UITableView datasource and delegate
@@ -88,6 +133,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MustReaddetialViewController *detialView = [[MustReaddetialViewController alloc] init];
+    [detialView.picture setImageWithURL:[data[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [detialView setTitle:[data[indexPath.section] valueForKey:@"title"]];
+    [detialView.atitle setText:[data[indexPath.section] valueForKey:@"title"]];
+    [detialView.avatar setImageWithURL:[user[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [detialView.user setText:[user[indexPath.section] valueForKey:@"uname"]];
+    [detialView.like setTitle:[data[indexPath.section] valueForKey:@"digg_count"] forState:UIControlStateNormal];
+    [detialView.comment setTitle:[data[indexPath.section] valueForKey:@"comment_count"] forState:UIControlStateNormal];
+    [detialView.content loadHTMLString:[data[indexPath.section] valueForKey:@"content"] baseURL:nil];
     [self.readTableView deselectRowAtIndexPath: indexPath animated:YES];
     [self.NavigationController pushViewController:detialView animated:YES];
 }
@@ -95,7 +148,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"mustreadCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    MustReadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    [cell.picture setImageWithURL:[data[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [cell.title setText:[data[indexPath.section] valueForKey:@"title"]];
+    [cell.avatar setImageWithURL:[user[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [cell.user setText:[user[indexPath.section] valueForKey:@"uname"]];
+    [cell.like setTitle:[data[indexPath.section] valueForKey:@"digg_count"] forState:UIControlStateNormal];
+    [cell.comment setTitle:[data[indexPath.section] valueForKey:@"comment_count"] forState:UIControlStateNormal];
     return cell;
 }
 
@@ -106,7 +165,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return [data count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -132,7 +191,7 @@
         
         UILabel *datelabel = [[UILabel alloc] init];
         _dateHeadView.backgroundColor = [UIColor whiteColor];
-        datelabel.text = @"2014年5月5号";
+        datelabel.text = timeStr;
         datelabel.textAlignment = NSTextAlignmentLeft;
         datelabel.textColor = [UIColor redColor];
         datelabel.font = [UIFont systemFontOfSize:12];
