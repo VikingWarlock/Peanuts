@@ -254,19 +254,22 @@
 - (void)ClickedButtonIsOnline:(NSInteger)isOnline IsPresenting:(NSInteger)ispresenting IsProgressing:(NSInteger)isprogressing
 {
     __weak ActivityViewController *weakSelf =self;
-    if (ispresenting) {
-        if (isprogressing) {
-            [self.progressingTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-                [weakSelf pullDownProgressing:refreshView IsOnline:isOnline IsProgressing:isprogressing];
-            }];
+    if (isprogressing) {
+        [self.progressingTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView)
+        {
+            [weakSelf pullDownProgressing:refreshView IsOnline:isOnline IsProgressing:isprogressing];
+        }];
+        if (ispresenting) {
             [_progressingTableView beginRefreshing];
         }
+    }
         else
         {
             [self.ReviewedTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
                 [weakSelf pullDownReviewed:refreshView IsOnline:isOnline IsProgressing:isprogressing];
             }];
-            [_ReviewedTableView beginRefreshing];
+            if (ispresenting) {
+                [_ReviewedTableView beginRefreshing];
         }
     }
 }
