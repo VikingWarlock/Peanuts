@@ -9,9 +9,17 @@
 #import "MustReadViewController.h"
 #import "MustReadTableViewCell.h"
 #import "MustReaddetialViewController.h"
+#import "PullRefreshTableView.h"
+#import "CoreData-Helper.h"
+#import "PublicLib.h"
 @interface MustReadViewController ()
+{
+    NSDateFormatter *formatter;
+    NSString* timeStr;
+    NSString* timeSp;
+}
 @property (nonatomic,strong) UIView *dateHeadView;
-@property (nonatomic,strong) UITableView *readTableView;
+@property (nonatomic,strong) PullRefreshTableView *readTableView;
 @end
 
 @implementation MustReadViewController
@@ -30,6 +38,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"必读";
+    formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"YYYY年MM月dd日"];
+    timeStr = [formatter stringFromDate:[NSDate date]];
     [self.view addSubview:self.dateHeadView];
     [self.view addSubview:self.readTableView];
     
@@ -43,6 +56,10 @@
     [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_readTableView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_dateHeadView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0.0]];
     
     [self.readTableView registerClass:[MustReadTableViewCell class] forCellReuseIdentifier:@"mustreadCell"];
+    
+    [self.readTableView setPullDownBeginRefreshAction:@selector(pullDownBeginRefreshAction)];
+    [self.readTableView setPullUpBeginRefreshAction:@selector(pullUpBeginRefreshAction)];
+    [self.readTableView beginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,6 +67,22 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)dealloc
+{
+    [self.readTableView freeHeaderFooter];
+}
+
+- (void)pullDownBeginRefreshAction
+{
+    
+}
+
+- (void)pullUpBeginRefreshAction
+{
+    
+}
+
 #pragma mark UITableView datasource and delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -111,11 +144,11 @@
     }
     return _dateHeadView;
 }
-- (UITableView *)readTableView
+- (PullRefreshTableView *)readTableView
 {
     if(!_readTableView)
     {
-        _readTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _readTableView = [[PullRefreshTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         [_readTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         _readTableView.delegate = self;
         _readTableView.dataSource = self;
