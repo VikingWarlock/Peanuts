@@ -15,13 +15,18 @@
 
 #define PRESENT_TITLE_COLOR [UIColor redColor]
 #define PAST_TITLE_COLOR [UIColor grayColor]
-
+#define COUNT_OF_PAGE 10
 @interface ActivityViewController ()
 {
     NSMutableArray *onlineArrayPrg;
     NSMutableArray *onlineArrayReviewed;
     NSMutableArray *offlineArrayPrg;
     NSMutableArray *offlineArrayReviewed;
+    
+    unsigned int onlinePagePrg;
+    unsigned int offlinePagePrg;
+    unsigned int onlinePageReviewed;
+    unsigned int offlinePageReviewed;
     
     NSArray *bindingFooterToBottom;
     NSArray *bindingFooterToTop;
@@ -53,6 +58,11 @@
     if (self) {
         shouldLoadReviewedTableView  = YES;
         status = 1;
+        
+        onlinePagePrg = 2;
+        onlinePageReviewed = 2;
+        offlinePagePrg = 2;
+        offlinePageReviewed = 2;
     }
     return self;
 }
@@ -79,13 +89,13 @@
         [weakSelf pullDownProgressing:refreshView IsOnline:YES IsProgressing:YES];
     }];
     [self.progressingTableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullUpProgressing:refreshView];
+        [weakSelf pullUpProgressing:refreshView IsOnline:YES IsProgressing:YES];
     }];
     [self.ReviewedTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
         [weakSelf pullDownReviewed:refreshView IsOnline:YES IsProgressing:NO];
     }];
     [self.ReviewedTableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullUpReviewed: refreshView];
+        [weakSelf pullUpReviewed: refreshView IsOnline:YES IsProgressing:NO];
     }];
     
 }
@@ -259,6 +269,10 @@
         {
             [weakSelf pullDownProgressing:refreshView IsOnline:isOnline IsProgressing:isprogressing];
         }];
+        [self.progressingTableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView)
+         {
+             [weakSelf pullUpProgressing:refreshView IsOnline:isOnline IsProgressing:isprogressing];
+         }];
         if (ispresenting) {
             [_progressingTableView beginRefreshing];
         }
@@ -268,6 +282,9 @@
             [self.ReviewedTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
                 [weakSelf pullDownReviewed:refreshView IsOnline:isOnline IsProgressing:isprogressing];
             }];
+            [self.ReviewedTableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
+                [weakSelf pullUpReviewed:refreshView IsOnline:isOnline IsProgressing:isprogressing];
+            }];
             if (ispresenting) {
                 [_ReviewedTableView beginRefreshing];
         }
@@ -276,7 +293,17 @@
 
 -(void)pullDownProgressing:(MJRefreshBaseView*)refreshView IsOnline:(BOOL)isOline IsProgressing:(BOOL)isprogressing
 {
-    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":@"10",@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    unsigned int *page;
+    
+    if (isOline) {
+        page = &onlinePagePrg;
+    }
+    else if (!isOline)
+    {
+        page = &offlinePagePrg;
+    }
+    
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
             if (isOline) {
@@ -294,6 +321,7 @@
             }
             [_progressingTableView reloadData];
             [refreshView endRefreshing];
+            *page = 2;
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
@@ -301,15 +329,66 @@
     }];
 }
 
--(void)pullUpProgressing:(MJRefreshBaseView*)refreshView
+-(void)pullUpProgressing:(MJRefreshBaseView*)refreshView IsOnline:(BOOL)isOline IsProgressing:(BOOL)isprogressing
 {
-    NSLog(@"this is pull up progressing");
-    [refreshView endRefreshing];
+    unsigned int *page = NULL;
+    NSMutableArray *array;
+    if (isOline) {
+        page = &onlinePagePrg;
+        array = onlineArrayPrg;
+    }
+    else if (!isOline)
+    {
+        page = &offlinePagePrg;
+        array = offlineArrayPrg;
+    }
+    
+    if ([array count]%COUNT_OF_PAGE == 0) {//如果一页没填满就不刷新
+        
+        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":[NSString stringWithFormat:@"%D",*page],@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
+            {
+                if (isOline) {
+                    [onlineArrayPrg addObjectsFromArray:[responseObject valueForKey:@"data"]];
+                    for (NSDictionary *dic in onlineArrayPrg) {
+                        //[CoreData_Helper addActivityEntity:dic];
+                    }
+                    (*page)++;
+                }
+                else
+                {
+                    offlineArrayPrg = [responseObject valueForKey:@"data"];
+                    for (NSDictionary *dic in offlineArrayPrg) {
+                        //[CoreData_Helper addActivityEntity:dic];
+                    }
+                    (*page)++;
+                }
+                [_progressingTableView reloadData];
+                [refreshView endRefreshing];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@",error);
+            [refreshView endRefreshing];
+        }];
+            
+    }
+    else
+        [refreshView endRefreshing];
 }
 
 -(void)pullDownReviewed:(MJRefreshBaseView*)refreshView IsOnline:(BOOL)isOline IsProgressing:(BOOL)isprogressing
 {
-    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":@"10",@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    unsigned int *page;
+    
+    if (isOline) {
+        page = &onlinePageReviewed;
+    }
+    else if (!isOline)
+    {
+        page = &offlinePageReviewed;
+    }
+    
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
             if (isOline) {
@@ -325,6 +404,7 @@
                     //[CoreData_Helper addActivityEntity:dic];
                 }
             }
+            *page = 2;
             [_ReviewedTableView reloadData];
             [refreshView endRefreshing];
         }
@@ -334,10 +414,51 @@
     }];
 }
 
--(void)pullUpReviewed:(MJRefreshBaseView*)refreshView
+-(void)pullUpReviewed:(MJRefreshBaseView*)refreshView IsOnline:(BOOL)isOline IsProgressing:(BOOL)isprogressing
 {
-    NSLog(@"this is pull up reviewed");
-    [refreshView endRefreshing];
+    unsigned int *page = NULL;
+    NSMutableArray *array;
+    if (isOline) {
+        page = &onlinePageReviewed;
+        array = onlineArrayReviewed;
+    }
+    else if (!isOline)
+    {
+        page = &offlinePageReviewed;
+        array = offlineArrayReviewed;
+    }
+    
+    if ([array count]%COUNT_OF_PAGE == 0) {//如果一页没填满就不刷新
+        
+        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":[NSString stringWithFormat:@"%D",*page],@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
+            {
+                if (isOline) {
+                    [onlineArrayReviewed addObjectsFromArray:[responseObject valueForKey:@"data"]];
+                    for (NSDictionary *dic in onlineArrayPrg) {
+                        //[CoreData_Helper addActivityEntity:dic];
+                    }
+                    (*page)++;
+                }
+                else
+                {
+                    offlineArrayReviewed = [responseObject valueForKey:@"data"];
+                    for (NSDictionary *dic in offlineArrayPrg) {
+                        //[CoreData_Helper addActivityEntity:dic];
+                    }
+                    (*page)++;
+                }
+                [_ReviewedTableView reloadData];
+                [refreshView endRefreshing];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@",error);
+            [refreshView endRefreshing];
+        }];
+        
+    }
+    else
+        [refreshView endRefreshing];
 }
 
 - (NSString *)DateFromTimestamp:(NSString *)beginTimestamp endTimestamp:(NSString *)endTimestamp
