@@ -31,12 +31,12 @@
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_title attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:_picture attribute:NSLayoutAttributeBottom multiplier:1.0 constant:6 ]];
 
         [_avatar setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-7.5-[_avatar(10)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_avatar(10)]-8-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-7.5-[_avatar(15)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_avatar(15)]-5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_avatar)]];
         
         [_user setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_user attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_avatar attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
-        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_user attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_avatar attribute:NSLayoutAttributeRight multiplier:1.0 constant:6 ]];
+        [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_user attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:_avatar attribute:NSLayoutAttributeRight multiplier:1.0 constant:4 ]];
         
         [_comment setTranslatesAutoresizingMaskIntoConstraints:NO];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_comment(30)]-5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_comment)]];
@@ -85,7 +85,7 @@
     if (!_title) {
         _title = [[UILabel alloc] init];
         _title.text = @"MustRead";
-        _title.font = [UIFont systemFontOfSize:10];
+        _title.font = [UIFont systemFontOfSize:12];
     }
     return _title;
 }
@@ -96,7 +96,7 @@
         _avatar = [[UIImageView alloc] init];
         _avatar.image = nil;
         _avatar.layer.masksToBounds = YES;
-        _avatar.layer.cornerRadius = 5.0;
+        _avatar.layer.cornerRadius = 7.5;
         _avatar.backgroundColor = [UIColor blueColor];
     }
     return _avatar;
@@ -109,7 +109,7 @@
         _user = [[UILabel alloc] init];
         _user.text = @"ZAKER";
         _user.textColor = [UIColor grayColor];
-        _user.font = [UIFont systemFontOfSize:8.0];
+        _user.font = [UIFont systemFontOfSize:10];
     }
     return _user;
 }
