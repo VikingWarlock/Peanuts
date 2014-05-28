@@ -19,9 +19,11 @@
 
 #define Peanut_Dig_Something @"http://112.124.10.151:82/index.php?app=mobile&mod=Feed&act=digg"
 
+#define Peanut_Cancel_Dig_Something @"http://112.124.10.151:82/index.php?app=mobile&mod=Feed&act=deldigg"
+
 #define Peanut_Delete_comment_Address @"http://112.124.10.151:82/index.php?app=mobile&mod=Comment&act=delete_comment"
 
-#define Peanut_Fetch_Square_Address @"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=home"
+#define Peanut_Fetch_Home_Address @"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=home"
 
-
+#define Peanut_Fetch_Square_Address @""
 #endif

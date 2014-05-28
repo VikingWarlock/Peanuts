@@ -18,6 +18,11 @@
 
 #import "SelfUser_ViewController.h"
 
+#import <UIImageView+WebCache.h>
+#import "StaticDataManager.h"
+
+
+
 @interface PeanutTopViewController ()<UITableViewDataSource,UITableViewDelegate,Delegate_BlurCellSlide>
 {
     UITableView *tableview;
@@ -25,6 +30,10 @@
     UIColor *backGroundImageColor;
     NSIndexPath *havebeenSlide;
     
+    NSMutableDictionary *downloadedImage;
+    
+    UIImageView *HeadimageView;
+    NSArray *IndexList;
 }
 
 
@@ -37,10 +46,24 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
     }
     return self;
 }
 
+
+-(void)updateHomePageImage
+{
+    
+    NSDictionary *array=[[StaticDataManager sharedObject]FetchHomePage];
+    [self AddDownloadTask:[array objectForKey:@"cover"] AndMark:@"cover"];
+    [self AddDownloadTask:[array objectForKey:@"square"] AndMark:@"square"];
+    [self AddDownloadTask:[array objectForKey:@"activity"] AndMark:@"activity"];
+    [self AddDownloadTask:[array objectForKey:@"daily"] AndMark:@"daily"];
+    
+    
+
+}
 
 
 - (void)viewDidLoad
@@ -49,11 +72,14 @@
     
     NSLog(@"%f\n\n\n\n",self.view.frame.origin.y);
     havebeenSlide=nil;
+
+    IndexList=@[@"square",@"activity",@"daily"];
+    downloadedImage =[[NSMutableDictionary alloc]init];
     
     
     screen=[UIScreen mainScreen].bounds;
     
-    tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, -62, screen.size.width, screen.size.height+62) style:UITableViewStylePlain];
+    tableview=[[UITableView alloc]initWithFrame:CGRectMake(0, -64, screen.size.width, screen.size.height+64) style:UITableViewStylePlain];
     
     tableview.scrollEnabled=NO;
     tableview.separatorStyle=UITableViewCellSeparatorStyleNone;
@@ -147,6 +173,11 @@
  //   self.NavigationController.navigationBarHidden=YES;
     
     [super viewDidAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateHomePageImage) name:@"Home Page Hase Been Update" object:nil];
+    
+    
+    
     if (self.NavigationController.navigationBarHidden) {
 //        [self.NavigationController setNavigationBarHidden:YES animated:YES];
         [self reset_NavigationBar];
@@ -159,6 +190,10 @@
 
 -(void)viewDidDisappear:(BOOL)animated
 {
+    [[NSNotificationCenter defaultCenter]removeObserver:self name:@"Home Page Hase Been Update" object:nil];
+    
+    
+    
 //    self.NavigationController.navigationBarHidden=NO;
     [super viewDidDisappear:animated];
 //    [self.NavigationController setNavigationBarHidden:YES animated:NO];
@@ -203,8 +238,13 @@
     //BlurAndSlide_TableViewCell *cell=[tableview dequeueReusableCellWithIdentifier:@"SliderCell" forIndexPath:indexPath];
     BlurTableViewCell_mark1 *cell=[tableview dequeueReusableCellWithIdentifier:@"mark1Cell" forIndexPath:indexPath];
     
+    NSString *name=[IndexList objectAtIndex:indexPath.row];
+    if ([downloadedImage objectForKey:name]!=nil) {
+        [cell SetupWithBackImage:[downloadedImage objectForKey:name] AtIndexpath:indexPath AndInitPosition:(indexPath.row%2) AndDelegate:self];
+    }else
+    {
     [cell SetupWithBackImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d",indexPath.row+1]] AtIndexpath:indexPath AndInitPosition:(indexPath.row%2) AndDelegate:self];
-    
+    }
     return cell;
 }
 
@@ -291,9 +331,34 @@
 
 -(void)addTableviewHeadView:(UIImage*)img
 {
-    UIImageView *imageView=[[UIImageView alloc]initWithImage:img];
-    [imageView setFrame:CGRectMake(0, 0, screen.size.width, (screen.size.height)*0.618f)];
-    tableview.tableHeaderView=imageView;
+    
+    if (HeadimageView) {
+        [HeadimageView setImage:img];
+    }else
+    {
+    HeadimageView=[[UIImageView alloc]initWithImage:img];
+    [HeadimageView setFrame:CGRectMake(0, 0, screen.size.width, (screen.size.height)*0.618f)];
+        tableview.tableHeaderView=HeadimageView;
+    }
+}
+
+
+#pragma ImageDownloader
+
+-(void)AddDownloadTask:(NSDictionary*)dic AndMark:(NSString*)mark
+{
+
+    SDWebImageManager *manager=[SDWebImageManager sharedManager];
+    [manager downloadWithURL:[NSURL URLWithString:[dic objectForKey: @"cover"]] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        nil;
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
+        [downloadedImage setObject:image forKey:mark];
+        
+        if ([mark isEqualToString:@"cover"]) {
+            [self addTableviewHeadView:image];
+        }else
+        [tableview reloadData];
+    }];
 
 }
 

@@ -10,6 +10,9 @@
 #import <AFNetworking.h>
 #import <AFHTTPRequestOperation.h>
 #import <RTAlertView.h>
+#import "API_address.h"
+#import "PublicLib.h"
+#import "StaticDataManager.h"
 
 
 static RequestPackage * PublicObject;
@@ -98,6 +101,26 @@ static RequestPackage * PublicObject;
     }
 }
 
+-(void)CancelDigSomething:(NSString *)feed_id
+{
+    if (![self HaveBeenLogin]) {
+        // 提示没有登录;
+    }else
+    {
+        AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+        NSDictionary *parameter=@{USER_Token: [[NSUserDefaults standardUserDefaults]decryptedValueForKey:USER_Token],@"feed_id":feed_id};
+        [manager POST:Peanut_Cancel_Dig_Something parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@",error);
+        }];
+        
+    }
+
+
+}
+
 -(void)DeleteCommentWithComment_id:(NSString *)comment_id AndFeed_id:(NSString *)feed_id
 {
     if ([self HaveBeenLogin]) {
@@ -183,6 +206,25 @@ static RequestPackage * PublicObject;
 
 
 
+-(void)FetchHomePage
+{
+    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+    [manager POST:Peanut_Fetch_Home_Address parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *response=responseObject;
+        if ([[response objectForKey:@"status"]integerValue]==1) {
+            
+            NSDictionary *data=[response objectForKey:@"data"];
+            
+            [[StaticDataManager sharedObject]updateHomePageData:data];
+            
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
 
 
 
