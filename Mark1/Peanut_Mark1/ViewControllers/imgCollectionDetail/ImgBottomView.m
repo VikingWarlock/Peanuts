@@ -41,6 +41,10 @@
         [_shareBtn setImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateHighlighted];
         [_shareBtn setImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateSelected];
         
+        [self.praiseBtn addTarget:self action:@selector(bottomPraiseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.commentBtn addTarget:self action:@selector(bottomCommentBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.shareBtn addTarget:self action:@selector(bottomShareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
         [self addSubview:_praiseBtn];
         [self addSubview:_commentBtn];
         [self addSubview:_shareBtn];
@@ -49,6 +53,10 @@
     return self;
 }
 
+-(void)bottomCommentBtnClick:(UIButton *)sender{
+    self.commentVC = [[CommentViewController alloc]init];
+    [self.delegate bottomCommentBtnClick];
+}
 
 
 /*

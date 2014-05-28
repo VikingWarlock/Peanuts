@@ -8,6 +8,7 @@
 
 #import "CommentViewController.h"
 #import "PublishCommentTableViewCell.h"
+#import "ImgBottomView.h"
 
 @interface CommentViewController (){
     NSIndexPath * selectedIndexPath;
@@ -15,6 +16,7 @@
 }
 
 @property(nonatomic,retain)UITableView * tableView;
+@property(nonatomic,strong)ImgBottomView * bottomView;
 
 @end
 
@@ -38,16 +40,25 @@ static NSString * cellIdentifier = @"cellIdentifier";
     count = 15;
     
     [self setBackgroundImage:[UIImage imageNamed:@"1.png"] andBlurEnable:YES];
-    
     [self registerForKeyboardNotification];
-
+    
     [self.view addSubview:self.tableView];
 //    [self.tableView registerClass:[CommentTableViewCell class] forCellReuseIdentifier:cellIdentifier];
-    
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
 
+    
     // Do any additional setup after loading the view.
+}
+
+-(ImgBottomView *)bottomView{
+    if (!_bottomView) {
+        _bottomView = [[ImgBottomView alloc]init];
+        [_bottomView.praiseBtn addTarget:self action:@selector(bottomPraiseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomView.commentBtn addTarget:self action:@selector(bottomCommentBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_bottomView.shareBtn addTarget:self action:@selector(bottomShareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _bottomView;
 }
 
 -(UITableView *)tableView{

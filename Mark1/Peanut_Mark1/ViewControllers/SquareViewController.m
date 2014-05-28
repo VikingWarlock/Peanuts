@@ -10,6 +10,8 @@
 #import "imgCollectionViewController.h"
 #import "UIImageView+WebCache.h"
 #import "PullRefreshTableView.h"
+#import "CoreData-Helper.h"
+#import "PhotoSeriesEntity.h"
 
 @interface SquareControl : UIControl
 @property NSInteger index;
@@ -50,6 +52,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
+    data = [[NSMutableArray alloc]init];
     [self.tableView beginRefreshing];
 }
 
@@ -89,13 +92,15 @@
 }
 
 -(void)pullDownRefreshing:(MJRefreshBaseView *)tableView{
-    if (currentPage > 1) {
-        currentPage--;
-    }
+    currentPage = 1;
     [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=photo_group_list" parameters:@{@"page":[NSString stringWithFormat:@"%d",currentPage],@"count":@"20"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
-            data = [responseObject valueForKey:@"data"];
+//            NSArray * arr = [responseObject valueForKey:@"data"];
+//            for (NSDictionary *dic in arr) {
+//                [CoreData_Helper addPhotoSeriesEntity:dic];
+//            }
+            [data addObjectsFromArray:[responseObject valueForKey:@"data"]];
             [_tableView reloadData];
             [tableView endRefreshing];
         }
@@ -108,7 +113,11 @@
     [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=photo_group_list" parameters:@{@"page":[NSString stringWithFormat:@"%d",++currentPage],@"count":@"20"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
-            data = [responseObject valueForKey:@"data"];
+//            NSArray * arr = [responseObject valueForKey:@"data"];
+//            for (NSDictionary *dic in arr) {
+//                [CoreData_Helper addPhotoSeriesEntity:dic];
+//            }
+            [data addObjectsFromArray:[responseObject valueForKey:@"data"]];
             [_tableView reloadData];
             [tableView endRefreshing];
         }
@@ -124,16 +133,23 @@
     CGRect rect = imageView1.frame;
     rect.origin.x += rect.size.width + 5;
     UIImageView * imageView2 = [[UIImageView alloc] initWithFrame:rect];
-    SquareControl * control1 = [[SquareControl alloc]initWithFrame:imageView1.frame atIndex:indexPath.row];
+    [imageView1 setBackgroundColor:[UIColor whiteColor]];
+    [imageView2 setBackgroundColor:[UIColor whiteColor]];
+    imageView1.contentMode = UIViewContentModeScaleAspectFit;
+    imageView2.contentMode = UIViewContentModeScaleAspectFit;
+    SquareControl * control1 = [[SquareControl alloc]initWithFrame:imageView1.frame atIndex:(indexPath.row+1)*2-2];
     [control1 addTarget:self action:@selector(imageTapped:) forControlEvents:UIControlEventTouchUpInside];
-    UIControl * control2 = [[UIControl alloc]initWithFrame:imageView2.frame];
+    SquareControl * control2 = [[SquareControl alloc]initWithFrame:imageView2.frame atIndex:(indexPath.row+1)*2-1];
     [control2 addTarget:self action:@selector(imageTapped:) forControlEvents:UIControlEventTouchUpInside];
     [cell.contentView addSubview:control1];
     [cell.contentView addSubview:control2];
-    NSDictionary * rowData1 = data[(indexPath.row+1)*2-2];
-    NSDictionary * rowData2 = data[(indexPath.row+1)*2-1];
-    [imageView1 setImageWithURL:rowData1[@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    [imageView2 setImageWithURL:rowData2[@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    NSDictionary * dic1 = data[(indexPath.row+1)*2-2];
+    NSDictionary * dic2 = data[(indexPath.row+1)*2-1];
+//    PhotoSeriesEntity * entity1 = [CoreData_Helper GetPhotoSeriesEntity:[dic1 valueForKey:@"feed_id"]];
+//    PhotoSeriesEntity * entity2 = [CoreData_Helper GetPhotoSeriesEntity:[dic2 valueForKey:@"feed_id"]];
+//    NSLog(@"%@",entity1.cover_url);
+    [imageView1 setImageWithURL:dic1[@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [imageView2 setImageWithURL:dic2[@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     [cell.contentView addSubview:imageView1];
     [cell.contentView addSubview:imageView2];
     
@@ -141,7 +157,7 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return [data count]/2;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -149,6 +165,10 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 0.1;
 }
 

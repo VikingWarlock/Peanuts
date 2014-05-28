@@ -31,11 +31,9 @@
 
 static NSString * cellIdentifier = @"cellIdentifier";
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id)initWithFeedId:(int)feedId{
+    self = [super init];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -248,6 +246,19 @@ static NSString * cellIdentifier = @"cellIdentifier";
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void)downLoadWithFeedId:(int)feedId{
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=photo_group_info" parameters:@{@"feed_id":[NSString stringWithFormat:@"%d",feedId]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+
+//- (void)dealloc
+//{
+//    [self.tableView freeHeaderFooter];
+//}
 
 /*
 #pragma mark - Navigation
