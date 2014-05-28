@@ -112,7 +112,7 @@
 {
     if (!_user) {
         _user = [[UILabel alloc] init];
-        _user.text = @"ZAKER";
+        _user.text = @"UnKnown!";
         _user.textColor = [UIColor grayColor];
         _user.font = [UIFont systemFontOfSize:8.0];
     }
@@ -124,7 +124,6 @@
     if (!_avatar) {
         _avatar = [[UIImageView alloc] init];
         _avatar.image = nil;
-        _avatar.backgroundColor = [UIColor blueColor];
     }
     return _avatar;
 }

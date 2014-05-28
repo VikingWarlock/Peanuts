@@ -10,5 +10,5 @@
 #import "BaseUIViewController.h"
 
 @interface ActivityDetailViewController : BaseUIViewController <UITableViewDataSource,UITableViewDelegate,UITabBarControllerDelegate>
-
+- (id)initWithCoverImage:(UIImage *)cover feedid:(NSString *)feedid;
 @end

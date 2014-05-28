@@ -13,8 +13,12 @@
 #import "ActivitDetailInterestedPeopleViewController.h"
 #import "BottomView.h"
 #import "CustomCell.h"
-
+#import "CoreData-Helper.h"
 @interface ActivityDetailViewController ()
+{
+    UIImage *cover;
+    NSString *feedid;
+}
 @property (nonatomic,strong) UIImageView *picture;
 @property (strong,nonatomic) Mask *mask;
 @property (strong,nonatomic) BottomView *bottomView;
@@ -31,19 +35,21 @@
 
 @implementation ActivityDetailViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithCoverImage:(UIImage *)coverimage feedid:(NSString *)feed_id
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
-        _tabBar = [[UITabBarController alloc] init];
-        _tabBar.delegate = self;
-        ActivityDetailInfoViewController *blueViewController = [[ActivityDetailInfoViewController alloc] init];
-         ActivityDetailUserViewController *yellowViewController = [[ActivityDetailUserViewController alloc] init];
-        NSArray *viewControllerArray = [NSArray arrayWithObjects:blueViewController,yellowViewController,nil];
-        _tabBar.viewControllers = viewControllerArray;
-        _tabBar.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-        //[self.view addSubview:_tabBar.view];
-        [self setTabBar:_tabBar];
+//        _tabBar = [[UITabBarController alloc] init];
+//        _tabBar.delegate = self;
+//        ActivityDetailInfoViewController *blueViewController = [[ActivityDetailInfoViewController alloc] init];
+//        ActivityDetailUserViewController *yellowViewController = [[ActivityDetailUserViewController alloc] init];
+//        NSArray *viewControllerArray = [NSArray arrayWithObjects:blueViewController,yellowViewController,nil];
+//        _tabBar.viewControllers = viewControllerArray;
+//        _tabBar.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+//        //[self.view addSubview:_tabBar.view];
+//        [self setTabBar:_tabBar];
+        cover = coverimage;
+        feedid = feed_id;
     }
     return self;
 }
@@ -172,12 +178,9 @@
 {
     if (!_picture) {
         _picture = [[UIImageView alloc] init];
-        _picture.image = nil;
         _picture.clipsToBounds = YES;
         _picture.contentMode = UIViewContentModeScaleAspectFill;
-        
-        _picture.backgroundColor = [UIColor blueColor];
-        
+        _picture.image = cover;
         [_picture addSubview:self.mask];
         [_mask setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_picture addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mask]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_mask)]];

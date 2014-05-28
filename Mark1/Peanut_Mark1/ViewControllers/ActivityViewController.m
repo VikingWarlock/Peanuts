@@ -141,6 +141,7 @@
         [cell.avatar setImageWithURL:[onlineArrayPrg[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
         cell.Date.text = [self DateFromTimestamp:[onlineArrayPrg[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[onlineArrayPrg[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [onlineArrayPrg[indexPath.section] valueForKey:@"topic"];
+        cell.feedid = [onlineArrayPrg[indexPath.section] valueForKey:@"feed_id"];
         if ([[onlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
         {
             cell.type.text = @"线上活动";
@@ -159,6 +160,7 @@
         [cell.avatar setImageWithURL:[offlineArrayPrg[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
         cell.Date.text = [self DateFromTimestamp:[offlineArrayPrg[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[offlineArrayPrg[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [offlineArrayPrg[indexPath.section] valueForKey:@"topic"];
+        cell.feedid = [offlineArrayPrg[indexPath.section] valueForKey:@"feed_id"];
         if ([[offlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
         {
             cell.type.text = @"线上活动";
@@ -177,6 +179,7 @@
         [cell.avatar setImageWithURL:[onlineArrayReviewed[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
         cell.Date.text = [self DateFromTimestamp:[onlineArrayReviewed[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[onlineArrayReviewed[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [onlineArrayReviewed[indexPath.section] valueForKey:@"topic"];
+        cell.feedid = [onlineArrayReviewed[indexPath.section] valueForKey:@"feed_id"];
         if ([[onlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
         {
             cell.type.text = @"线上活动";
@@ -195,6 +198,7 @@
         [cell.avatar setImageWithURL:[offlineArrayReviewed[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
         cell.Date.text = [self DateFromTimestamp:[offlineArrayReviewed[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[offlineArrayReviewed[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [offlineArrayReviewed[indexPath.section] valueForKey:@"topic"];
+        cell.feedid = [offlineArrayReviewed[indexPath.section] valueForKey:@"feed_id"];
         if ([[offlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
         {
             cell.type.text = @"线上活动";
@@ -258,7 +262,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] init];
+    ActivityTableViewCell *cell = (ActivityTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
+    ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] initWithCoverImage:cell.picture.image feedid:cell.feedid];
     [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -312,20 +317,17 @@
         {
             if (isOline) {
                 onlineArrayPrg = [[responseObject valueForKey:@"data"] mutableCopy];
-                for (NSDictionary *dic in onlineArrayPrg) {
-                    //[CoreData_Helper addActivityEntity:dic];
-                }
             }
             else
             {
                 offlineArrayPrg = [[responseObject valueForKey:@"data"] mutableCopy];;
-                for (NSDictionary *dic in offlineArrayPrg) {
-                    //[CoreData_Helper addActivityEntity:dic];
-                }
             }
             [_progressingTableView reloadData];
             [refreshView endRefreshing];
             *page = 2;
+            for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
+                [CoreData_Helper addActivityEntity:dic];
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
@@ -354,21 +356,18 @@
             {
                 if (isOline) {
                     [onlineArrayPrg addObjectsFromArray:[responseObject valueForKey:@"data"]];
-                    for (NSDictionary *dic in onlineArrayPrg) {
-                        //[CoreData_Helper addActivityEntity:dic];
-                    }
                     (*page)++;
                 }
                 else
                 {
                     [offlineArrayPrg addObjectsFromArray:[responseObject valueForKey:@"data"]];
-                    for (NSDictionary *dic in offlineArrayPrg) {
-                        //[CoreData_Helper addActivityEntity:dic];
-                    }
                     (*page)++;
                 }
                 [_progressingTableView reloadData];
                 [refreshView endRefreshing];
+                for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
+                    [CoreData_Helper addActivityEntity:dic];
+                }
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"%@",error);
@@ -397,20 +396,17 @@
         {
             if (isOline) {
                 onlineArrayReviewed = [[responseObject valueForKey:@"data"] mutableCopy];
-                for (NSDictionary *dic in onlineArrayReviewed) {
-                    //[CoreData_Helper addActivityEntity:dic];
-                }
             }
             else
             {
                 offlineArrayReviewed = [[responseObject valueForKey:@"data"] mutableCopy];
-                for (NSDictionary *dic in offlineArrayReviewed) {
-                    //[CoreData_Helper addActivityEntity:dic];
-                }
             }
             *page = 2;
             [_ReviewedTableView reloadData];
             [refreshView endRefreshing];
+            for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
+                [CoreData_Helper addActivityEntity:dic];
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
@@ -439,21 +435,18 @@
             {
                 if (isOline) {
                     [onlineArrayReviewed addObjectsFromArray:[responseObject valueForKey:@"data"]];
-                    for (NSDictionary *dic in onlineArrayPrg) {
-                        //[CoreData_Helper addActivityEntity:dic];
-                    }
                     (*page)++;
                 }
                 else
                 {
                     [offlineArrayReviewed addObjectsFromArray:[responseObject valueForKey:@"data"]];
-                    for (NSDictionary *dic in offlineArrayPrg) {
-                        //[CoreData_Helper addActivityEntity:dic];
-                    }
                     (*page)++;
                 }
                 [_ReviewedTableView reloadData];
                 [refreshView endRefreshing];
+                for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
+                    [CoreData_Helper addActivityEntity:dic];
+                }
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"%@",error);
