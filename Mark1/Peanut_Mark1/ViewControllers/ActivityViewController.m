@@ -140,9 +140,8 @@
     ActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     if (tableView.tag == 0 && _progressingSegmentedControl.isOnline) {
-        [cell.picture setImageWithURL:[NSURL URLWithString:[onlineArrayPrg[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-        }];
-        [cell.avatar setImageWithURL:[onlineArrayPrg[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        [cell.picture setImageWithURL:[NSURL URLWithString:[onlineArrayPrg[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        [cell.avatar setImageWithURL:[[onlineArrayPrg[indexPath.section] valueForKey:@"user_info"] valueForKey:@"avatar_tiny"]];
         cell.user.text = [[onlineArrayPrg[indexPath.section] valueForKey:@"user_info"] valueForKey:@"uname"];
         cell.Date.text = [self DateFromTimestamp:[onlineArrayPrg[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[onlineArrayPrg[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [onlineArrayPrg[indexPath.section] valueForKey:@"topic"];
@@ -161,8 +160,8 @@
         }
     }
     else if (tableView.tag == 0 && !_progressingSegmentedControl.isOnline) {
-        [cell.picture setImageWithURL:[NSURL URLWithString:[offlineArrayPrg[indexPath.section] valueForKey:@"cover"] ]];
-        [cell.avatar setImageWithURL:[offlineArrayPrg[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        [cell.picture setImageWithURL:[NSURL URLWithString:[offlineArrayPrg[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        [cell.avatar setImageWithURL:[[offlineArrayPrg[indexPath.section] valueForKey:@"user_info"] valueForKey:@"avatar_tiny"]];
         cell.user.text = [[offlineArrayPrg[indexPath.section] valueForKey:@"user_info"] valueForKey:@"uname"];
         cell.Date.text = [self DateFromTimestamp:[offlineArrayPrg[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[offlineArrayPrg[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [offlineArrayPrg[indexPath.section] valueForKey:@"topic"];
@@ -181,9 +180,8 @@
         }
     }
     else if (tableView.tag == 1 && _ReviewedSegmentedControl.isOnline) {
-        [cell.picture setImageWithURL:[NSURL URLWithString:[onlineArrayReviewed[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-        }];
-        [cell.avatar setImageWithURL:[onlineArrayReviewed[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        [cell.picture setImageWithURL:[NSURL URLWithString:[onlineArrayReviewed[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        [cell.avatar setImageWithURL:[[onlineArrayReviewed[indexPath.section] valueForKey:@"user_info"] valueForKey:@"avatar_tiny"]];
         cell.user.text = [[onlineArrayReviewed[indexPath.section] valueForKey:@"user_info"] valueForKey:@"uname"];
         cell.Date.text = [self DateFromTimestamp:[onlineArrayReviewed[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[onlineArrayReviewed[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [onlineArrayReviewed[indexPath.section] valueForKey:@"topic"];
@@ -202,8 +200,8 @@
         }
     }
     else if (tableView.tag == 1 && !_ReviewedSegmentedControl.isOnline) {
-        [cell.picture setImageWithURL:[NSURL URLWithString:[offlineArrayReviewed[indexPath.section] valueForKey:@"cover"] ]];
-        [cell.avatar setImageWithURL:[offlineArrayReviewed[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        [cell.picture setImageWithURL:[NSURL URLWithString:[offlineArrayReviewed[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        [cell.avatar setImageWithURL:[[offlineArrayReviewed[indexPath.section] valueForKey:@"user_info"] valueForKey:@"avatar_tiny"]];
         cell.user.text = [[offlineArrayReviewed[indexPath.section] valueForKey:@"user_info"] valueForKey:@"uname"];
         cell.Date.text = [self DateFromTimestamp:[offlineArrayReviewed[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[offlineArrayReviewed[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [offlineArrayReviewed[indexPath.section] valueForKey:@"topic"];
