@@ -15,7 +15,7 @@
 
 #define PRESENT_TITLE_COLOR [UIColor redColor]
 #define PAST_TITLE_COLOR [UIColor grayColor]
-#define COUNT_OF_PAGE 10
+#define COUNT_OF_PAGE 3
 @interface ActivityViewController ()
 {
     NSMutableArray *onlineArrayPrg;
@@ -31,6 +31,7 @@
     NSArray *bindingFooterToBottom;
     NSArray *bindingFooterToTop;
     BOOL status;//1代表展示正在进行的活动，0代表展示往期活动
+    BOOL oldStatus;
     BOOL shouldLoadReviewedTableView;
     CGPoint upPoint;
     CGPoint downPoint;
@@ -58,6 +59,7 @@
     if (self) {
         shouldLoadReviewedTableView  = YES;
         status = 1;
+        oldStatus = 1;
         
         onlinePagePrg = 2;
         onlinePageReviewed = 2;
@@ -98,6 +100,8 @@
         [weakSelf pullUpReviewed: refreshView IsOnline:YES IsProgressing:NO];
     }];
     
+    
+    upPoint = CGPointMake(self.view.frame.size.width / 2,HEIGHT_OF_HEADER_OR_FOOTER + HEIGHT_OF_HEADER_OR_FOOTER / 2 + 1);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -307,14 +311,14 @@
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
             if (isOline) {
-                onlineArrayPrg = [responseObject valueForKey:@"data"];
+                onlineArrayPrg = [[responseObject valueForKey:@"data"] mutableCopy];
                 for (NSDictionary *dic in onlineArrayPrg) {
                     //[CoreData_Helper addActivityEntity:dic];
                 }
             }
             else
             {
-                offlineArrayPrg = [responseObject valueForKey:@"data"];
+                offlineArrayPrg = [[responseObject valueForKey:@"data"] mutableCopy];;
                 for (NSDictionary *dic in offlineArrayPrg) {
                     //[CoreData_Helper addActivityEntity:dic];
                 }
@@ -357,7 +361,7 @@
                 }
                 else
                 {
-                    offlineArrayPrg = [responseObject valueForKey:@"data"];
+                    [offlineArrayPrg addObjectsFromArray:[responseObject valueForKey:@"data"]];
                     for (NSDictionary *dic in offlineArrayPrg) {
                         //[CoreData_Helper addActivityEntity:dic];
                     }
@@ -392,14 +396,14 @@
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
             if (isOline) {
-                onlineArrayReviewed = [responseObject valueForKey:@"data"];
+                onlineArrayReviewed = [[responseObject valueForKey:@"data"] mutableCopy];
                 for (NSDictionary *dic in onlineArrayReviewed) {
                     //[CoreData_Helper addActivityEntity:dic];
                 }
             }
             else
             {
-                offlineArrayReviewed = [responseObject valueForKey:@"data"];
+                offlineArrayReviewed = [[responseObject valueForKey:@"data"] mutableCopy];
                 for (NSDictionary *dic in offlineArrayReviewed) {
                     //[CoreData_Helper addActivityEntity:dic];
                 }
@@ -442,7 +446,7 @@
                 }
                 else
                 {
-                    offlineArrayReviewed = [responseObject valueForKey:@"data"];
+                    [offlineArrayReviewed addObjectsFromArray:[responseObject valueForKey:@"data"]];
                     for (NSDictionary *dic in offlineArrayPrg) {
                         //[CoreData_Helper addActivityEntity:dic];
                     }
@@ -476,7 +480,6 @@
 
 - (void)handleTap:(UITapGestureRecognizer *)recognizer
 {
-    upPoint = CGPointMake(self.view.frame.size.width / 2,HEIGHT_OF_HEADER_OR_FOOTER + HEIGHT_OF_HEADER_OR_FOOTER / 2);
     downPoint = CGPointMake(self.view.frame.size.width / 2,self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER / 2);
 
     if (shouldLoadReviewedTableView == YES) {
@@ -490,16 +493,17 @@
         if (status == 0) {
             _ReviewedFooterView.center = downPoint;
             status = !status;
+            oldStatus = status;
             _progressing.textColor = PRESENT_TITLE_COLOR;
             _reviewed.textColor = PAST_TITLE_COLOR;
             _progressingSegmentedControl.isPresenting = YES;
             _ReviewedSegmentedControl.isPresenting = NO;
-            [_progressingTableView beginRefreshing];
         }
         else
         {
             _ReviewedFooterView.center = upPoint;
             status = !status;
+            oldStatus = status;
             _progressing.textColor = PAST_TITLE_COLOR;
             _reviewed.textColor = PRESENT_TITLE_COLOR;
             _progressingSegmentedControl.isPresenting = NO;
@@ -518,12 +522,12 @@
         if (status == NO) {
             _ReviewedFooterView.center = downPoint;
             status = !status;
+            oldStatus = status;
             _progressing.textColor = PRESENT_TITLE_COLOR;
             _reviewed.textColor = PAST_TITLE_COLOR;
             _progressingSegmentedControl.isPresenting = YES;
             _ReviewedSegmentedControl.isPresenting = NO;
             _ReviewedTableView.frame = CGRectMake(0, _ReviewedFooterView.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
-            [_progressingTableView beginRefreshing];
         }
     } completion:nil];
     
@@ -531,7 +535,6 @@
 
 - (void)handlePan:(UIPanGestureRecognizer *)recognizer
 {
-    upPoint = CGPointMake(self.view.frame.size.width / 2,HEIGHT_OF_HEADER_OR_FOOTER + HEIGHT_OF_HEADER_OR_FOOTER / 2);
     downPoint = CGPointMake(self.view.frame.size.width / 2,self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER / 2);
     static long i = 0;
     i++;
@@ -583,12 +586,16 @@
                 _reviewed.textColor = PRESENT_TITLE_COLOR;
                 _progressingSegmentedControl.isPresenting = NO;
                 _ReviewedSegmentedControl.isPresenting = YES;
-                [_ReviewedTableView beginRefreshing];
+                if (oldStatus != status) {
+                    [_ReviewedTableView beginRefreshing];
+                }
+                oldStatus = status;
             }
             if(recognizer.view.center.y > self.view.frame.size.height / 2 || flag2)
             {
                 recognizer.view.center = downPoint;
                 status = YES;
+                oldStatus = status;
                 _progressing.textColor = PRESENT_TITLE_COLOR;
                 _reviewed.textColor = PAST_TITLE_COLOR;
                 _progressingSegmentedControl.isPresenting = YES;
