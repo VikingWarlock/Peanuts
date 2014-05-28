@@ -90,6 +90,7 @@
     item.credit_limit=[parameter objectForKey:@"credit_limit"];
     item.address=[parameter objectForKey:@"address"];
     item.descriptions=[parameter objectForKey:@"description"];
+    item.topic=[parameter objectForKey:@"topic"];
     
     item.avatar_original_url=[parameter objectForKey:@"avatar_original"];
     item.avatar_big_url=[parameter objectForKey:@"avatar_big"];

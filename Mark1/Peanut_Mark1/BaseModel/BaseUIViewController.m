@@ -81,7 +81,24 @@
 
     return bkImageView;
 }
+/*
+-(BOOL)shouldAutorotate
+{
+    return YES;
+}
 
+-(NSUInteger)supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationPortrait;
+}
+
+-(UIInterfaceOrientation)preferredInterfaceOrientationForPresentation
+{
+    return UIInterfaceOrientationPortrait;
+}
+ 
+ */
+ 
 /*
 #pragma mark - Navigation
 

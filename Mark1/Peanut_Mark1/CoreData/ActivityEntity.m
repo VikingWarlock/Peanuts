@@ -2,7 +2,7 @@
 //  ActivityEntity.m
 //  Peanut_Mark1
 //
-//  Created by viking warlock on 5/27/14.
+//  Created by viking warlock on 5/28/14.
 //  Copyright (c) 2014 viking warlock. All rights reserved.
 //
 
@@ -35,5 +35,6 @@
 @dynamic publish_time;
 @dynamic repost_count;
 @dynamic uid;
+@dynamic topic;
 
 @end

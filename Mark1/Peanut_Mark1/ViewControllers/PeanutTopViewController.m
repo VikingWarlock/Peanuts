@@ -102,13 +102,21 @@
     
     [self.view addSubview:tableview];
     
-    [self addTableviewHeadView:[downloadedImage objectForKey:@"cover"]?[downloadedImage objectForKey:@"cover"]:[UIImage imageNamed:@"placeholder.png"]];
+    
+    if ([[downloadedImage allKeys]containsObject:@"cover"]) {
+        [self addTableviewHeadView:[downloadedImage objectForKey:@"cover"]];
+        [self.NavigationController.navigationBar setTintColor:[UIColor whiteColor]];
+
+    }else
+    {
+        [self addTableviewHeadView:[UIImage imageNamed:@"placeholder.png"]];
+        [self.NavigationController.navigationBar setTintColor:[UIColor blackColor]];
+    }
     
     
     
     [self.view setNeedsDisplay];
     
-    [self.NavigationController SNS_appear];
     
 //    [self reset_NavigationBar];
 
@@ -125,7 +133,6 @@
     [self.NavigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     [self.NavigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
     self.navigationItem.title=@"花生米";
-    [self.NavigationController.navigationBar setTintColor:[UIColor whiteColor]];
 
     
 
@@ -349,6 +356,7 @@
         [ImageCache storeImage:image forKey:mark toDisk:YES];
         if ([mark isEqualToString:@"cover"]) {
             [self addTableviewHeadView:image];
+            [self.NavigationController.navigationBar setTintColor:[UIColor whiteColor]];
         }else
         [tableview reloadData];
         //TODO 这个地方使用缓存的图片，还是会调用多次reloadData
