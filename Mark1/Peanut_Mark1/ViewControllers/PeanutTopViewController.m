@@ -35,6 +35,7 @@
     UIImageView *HeadimageView;
     NSArray *IndexList;
     
+    SDImageCache *ImageCache;
     
 }
 
@@ -48,7 +49,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
+        ImageCache=[[SDImageCache alloc] initWithNamespace:@"HomePageImageCache"];
     }
     return self;
 }
@@ -58,20 +59,10 @@
 {
     
     NSDictionary *array=[[StaticDataManager sharedObject]FetchHomePage];
-    
-    [[NSUserDefaults standardUserDefaults]setObject:[array objectForKey:@"cover"] forKey:@"cover"];
-    [[NSUserDefaults standardUserDefaults]setObject:[array objectForKey:@"square"] forKey:@"square"];
-    [[NSUserDefaults standardUserDefaults]setObject:[array objectForKey:@"activity"] forKey:@"activity"];
-    [[NSUserDefaults standardUserDefaults]setObject:[array objectForKey:@"daily"] forKey:@"daily"];
-    
     [self AddDownloadTask:[array objectForKey:@"cover"] AndMark:@"cover"];
     [self AddDownloadTask:[array objectForKey:@"square"] AndMark:@"square"];
     [self AddDownloadTask:[array objectForKey:@"activity"] AndMark:@"activity"];
     [self AddDownloadTask:[array objectForKey:@"daily"] AndMark:@"daily"];
-    
-    
-    
-
 }
 
 
@@ -86,18 +77,10 @@
     downloadedImage =[[NSMutableDictionary alloc]init];
     
     
-    if ([[NSUserDefaults standardUserDefaults]dictionaryForKey:@"cover"]) {
-        [self prepareDownloadedImage:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"cover"] AndMark:@"cover"];
-    }
-    if ([[NSUserDefaults standardUserDefaults]dictionaryForKey:@"square"]) {
-        [self prepareDownloadedImage:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"square"] AndMark:@"square"];
-    }
-    if ([[NSUserDefaults standardUserDefaults]dictionaryForKey:@"activity"]) {
-        [self prepareDownloadedImage:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"activity"] AndMark:@"activity"];
-    }
-    if ([[NSUserDefaults standardUserDefaults]dictionaryForKey:@"daily"]) {
-        [self prepareDownloadedImage:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"daily"] AndMark:@"daily"];
-    }
+    [self prepareDownloadedImageMark:@"cover"];
+    [self prepareDownloadedImageMark:@"square"];
+    [self prepareDownloadedImageMark:@"activity"];
+    [self prepareDownloadedImageMark:@"daily"];
     
     
     
@@ -118,18 +101,14 @@
     tableview.dataSource=self;
     
     [self.view addSubview:tableview];
-    [self addTableviewHeadView:[UIImage imageNamed:@"placeholder.png"]];
+    
+    [self addTableviewHeadView:[downloadedImage objectForKey:@"cover"]?[downloadedImage objectForKey:@"cover"]:[UIImage imageNamed:@"placeholder.png"]];
+    
+    
     
     [self.view setNeedsDisplay];
     
     [self.NavigationController SNS_appear];
-    
-     /*
-    UIImageWriteToSavedPhotosAlbum([[self.view getClipView:CGRectMake(0, 0, 320, 100)]captureView ], self, nil, nil);
-    
-    backGroundImageColor=[[[self.view getClipView:CGRectMake(0, 0, 320, 40)] captureView]averageColor];
-    */
-    //[self.NavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: backGroundImageColor}];
     
 //    [self reset_NavigationBar];
 
@@ -149,8 +128,7 @@
     [self.NavigationController.navigationBar setTintColor:[UIColor whiteColor]];
 
     
- //   UIImageWriteToSavedPhotosAlbum([[self.Peanut_backgroundView getClipView:CGRectMake(0, 0, 320, 100)]captureView ], self, nil, nil);
-    
+
     backGroundImageColor=[[[self.view getClipView:CGRectMake(0, 0, 320, 40)] captureView]averageColor];
     
     
@@ -195,16 +173,13 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
- //   self.NavigationController.navigationBarHidden=YES;
     
     [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateHomePageImage) name:@"Home Page Hase Been Update" object:nil];
     
     if (self.NavigationController.navigationBarHidden) {
-//        [self.NavigationController setNavigationBarHidden:YES animated:YES];
         [self reset_NavigationBar];
-//        [self.NavigationController setNavigationBarHidden:NO animated:NO];
     }else
     {
     [self reset_NavigationBar];
@@ -216,13 +191,8 @@
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"Home Page Hase Been Update" object:nil];
     
-    
-    
-//    self.NavigationController.navigationBarHidden=NO;
     [super viewWillDisappear:animated];
-//    [self.NavigationController setNavigationBarHidden:YES animated:NO];
     [self setNavigationBarForOther];
-//    [self.NavigationController setNavigationBarHidden:NO animated:YES];
 }
 
 /*
@@ -259,7 +229,6 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //BlurAndSlide_TableViewCell *cell=[tableview dequeueReusableCellWithIdentifier:@"SliderCell" forIndexPath:indexPath];
     BlurTableViewCell_mark1 *cell=[tableview dequeueReusableCellWithIdentifier:@"mark1Cell" forIndexPath:indexPath];
     
     NSString *name=[IndexList objectAtIndex:indexPath.row];
@@ -377,7 +346,7 @@
         nil;
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
         [downloadedImage setObject:image forKey:mark];
-        
+        [ImageCache storeImage:image forKey:mark toDisk:YES];
         if ([mark isEqualToString:@"cover"]) {
             [self addTableviewHeadView:image];
         }else
@@ -386,20 +355,12 @@
 
 }
 
--(void)prepareDownloadedImage:(NSDictionary*)dic AndMark:(NSString*)mark
+-(void)prepareDownloadedImageMark:(NSString*)mark
 {
-    
-    SDWebImageManager *manager=[SDWebImageManager sharedManager];
-    [manager downloadWithURL:[NSURL URLWithString:[dic objectForKey: @"cover"]] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-        nil;
-    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
+        UIImage*image=[ImageCache imageFromDiskCacheForKey:mark];
+    if (image!=nil) {
         [downloadedImage setObject:image forKey:mark];
-        
-        if ([mark isEqualToString:@"cover"]) {
-            [self addTableviewHeadView:image];
-        }
-    }];
-    
+    }
 }
 
 
