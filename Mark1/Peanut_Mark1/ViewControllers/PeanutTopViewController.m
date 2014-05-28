@@ -56,10 +56,17 @@
 {
     
     NSDictionary *array=[[StaticDataManager sharedObject]FetchHomePage];
+    
+    [[NSUserDefaults standardUserDefaults]setObject:[array objectForKey:@"cover"] forKey:@"cover"];
+    [[NSUserDefaults standardUserDefaults]setObject:[array objectForKey:@"square"] forKey:@"square"];
+    [[NSUserDefaults standardUserDefaults]setObject:[array objectForKey:@"activity"] forKey:@"activity"];
+    [[NSUserDefaults standardUserDefaults]setObject:[array objectForKey:@"daily"] forKey:@"daily"];
+    
     [self AddDownloadTask:[array objectForKey:@"cover"] AndMark:@"cover"];
     [self AddDownloadTask:[array objectForKey:@"square"] AndMark:@"square"];
     [self AddDownloadTask:[array objectForKey:@"activity"] AndMark:@"activity"];
     [self AddDownloadTask:[array objectForKey:@"daily"] AndMark:@"daily"];
+    
     
     
 
@@ -75,6 +82,22 @@
 
     IndexList=@[@"square",@"activity",@"daily"];
     downloadedImage =[[NSMutableDictionary alloc]init];
+    
+    
+    if ([[NSUserDefaults standardUserDefaults]dictionaryForKey:@"cover"]) {
+        [self AddDownloadTask:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"cover"] AndMark:@"cover"];
+    }
+    if ([[NSUserDefaults standardUserDefaults]dictionaryForKey:@"square"]) {
+        [self AddDownloadTask:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"square"] AndMark:@"square"];
+    }
+    if ([[NSUserDefaults standardUserDefaults]dictionaryForKey:@"activity"]) {
+        [self AddDownloadTask:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"activity"] AndMark:@"activity"];
+    }
+    if ([[NSUserDefaults standardUserDefaults]dictionaryForKey:@"daily"]) {
+        [self AddDownloadTask:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"daily"] AndMark:@"daily"];
+    }
+    
+    
     
     
     screen=[UIScreen mainScreen].bounds;
