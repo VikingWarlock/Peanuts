@@ -7,7 +7,6 @@
 //
 
 #import "ActivityDetailViewController.h"
-#import "Mask.h"
 #import "ActivityDetailInfoViewController.h"
 #import "ActivityDetailUserViewController.h"
 #import "ActivitDetailInterestedPeopleViewController.h"
@@ -16,11 +15,10 @@
 #import "CoreData-Helper.h"
 @interface ActivityDetailViewController ()
 {
-    UIImage *cover;
-    NSString *feedid;
+    NSMutableArray *pictures;
+    NSMutableArray *user;
+    NSMutableArray *interesteUser;
 }
-@property (nonatomic,strong) UIImageView *picture;
-@property (strong,nonatomic) Mask *mask;
 @property (strong,nonatomic) BottomView *bottomView;
 @property (nonatomic,strong) UIButton *leftButton;
 @property (nonatomic,strong) UIButton *rightButton;
@@ -35,7 +33,7 @@
 
 @implementation ActivityDetailViewController
 
-- (id)initWithCoverImage:(UIImage *)coverimage feedid:(NSString *)feed_id
+- (id)init
 {
     self = [super init];
     if (self) {
@@ -48,8 +46,6 @@
 //        _tabBar.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
 //        //[self.view addSubview:_tabBar.view];
 //        [self setTabBar:_tabBar];
-        cover = coverimage;
-        feedid = feed_id;
     }
     return self;
 }
@@ -57,6 +53,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self getFirstPage];
+    [self.picture setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    
     [self.view addSubview:self.picture];
     [self.view addSubview:self.leftButton];
     [self.view addSubview:self.rightButton];
@@ -102,7 +101,83 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark tableView datasource and delegate
+#pragma mark -network stuff
+
+- (void)getFirstPage
+{   //活动作品
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_work_list" parameters:@{@"page":@"1",@"count":@"10",@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
+        {
+            pictures = [responseObject valueForKey:@"data"];
+            if ([pictures count] == 1) {
+                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView1 setImageWithURL:[pictures[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+            }
+            else if ([pictures count] == 2)
+            {
+                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView2 setImageWithURL:[pictures[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+            }
+            else if ([pictures count] >= 3)
+            {
+                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView3 setImageWithURL:[pictures[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+            }
+            
+            //NSLog(@"%@",[responseObject valueForKey:@"data"]);
+
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+    //活动成员
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_user_list" parameters:@{@"page":@"1",@"count":@"10",@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
+        {
+            user = [responseObject valueForKey:@"data"];
+//            if ([user count] == 1) {
+//                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView1 setImageWithURL:[user[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+//            }
+//            else if ([user count] == 2)
+//            {
+//                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView2 setImageWithURL:[user[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+//            }
+//            else if ([user count] >= 3)
+//            {
+//                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView3 setImageWithURL:[user[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+//            }
+            
+            NSLog(@"%@",responseObject);
+            
+
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+    //感兴趣的人
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_work_list" parameters:@{@"page":@"1",@"count":@"10",@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
+        {
+//            interesteUser = [responseObject valueForKey:@"data"];
+//            if ([interesteUser count] == 1) {
+//                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView1 setImageWithURL:[interesteUser[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+//            }
+//            else if ([interesteUser count] == 2)
+//            {
+//                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView2 setImageWithURL:[interesteUser[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+//            }
+//            else if ([interesteUser count] >= 3)
+//            {
+//                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView3 setImageWithURL:[interesteUser[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+//            }
+            
+            //NSLog(@"%@",[responseObject valueForKey:@"data"]);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+#pragma mark -tableView datasource and delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -116,6 +191,9 @@
     switch (indexPath.row) {
         case 0:
             cell.label.text = @"活动详细";
+            cell.imageView1.hidden = YES;
+            cell.imageView2.hidden = YES;
+            cell.imageView3.hidden = YES;
             break;
         case 1:
             cell.label.text = @"活动作品";
@@ -144,6 +222,13 @@
         {
             ActivityDetailInfoViewController *vc = [[ActivityDetailInfoViewController alloc] init];
             vc.navigationItem.title = self.navigationItem.title;
+            vc.mask.avatar.image = self.mask.avatar.image;
+            vc.mask.headline.text = self.mask.headline.text;
+            vc.mask.user.text = self.mask.user.text;
+            vc.mask.Date.text = self.mask.Date.text;
+            vc.mask.type.text = self.mask.type.text;
+            vc.description = [CoreData_Helper GetActivityEntity:_feedid].descriptions;
+            vc.backImage = self.picture.image;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
@@ -180,7 +265,7 @@
         _picture = [[UIImageView alloc] init];
         _picture.clipsToBounds = YES;
         _picture.contentMode = UIViewContentModeScaleAspectFill;
-        _picture.image = cover;
+        _picture.image = [UIImage imageNamed:@"placeholder.png"];
         [_picture addSubview:self.mask];
         [_mask setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_picture addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mask]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_mask)]];
@@ -193,6 +278,7 @@
 {
     if (!_mask) {
         _mask = [[Mask alloc] init];
+        
     }
     return _mask;
 }

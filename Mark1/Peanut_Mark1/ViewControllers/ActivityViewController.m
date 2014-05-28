@@ -15,7 +15,7 @@
 
 #define PRESENT_TITLE_COLOR [UIColor redColor]
 #define PAST_TITLE_COLOR [UIColor grayColor]
-#define COUNT_OF_PAGE 3
+#define COUNT_OF_PAGE 10
 @interface ActivityViewController ()
 {
     NSMutableArray *onlineArrayPrg;
@@ -35,8 +35,11 @@
     BOOL shouldLoadReviewedTableView;
     CGPoint upPoint;
     CGPoint downPoint;
+    UIView *separatorLine;
     NSMutableArray *sweepSpeed;
     NSMutableArray *downSpeed;
+    
+    ActivityDetailViewController *callback;
 }
 @property (nonatomic,strong) PullRefreshTableView *progressingTableView;
 @property (nonatomic,strong) PullRefreshTableView *ReviewedTableView;
@@ -137,8 +140,10 @@
     ActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     if (tableView.tag == 0 && _progressingSegmentedControl.isOnline) {
-        [cell.picture setImageWithURL:[onlineArrayPrg[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] ];
+        [cell.picture setImageWithURL:[NSURL URLWithString:[onlineArrayPrg[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        }];
         [cell.avatar setImageWithURL:[onlineArrayPrg[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        cell.user.text = [[onlineArrayPrg[indexPath.section] valueForKey:@"user_info"] valueForKey:@"uname"];
         cell.Date.text = [self DateFromTimestamp:[onlineArrayPrg[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[onlineArrayPrg[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [onlineArrayPrg[indexPath.section] valueForKey:@"topic"];
         cell.feedid = [onlineArrayPrg[indexPath.section] valueForKey:@"feed_id"];
@@ -156,8 +161,9 @@
         }
     }
     else if (tableView.tag == 0 && !_progressingSegmentedControl.isOnline) {
-        [cell.picture setImageWithURL:[offlineArrayPrg[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] ];
+        [cell.picture setImageWithURL:[NSURL URLWithString:[offlineArrayPrg[indexPath.section] valueForKey:@"cover"] ]];
         [cell.avatar setImageWithURL:[offlineArrayPrg[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        cell.user.text = [[offlineArrayPrg[indexPath.section] valueForKey:@"user_info"] valueForKey:@"uname"];
         cell.Date.text = [self DateFromTimestamp:[offlineArrayPrg[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[offlineArrayPrg[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [offlineArrayPrg[indexPath.section] valueForKey:@"topic"];
         cell.feedid = [offlineArrayPrg[indexPath.section] valueForKey:@"feed_id"];
@@ -175,8 +181,10 @@
         }
     }
     else if (tableView.tag == 1 && _ReviewedSegmentedControl.isOnline) {
-        [cell.picture setImageWithURL:[onlineArrayReviewed[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] ];
+        [cell.picture setImageWithURL:[NSURL URLWithString:[onlineArrayReviewed[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        }];
         [cell.avatar setImageWithURL:[onlineArrayReviewed[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        cell.user.text = [[onlineArrayReviewed[indexPath.section] valueForKey:@"user_info"] valueForKey:@"uname"];
         cell.Date.text = [self DateFromTimestamp:[onlineArrayReviewed[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[onlineArrayReviewed[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [onlineArrayReviewed[indexPath.section] valueForKey:@"topic"];
         cell.feedid = [onlineArrayReviewed[indexPath.section] valueForKey:@"feed_id"];
@@ -194,8 +202,9 @@
         }
     }
     else if (tableView.tag == 1 && !_ReviewedSegmentedControl.isOnline) {
-        [cell.picture setImageWithURL:[offlineArrayReviewed[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] ];
+        [cell.picture setImageWithURL:[NSURL URLWithString:[offlineArrayReviewed[indexPath.section] valueForKey:@"cover"] ]];
         [cell.avatar setImageWithURL:[offlineArrayReviewed[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        cell.user.text = [[offlineArrayReviewed[indexPath.section] valueForKey:@"user_info"] valueForKey:@"uname"];
         cell.Date.text = [self DateFromTimestamp:[offlineArrayReviewed[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[offlineArrayReviewed[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [offlineArrayReviewed[indexPath.section] valueForKey:@"topic"];
         cell.feedid = [offlineArrayReviewed[indexPath.section] valueForKey:@"feed_id"];
@@ -263,7 +272,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ActivityTableViewCell *cell = (ActivityTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
-    ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] initWithCoverImage:cell.picture.image feedid:cell.feedid];
+    ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] init];
+    callback = vc;
+    vc.feedid = cell.feedid;
+    vc.picture.image = cell.picture.image;
+    vc.mask.avatar.image = cell.avatar.image;
+    vc.mask.headline.text = cell.title.text;
+    vc.mask.user.text = cell.user.text;
+    vc.mask.Date.text = cell.Date.text;
+    vc.mask.type.text = cell.type.text;
     [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -491,6 +508,7 @@
             _reviewed.textColor = PAST_TITLE_COLOR;
             _progressingSegmentedControl.isPresenting = YES;
             _ReviewedSegmentedControl.isPresenting = NO;
+            separatorLine.hidden =_progressingSegmentedControl.isPresenting;
         }
         else
         {
@@ -504,7 +522,9 @@
             [_ReviewedTableView beginRefreshing];
         }
         _ReviewedTableView.frame = CGRectMake(0, recognizer.view.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
-    } completion:nil];
+    } completion:^(BOOL finished) {
+        separatorLine.hidden =_progressingSegmentedControl.isPresenting;
+    }];
 }
 
 - (void)handleTap2:(UITapGestureRecognizer *)recognizer
@@ -520,6 +540,7 @@
             _reviewed.textColor = PAST_TITLE_COLOR;
             _progressingSegmentedControl.isPresenting = YES;
             _ReviewedSegmentedControl.isPresenting = NO;
+            separatorLine.hidden =_progressingSegmentedControl.isPresenting;
             _ReviewedTableView.frame = CGRectMake(0, _ReviewedFooterView.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
         }
     } completion:nil];
@@ -567,7 +588,7 @@
         }
     }
     _ReviewedTableView.frame = CGRectMake(0, recognizer.view.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
-
+    separatorLine.hidden = YES;
     
     if(recognizer.state == UIGestureRecognizerStateEnded)
     {
@@ -595,7 +616,9 @@
                 _ReviewedSegmentedControl.isPresenting = NO;
             }
             _ReviewedTableView.frame = CGRectMake(0, recognizer.view.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
-        } completion:nil];
+        } completion:^(BOOL finished) {
+            separatorLine.hidden =_progressingSegmentedControl.isPresenting;
+        }];
     }
 }
 
@@ -634,6 +657,11 @@
         
         [_progressingHeadView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap2:)]];
 
+        
+        separatorLine = [[UIView alloc] initWithFrame:CGRectMake(0, _progressingHeadView.frame.size.height, self.view.frame.size.width, 1)];
+        separatorLine.backgroundColor = _progressingTableView.separatorColor;
+        separatorLine.hidden = YES;
+        [self.view addSubview:separatorLine];
     }
     return _progressingHeadView;
 }

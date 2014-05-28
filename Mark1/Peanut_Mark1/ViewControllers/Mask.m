@@ -97,7 +97,6 @@
     if (!_avatar) {
         _avatar = [[UIImageView alloc] init];
         _avatar.image = nil;
-        _avatar.backgroundColor = [UIColor blueColor];
     }
     return _avatar;
 }

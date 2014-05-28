@@ -34,7 +34,7 @@
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_imageView2 attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_imageView2 attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0]];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-8.5-[_imageView3]-8.5-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_imageView3)]];
         [self.contentView addConstraint:[NSLayoutConstraint constraintWithItem:_imageView3 attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:_imageView3 attribute:NSLayoutAttributeHeight multiplier:1.0 constant:0]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_imageView1]-7.5-[_imageView2]-7.5-[_imageView3]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_imageView1,_imageView2,_imageView3)]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_imageView3]-7.5-[_imageView2]-7.5-[_imageView1]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_imageView1,_imageView2,_imageView3)]];
         
     }
     return self;
@@ -44,9 +44,10 @@
 {
     if (!_imageView1) {
         _imageView1 = [[UIImageView alloc] init];
-        _imageView1.image = [UIImage imageNamed:@"iron.png"];
+        _imageView1.image = nil;
         _imageView1.contentMode = UIViewContentModeScaleAspectFill;
         _imageView1.clipsToBounds = YES;
+        _imageView1.backgroundColor = [UIColor redColor];
     }
     return _imageView1;
 }
@@ -58,8 +59,7 @@
         _imageView2.image = nil;
         _imageView2.contentMode = UIViewContentModeScaleAspectFill;
         _imageView2.clipsToBounds = YES;
-        
-        _imageView2.backgroundColor = [UIColor redColor];
+        _imageView2.backgroundColor = [UIColor greenColor];
     }
     return _imageView2;
 }
@@ -71,8 +71,8 @@
         _imageView3.image = nil;
         _imageView3.contentMode = UIViewContentModeScaleAspectFill;
         _imageView3.clipsToBounds = YES;
+        _imageView3.backgroundColor = [UIColor blueColor];
         
-        _imageView3.backgroundColor = [UIColor blackColor];
     }
     return _imageView3;
 }
