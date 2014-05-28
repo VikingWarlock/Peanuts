@@ -15,7 +15,7 @@
 
 #define PRESENT_TITLE_COLOR [UIColor redColor]
 #define PAST_TITLE_COLOR [UIColor grayColor]
-#define COUNT_OF_PAGE 10
+#define COUNT_OF_PAGE 3
 @interface ActivityViewController ()
 {
     NSMutableArray *onlineArrayPrg;
@@ -307,14 +307,14 @@
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
             if (isOline) {
-                onlineArrayPrg = [responseObject valueForKey:@"data"];
+                onlineArrayPrg = [[responseObject valueForKey:@"data"] mutableCopy];
                 for (NSDictionary *dic in onlineArrayPrg) {
                     //[CoreData_Helper addActivityEntity:dic];
                 }
             }
             else
             {
-                offlineArrayPrg = [responseObject valueForKey:@"data"];
+                offlineArrayPrg = [[responseObject valueForKey:@"data"] mutableCopy];;
                 for (NSDictionary *dic in offlineArrayPrg) {
                     //[CoreData_Helper addActivityEntity:dic];
                 }
@@ -357,7 +357,7 @@
                 }
                 else
                 {
-                    offlineArrayPrg = [responseObject valueForKey:@"data"];
+                    [offlineArrayPrg addObjectsFromArray:[responseObject valueForKey:@"data"]];
                     for (NSDictionary *dic in offlineArrayPrg) {
                         //[CoreData_Helper addActivityEntity:dic];
                     }
@@ -392,14 +392,14 @@
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
             if (isOline) {
-                onlineArrayReviewed = [responseObject valueForKey:@"data"];
+                onlineArrayReviewed = [[responseObject valueForKey:@"data"] mutableCopy];
                 for (NSDictionary *dic in onlineArrayReviewed) {
                     //[CoreData_Helper addActivityEntity:dic];
                 }
             }
             else
             {
-                offlineArrayReviewed = [responseObject valueForKey:@"data"];
+                offlineArrayReviewed = [[responseObject valueForKey:@"data"] mutableCopy];
                 for (NSDictionary *dic in offlineArrayReviewed) {
                     //[CoreData_Helper addActivityEntity:dic];
                 }
@@ -442,7 +442,7 @@
                 }
                 else
                 {
-                    offlineArrayReviewed = [responseObject valueForKey:@"data"];
+                    [offlineArrayReviewed addObjectsFromArray:[responseObject valueForKey:@"data"]];
                     for (NSDictionary *dic in offlineArrayPrg) {
                         //[CoreData_Helper addActivityEntity:dic];
                     }
