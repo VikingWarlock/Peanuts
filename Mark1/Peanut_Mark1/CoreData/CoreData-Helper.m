@@ -15,7 +15,10 @@
 
 +(void)addPhotoEntity:(NSDictionary *)parameter
 {
-    PhotoInfoEntity *item=[PhotoInfoEntity MR_createEntity];
+    PhotoInfoEntity *item=[CoreData_Helper GetPhotoEntity:[parameter objectForKey:@"feed_id"]];
+    if (item==nil) {
+        item=[PhotoInfoEntity MR_createEntity];
+    }
     item.feed_id=[parameter objectForKey:@"feed_id"];
     item.comment_count=[parameter objectForKey:@"comment_count"];
     item.descriptions=[parameter objectForKey:@"discription"];
@@ -35,14 +38,18 @@
 
 +(void)addPhotoSeriesEntity:(NSDictionary *)parameter
 {
-    PhotoSeriesEntity *item=[PhotoSeriesEntity MR_createEntity];
+    PhotoSeriesEntity *item=[CoreData_Helper GetPhotoSeriesEntity:[parameter objectForKey:@"feed_id"]];
+    if (item==nil) {
+        item=[PhotoSeriesEntity MR_createEntity];
+
+    }
     item.addr=[parameter objectForKey:@"addr"];
     item.comment_count=[parameter objectForKey:@"comment_count"];
     item.cover_url=[parameter objectForKey: @"cover"];
     item.descriptions=[parameter objectForKey:@"description"];
     item.dig_count=[parameter objectForKey:@"digg_count"];
     item.feed_id=[parameter objectForKey:@"feed_id"];
-   
+    
     item.is_repost=[parameter objectForKey:@"is_post"];
     item.publish_time=[parameter objectForKey:@"publish_time"];
     item.recommend_content=[parameter objectForKey:@"recommend_content"];
@@ -63,7 +70,11 @@
 
 +(void)addActivityEntity:(NSDictionary *)parameter
 {
-    ActivityEntity *item=[ActivityEntity MR_createEntity];
+    ActivityEntity *item=[CoreData_Helper GetActivityEntity:[parameter objectForKey:@"feed_id"]];
+    if ( item==nil) {
+        item=[ActivityEntity MR_createEntity];
+    }
+    
     item.feed_id=[parameter objectForKey:@"feed_id"];
     item.cover_url=[parameter objectForKey:@"cover"];
     item.uid=[parameter objectForKey:@"uid"];
@@ -84,8 +95,7 @@
     item.avatar_big_url=[parameter objectForKey:@"avatar_big"];
     item.avatar_small_url=[parameter objectForKey:@"avatar_small"];
     
-    
-    
+
     item.avatar_tiny_url=[parameter objectForKey:@"avatar_tiny"];
     item.avatar_middle_url=[parameter objectForKey:@"avatar_middle"];
     item.personNum_limit=[parameter objectForKey:@"personNum_limit"];
@@ -99,7 +109,11 @@
 
 +(void)addMustReadEntity:(NSDictionary *)parameter
 {
-    MustReadEntity *item=[MustReadEntity MR_createEntity];
+    MustReadEntity *item=[CoreData_Helper GetMustReadEntity:[parameter objectForKey:@"feed_id"]];
+    if (item==nil) {
+        item=[MustReadEntity MR_createEntity];
+    }
+    
     item.abstraction=[parameter objectForKey:@"abstraction"];
     item.comment_count=[parameter objectForKey:@"comment_count"];
     item.content=[parameter objectForKey:@"content"];
@@ -120,7 +134,10 @@
 
 +(void)addUserInfoEntity:(NSDictionary *)parameter
 {
-    UserInfEntity *item=[UserInfEntity MR_createEntity];
+    UserInfEntity *item=[CoreData_Helper GetUserInfEntity:[parameter objectForKey:@"uid"]];
+    if (item==nil) {
+        item=[UserInfEntity MR_createEntity];
+    }
     item.equipment=[parameter objectForKey:@"equipment"];
     item.followercount=[parameter objectForKey:@"followercount"];
     item.followingcount=[parameter objectForKey:@"followingcount"];
@@ -169,27 +186,56 @@
 
 +(UserInfEntity*)GetUserInfEntity:(NSString *)uid
 {
-
-    return nil;
+    NSArray *list=[UserInfEntity MR_findByAttribute:@"uid" withValue:uid];
+    if ([list count]>0) {
+        return [list objectAtIndex:0];
+    }else
+        return nil;
 }
 
 +(UserInfEntity*)GetSelfUserInfEntity
 {
     NSArray *list=[UserInfEntity MR_findByAttribute:@"uid" withValue:USER_UID];
-    return [list objectAtIndex:0];
+    if ([list count]>0) {
+        return [list objectAtIndex:0];
+    }else
+        return nil;
 }
 
 +(PhotoSeriesEntity*)GetPhotoSeriesEntity:(NSString *)feed_id
 {
-    
-
-    return nil;
+    NSArray *list=[PhotoSeriesEntity MR_findByAttribute:@"feed_id" withValue:feed_id];
+    if ([list count]>0) {
+        return [list objectAtIndex:0];
+    }else
+        return nil;
 }
 
 +(PhotoInfoEntity*)GetPhotoEntity:(NSString *)feed_id
 {
+    NSArray *list=[PhotoInfoEntity MR_findByAttribute:@"feed_id" withValue:feed_id];
+    if ([list count]>0) {
+        return [list objectAtIndex:0];
+    }else
+        return nil;
+}
 
-    return nil;
++(ActivityEntity*)GetActivityEntity:(NSString *)feed_id
+{
+    NSArray *list=[ActivityEntity MR_findByAttribute:@"feed_id" withValue:feed_id];
+    if ([list count]>0) {
+        return [list objectAtIndex:0];
+    }else
+        return nil;
+}
+
++(MustReadEntity*)GetMustReadEntity:(NSString *)feed_id
+{
+    NSArray *list=[MustReadEntity MR_findByAttribute:@"feed_id" withValue:feed_id];
+    if ([list count]>0) {
+        return [list objectAtIndex:0];
+    }else
+        return nil;
 }
 
 +(void)updateStaticData
@@ -197,5 +243,42 @@
 
 
 }
+
++(NSString *)DateFromTimestamp:(NSString *)beginTimestamp endTimestamp:(NSString *)endTimestamp
+{
+    NSDate *begin = [NSDate dateWithTimeIntervalSince1970:[beginTimestamp intValue]];
+    NSDate *end = [NSDate dateWithTimeIntervalSince1970:[endTimestamp intValue]];
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy/MM/dd"];
+    NSString *date = [NSString stringWithFormat:@"%@ - %@",[formatter stringFromDate:begin],[formatter stringFromDate:end]];
+    return date;
+}
+
++(NSString*)TimeFromTimestamp:(NSString *)beginTimestamp endTimestamp:(NSString *)endTimestamp
+{
+    NSDate *begin = [NSDate dateWithTimeIntervalSince1970:[beginTimestamp intValue]];
+    NSDate *end = [NSDate dateWithTimeIntervalSince1970:[endTimestamp intValue]];
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"hh:mm:ss"];
+    NSString *date = [NSString stringWithFormat:@"%@ - %@",[formatter stringFromDate:begin],[formatter stringFromDate:end]];
+    return date;
+
+}
+
++(NSString*)DateAndTimeFromTimestamp:(NSString *)beginTimestamp endTimestamp:(NSString *)endTimestamp
+{
+    NSDate *begin = [NSDate dateWithTimeIntervalSince1970:[beginTimestamp intValue]];
+    NSDate *end = [NSDate dateWithTimeIntervalSince1970:[endTimestamp intValue]];
+    
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy/MM/dd hh:mm:ss"];
+    NSString *date = [NSString stringWithFormat:@"%@ - %@",[formatter stringFromDate:begin],[formatter stringFromDate:end]];
+    return date;
+
+}
+
+
 
 @end

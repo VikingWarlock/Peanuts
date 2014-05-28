@@ -50,4 +50,12 @@
 +(void)updateStaticData;
 
 
+
++(NSString *)DateFromTimestamp:(NSString *)beginTimestamp endTimestamp:(NSString *)endTimestamp;
+
++(NSString *)TimeFromTimestamp:(NSString *)beginTimestamp endTimestamp:(NSString *)endTimestamp;
+
++(NSString *)DateAndTimeFromTimestamp:(NSString *)beginTimestamp endTimestamp:(NSString *)endTimestamp;
+
+
 @end

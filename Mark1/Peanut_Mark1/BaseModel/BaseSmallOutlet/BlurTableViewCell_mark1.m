@@ -215,6 +215,9 @@
 
 -(BOOL)gestureRecognizerShouldBegin:(UIPanGestureRecognizer *)gestureRecognizer
 {
+    if (![[gestureRecognizer class]isSubclassOfClass:[UIPanGestureRecognizer class]]) {
+        return NO;
+    }
     CGPoint trans=[gestureRecognizer translationInView:self];
     if (abs(trans.x)<abs(trans.y)) {
         return NO;
