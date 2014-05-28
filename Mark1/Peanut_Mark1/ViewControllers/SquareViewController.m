@@ -14,15 +14,17 @@
 #import "PhotoSeriesEntity.h"
 
 @interface SquareControl : UIControl
-@property NSInteger index;
+@property int feedId;
+@property NSURL *url;
 @end
 
 @implementation SquareControl
 
--(id)initWithFrame:(CGRect)frame atIndex:(NSInteger)index{
+-(id)initWithFrame:(CGRect)frame withFeedId:(int)feedId imageUrl:(NSURL *)url{
     self = [super initWithFrame:frame];
     if (self) {
-        self.index = index;
+        self.feedId = feedId;
+        self.url = url;
     }
     return self;
 }
@@ -31,8 +33,8 @@
 
 
 @interface SquareViewController (){
-    NSMutableArray * data;
     int currentPage;
+    NSArray * data;
 }
 
 @property (nonatomic,strong) PullRefreshTableView * tableView;
@@ -52,7 +54,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    data = [[NSMutableArray alloc]init];
     [self.tableView beginRefreshing];
 }
 
@@ -100,7 +101,7 @@
 //            for (NSDictionary *dic in arr) {
 //                [CoreData_Helper addPhotoSeriesEntity:dic];
 //            }
-            [data addObjectsFromArray:[responseObject valueForKey:@"data"]];
+            data = [[NSArray alloc]initWithArray:[responseObject valueForKey:@"data"]];
             [_tableView reloadData];
             [tableView endRefreshing];
         }
@@ -117,7 +118,9 @@
 //            for (NSDictionary *dic in arr) {
 //                [CoreData_Helper addPhotoSeriesEntity:dic];
 //            }
-            [data addObjectsFromArray:[responseObject valueForKey:@"data"]];
+            NSMutableArray * arr = [[NSMutableArray alloc]initWithArray:data];
+            [arr addObjectsFromArray:[responseObject valueForKey:@"data"]];
+            data = arr;
             [_tableView reloadData];
             [tableView endRefreshing];
         }
@@ -137,21 +140,25 @@
     [imageView2 setBackgroundColor:[UIColor whiteColor]];
     imageView1.contentMode = UIViewContentModeScaleAspectFit;
     imageView2.contentMode = UIViewContentModeScaleAspectFit;
-    SquareControl * control1 = [[SquareControl alloc]initWithFrame:imageView1.frame atIndex:(indexPath.row+1)*2-2];
-    [control1 addTarget:self action:@selector(imageTapped:) forControlEvents:UIControlEventTouchUpInside];
-    SquareControl * control2 = [[SquareControl alloc]initWithFrame:imageView2.frame atIndex:(indexPath.row+1)*2-1];
-    [control2 addTarget:self action:@selector(imageTapped:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.contentView addSubview:control1];
-    [cell.contentView addSubview:control2];
     NSDictionary * dic1 = data[(indexPath.row+1)*2-2];
     NSDictionary * dic2 = data[(indexPath.row+1)*2-1];
+    [imageView1 setImageWithURL:dic1[@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [imageView2 setImageWithURL:dic2[@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+
+
 //    PhotoSeriesEntity * entity1 = [CoreData_Helper GetPhotoSeriesEntity:[dic1 valueForKey:@"feed_id"]];
 //    PhotoSeriesEntity * entity2 = [CoreData_Helper GetPhotoSeriesEntity:[dic2 valueForKey:@"feed_id"]];
 //    NSLog(@"%@",entity1.cover_url);
-    [imageView1 setImageWithURL:dic1[@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    [imageView2 setImageWithURL:dic2[@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+
     [cell.contentView addSubview:imageView1];
     [cell.contentView addSubview:imageView2];
+    
+    SquareControl * control1 = [[SquareControl alloc]initWithFrame:imageView1.frame withFeedId:[dic1[@"feed_id"] intValue] imageUrl:dic1[@"cover"]];
+    [control1 addTarget:self action:@selector(imageTapped:) forControlEvents:UIControlEventTouchUpInside];
+    SquareControl * control2 = [[SquareControl alloc]initWithFrame:imageView2.frame withFeedId:[dic2[@"feed_id"] intValue] imageUrl:dic2[@"cover"]];
+    [control2 addTarget:self action:@selector(imageTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.contentView addSubview:control1];
+    [cell.contentView addSubview:control2];
     
     return cell;
 }
@@ -173,7 +180,7 @@
 }
 
 -(void)imageTapped:(SquareControl *)sender{
-    [self.NavigationController pushViewController:[[imgCollectionViewController alloc] init] animated:YES];
+    [self.NavigationController pushViewController:[[imgCollectionViewController alloc] initWithFeedId:sender.feedId bgImageUrl:sender.url] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
