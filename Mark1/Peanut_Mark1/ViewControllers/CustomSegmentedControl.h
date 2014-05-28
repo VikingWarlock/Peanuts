@@ -8,11 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CustomSegmentedControl : UIView
+@protocol customSegCtrolDelegate <NSObject>
+
+- (void)ClickedButtonIsOnline:(NSInteger)isOnline IsPresenting:(NSInteger)ispresenting IsProgressing:(NSInteger)isprogressing;
+
+@end
+
+@interface CustomSegmentedControl : UIView 
 @property (strong,nonatomic) UIButton *leftButton;
 @property (strong,nonatomic) UIButton *rightButton;
 @property (nonatomic) BOOL isOnline;
-@property (nonatomic,setter = setIsProgressing:) BOOL isProgressing;
+@property (nonatomic) BOOL isProgressing;
+@property (nonatomic,strong) id delegate;
+@property (nonatomic,setter = setIsPresenting:) BOOL isPresenting;
 - (id)initWithisProgressing:(BOOL)isProgressing;
 @end
 
