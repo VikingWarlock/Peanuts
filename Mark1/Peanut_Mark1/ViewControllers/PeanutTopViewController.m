@@ -34,6 +34,8 @@
     
     UIImageView *HeadimageView;
     NSArray *IndexList;
+    
+    
 }
 
 
@@ -85,16 +87,16 @@
     
     
     if ([[NSUserDefaults standardUserDefaults]dictionaryForKey:@"cover"]) {
-        [self AddDownloadTask:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"cover"] AndMark:@"cover"];
+        [self prepareDownloadedImage:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"cover"] AndMark:@"cover"];
     }
     if ([[NSUserDefaults standardUserDefaults]dictionaryForKey:@"square"]) {
-        [self AddDownloadTask:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"square"] AndMark:@"square"];
+        [self prepareDownloadedImage:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"square"] AndMark:@"square"];
     }
     if ([[NSUserDefaults standardUserDefaults]dictionaryForKey:@"activity"]) {
-        [self AddDownloadTask:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"activity"] AndMark:@"activity"];
+        [self prepareDownloadedImage:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"activity"] AndMark:@"activity"];
     }
     if ([[NSUserDefaults standardUserDefaults]dictionaryForKey:@"daily"]) {
-        [self AddDownloadTask:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"daily"] AndMark:@"daily"];
+        [self prepareDownloadedImage:[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"daily"] AndMark:@"daily"];
     }
     
     
@@ -116,7 +118,7 @@
     tableview.dataSource=self;
     
     [self.view addSubview:tableview];
-    [self addTableviewHeadView:[UIImage imageNamed:@"pic.jpg"]];
+    [self addTableviewHeadView:[UIImage imageNamed:@"placeholder.png"]];
     
     [self.view setNeedsDisplay];
     
@@ -191,15 +193,13 @@
 }
 
 
--(void)viewDidAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
  //   self.NavigationController.navigationBarHidden=YES;
     
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateHomePageImage) name:@"Home Page Hase Been Update" object:nil];
-    
-    
     
     if (self.NavigationController.navigationBarHidden) {
 //        [self.NavigationController setNavigationBarHidden:YES animated:YES];
@@ -209,16 +209,17 @@
     {
     [self reset_NavigationBar];
     }
+    
 }
 
--(void)viewDidDisappear:(BOOL)animated
+-(void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"Home Page Hase Been Update" object:nil];
     
     
     
 //    self.NavigationController.navigationBarHidden=NO;
-    [super viewDidDisappear:animated];
+    [super viewWillDisappear:animated];
 //    [self.NavigationController setNavigationBarHidden:YES animated:NO];
     [self setNavigationBarForOther];
 //    [self.NavigationController setNavigationBarHidden:NO animated:YES];
@@ -266,7 +267,7 @@
         [cell SetupWithBackImage:[downloadedImage objectForKey:name] AtIndexpath:indexPath AndInitPosition:(indexPath.row%2) AndDelegate:self];
     }else
     {
-    [cell SetupWithBackImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d",indexPath.row+1]] AtIndexpath:indexPath AndInitPosition:(indexPath.row%2) AndDelegate:self];
+    [cell SetupWithBackImage:[UIImage imageNamed:@"placeholder.png"] AtIndexpath:indexPath AndInitPosition:(indexPath.row%2) AndDelegate:self];
     }
     return cell;
 }
@@ -384,5 +385,22 @@
     }];
 
 }
+
+-(void)prepareDownloadedImage:(NSDictionary*)dic AndMark:(NSString*)mark
+{
+    
+    SDWebImageManager *manager=[SDWebImageManager sharedManager];
+    [manager downloadWithURL:[NSURL URLWithString:[dic objectForKey: @"cover"]] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+        nil;
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
+        [downloadedImage setObject:image forKey:mark];
+        
+        if ([mark isEqualToString:@"cover"]) {
+            [self addTableviewHeadView:image];
+        }
+    }];
+    
+}
+
 
 @end
