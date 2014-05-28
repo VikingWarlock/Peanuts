@@ -69,7 +69,7 @@
 {
     if (!_picture) {
         _picture = [[UIImageView alloc] init];
-        _picture.frame = CGRectMake(0, -265, self.view.bounds.size.width, 255);
+        _picture.frame = CGRectMake(0, -255, self.view.bounds.size.width, 255);
         _picture.image = nil;
         _picture.clipsToBounds = YES;
         _picture.contentMode = UIViewContentModeScaleAspectFill;
