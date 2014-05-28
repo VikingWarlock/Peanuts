@@ -77,6 +77,8 @@
 		D2F32F0C1925F88B00E446D6 /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F0A1925F88B00E446D6 /* comment.png */; };
 		D2F32F12192607ED00E446D6 /* MustReaddetialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F32F11192607ED00E446D6 /* MustReaddetialViewController.m */; };
 		F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */; };
+		F2434DD21934B711002D3426 /* SelfUser_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DC9F4A1932D48A00AE9E86 /* SelfUser_ViewController.m */; };
+		F285CDB9193213D300857D70 /* ImgBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = F285CDB8193213D300857D70 /* ImgBottomView.m */; };
 		F2B58DCE19264B7F009D6131 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2B58DCD19264B7F009D6131 /* ShareViewController.m */; };
 		F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8F95B19225B2000102F3F /* CommentTableViewCell.m */; };
 		F2F8BF1F1924EFE6000A3CED /* PeanutTopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88FF355D1923962B00E76BB2 /* PeanutTopViewController.m */; };
@@ -218,6 +220,8 @@
 		D2F32F11192607ED00E446D6 /* MustReaddetialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MustReaddetialViewController.m; path = ViewControllers/MustReaddetialViewController.m; sourceTree = "<group>"; };
 		F22D8FC819248418005D2A1A /* PublishCommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PublishCommentTableViewCell.h; path = ViewControllers/imgCollectionDetail/PublishCommentTableViewCell.h; sourceTree = "<group>"; };
 		F22D8FC919248418005D2A1A /* PublishCommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PublishCommentTableViewCell.m; path = ViewControllers/imgCollectionDetail/PublishCommentTableViewCell.m; sourceTree = "<group>"; };
+		F285CDB7193213D300857D70 /* ImgBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImgBottomView.h; path = ViewControllers/imgCollectionDetail/ImgBottomView.h; sourceTree = "<group>"; };
+		F285CDB8193213D300857D70 /* ImgBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImgBottomView.m; path = ViewControllers/imgCollectionDetail/ImgBottomView.m; sourceTree = "<group>"; };
 		F2B58DCC19264B7F009D6131 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareViewController.h; path = ViewControllers/imgCollectionDetail/ShareViewController.h; sourceTree = "<group>"; };
 		F2B58DCD19264B7F009D6131 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareViewController.m; path = ViewControllers/imgCollectionDetail/ShareViewController.m; sourceTree = "<group>"; };
 		F2D8F95319223C5E00102F3F /* imgCollectionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = imgCollectionTableViewCell.h; path = ViewControllers/imgCollectionDetail/imgCollectionTableViewCell.h; sourceTree = "<group>"; };
@@ -567,6 +571,8 @@
 				F2D8F95819224DF100102F3F /* CommentViewController.m */,
 				F2B58DCC19264B7F009D6131 /* ShareViewController.h */,
 				F2B58DCD19264B7F009D6131 /* ShareViewController.m */,
+				F285CDB7193213D300857D70 /* ImgBottomView.h */,
+				F285CDB8193213D300857D70 /* ImgBottomView.m */,
 			);
 			name = detail;
 			sourceTree = "<group>";
@@ -727,6 +733,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2434DD21934B711002D3426 /* SelfUser_ViewController.m in Sources */,
 				883E546A19339EDF00E8D2CE /* PhotoDetailEntity.m in Sources */,
 				883E546F19339EDF00E8D2CE /* CoreData-Helper.m in Sources */,
 				8881AC6519267AF000F9646B /* imgCollectionTableViewCell.m in Sources */,
@@ -756,7 +763,7 @@
 				5101B34419270E2900084BCA /* ActivityDetailUserViewController.m in Sources */,
 				88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */,
 				F2D8F95C19225B2000102F3F /* CommentTableViewCell.m in Sources */,
-				88DC9F4B1932D48A00AE9E86 /* SelfUser_ViewController.m in Sources */,
+				F285CDB9193213D300857D70 /* ImgBottomView.m in Sources */,
 				D2F32F081925D4A900E446D6 /* MustReadTableViewCell.m in Sources */,
 				885F6341192A4447007BAAE0 /* RequestPackage.m in Sources */,
 				F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */,

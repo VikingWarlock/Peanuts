@@ -8,10 +8,32 @@
 
 #import "SquareViewController.h"
 #import "imgCollectionViewController.h"
+#import "UIImageView+WebCache.h"
+#import "PullRefreshTableView.h"
 
-@interface SquareViewController ()
+@interface SquareControl : UIControl
+@property NSInteger index;
+@end
 
-@property (nonatomic,strong) UICollectionView * collectionView;
+@implementation SquareControl
+
+-(id)initWithFrame:(CGRect)frame atIndex:(NSInteger)index{
+    self = [super initWithFrame:frame];
+    if (self) {
+        self.index = index;
+    }
+    return self;
+}
+
+@end
+
+
+@interface SquareViewController (){
+    NSMutableArray * data;
+    int currentPage;
+}
+
+@property (nonatomic,strong) PullRefreshTableView * tableView;
 
 @end
 
@@ -26,53 +48,113 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    [self.tableView beginRefreshing];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.title = @"广场";
+    currentPage = 1;
+//    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
+//    [self.view addSubview:self.collectionView];
+    [self.view addSubview:self.tableView];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cellIdentifier"];
     
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"cellIdentifier"];
-    [self.view addSubview:self.collectionView];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_collectionView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_collectionView)]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_collectionView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_collectionView)]];
+    __weak SquareViewController *weakSelf =self;
+    [_tableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
+        [weakSelf pullDownRefreshing:refreshView];
+    }];
+    [_tableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
+        [weakSelf pullUpRefreshing:refreshView];
+    }];
     // Do any additional setup after loading the view.
 }
 
-
--(UICollectionView *)collectionView{
-    if (!_collectionView) {
-        UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.minimumInteritemSpacing = 4;
-        flowLayout.minimumLineSpacing = 4;
-        flowLayout.itemSize = CGSizeMake(153, 153);
-        flowLayout.sectionInset = UIEdgeInsetsMake(5, 5, 5, 5);
-
-        
-        
-        _collectionView = [[UICollectionView alloc] initWithFrame:self.view.frame collectionViewLayout:flowLayout];
-        [_collectionView setBackgroundColor:[UIColor whiteColor]];
-        _collectionView.translatesAutoresizingMaskIntoConstraints = NO;
-        _collectionView.delegate = self;
-        _collectionView.dataSource = self;
-    
+-(PullRefreshTableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[PullRefreshTableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView.translatesAutoresizingMaskIntoConstraints = NO;
+        _tableView.separatorColor = [UIColor clearColor];
+        _tableView.allowsSelection = NO;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
     }
-    return _collectionView;
+    return _tableView;
 }
 
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 15;
+-(void)pullDownRefreshing:(MJRefreshBaseView *)tableView{
+    if (currentPage > 1) {
+        currentPage--;
+    }
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=photo_group_list" parameters:@{@"page":[NSString stringWithFormat:@"%d",currentPage],@"count":@"20"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
+        {
+            data = [responseObject valueForKey:@"data"];
+            [_tableView reloadData];
+            [tableView endRefreshing];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
 }
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cellIdentifier" forIndexPath:indexPath];
-    [cell setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"iron.png"]]];
+
+-(void)pullUpRefreshing:(MJRefreshBaseView *)tableView{
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=photo_group_list" parameters:@{@"page":[NSString stringWithFormat:@"%d",++currentPage],@"count":@"20"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
+        {
+            data = [responseObject valueForKey:@"data"];
+            [_tableView reloadData];
+            [tableView endRefreshing];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellIdentifier"];
+    UIImageView * imageView1 = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, (self.view.frame.size.width - 15)/2, (self.view.frame.size.width - 15)/2)];
+    CGRect rect = imageView1.frame;
+    rect.origin.x += rect.size.width + 5;
+    UIImageView * imageView2 = [[UIImageView alloc] initWithFrame:rect];
+    SquareControl * control1 = [[SquareControl alloc]initWithFrame:imageView1.frame atIndex:indexPath.row];
+    [control1 addTarget:self action:@selector(imageTapped:) forControlEvents:UIControlEventTouchUpInside];
+    UIControl * control2 = [[UIControl alloc]initWithFrame:imageView2.frame];
+    [control2 addTarget:self action:@selector(imageTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.contentView addSubview:control1];
+    [cell.contentView addSubview:control2];
+    NSDictionary * rowData1 = data[(indexPath.row+1)*2-2];
+    NSDictionary * rowData2 = data[(indexPath.row+1)*2-1];
+    [imageView1 setImageWithURL:rowData1[@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [imageView2 setImageWithURL:rowData2[@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [cell.contentView addSubview:imageView1];
+    [cell.contentView addSubview:imageView2];
+    
     return cell;
 }
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    imgCollectionViewController * VC = [[imgCollectionViewController alloc] init];
-    [self.navigationController pushViewController:VC animated:YES];
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 10;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return self.view.frame.size.width/2;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.1;
+}
+
+-(void)imageTapped:(SquareControl *)sender{
+    [self.NavigationController pushViewController:[[imgCollectionViewController alloc] init] animated:YES];
+}
 
 - (void)didReceiveMemoryWarning
 {

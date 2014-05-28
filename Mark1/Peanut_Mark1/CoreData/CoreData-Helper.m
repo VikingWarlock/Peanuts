@@ -49,7 +49,7 @@
     item.descriptions=[parameter objectForKey:@"description"];
     item.dig_count=[parameter objectForKey:@"digg_count"];
     item.feed_id=[parameter objectForKey:@"feed_id"];
-   
+    
     item.is_repost=[parameter objectForKey:@"is_post"];
     item.publish_time=[parameter objectForKey:@"publish_time"];
     item.recommend_content=[parameter objectForKey:@"recommend_content"];
