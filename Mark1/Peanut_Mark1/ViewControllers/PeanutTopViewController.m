@@ -34,6 +34,9 @@
     
     UIImageView *HeadimageView;
     NSArray *IndexList;
+    
+    SDImageCache *ImageCache;
+    
 }
 
 
@@ -46,7 +49,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        
+        ImageCache=[[SDImageCache alloc] initWithNamespace:@"HomePageImageCache"];
     }
     return self;
 }
@@ -60,9 +63,6 @@
     [self AddDownloadTask:[array objectForKey:@"square"] AndMark:@"square"];
     [self AddDownloadTask:[array objectForKey:@"activity"] AndMark:@"activity"];
     [self AddDownloadTask:[array objectForKey:@"daily"] AndMark:@"daily"];
-    
-    
-
 }
 
 
@@ -75,6 +75,13 @@
 
     IndexList=@[@"square",@"activity",@"daily"];
     downloadedImage =[[NSMutableDictionary alloc]init];
+    
+    
+    [self prepareDownloadedImageMark:@"cover"];
+    [self prepareDownloadedImageMark:@"square"];
+    [self prepareDownloadedImageMark:@"activity"];
+    [self prepareDownloadedImageMark:@"daily"];
+    
     
     
     
@@ -94,18 +101,14 @@
     tableview.dataSource=self;
     
     [self.view addSubview:tableview];
-    [self addTableviewHeadView:[UIImage imageNamed:@"pic.jpg"]];
+    
+    [self addTableviewHeadView:[downloadedImage objectForKey:@"cover"]?[downloadedImage objectForKey:@"cover"]:[UIImage imageNamed:@"placeholder.png"]];
+    
+    
     
     [self.view setNeedsDisplay];
     
     [self.NavigationController SNS_appear];
-    
-     /*
-    UIImageWriteToSavedPhotosAlbum([[self.view getClipView:CGRectMake(0, 0, 320, 100)]captureView ], self, nil, nil);
-    
-    backGroundImageColor=[[[self.view getClipView:CGRectMake(0, 0, 320, 40)] captureView]averageColor];
-    */
-    //[self.NavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: backGroundImageColor}];
     
 //    [self reset_NavigationBar];
 
@@ -125,8 +128,7 @@
     [self.NavigationController.navigationBar setTintColor:[UIColor whiteColor]];
 
     
- //   UIImageWriteToSavedPhotosAlbum([[self.Peanut_backgroundView getClipView:CGRectMake(0, 0, 320, 100)]captureView ], self, nil, nil);
-    
+
     backGroundImageColor=[[[self.view getClipView:CGRectMake(0, 0, 320, 40)] captureView]averageColor];
     
     
@@ -169,37 +171,28 @@
 }
 
 
--(void)viewDidAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
- //   self.NavigationController.navigationBarHidden=YES;
     
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(updateHomePageImage) name:@"Home Page Hase Been Update" object:nil];
     
-    
-    
     if (self.NavigationController.navigationBarHidden) {
-//        [self.NavigationController setNavigationBarHidden:YES animated:YES];
         [self reset_NavigationBar];
-//        [self.NavigationController setNavigationBarHidden:NO animated:NO];
     }else
     {
     [self reset_NavigationBar];
     }
+    
 }
 
--(void)viewDidDisappear:(BOOL)animated
+-(void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self name:@"Home Page Hase Been Update" object:nil];
     
-    
-    
-//    self.NavigationController.navigationBarHidden=NO;
-    [super viewDidDisappear:animated];
-//    [self.NavigationController setNavigationBarHidden:YES animated:NO];
+    [super viewWillDisappear:animated];
     [self setNavigationBarForOther];
-//    [self.NavigationController setNavigationBarHidden:NO animated:YES];
 }
 
 /*
@@ -236,7 +229,6 @@
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //BlurAndSlide_TableViewCell *cell=[tableview dequeueReusableCellWithIdentifier:@"SliderCell" forIndexPath:indexPath];
     BlurTableViewCell_mark1 *cell=[tableview dequeueReusableCellWithIdentifier:@"mark1Cell" forIndexPath:indexPath];
     
     NSString *name=[IndexList objectAtIndex:indexPath.row];
@@ -244,7 +236,7 @@
         [cell SetupWithBackImage:[downloadedImage objectForKey:name] AtIndexpath:indexPath AndInitPosition:(indexPath.row%2) AndDelegate:self];
     }else
     {
-    [cell SetupWithBackImage:[UIImage imageNamed:[NSString stringWithFormat:@"%d",indexPath.row+1]] AtIndexpath:indexPath AndInitPosition:(indexPath.row%2) AndDelegate:self];
+    [cell SetupWithBackImage:[UIImage imageNamed:@"placeholder.png"] AtIndexpath:indexPath AndInitPosition:(indexPath.row%2) AndDelegate:self];
     }
     return cell;
 }
@@ -354,13 +346,23 @@
         nil;
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
         [downloadedImage setObject:image forKey:mark];
-        
+        [ImageCache storeImage:image forKey:mark toDisk:YES];
         if ([mark isEqualToString:@"cover"]) {
             [self addTableviewHeadView:image];
         }else
         [tableview reloadData];
+        //TODO 这个地方使用缓存的图片，还是会调用多次reloadData
     }];
 
 }
+
+-(void)prepareDownloadedImageMark:(NSString*)mark
+{
+        UIImage*image=[ImageCache imageFromDiskCacheForKey:mark];
+    if (image!=nil) {
+        [downloadedImage setObject:image forKey:mark];
+    }
+}
+
 
 @end

@@ -18,9 +18,9 @@
         <attribute name="fee_limit" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="feed_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="image_path_array" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="is_repost" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="isCurrent" optional="YES" attributeType="Boolean" syncable="YES"/>
-        <attribute name="member_audit" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="is_repost" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isCurrent" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="member_audit" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="personNum_limit" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="publish_time" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="repost_count" optional="YES" attributeType="String" syncable="YES"/>

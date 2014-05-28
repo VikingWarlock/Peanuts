@@ -66,11 +66,12 @@
 		8896668219348AD600138572 /* PhotoInfoEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8896668119348AD600138572 /* PhotoInfoEntity.m */; };
 		8896668519348AD600138572 /* PhotoSeriesEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8896668419348AD600138572 /* PhotoSeriesEntity.m */; };
 		8896668819348AD600138572 /* UserInfEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8896668719348AD600138572 /* UserInfEntity.m */; };
-		8896668B19348AD600138572 /* ActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 8896668A19348AD600138572 /* ActivityEntity.m */; };
 		88D02AB4191E721C001ABA96 /* ActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB3191E721C001ABA96 /* ActivityViewController.m */; };
 		88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB6191E723B001ABA96 /* MustReadViewController.m */; };
 		88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB9191E724C001ABA96 /* SquareViewController.m */; };
 		88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */; };
+		88DC9F4B1932D48A00AE9E86 /* SelfUser_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DC9F4A1932D48A00AE9E86 /* SelfUser_ViewController.m */; };
+		88DE03F21934EA0F00E2B9AC /* ActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DE03F11934EA0F00E2B9AC /* ActivityEntity.m */; };
 		D2F32F081925D4A900E446D6 /* MustReadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */; };
 		D2F32F0B1925F88B00E446D6 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F091925F88B00E446D6 /* like.png */; };
 		D2F32F0C1925F88B00E446D6 /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F0A1925F88B00E446D6 /* comment.png */; };
@@ -192,8 +193,6 @@
 		8896668419348AD600138572 /* PhotoSeriesEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoSeriesEntity.m; path = CoreData/PhotoSeriesEntity.m; sourceTree = "<group>"; };
 		8896668619348AD600138572 /* UserInfEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfEntity.h; path = CoreData/UserInfEntity.h; sourceTree = "<group>"; };
 		8896668719348AD600138572 /* UserInfEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfEntity.m; path = CoreData/UserInfEntity.m; sourceTree = "<group>"; };
-		8896668919348AD600138572 /* ActivityEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityEntity.h; path = CoreData/ActivityEntity.h; sourceTree = "<group>"; };
-		8896668A19348AD600138572 /* ActivityEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityEntity.m; path = CoreData/ActivityEntity.m; sourceTree = "<group>"; };
 		88D02AB2191E721C001ABA96 /* ActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityViewController.h; path = ViewControllers/ActivityViewController.h; sourceTree = "<group>"; };
 		88D02AB3191E721C001ABA96 /* ActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityViewController.m; path = ViewControllers/ActivityViewController.m; sourceTree = "<group>"; };
 		88D02AB5191E723B001ABA96 /* MustReadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MustReadViewController.h; path = ViewControllers/MustReadViewController.h; sourceTree = "<group>"; };
@@ -204,6 +203,8 @@
 		88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = imgCollectionViewController.m; path = ViewControllers/imgCollectionViewController.m; sourceTree = "<group>"; };
 		88DC9F491932D48A00AE9E86 /* SelfUser_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SelfUser_ViewController.h; path = ViewControllers/SelfUser_ViewController.h; sourceTree = "<group>"; };
 		88DC9F4A1932D48A00AE9E86 /* SelfUser_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelfUser_ViewController.m; path = ViewControllers/SelfUser_ViewController.m; sourceTree = "<group>"; };
+		88DE03F01934EA0F00E2B9AC /* ActivityEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityEntity.h; path = CoreData/ActivityEntity.h; sourceTree = "<group>"; };
+		88DE03F11934EA0F00E2B9AC /* ActivityEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityEntity.m; path = CoreData/ActivityEntity.m; sourceTree = "<group>"; };
 		88E06FD819232317006B3EAC /* BlurTableViewCell_mark1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlurTableViewCell_mark1.h; path = BaseModel/BaseSmallOutlet/BlurTableViewCell_mark1.h; sourceTree = "<group>"; };
 		88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlurTableViewCell_mark1.m; path = BaseModel/BaseSmallOutlet/BlurTableViewCell_mark1.m; sourceTree = "<group>"; };
 		88FF355C1923962B00E76BB2 /* PeanutTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeanutTopViewController.h; path = ViewControllers/PeanutTopViewController.h; sourceTree = "<group>"; };
@@ -421,8 +422,6 @@
 			isa = PBXGroup;
 			children = (
 				887F2126191DB934009250D2 /* CoreDataModel.xcdatamodeld */,
-				8896668919348AD600138572 /* ActivityEntity.h */,
-				8896668A19348AD600138572 /* ActivityEntity.m */,
 				8896668619348AD600138572 /* UserInfEntity.h */,
 				8896668719348AD600138572 /* UserInfEntity.m */,
 				8896668319348AD600138572 /* PhotoSeriesEntity.h */,
@@ -439,6 +438,8 @@
 				886C5E371932E57D008F885A /* CoreData-Helper.m */,
 				8896667A19347BE900138572 /* StaticDataManager.h */,
 				8896667B19347BE900138572 /* StaticDataManager.m */,
+				88DE03F01934EA0F00E2B9AC /* ActivityEntity.h */,
+				88DE03F11934EA0F00E2B9AC /* ActivityEntity.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -734,7 +735,6 @@
 			files = (
 				F2434DD21934B711002D3426 /* SelfUser_ViewController.m in Sources */,
 				883E546A19339EDF00E8D2CE /* PhotoDetailEntity.m in Sources */,
-				8896668B19348AD600138572 /* ActivityEntity.m in Sources */,
 				883E546F19339EDF00E8D2CE /* CoreData-Helper.m in Sources */,
 				8881AC6519267AF000F9646B /* imgCollectionTableViewCell.m in Sources */,
 				8881AC6619267AF000F9646B /* CommentViewController.m in Sources */,
@@ -775,6 +775,7 @@
 				F2B58DCE19264B7F009D6131 /* ShareViewController.m in Sources */,
 				510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */,
 				510A5DAA19332AE200D415E4 /* CustomSegmentedControl.m in Sources */,
+				88DE03F21934EA0F00E2B9AC /* ActivityEntity.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
 				51B47EA219330925000E47C6 /* MJRefreshFooterView.m in Sources */,
 				8896667C19347BE900138572 /* StaticDataManager.m in Sources */,

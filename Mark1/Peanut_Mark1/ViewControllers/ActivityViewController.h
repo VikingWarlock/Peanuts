@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseUIViewController.h"
-@interface ActivityViewController : BaseUIViewController <UITableViewDataSource,UITableViewDelegate>
+#import "CustomSegmentedControl.h"
+@interface ActivityViewController : BaseUIViewController <UITableViewDataSource,UITableViewDelegate,customSegCtrolDelegate>
 
 @end

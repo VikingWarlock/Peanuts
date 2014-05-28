@@ -22,6 +22,7 @@
         [self addSubview:self.leftButton];
         [self addSubview:self.rightButton];
         self.isProgressing = isProgressing;
+        self.isPresenting = isProgressing;
         
         [_leftButton setTranslatesAutoresizingMaskIntoConstraints:NO];
         [_rightButton setTranslatesAutoresizingMaskIntoConstraints:NO];
@@ -39,13 +40,13 @@
         _leftButton.backgroundColor = _rightButton.backgroundColor;
         _rightButton.backgroundColor = temp;
         _isOnline = ((UIButton *)sender).tag;
+        [self.delegate ClickedButtonIsOnline:_isOnline IsPresenting:_isPresenting IsProgressing:_isProgressing];
     }
-    NSLog(@"%D",_isOnline);
 }
 
-- (void)setIsProgressing:(BOOL)isProgressing
+- (void)setIsPresenting:(BOOL)isProgressing
 {
-    _isProgressing = isProgressing;
+    _isPresenting = isProgressing;
     if (isProgressing) {
         if (_isOnline == YES) {
             _leftButton.backgroundColor = SELECTED_COLOR;
