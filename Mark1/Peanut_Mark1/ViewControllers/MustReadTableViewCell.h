@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIImageView+WebCache.h"
 
 @interface MustReadTableViewCell : UITableViewCell
 @property (nonatomic,strong) UIImageView *picture;

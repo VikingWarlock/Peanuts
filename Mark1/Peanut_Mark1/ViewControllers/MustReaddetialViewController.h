@@ -8,6 +8,13 @@
 
 #import "BaseUIViewController.h"
 
-@interface MustReaddetialViewController : BaseUIViewController
-
+@interface MustReaddetialViewController : BaseUIViewController <UIWebViewDelegate>
+@property (nonatomic,retain) UIImageView *picture;
+@property (nonatomic,retain) UIView *mask;
+@property (nonatomic,retain) UIImageView *avatar;
+@property (nonatomic,retain) UILabel *atitle;
+@property (nonatomic,retain) UILabel *user;
+@property (nonatomic,retain) UIButton *like;
+@property (nonatomic,retain) UIButton *comment;
+@property (nonatomic,retain) UIWebView *content;
 @end
