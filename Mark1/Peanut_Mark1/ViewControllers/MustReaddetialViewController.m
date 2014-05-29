@@ -190,6 +190,7 @@
 {
     if (!_content) {
         _content = [[UIWebView alloc] init];
+        _content.delegate = self;
         [_content.scrollView addSubview:self.picture];
         //        _content.frame = CGRectMake(0, 255, self.view.bounds.size.width, 0);
         //_content.textColor = [UIColor blackColor];
@@ -200,10 +201,34 @@
         //        _content.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         //[_content setEditable:NO];
         //[_content setSelectable:NO];
-        _content.scrollView.contentInset = UIEdgeInsetsMake(255, 0, 0, 10);
-        _content.scalesPageToFit = YES;
+        _content.scrollView.contentInset = UIEdgeInsetsMake(255, 0, 0, 0);
+        //_content.scalesPageToFit = NO;
     }
     return _content;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    //拦截网页图片  并修改图片大小
+    [webView stringByEvaluatingJavaScriptFromString:
+     @"var script = document.createElement('script');"
+     "script.type = 'text/javascript';"
+     "script.text = \"function ResizeImages() { "
+     "var myimg,oldwidth;"
+     "var maxwidth=300;" //缩放系数
+     "for(i=0;i <document.images.length;i++){"
+     "myimg = document.images[i];"
+     "if(myimg.width > maxwidth){"
+     "oldwidth = myimg.width;"
+     "myimg.width = maxwidth;"
+     "}"
+     "}"
+     "}\";"
+     "document.getElementsByTagName('head')[0].appendChild(script);"];
+    
+    [webView stringByEvaluatingJavaScriptFromString:@"ResizeImages();"];
+    
+    [_content.scrollView setContentSize:CGSizeMake(0, _content.scrollView.contentSize.height)];
 }
 
 @end

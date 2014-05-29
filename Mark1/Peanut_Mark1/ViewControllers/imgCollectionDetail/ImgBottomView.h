@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommentViewController.h"
+
+@protocol Delegate_imgBottomView <NSObject>
+
+-(void)bottomCommentBtnClick;
+
+@end
 
 @interface ImgBottomView : UIView
 
 @property (nonatomic,strong)UIButton * praiseBtn;
 @property (nonatomic,strong)UIButton * commentBtn;
 @property (nonatomic,strong)UIButton * shareBtn;
+@property (nonatomic,strong)CommentViewController * commentVC;
+@property (nonatomic,assign)id<Delegate_imgBottomView>delegate;
 
 @end

@@ -28,22 +28,22 @@
         [self.contentView addSubview:_titleLabel];
         [self.contentView addSubview:self.praiseBtn];
 
-        [self.contentView addSubview:self.detailBtn];
+//        [self.contentView addSubview:self.detailBtn];
         [self.contentView addSubview:self.commentBtn];
         [self.contentView addSubview:self.shareBtn];
         
-        NSDictionary * dic = NSDictionaryOfVariableBindings(_imgView,_titleLabel,_detailBtn,_praiseBtn,_commentBtn,_shareBtn);
+        NSDictionary * dic = NSDictionaryOfVariableBindings(_imgView,_titleLabel,_praiseBtn,_commentBtn,_shareBtn);
         for (UIView * view in [dic allValues]) {
             [view setTranslatesAutoresizingMaskIntoConstraints:NO];
         }
 
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_imgView]-10-|" options:0 metrics:nil views:dic]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_titleLabel(==50)]-10-[_detailBtn]-100-[_praiseBtn(==50)]-10-[_commentBtn(==50)]-10-[_shareBtn(==50)]-10-|" options:0 metrics:nil views:dic]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_titleLabel(==20)]|"] options:0 metrics:nil views:dic]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_detailBtn(==20)]|"] options:0 metrics:nil views:dic]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_praiseBtn(==20)]|"] options:0 metrics:nil views:dic]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_commentBtn(==20)]|"] options:0 metrics:nil views:dic]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_shareBtn(==20)]|"] options:0 metrics:nil views:dic]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_titleLabel]-30-[_praiseBtn(==50)]-10-[_commentBtn(==50)]-10-[_shareBtn(==50)]-10-|" options:0 metrics:nil views:dic]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_titleLabel(==20)]-10-|"] options:0 metrics:nil views:dic]];
+//        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_detailBtn(==20)]|"] options:0 metrics:nil views:dic]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_praiseBtn(==20)]-10-|"] options:0 metrics:nil views:dic]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_commentBtn(==20)]-10-|"] options:0 metrics:nil views:dic]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_shareBtn(==20)]-10-|"] options:0 metrics:nil views:dic]];
         
         praiseCount = 0;
         commentCount = 0;
@@ -53,7 +53,7 @@
     }
     return self;
 }
-
+/*
 -(UIButton *)detailBtn{
     if (!_detailBtn) {
         _detailBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.titleLabel.frame.origin.x + self.titleLabel.frame.size.width ,self.titleLabel.frame.origin.y - 15 , 50, 50)];
@@ -66,10 +66,10 @@
     }
     return _detailBtn;
 }
-
--(void)detailBtnClick:(UIButton *)sender{
-    
-}
+*/
+//-(void)detailBtnClick:(UIButton *)sender{
+//    
+//}
 
 -(UIButton *)praiseBtn{
     if (!_praiseBtn) {
