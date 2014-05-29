@@ -27,25 +27,17 @@
 @property (nonatomic,strong) UIImageView *interestImage;
 @property (nonatomic,strong) UIImageView *joinImage;
 @property (nonatomic,strong) UITableView *tableview;
-@property (nonatomic,strong) UITabBarController *tabBar;
 
 @end
 
 @implementation ActivityDetailViewController
 
-- (id)init
+- (id)initWithFeedId:(int)feedId bgImageUrl:(NSURL *)url
 {
     self = [super init];
-    if (self) {
-//        _tabBar = [[UITabBarController alloc] init];
-//        _tabBar.delegate = self;
-//        ActivityDetailInfoViewController *blueViewController = [[ActivityDetailInfoViewController alloc] init];
-//        ActivityDetailUserViewController *yellowViewController = [[ActivityDetailUserViewController alloc] init];
-//        NSArray *viewControllerArray = [NSArray arrayWithObjects:blueViewController,yellowViewController,nil];
-//        _tabBar.viewControllers = viewControllerArray;
-//        _tabBar.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-//        //[self.view addSubview:_tabBar.view];
-//        [self setTabBar:_tabBar];
+    if (self)
+    {
+        
     }
     return self;
 }
@@ -109,19 +101,20 @@
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
             pictures = [responseObject valueForKey:@"data"];
-            if ([pictures count] == 1) {
-                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView1 setImageWithURL:[pictures[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-            }
-            else if ([pictures count] == 2)
-            {
-                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView2 setImageWithURL:[pictures[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-            }
-            else if ([pictures count] >= 3)
-            {
-                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView3 setImageWithURL:[pictures[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-            }
-            
-            //NSLog(@"%@",[responseObject valueForKey:@"data"]);
+//            if ([pictures count] == 1) {
+//                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView1 setImageWithURL:[pictures[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+//            }
+//            else if ([pictures count] == 2)
+//            {
+//                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView2 setImageWithURL:[pictures[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+//            }
+//            else if ([pictures count] >= 3)
+//            {
+//                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView3 setImageWithURL:[pictures[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+//            }
+//
+            NSLog(@"%@",_feedid);
+            NSLog(@"%@\n\n\n",responseObject);
 
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -145,7 +138,7 @@
 //                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView3 setImageWithURL:[user[0] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
 //            }
             
-            NSLog(@"%@",responseObject);
+            //NSLog(@"%@",responseObject);
             
 
         }
