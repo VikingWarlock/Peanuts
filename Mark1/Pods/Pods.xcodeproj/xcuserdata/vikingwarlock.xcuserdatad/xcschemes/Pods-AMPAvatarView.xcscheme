@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DE418F186E384B709B8C3152"
+               BlueprintIdentifier = "3F98468169574ECAA3123229"
                BuildableName = "libPods-AMPAvatarView.a"
                BlueprintName = "Pods-AMPAvatarView"
                ReferencedContainer = "container:Pods.xcodeproj">

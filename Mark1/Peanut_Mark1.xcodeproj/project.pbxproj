@@ -70,8 +70,8 @@
 		88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB6191E723B001ABA96 /* MustReadViewController.m */; };
 		88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB9191E724C001ABA96 /* SquareViewController.m */; };
 		88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */; };
-		88DC9F4B1932D48A00AE9E86 /* SelfUser_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DC9F4A1932D48A00AE9E86 /* SelfUser_ViewController.m */; };
 		88DE03F51935C8EE00E2B9AC /* ActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DE03F41935C8EE00E2B9AC /* ActivityEntity.m */; };
+		88DE03F91936F05A00E2B9AC /* PhotoBroswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DE03F81936F05A00E2B9AC /* PhotoBroswerViewController.m */; };
 		D2F32F081925D4A900E446D6 /* MustReadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */; };
 		D2F32F0B1925F88B00E446D6 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F091925F88B00E446D6 /* like.png */; };
 		D2F32F0C1925F88B00E446D6 /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F0A1925F88B00E446D6 /* comment.png */; };
@@ -205,6 +205,8 @@
 		88DC9F4A1932D48A00AE9E86 /* SelfUser_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelfUser_ViewController.m; path = ViewControllers/SelfUser_ViewController.m; sourceTree = "<group>"; };
 		88DE03F31935C8EE00E2B9AC /* ActivityEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityEntity.h; path = CoreData/ActivityEntity.h; sourceTree = "<group>"; };
 		88DE03F41935C8EE00E2B9AC /* ActivityEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityEntity.m; path = CoreData/ActivityEntity.m; sourceTree = "<group>"; };
+		88DE03F71936F05A00E2B9AC /* PhotoBroswerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoBroswerViewController.h; path = ViewControllers/PhotoBroswerViewController.h; sourceTree = "<group>"; };
+		88DE03F81936F05A00E2B9AC /* PhotoBroswerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoBroswerViewController.m; path = ViewControllers/PhotoBroswerViewController.m; sourceTree = "<group>"; };
 		88E06FD819232317006B3EAC /* BlurTableViewCell_mark1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlurTableViewCell_mark1.h; path = BaseModel/BaseSmallOutlet/BlurTableViewCell_mark1.h; sourceTree = "<group>"; };
 		88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlurTableViewCell_mark1.m; path = BaseModel/BaseSmallOutlet/BlurTableViewCell_mark1.m; sourceTree = "<group>"; };
 		88FF355C1923962B00E76BB2 /* PeanutTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeanutTopViewController.h; path = ViewControllers/PeanutTopViewController.h; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 		887F2118191DB787009250D2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				88DE03F61936F02800E2B9AC /* PhotoBroswerViewController */,
 				887F2130191DF569009250D2 /* SquareViewController */,
 				887F212F191DF55F009250D2 /* MustReadViewController */,
 				887F212E191DF3CC009250D2 /* imgCollection */,
@@ -561,6 +564,15 @@
 				887F214C191E4590009250D2 /* pic.jpg */,
 			);
 			name = img;
+			sourceTree = "<group>";
+		};
+		88DE03F61936F02800E2B9AC /* PhotoBroswerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				88DE03F71936F05A00E2B9AC /* PhotoBroswerViewController.h */,
+				88DE03F81936F05A00E2B9AC /* PhotoBroswerViewController.m */,
+			);
+			name = PhotoBroswerViewController;
 			sourceTree = "<group>";
 		};
 		F2D8F95219223C1600102F3F /* detail */ = {
@@ -772,6 +784,7 @@
 				51B47EA119330925000E47C6 /* MJRefreshConst.m in Sources */,
 				8881AC641925E4A700F9646B /* SNS_Helper.m in Sources */,
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
+				88DE03F91936F05A00E2B9AC /* PhotoBroswerViewController.m in Sources */,
 				F2B58DCE19264B7F009D6131 /* ShareViewController.m in Sources */,
 				510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */,
 				510A5DAA19332AE200D415E4 /* CustomSegmentedControl.m in Sources */,

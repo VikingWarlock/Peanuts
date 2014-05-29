@@ -20,11 +20,19 @@ PODS:
     - AFNetworking/NSURLSession
   - AMPAvatarView (1.0.3)
   - CocoaSecurity (1.2.4)
+  - DACircularProgress (2.2.0)
   - MagicalRecord (2.2):
     - MagicalRecord/Core
   - MagicalRecord/Core (2.2)
+  - MBProgressHUD (0.8)
+  - MWPhotoBrowser (1.4.0):
+    - DACircularProgress
+    - MBProgressHUD (~> 0.8)
+    - PSTCollectionView (~> 1.2)
+    - SDWebImage (~> 3.5.4)
   - NSUserDefaults-AESEncryptor (0.0.4):
     - CocoaSecurity (~> 1.2.2)
+  - PSTCollectionView (1.2.0)
   - RBBAnimation (0.3.0)
   - Reachability (3.1.1)
   - RTAlertView (0.0.6):
@@ -45,6 +53,7 @@ DEPENDENCIES:
   - AFNetworking (~> 2.2.3)
   - AMPAvatarView (~> 1.0.3)
   - MagicalRecord (~> 2.2)
+  - MWPhotoBrowser (~> 1.4.0)
   - NSUserDefaults-AESEncryptor (~> 0.0.4)
   - Reachability (~> 3.1)
   - RTAlertView (~> 0.0.6)
@@ -57,21 +66,25 @@ DEPENDENCIES:
   - ZGPullDragTableView (~> 0.0.1)
 
 SPEC CHECKSUMS:
-  AFNetworking: 01aa7c3aa9a200b94943e54072a4373f14b3d219
-  AMPAvatarView: 473eae59b5d71dfdeed18803917bfc2a9e0a0a42
-  CocoaSecurity: 7118996ece3493e6dcf2d45006bf0c1d955dbbc8
-  MagicalRecord: 95d49d74ef752cd52f6ad87bcb474817fc3978cf
-  NSUserDefaults-AESEncryptor: f53c00dbe0f67ed2c66b4b937c4d2d8b131284e0
-  RBBAnimation: e7f31ed62f760f3caf120b5d943267bd9a8e1f64
-  Reachability: be4883bb93f31e38266ae3365e5600a317aae735
-  RTAlertView: 063dc8743ac8acf426cb64c011aa786f22563665
-  SDWebImage: 7eb273e54ca8a2e506ad9bd5e80c35b2a4d7c95e
-  SDWebImage-ProgressView: 472d7eb4ed2663109164afc13b936d8e3e5c8cd6
-  UIColor-Utilities: 5c2076b975f423097011aeea4012e75857dd9c99
-  UIColorCategories: 3b1153d8e4b97d26f2107f0da5e898e4438b5fc8
-  UIImage+BlurAndDarken: e8624dc1153e8bd73d2eabd36a193741e91d43c1
-  UIImage+ImageCompress: 9772dde93c0f615c53d2eecd7849797a2afdfd05
-  UIImage-Resize: b71ddbd27e5a29c2776df5c55b766928050437b2
-  ZGPullDragTableView: 16d1157aa8a19730ceff60dd6446d2626a9ec2e2
+  AFNetworking: ab63e259fe91eef4519b371ef0a4955af0e73e64
+  AMPAvatarView: b4b26cb1350a4eaefc47e6b71f389d190dbde073
+  CocoaSecurity: 7ce1b967863d4e96dcffdbad17671117900e6c6e
+  DACircularProgress: 3b41941891a56dc6aa17971f5322a9a38a6f446e
+  MagicalRecord: 2b471584fc9e3137f3d0a56967917baa4979e224
+  MBProgressHUD: c356980b0cd097f19acec959b49dca5eb8ec31be
+  MWPhotoBrowser: 4efcdb9da34751f97992128a5356f3929d1af537
+  NSUserDefaults-AESEncryptor: 913075da1eab9af8421957d11ab0ea775d536912
+  PSTCollectionView: e82c1a71ec6469f88490b674c0f66f0bbf1de001
+  RBBAnimation: 243d73be1a526f1b51d266b182e4aa0cfe9cbf64
+  Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
+  RTAlertView: 93a2c3a42bffde43b0736a50e0d8e811081c3ea4
+  SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
+  SDWebImage-ProgressView: 7b7a9512cbf22d0d6e3d20d9aa8b03e1940d164f
+  UIColor-Utilities: 3f13aebe447f5e19c8d3aa18c194c53116b23537
+  UIColorCategories: 8fbcc33a0ed3a03395caabfcb39f77231986413b
+  UIImage+BlurAndDarken: 1a8a91f855eb395dd0348bf27360f5581fcb7cd9
+  UIImage+ImageCompress: 170241cb980e3f5057d74122480a24c92d25d8a8
+  UIImage-Resize: fc57263eed2cd98f74e5ba4848bedae979a0bdf0
+  ZGPullDragTableView: 658565e7e8e6a01ac8008c9ab4e79a1e79f0e75d
 
 COCOAPODS: 0.32.1

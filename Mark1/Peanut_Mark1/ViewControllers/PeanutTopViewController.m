@@ -375,6 +375,7 @@
     {
         [[NSUserDefaults standardUserDefaults]setObject:dic forKey:mark];
     }
+    
     [manager downloadWithURL:[NSURL URLWithString:[dic objectForKey: @"cover"]] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         nil;
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {

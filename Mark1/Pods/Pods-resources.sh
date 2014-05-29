@@ -41,6 +41,7 @@ install_resource()
       ;;
   esac
 }
+install_resource "MWPhotoBrowser/MWPhotoBrowser/MWPhotoBrowser.bundle"
 install_resource "RTAlertView/RTAlertView/RTAlertView/RTAlertViewController.xib"
 install_resource "RTAlertView/RTAlertView/RTAlertView/RTAlertViewDoubleTextFieldView.xib"
 install_resource "RTAlertView/RTAlertView/RTAlertView/RTAlertViewRecursiveButtonContainerView.xib"
