@@ -70,8 +70,9 @@
 		88D02AB7191E723B001ABA96 /* MustReadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB6191E723B001ABA96 /* MustReadViewController.m */; };
 		88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB9191E724C001ABA96 /* SquareViewController.m */; };
 		88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */; };
-		88DC9F4B1932D48A00AE9E86 /* SelfUser_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DC9F4A1932D48A00AE9E86 /* SelfUser_ViewController.m */; };
 		88DE03F51935C8EE00E2B9AC /* ActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DE03F41935C8EE00E2B9AC /* ActivityEntity.m */; };
+		D29EA96719372CEE001FEE36 /* NoReadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D29EA96619372CEE001FEE36 /* NoReadCell.m */; };
+		D29EA96A19372D0E001FEE36 /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D29EA96919372D0E001FEE36 /* DateCell.m */; };
 		D2F32F081925D4A900E446D6 /* MustReadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */; };
 		D2F32F0B1925F88B00E446D6 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F091925F88B00E446D6 /* like.png */; };
 		D2F32F0C1925F88B00E446D6 /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F0A1925F88B00E446D6 /* comment.png */; };
@@ -212,6 +213,10 @@
 		88FF355F19239FF500E76BB2 /* Peanut_SNSPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Peanut_SNSPart.h; path = BaseModel/Peanut_SNSPart.h; sourceTree = "<group>"; };
 		88FF356019239FF500E76BB2 /* Peanut_SNSPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Peanut_SNSPart.m; path = BaseModel/Peanut_SNSPart.m; sourceTree = "<group>"; };
 		C2AAB9293F12492E8B381615 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		D29EA96519372CEE001FEE36 /* NoReadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoReadCell.h; sourceTree = "<group>"; };
+		D29EA96619372CEE001FEE36 /* NoReadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoReadCell.m; sourceTree = "<group>"; };
+		D29EA96819372D0E001FEE36 /* DateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateCell.h; sourceTree = "<group>"; };
+		D29EA96919372D0E001FEE36 /* DateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateCell.m; sourceTree = "<group>"; };
 		D2F32F061925D4A900E446D6 /* MustReadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MustReadTableViewCell.h; path = ViewControllers/MustReadTableViewCell.h; sourceTree = "<group>"; };
 		D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MustReadTableViewCell.m; path = ViewControllers/MustReadTableViewCell.m; sourceTree = "<group>"; };
 		D2F32F091925F88B00E446D6 /* like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = like.png; sourceTree = "<group>"; };
@@ -524,6 +529,10 @@
 			children = (
 				88D02AB5191E723B001ABA96 /* MustReadViewController.h */,
 				88D02AB6191E723B001ABA96 /* MustReadViewController.m */,
+				D29EA96819372D0E001FEE36 /* DateCell.h */,
+				D29EA96919372D0E001FEE36 /* DateCell.m */,
+				D29EA96519372CEE001FEE36 /* NoReadCell.h */,
+				D29EA96619372CEE001FEE36 /* NoReadCell.m */,
 				D2F32F061925D4A900E446D6 /* MustReadTableViewCell.h */,
 				D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */,
 				D2F32F10192607ED00E446D6 /* MustReaddetialViewController.h */,
@@ -745,6 +754,7 @@
 				51B47EA019330925000E47C6 /* MJRefreshBaseView.m in Sources */,
 				F2F8BF1F1924EFE6000A3CED /* PeanutTopViewController.m in Sources */,
 				8896668819348AD600138572 /* UserInfEntity.m in Sources */,
+				D29EA96719372CEE001FEE36 /* NoReadCell.m in Sources */,
 				8896668519348AD600138572 /* PhotoSeriesEntity.m in Sources */,
 				51B47EA71933093C000E47C6 /* PullRefreshTableView.m in Sources */,
 				51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */,
@@ -775,6 +785,7 @@
 				F2B58DCE19264B7F009D6131 /* ShareViewController.m in Sources */,
 				510FD05D1926032400CD73AD /* ActivityDetailInfoViewController.m in Sources */,
 				510A5DAA19332AE200D415E4 /* CustomSegmentedControl.m in Sources */,
+				D29EA96A19372D0E001FEE36 /* DateCell.m in Sources */,
 				88DE03F51935C8EE00E2B9AC /* ActivityEntity.m in Sources */,
 				887F211E191DB85D009250D2 /* BaseNaviViewController.m in Sources */,
 				51B47EA219330925000E47C6 /* MJRefreshFooterView.m in Sources */,

@@ -99,7 +99,9 @@
             [self.user setText:userinfo[@"uname"]];
             [self.like setTitle:data[@"digg_count"] forState:UIControlStateNormal];
             [self.comment setTitle:data[@"comment_count"] forState:UIControlStateNormal];
-            [self.content loadHTMLString:data[@"content"] baseURL:nil];
+            NSString *html = data[@"content"];
+            NSString *imghtml = [html stringByReplacingOccurrencesOfString:@"class=\"post-img\">" withString:@"style=\"width:300px;\" class=\"post-img\">"];
+            [self.content loadHTMLString:imghtml baseURL:nil];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
@@ -268,12 +270,14 @@
      "var maxwidth=300;" //缩放系数
      "for(i=0;i <document.images.length;i++){"
      "myimg = document.images[i];"
-     "if(myimg.width > maxwidth){"
+//     "if(myimg.width > maxwidth){"
      "oldwidth = myimg.width;"
      "oldheight = myimg.height;"
+     "myimg.style.width = maxwidth;"
+     "myimg.style.height = oldheight * (maxwidth/oldwidth);"
      "myimg.width = maxwidth;"
      "myimg.height = oldheight * (maxwidth/oldwidth);"
-     "}"
+//     "}"
      "}"
      "}\";"
      "document.getElementsByTagName('head')[0].appendChild(script);"];
