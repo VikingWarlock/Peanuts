@@ -14,7 +14,10 @@
 #import "SquareViewController.h"
 #import "MustReadViewController.h"
 #import "ActivityViewController.h"
+
 #import "imgCollectionViewController.h"
+#import "ActivityDetailViewController.h"
+#import "MustReaddetialViewController.h"
 
 #import "SelfUser_ViewController.h"
 
@@ -102,13 +105,21 @@
     
     [self.view addSubview:tableview];
     
-    [self addTableviewHeadView:[downloadedImage objectForKey:@"cover"]?[downloadedImage objectForKey:@"cover"]:[UIImage imageNamed:@"placeholder.png"]];
+    
+    if ([[downloadedImage allKeys]containsObject:@"cover"]) {
+        [self addTableviewHeadView:[downloadedImage objectForKey:@"cover"]];
+        [self.NavigationController.navigationBar setTintColor:[UIColor whiteColor]];
+
+    }else
+    {
+        [self addTableviewHeadView:[UIImage imageNamed:@"placeholder.png"]];
+        [self.NavigationController.navigationBar setTintColor:[UIColor blackColor]];
+    }
     
     
     
     [self.view setNeedsDisplay];
     
-    [self.NavigationController SNS_appear];
     
 //    [self reset_NavigationBar];
 
@@ -125,7 +136,6 @@
     [self.NavigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     [self.NavigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
     self.navigationItem.title=@"花生米";
-    [self.NavigationController.navigationBar setTintColor:[UIColor whiteColor]];
 
     
 
@@ -286,7 +296,26 @@
 -(void)slideHaveBeenDoneAtIndexPath:(NSIndexPath *)indexpath
 {
     BlurTableViewCell_mark1 *cell=(BlurTableViewCell_mark1*)[tableview cellForRowAtIndexPath:indexpath];
-    imgCollectionViewController *vc=[[imgCollectionViewController alloc]init];
+    NSString*index=[IndexList objectAtIndex:indexpath.row];
+    NSDictionary *dic=[[NSUserDefaults standardUserDefaults]objectForKey:index];
+    NSURL *bkUrl=[NSURL URLWithString:[dic objectForKey:@"cover"]];
+    int feed_id=[[dic objectForKey:@"feed_id"]intValue];
+    
+    BaseUIViewController *vc;
+    
+    switch (indexpath.row) {
+        case 0:
+        vc=[[imgCollectionViewController alloc]initWithFeedId:feed_id bgImageUrl:bkUrl];
+            break;
+        case 1:
+            vc=[[ActivityDetailViewController alloc]init];
+            break;
+        case 2:
+            vc=[[MustReaddetialViewController alloc]init];
+            break;
+        default:
+            break;
+    }
     [cell backToOriginWithAnimate:NO];
     havebeenSlide=nil;
     [self.NavigationController pushViewController:vc animated:YES];
@@ -310,9 +339,7 @@
 
 -(void)ThisCellHaveBeenSlide:(NSIndexPath *)indexpath
 {
-
     havebeenSlide=indexpath;
-    
 }
 
 -(void)ThisCellHaveBeenReleased:(NSIndexPath *)indexpath
@@ -342,6 +369,12 @@
 {
 
     SDWebImageManager *manager=[SDWebImageManager sharedManager];
+    if ([mark isEqualToString:@"cover"]) {
+        
+    }else
+    {
+        [[NSUserDefaults standardUserDefaults]setObject:dic forKey:mark];
+    }
     [manager downloadWithURL:[NSURL URLWithString:[dic objectForKey: @"cover"]] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         nil;
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
@@ -349,6 +382,7 @@
         [ImageCache storeImage:image forKey:mark toDisk:YES];
         if ([mark isEqualToString:@"cover"]) {
             [self addTableviewHeadView:image];
+            [self.NavigationController.navigationBar setTintColor:[UIColor whiteColor]];
         }else
         [tableview reloadData];
         //TODO 这个地方使用缓存的图片，还是会调用多次reloadData

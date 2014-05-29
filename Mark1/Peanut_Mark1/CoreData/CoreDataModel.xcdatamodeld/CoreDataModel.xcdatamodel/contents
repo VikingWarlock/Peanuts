@@ -24,6 +24,7 @@
         <attribute name="personNum_limit" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="publish_time" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="repost_count" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="topic" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="uid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="MustReadEntity" representedClassName="MustReadEntity" syncable="YES">
@@ -110,7 +111,7 @@
         <attribute name="uname" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ActivityEntity" positionX="-144" positionY="171" width="128" height="405"/>
+        <element name="ActivityEntity" positionX="-144" positionY="171" width="128" height="420"/>
         <element name="MustReadEntity" positionX="151" positionY="149" width="128" height="225"/>
         <element name="NetworkRequest" positionX="-317" positionY="42" width="128" height="30"/>
         <element name="PhotoDetailEntity" positionX="-135" positionY="180" width="128" height="178"/>

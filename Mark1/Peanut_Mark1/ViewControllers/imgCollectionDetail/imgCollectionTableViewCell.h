@@ -24,7 +24,7 @@
 
 @property (nonatomic,strong) UIImageView * imgView;
 @property (nonatomic,strong) UILabel * titleLabel;
-@property (nonatomic,strong) UIButton * detailBtn;
+//@property (nonatomic,strong) UIButton * detailBtn;
 @property (nonatomic,strong) UIButton * praiseBtn;
 @property (nonatomic,strong) UIButton * commentBtn;
 @property (nonatomic,strong) UIButton * shareBtn;

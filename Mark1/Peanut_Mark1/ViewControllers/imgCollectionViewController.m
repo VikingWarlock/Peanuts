@@ -10,6 +10,9 @@
 #import <UIImage+BlurAndDarken.h>
 #import "imgCollectionTableViewCell.h"
 #import "ImgBottomView.h"
+#import "UIImageView+WebCache.h"
+
+
 
 
 @interface imgCollectionViewController (){
@@ -17,8 +20,12 @@
     UIButton * commentBtn;
     UIButton * shareBtn;
     
+    UILabel * nameLabel;
+    UILabel * timeLabel;
+    
     NSIndexPath * currentIndexPath;
-    NSMutableArray * data;
+    NSArray * imgData;
+    int feed_id;
 }
 
 @property (nonatomic,strong)UITableView * tableView;
@@ -31,13 +38,21 @@
 
 static NSString * cellIdentifier = @"cellIdentifier";
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+- (id)initWithFeedId:(int)feedId bgImageUrl:(NSURL *)url{
+    self = [super init];
     if (self) {
-        // Custom initialization
+//        [self downLoadWithFeedId:feedId];
+        UIImageView * iv = [[UIImageView alloc]initWithFrame:self.view.frame];
+        [iv setImageWithURL:url];
+        [self setBackgroundImage:iv.image andBlurEnable:YES];
+        feed_id = feedId;
     }
     return self;
+}
+
+-(void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+    [self downLoadWithFeedId:feed_id];
 }
 
 - (void)viewDidLoad
@@ -45,31 +60,10 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [super viewDidLoad];
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    [self setBackgroundImage:[UIImage imageNamed:@"1.png"] andBlurEnable:YES];
+//    [self setBackgroundImage:[UIImage imageNamed:@"1.png"] andBlurEnable:YES];
     
     [self.view addSubview:self.tableView];
     
-    
-    _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
-    [_tableView.tableHeaderView setBackgroundColor:[UIColor clearColor]];
-    
-    UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, _tableView.tableHeaderView.frame.size.height - 20, 60, 17)];
-    nameLabel.text = @"aaaaa";
-    nameLabel.textColor = [UIColor whiteColor];
-    
-    CGRect rect = nameLabel.frame;
-    rect.origin.x = nameLabel.frame.origin.x + nameLabel.frame.size.width + 20;
-    rect.size.width = 100;
-    UILabel * timeLabel = [[UILabel alloc] initWithFrame:rect];
-    timeLabel.text = @"2014-05-13";
-    timeLabel.textColor = [UIColor whiteColor];
-    
-    [_tableView updateWithAvatar:[UIImage imageNamed:@"iron.png"] And_X_Offset:30.0 AndSize:CGSizeMake(70, 70)];
-    
-    
-    [_tableView.tableHeaderView addSubview:nameLabel];
-    [_tableView.tableHeaderView addSubview:timeLabel];
-
 
     [self.view addSubview:self.bottomView];
     
@@ -92,6 +86,24 @@ static NSString * cellIdentifier = @"cellIdentifier";
         _tableView.separatorColor = [UIColor whiteColor];
         [_tableView setBackgroundColor:[UIColor clearColor]];
         _tableView.allowsSelection = NO;
+        
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
+        [_tableView.tableHeaderView setBackgroundColor:[UIColor clearColor]];
+        
+        nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, _tableView.tableHeaderView.frame.size.height - 20, 60, 17)];
+        nameLabel.textColor = [UIColor whiteColor];
+        
+        CGRect rect = nameLabel.frame;
+        rect.origin.x = nameLabel.frame.origin.x + nameLabel.frame.size.width + 20;
+        rect.size.width = 100;
+        timeLabel = [[UILabel alloc] initWithFrame:rect];
+        timeLabel.text = @"2014-05-13";
+        timeLabel.textColor = [UIColor whiteColor];
+        [_tableView updateWithAvatar:[UIImage imageNamed:@"placeholder.png"] And_X_Offset:30.0 AndSize:CGSizeMake(70, 70)];
+        
+        
+        [_tableView.tableHeaderView addSubview:nameLabel];
+        [_tableView.tableHeaderView addSubview:timeLabel];
 
 //        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
 //        [_tableView.tableHeaderView setBackgroundColor:[UIColor clearColor]];
@@ -212,23 +224,28 @@ static NSString * cellIdentifier = @"cellIdentifier";
     
     cell.delegate = self;
 
-    
-    cell.imgView.image = [UIImage imageNamed:@"pic.jpg"];
-    cell.titleLabel.text = @"001";
+    NSDictionary * rowData = imgData[indexPath.row];
+    [cell.imgView setImageWithURL:rowData[@"imageUrl"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+//    cell.imgView.contentMode = UIViewContentModeScaleAspectFit;
+    cell.titleLabel.text = rowData[@"description"];
+    cell.titleLabel.adjustsFontSizeToFitWidth = YES;
     [cell.praiseBtn setTitle:[NSString stringWithFormat:@"%d",indexPath.row] forState:UIControlStateNormal];
     [cell.commentBtn setTitle:[NSString stringWithFormat:@"%d",indexPath.row] forState:UIControlStateNormal];
     [cell.shareBtn setTitle:[NSString stringWithFormat:@"%d",indexPath.row] forState:UIControlStateNormal];
-    NSLog(@"%d",indexPath.row);
 
     return cell;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return [imgData count];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 30;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -248,6 +265,61 @@ static NSString * cellIdentifier = @"cellIdentifier";
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void)downLoadWithFeedId:(int)feedId{
+    
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=photo_group_info" parameters:@{@"feed_id":[NSString stringWithFormat:@"%d",feedId]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"]) {
+            imgData = [[NSArray alloc]initWithArray:[[responseObject valueForKey:@"data"] valueForKey:@"photos"]];
+            NSDictionary * userData = [[responseObject valueForKey:@"data"] valueForKey:@"user_info"];
+            NSDictionary * seriesData = [[responseObject valueForKey:@"data"] valueForKey:@"photo_group"];
+            
+            nameLabel.text = userData[@"uname"];
+            nameLabel.adjustsFontSizeToFitWidth = YES;
+            NSDate * date = [NSDate dateWithTimeIntervalSince1970:[seriesData[@"publish_time"] intValue]];
+            NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
+            [formatter setDateFormat:@"yyyy-MM-dd"];
+
+            timeLabel.text = [formatter stringFromDate:date];
+            [self.tableView reloadData];
+            
+//            UIImageView * bgTV = [[UIImageView alloc]initWithFrame:self.view.frame];
+//            [bgTV setImageWithURL:[seriesData valueForKey:@"cover"]];
+//            [self setBackgroundImage:bgTV.image andBlurEnable:YES];
+
+            UIImageView * iconIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
+            [iconIV setImageWithURL:userData[@"avatar_tiny"]];
+            [_tableView updateWithAvatar:iconIV.image And_X_Offset:30.0 AndSize:CGSizeMake(70, 70)];
+            
+
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+
+//if (url) {
+//    __weak UIImageView *wself = self;
+//    id <SDWebImageOperation> operation = [SDWebImageManager.sharedManager downloadWithURL:url options:options progress:progressBlock completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
+//        if (!wself) return;
+//        dispatch_main_sync_safe(^{
+//            if (!wself) return;
+//            if (image) {
+//                wself.image = image;
+//                [wself setNeedsLayout];
+//            }
+//            if (completedBlock && finished) {
+//                completedBlock(image, error, cacheType);
+//            }
+//        });
+//    }];
+//    objc_setAssociatedObject(self, &operationKey, operation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+//}
+
+//- (void)dealloc
+//{
+//    [self.tableView freeHeaderFooter];
+//}
 
 /*
 #pragma mark - Navigation

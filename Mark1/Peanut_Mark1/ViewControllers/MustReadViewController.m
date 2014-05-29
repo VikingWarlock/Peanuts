@@ -19,7 +19,7 @@
     NSString *timeStr;
     NSString *timeSp;
     NSMutableArray *data;
-    NSMutableArray *user;
+    NSMutableArray *userinfo;
 }
 @property (nonatomic,strong) UIView *dateHeadView;
 @property (nonatomic,strong) PullRefreshTableView *readTableView;
@@ -97,7 +97,7 @@
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
             data = [[responseObject valueForKey:@"data"] mutableCopy];
-            user = [[[responseObject valueForKey:@"data"] valueForKey:@"user_info"] mutableCopy];
+            userinfo = [[[responseObject valueForKey:@"data"] valueForKey:@"user_info"] mutableCopy];
             [_readTableView reloadData];
             [tableView endRefreshing];
         }
@@ -115,7 +115,7 @@
             if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
             {
                 [data addObjectsFromArray:[responseObject valueForKey:@"data"]];
-                [user addObjectsFromArray:[[responseObject valueForKey:@"data"] valueForKey:@"user_info"]];
+                [userinfo addObjectsFromArray:[[responseObject valueForKey:@"data"] valueForKey:@"user_info"]];
                 [_readTableView reloadData];
                 [tableView endRefreshing];
             }
@@ -136,8 +136,8 @@
     [detialView.picture setImageWithURL:[data[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     [detialView setTitle:[data[indexPath.section] valueForKey:@"title"]];
     [detialView.atitle setText:[data[indexPath.section] valueForKey:@"title"]];
-    [detialView.avatar setImageWithURL:[user[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    [detialView.user setText:[user[indexPath.section] valueForKey:@"uname"]];
+    [detialView.avatar setImageWithURL:[userinfo[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [detialView.user setText:[userinfo[indexPath.section] valueForKey:@"uname"]];
     [detialView.like setTitle:[data[indexPath.section] valueForKey:@"digg_count"] forState:UIControlStateNormal];
     [detialView.comment setTitle:[data[indexPath.section] valueForKey:@"comment_count"] forState:UIControlStateNormal];
     [detialView.content loadHTMLString:[data[indexPath.section] valueForKey:@"content"] baseURL:nil];
@@ -151,8 +151,8 @@
     MustReadTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     [cell.picture setImageWithURL:[data[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     [cell.title setText:[data[indexPath.section] valueForKey:@"title"]];
-    [cell.avatar setImageWithURL:[user[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    [cell.user setText:[user[indexPath.section] valueForKey:@"uname"]];
+    [cell.avatar setImageWithURL:[userinfo[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [cell.user setText:[userinfo[indexPath.section] valueForKey:@"uname"]];
     [cell.like setTitle:[data[indexPath.section] valueForKey:@"digg_count"] forState:UIControlStateNormal];
     [cell.comment setTitle:[data[indexPath.section] valueForKey:@"comment_count"] forState:UIControlStateNormal];
     return cell;

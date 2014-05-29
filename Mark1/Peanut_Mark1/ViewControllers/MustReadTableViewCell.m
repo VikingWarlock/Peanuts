@@ -84,7 +84,7 @@
 {
     if (!_title) {
         _title = [[UILabel alloc] init];
-        _title.text = @"MustRead";
+        _title.text = @"Loading";
         _title.font = [UIFont systemFontOfSize:12];
     }
     return _title;
@@ -107,7 +107,7 @@
 {
     if (!_user) {
         _user = [[UILabel alloc] init];
-        _user.text = @"ZAKER";
+        _user.text = @"Loading";
         _user.textColor = [UIColor grayColor];
         _user.font = [UIFont systemFontOfSize:10];
     }
@@ -118,7 +118,7 @@
 {
     if (!_like) {
         _like = [[UIButton alloc] init];
-        [_like setTitle:@"100" forState:UIControlStateNormal];
+        [_like setTitle:@"0" forState:UIControlStateNormal];
         [_like setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         [_like.titleLabel setFont:[UIFont systemFontOfSize:9.0]];
         [_like setImage:[UIImage imageNamed:@"like.png"] forState:UIControlStateNormal];
@@ -132,7 +132,7 @@
 {
     if (!_comment) {
         _comment = [[UIButton alloc] init];
-        [_comment setTitle:@"33" forState:UIControlStateNormal];
+        [_comment setTitle:@"0" forState:UIControlStateNormal];
         [_comment setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         [_comment.titleLabel setFont:[UIFont systemFontOfSize:9.0]];
         [_comment setImage:[UIImage imageNamed:@"comment.png"] forState:UIControlStateNormal];

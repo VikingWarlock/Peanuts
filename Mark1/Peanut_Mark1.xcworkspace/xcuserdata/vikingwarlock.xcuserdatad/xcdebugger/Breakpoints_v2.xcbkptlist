@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
             endingLineNumber = "48"
-            landmarkName = "-didReceiveMemoryWarning"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -90,7 +90,23 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peanut_Mark1/CoreData/CoreData-Helper.m"
-            timestampString = "422952318.006114"
+            timestampString = "422955326.126092"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "+addActivityEntity:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Peanut_Mark1/CoreData/CoreData-Helper.m"
+            timestampString = "422955326.126092"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "104"
@@ -105,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Peanut_Mark1/CoreData/CoreData-Helper.m"
-            timestampString = "422952318.006114"
+            filePath = "Peanut_Mark1/ViewControllers/imgCollectionViewController.m"
+            timestampString = "423025892.23252"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "+addActivityEntity:"
+            startingLineNumber = "278"
+            endingLineNumber = "278"
+            landmarkName = "-downLoadWithFeedId:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,13 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Peanut_Mark1/BaseModel/BaseSmallOutlet/BlurTableViewCell_mark1.m"
-            timestampString = "422952935.970362"
+            filePath = "Peanut_Mark1/ViewControllers/imgCollectionViewController.m"
+            timestampString = "423025893.934355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
-            landmarkName = "-gestureRecognizerShouldBegin:"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
+            landmarkName = "-downLoadWithFeedId:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

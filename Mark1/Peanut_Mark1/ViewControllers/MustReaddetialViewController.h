@@ -7,8 +7,9 @@
 //
 
 #import "BaseUIViewController.h"
+#import "UIImageView+WebCache.h"
 
-@interface MustReaddetialViewController : BaseUIViewController
+@interface MustReaddetialViewController : BaseUIViewController <UIWebViewDelegate>
 @property (nonatomic,retain) UIImageView *picture;
 @property (nonatomic,retain) UIView *mask;
 @property (nonatomic,retain) UIImageView *avatar;
@@ -17,4 +18,5 @@
 @property (nonatomic,retain) UIButton *like;
 @property (nonatomic,retain) UIButton *comment;
 @property (nonatomic,retain) UIWebView *content;
+- (id)initWithFeedId:(NSString *)feedId;
 @end
