@@ -11,6 +11,8 @@
 #import "UIImageView+WebCache.h"
 
 @interface ActivitDetailInterestedPeopleViewController ()
+{
+}
 @property (strong,nonatomic) UIView *header;
 @property (nonatomic,strong) UITableView *tableview;
 @property (nonatomic,strong) UIAlertView *alertView;
@@ -23,7 +25,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-        self.userInfo = [[NSMutableArray alloc] init];
+        self.interesteUsers = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -31,8 +33,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setBackgroundImage:self.bkImage andBlurEnable:YES];
     self.tableview.allowsSelection = NO;
-    [self setBackgroundImage:[UIImage imageNamed:@"pic.jpg"] andBlurEnable:YES];
     
     [self.view addSubview:self.header];
     [self.view addSubview:self.tableview];
@@ -73,19 +75,13 @@
     static NSString *cellIdentifier = @"usercell";
     UserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     cell.unverified.hidden = YES;
-    cell.name.text = [_userInfo[indexPath.row] valueForKey:@"uname"];
-
-    UIImageView *imageview = [[UIImageView alloc] init];
-    [imageview setImageWithURL:[NSURL URLWithString:[self.userInfo[indexPath.row] valueForKey:@"avatar_small"]] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-        [cell.avatar setImage:image];
-        NSLog(@"cacheType:%D indexPath:%D name:%@\n", cacheType,indexPath.row,cell.name.text);
-    }];
+    cell.name.text = [_interesteUsers[indexPath.row] valueForKey:@"uname"];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_userInfo count];
+    return [_interesteUsers count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

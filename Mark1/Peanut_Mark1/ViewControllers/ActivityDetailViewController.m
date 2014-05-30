@@ -16,8 +16,8 @@
 @interface ActivityDetailViewController ()
 {
     NSMutableArray *pictures;
-    NSMutableArray *user;
-    NSMutableArray *interesteUser;
+    NSMutableArray *users;
+    NSMutableArray *interesteUsers;
 }
 @property (strong,nonatomic) BottomView *bottomView;
 @property (nonatomic,strong) UIButton *leftButton;
@@ -124,20 +124,20 @@
     [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_user_list" parameters:@{@"page":@"1",@"count":@"10",@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
-            user = [responseObject valueForKey:@"data"];
-            if ([user count] == 1) {
-                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView1 setImageWithURL:[NSURL URLWithString:[user[0] valueForKey:@"avatar_small"]]];
+            users = [responseObject valueForKey:@"data"];
+            if ([users count] == 1) {
+                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView1 setImageWithURL:[NSURL URLWithString:[users[0] valueForKey:@"avatar_small"]]];
             }
-            else if ([user count] == 2)
+            else if ([users count] == 2)
             {
-                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView1 setImageWithURL:[NSURL URLWithString:[user[0] valueForKey:@"avatar_small"]]];
-                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView2 setImageWithURL:[NSURL URLWithString:[user[1] valueForKey:@"avatar_small"]]];
+                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView1 setImageWithURL:[NSURL URLWithString:[users[0] valueForKey:@"avatar_small"]]];
+                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView2 setImageWithURL:[NSURL URLWithString:[users[1] valueForKey:@"avatar_small"]]];
             }
-            else if ([user count] >= 3)
+            else if ([users count] >= 3)
             {
-                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView1 setImageWithURL:[NSURL URLWithString:[user[0] valueForKey:@"avatar_small"]]];
-                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView2 setImageWithURL:[NSURL URLWithString:[user[1] valueForKey:@"avatar_small"]]];
-                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView3 setImageWithURL:[NSURL URLWithString:[user[2] valueForKey:@"avatar_small"]]];
+                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView1 setImageWithURL:[NSURL URLWithString:[users[0] valueForKey:@"avatar_small"]]];
+                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView2 setImageWithURL:[NSURL URLWithString:[users[1] valueForKey:@"avatar_small"]]];
+                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView3 setImageWithURL:[NSURL URLWithString:[users[2] valueForKey:@"avatar_small"]]];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -148,20 +148,20 @@
     [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_love_list" parameters:@{@"page":@"1",@"count":@"10",@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
-            interesteUser = [responseObject valueForKey:@"data"];
-            if ([interesteUser count] == 1) {
-                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView1 setImageWithURL:[NSURL URLWithString:[interesteUser[0] valueForKey:@"avatar_small"]]];
+            interesteUsers = [responseObject valueForKey:@"data"];
+            if ([interesteUsers count] == 1) {
+                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView1 setImageWithURL:[NSURL URLWithString:[interesteUsers[0] valueForKey:@"avatar_small"]]];
             }
-            else if ([interesteUser count] == 2)
+            else if ([interesteUsers count] == 2)
             {
-                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView1 setImageWithURL:[NSURL URLWithString:[interesteUser[0] valueForKey:@"avatar_small"]]];
-                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView2 setImageWithURL:[NSURL URLWithString:[interesteUser[1] valueForKey:@"avatar_small"]]];
+                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView1 setImageWithURL:[NSURL URLWithString:[interesteUsers[0] valueForKey:@"avatar_small"]]];
+                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView2 setImageWithURL:[NSURL URLWithString:[interesteUsers[1] valueForKey:@"avatar_small"]]];
             }
-            else if ([interesteUser count] >= 3)
+            else if ([interesteUsers count] >= 3)
             {
-                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView1 setImageWithURL:[NSURL URLWithString: [interesteUser[0] valueForKey:@"avatar_small"]]];
-                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView2 setImageWithURL:[NSURL URLWithString:[interesteUser[1] valueForKey:@"avatar_small"]]];
-                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView3 setImageWithURL:[NSURL URLWithString:[interesteUser[2] valueForKey:@"avatar_small"]]];
+                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView1 setImageWithURL:[NSURL URLWithString: [interesteUsers[0] valueForKey:@"avatar_small"]]];
+                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView2 setImageWithURL:[NSURL URLWithString:[interesteUsers[1] valueForKey:@"avatar_small"]]];
+                [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView3 setImageWithURL:[NSURL URLWithString:[interesteUsers[2] valueForKey:@"avatar_small"]]];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -233,6 +233,8 @@
         {
             ActivityDetailUserViewController *vc = [[ActivityDetailUserViewController alloc] init];
             vc.navigationItem.title = self.navigationItem.title;
+            vc.bkImage = self.picture.image;
+            vc.users = [users copy];
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
@@ -240,7 +242,8 @@
         {
             ActivitDetailInterestedPeopleViewController *vc = [[ActivitDetailInterestedPeopleViewController alloc] init];
             vc.navigationItem.title = self.navigationItem.title;
-            vc.userInfo = [interesteUser copy];
+            vc.interesteUsers = [interesteUsers copy];
+            vc.bkImage = self.picture.image;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }

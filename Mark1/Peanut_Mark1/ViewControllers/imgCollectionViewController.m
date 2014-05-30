@@ -226,7 +226,8 @@ static NSString * cellIdentifier = @"cellIdentifier";
 
     NSDictionary * rowData = imgData[indexPath.row];
     [cell.imgView setImageWithURL:rowData[@"imageUrl"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-//    cell.imgView.contentMode = UIViewContentModeScaleAspectFit;
+    cell.imgView.clipsToBounds = YES;
+    cell.imgView.contentMode = UIViewContentModeScaleAspectFill;
     cell.titleLabel.text = rowData[@"description"];
     cell.titleLabel.adjustsFontSizeToFitWidth = YES;
     [cell.praiseBtn setTitle:[NSString stringWithFormat:@"%d",indexPath.row] forState:UIControlStateNormal];

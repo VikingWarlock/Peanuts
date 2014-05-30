@@ -138,8 +138,10 @@
     UIImageView * imageView2 = [[UIImageView alloc] initWithFrame:rect];
     [imageView1 setBackgroundColor:[UIColor whiteColor]];
     [imageView2 setBackgroundColor:[UIColor whiteColor]];
-    imageView1.contentMode = UIViewContentModeScaleAspectFit;
-    imageView2.contentMode = UIViewContentModeScaleAspectFit;
+    imageView1.clipsToBounds = YES;
+    imageView2.clipsToBounds = YES;
+    imageView1.contentMode = UIViewContentModeScaleAspectFill;
+    imageView2.contentMode = UIViewContentModeScaleAspectFill;
     NSDictionary * dic1 = data[(indexPath.row+1)*2-2];
     NSDictionary * dic2 = data[(indexPath.row+1)*2-1];
     [imageView1 setImageWithURL:dic1[@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];

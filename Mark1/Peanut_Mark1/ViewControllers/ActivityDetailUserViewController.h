@@ -10,4 +10,6 @@
 #import "BaseUIViewController.h"
 
 @interface ActivityDetailUserViewController : BaseUIViewController <UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
+@property (nonatomic,strong) UIImage *backImage;
+@property (nonatomic,strong) NSMutableArray *users;
 @end
