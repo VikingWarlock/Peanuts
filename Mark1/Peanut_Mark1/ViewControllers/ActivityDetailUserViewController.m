@@ -167,9 +167,11 @@
     [cell.deleteMember addTarget:self action:@selector(showAlert:) forControlEvents:UIControlEventTouchUpInside];
     [cell.passVerify addTarget:self action:@selector(addMember:) forControlEvents:UIControlEventTouchUpInside];
     
-    cell.passVerify.hidden = [[users[indexPath.row] valueForKey:@"isVerified"] boolValue] || !isEdit;
-    cell.deleteMember.hidden = !isEdit;
-    cell.unverified.hidden = [[users[indexPath.row] valueForKey:@"isVerified"] boolValue];
+    [UIView animateWithDuration:0.2 animations:^{
+        cell.passVerify.hidden = [[users[indexPath.row] valueForKey:@"isVerified"] boolValue] || !isEdit;
+        cell.deleteMember.hidden = !isEdit;
+        cell.unverified.hidden = [[users[indexPath.row] valueForKey:@"isVerified"] boolValue];
+    }];
     return cell;
 }
 

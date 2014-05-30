@@ -67,7 +67,9 @@
 {
     if (!_avatar) {
         _avatar = [[AMPAvatarView alloc] init];
-        [_avatar setImage:[UIImage imageNamed:@"iron.png"]];
+        [_avatar setImage:nil];
+        _avatar.clipsToBounds = YES;
+        _avatar.contentMode = UIViewContentModeScaleAspectFill;
         _avatar.borderWith = 0;
         _avatar.shadowRadius = 0;
     }

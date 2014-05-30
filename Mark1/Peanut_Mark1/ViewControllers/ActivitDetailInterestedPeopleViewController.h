@@ -9,4 +9,5 @@
 #import "BaseUIViewController.h"
 
 @interface ActivitDetailInterestedPeopleViewController : BaseUIViewController <UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic,strong) NSMutableArray *userInfo;
 @end

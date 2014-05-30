@@ -8,20 +8,11 @@
 
 #import "ActivitDetailInterestedPeopleViewController.h"
 #import "UserCell.h"
-#import "PullRefreshTableView.h"
+#import "UIImageView+WebCache.h"
+
 @interface ActivitDetailInterestedPeopleViewController ()
-{
-    NSMutableArray *users;
-    NSIndexPath *deletedIndexPath;
-    NSMutableDictionary *isVerified1;
-    NSMutableDictionary *isVerified2;
-    NSMutableDictionary *isVerified3;
-    NSMutableDictionary *isVerified4;
-    NSMutableDictionary *d;
-    BOOL isEdit;
-}
 @property (strong,nonatomic) UIView *header;
-@property (nonatomic,strong) PullRefreshTableView *tableview;
+@property (nonatomic,strong) UITableView *tableview;
 @property (nonatomic,strong) UIAlertView *alertView;
 @end
 
@@ -32,6 +23,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.userInfo = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -39,18 +31,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showEditButton)];
-    [self.navigationItem setRightBarButtonItem:rightButton];
     self.tableview.allowsSelection = NO;
     [self setBackgroundImage:[UIImage imageNamed:@"pic.jpg"] andBlurEnable:YES];
-    isEdit = NO;
-    deletedIndexPath = [[NSIndexPath alloc] init];
-    
-    isVerified1 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"1",@"isVerified", nil];
-    isVerified2 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"0",@"isVerified", nil];
-    isVerified3 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"0",@"isVerified", nil];
-    isVerified4 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"1",@"isVerified", nil];
-    users = [[NSMutableArray alloc] initWithObjects:isVerified1,isVerified2,isVerified3,isVerified4, nil];
     
     [self.view addSubview:self.header];
     [self.view addSubview:self.tableview];
@@ -64,21 +46,13 @@
     [_tableview setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableview)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_header][_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_header,_tableview)]];
-    
-    __weak ActivitDetailInterestedPeopleViewController *weakSelf =self;
-    [self.tableview setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullDown:refreshView];
-    }];
-    [self.tableview setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullUp:refreshView];
-    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     ((UIViewController *)(self.navigationController.viewControllers)[[self.navigationController.viewControllers indexOfObject:self] - 1]).navigationItem.title = @"";
-    [self sortArrayByIsVerified];
+    //[self sortArrayByIsVerified];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -92,102 +66,31 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-    [self.tableview freeHeaderFooter];
-}
-
-#pragma mark -Network stuff
-
--(void)pullDown:(MJRefreshBaseView*)refreshView
-{
-    NSLog(@"this is pull down");
-    [refreshView endRefreshing];
-}
-
--(void)pullUp:(MJRefreshBaseView*)refreshView
-{
-    NSLog(@"this is pull up");
-    [refreshView endRefreshing];
-}
-
-#pragma mark -method
-
-- (void)addMember:(id)sender
-{
-    NSIndexPath *indexPath = [_tableview indexPathForCell:(UserCell *)((UIButton *)sender).superview.superview.superview];
-    ((UserCell *)[_tableview cellForRowAtIndexPath:indexPath]).unverified.hidden = YES;
-    ((UserCell *)[_tableview cellForRowAtIndexPath:indexPath]).passVerify.hidden = YES;
-    [users[indexPath.row] setValue:[NSString stringWithFormat:@"1"] forKey:@"isVerified"];
-}
-
-- (void)deleteMember
-{
-    [users removeObjectAtIndex:deletedIndexPath.row];
-    [_tableview deleteRowsAtIndexPaths:@[deletedIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-}
-
-- (void)showEditButton
-{
-    isEdit = !isEdit;
-    for (int i = 0; i< [users count]; i++) {
-        if ([[users[i] valueForKey:@"isVerified"] boolValue] == NO && isEdit == YES) {
-            [users[i] setValue:[NSString stringWithFormat:@"%D",!isEdit] forKey:@"isVerified"];
-        }
-    }
-    [_tableview reloadData];
-}
-
--(void)showAlert:(id)sender
-{
-    deletedIndexPath = [_tableview indexPathForCell:(UserCell *)((UIButton *)sender).superview.superview.superview];
-    [self.alertView show];
-}
-
-- (void)sortArrayByIsVerified
-{
-    [users sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        int a = [[obj1 valueForKey:@"isVerified"] intValue];
-        int b = [[obj2 valueForKey:@"isVerified"] intValue];
-        if (a > b)
-            return NSOrderedDescending;
-        else
-            return NSOrderedAscending;
-    }];
-}
-
 #pragma mark -tableView datasource and delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"usercell";
     UserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    [cell.deleteMember addTarget:self action:@selector(showAlert:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.passVerify addTarget:self action:@selector(addMember:) forControlEvents:UIControlEventTouchUpInside];
-    
-    cell.passVerify.hidden = [[users[indexPath.row] valueForKey:@"isVerified"] boolValue] || !isEdit;
-    cell.deleteMember.hidden = !isEdit;
-    cell.unverified.hidden = [[users[indexPath.row] valueForKey:@"isVerified"] boolValue];
+    cell.unverified.hidden = YES;
+    cell.name.text = [_userInfo[indexPath.row] valueForKey:@"uname"];
+
+    UIImageView *imageview = [[UIImageView alloc] init];
+    [imageview setImageWithURL:[NSURL URLWithString:[self.userInfo[indexPath.row] valueForKey:@"avatar_small"]] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [cell.avatar setImage:image];
+        NSLog(@"cacheType:%D indexPath:%D name:%@\n", cacheType,indexPath.row,cell.name.text);
+    }];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [users count];
+    return [_userInfo count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 70;
-}
-
-#pragma mark -UIAlertView delegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1) {
-        [self deleteMember];
-    }
 }
 
 #pragma mark -lazy initialization
@@ -212,10 +115,10 @@
     return _header;
 }
 
-- (PullRefreshTableView *)tableview
+- (UITableView *)tableview
 {
     if (!_tableview) {
-        _tableview = [[PullRefreshTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         [_tableview setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         _tableview.dataSource = self;
         _tableview.delegate = self;
