@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseUIViewController.h"
+#import "Mask.h"
 
 @interface ActivityDetailViewController : BaseUIViewController <UITableViewDataSource,UITableViewDelegate,UITabBarControllerDelegate>
-
+@property (nonatomic,strong) NSString *feedid;
+@property (nonatomic,strong) UIImageView *picture;
+@property (strong,nonatomic) Mask *mask;
+- (id)initWithFeedId:(int)feedId bgImageUrl:(NSURL *)url;
 @end

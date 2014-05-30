@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIImageView+WebCache.h"
 
 @interface CustomCell : UITableViewCell
 @property (strong,nonatomic) UILabel *label;

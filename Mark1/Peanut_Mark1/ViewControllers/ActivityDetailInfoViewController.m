@@ -7,11 +7,9 @@
 //
 
 #import "ActivityDetailInfoViewController.h"
-#import "Mask.h"
 
 @interface ActivityDetailInfoViewController ()
-@property (nonatomic,strong) Mask *mask;
-@property (nonatomic,strong) UITextView *textView;
+
 @end
 
 @implementation ActivityDetailInfoViewController
@@ -28,35 +26,39 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setBackgroundImage:[UIImage imageNamed:@"pic.jpg"] andBlurEnable:YES];
+    [self setBackgroundImage:self.backImage andBlurEnable:YES];
     [self.view addSubview:self.mask];
-    [self.view addSubview:self.textView];
+    //[self.view addSubview:self.textView];
+    [self.view addSubview:self.webView];
 
     [_mask setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mask]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_mask)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mask(57)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_mask)]];
     
-    [_textView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_textView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_textView)]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_mask][_textView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_mask,_textView)]];
+//    [_textView setTranslatesAutoresizingMaskIntoConstraints:NO];
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_textView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_textView)]];
+//    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_mask][_textView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_mask,_textView)]];
     
+    [_webView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_webView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_webView)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_mask][_webView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_mask,_webView)]];
+    [_webView loadHTMLString:self.description baseURL:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.maximumLineHeight = 25;
-    paragraphStyle.minimumLineHeight = 25;
-    NSString *string = _textView.text;
-    NSDictionary *ats = @{
-                          NSFontAttributeName : [UIFont boldSystemFontOfSize:12],
-                          NSForegroundColorAttributeName : [UIColor whiteColor],
-                          NSParagraphStyleAttributeName : paragraphStyle,
-                          };
-    _textView.attributedText = [[NSAttributedString alloc] initWithString:string attributes:ats];
+//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//    paragraphStyle.maximumLineHeight = 25;
+//    paragraphStyle.minimumLineHeight = 25;
+//    NSString *string = _textView.text;
+//    NSDictionary *ats = @{
+//                          NSFontAttributeName : [UIFont boldSystemFontOfSize:12],
+//                          NSForegroundColorAttributeName : [UIColor whiteColor],
+//                          NSParagraphStyleAttributeName : paragraphStyle,
+//                          };
+//    _textView.attributedText = [[NSAttributedString alloc] initWithString:string attributes:ats];
 
-    ((UIViewController *)(self.navigationController.viewControllers)[[self.navigationController.viewControllers indexOfObject:self] - 1]).navigationItem.title = @"";
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -89,6 +91,17 @@
         _mask = [[Mask alloc] init];
     }
     return _mask;
+}
+
+- (UIWebView *)webView
+{
+    if (!_webView) {
+        _webView = [[UIWebView alloc] init];
+        [_webView setScalesPageToFit:YES];
+        _webView.backgroundColor = [UIColor clearColor];
+        _webView.opaque = NO;
+    }
+    return _webView;
 }
 
 - (UITextView *)textView

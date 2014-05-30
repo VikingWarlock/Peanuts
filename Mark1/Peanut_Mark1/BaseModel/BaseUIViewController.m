@@ -66,6 +66,8 @@
 -(void)setBackgroundImage:(UIImage *)bkimage andBlurEnable:(BOOL)enable
 {
     bkImageView=[[UIImageView alloc]init];
+    bkImageView.clipsToBounds = YES;
+    bkImageView.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:bkImageView];
     [bkImageView setFrame:self.view.frame];
     if (enable) {
