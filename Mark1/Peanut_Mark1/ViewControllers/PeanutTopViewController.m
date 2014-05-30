@@ -24,6 +24,7 @@
 #import <UIImageView+WebCache.h>
 #import "StaticDataManager.h"
 
+#import "Peanut_PhotoBroswer.h"
 
 
 @interface PeanutTopViewController ()<UITableViewDataSource,UITableViewDelegate,Delegate_BlurCellSlide>
@@ -295,23 +296,45 @@
 
 -(void)slideHaveBeenDoneAtIndexPath:(NSIndexPath *)indexpath
 {
+    switch (indexpath.row) {
+        case 0:
+        case 1:
+            [[Peanut_PhotoBroswer SharedObject]setImgArray:@[downloadedImage[@"cover"],downloadedImage[@"square"],downloadedImage[@"daily"]]];
+
+            break;
+        case 2:
+            [[Peanut_PhotoBroswer SharedObject]setImgArray:@[downloadedImage[@"cover"],downloadedImage[@"square"],downloadedImage[@"activity"],downloadedImage[@"daily"]]];
+
+        default:
+            break;
+    }
+    
+    [[Peanut_PhotoBroswer SharedObject]display:self];
+    
+    return ;
+    
     BlurTableViewCell_mark1 *cell=(BlurTableViewCell_mark1*)[tableview cellForRowAtIndexPath:indexpath];
     NSString*index=[IndexList objectAtIndex:indexpath.row];
     NSDictionary *dic=[[NSUserDefaults standardUserDefaults]objectForKey:index];
     NSURL *bkUrl=[NSURL URLWithString:[dic objectForKey:@"cover"]];
-    int feed_id=[[dic objectForKey:@"feed_id"]intValue];
     
     BaseUIViewController *vc;
     
     switch (indexpath.row) {
         case 0:
-        vc=[[imgCollectionViewController alloc]initWithFeedId:feed_id bgImageUrl:bkUrl];
+        {
+            int feed_id=[[dic objectForKey:@"feed_id"]intValue];
+            vc=[[imgCollectionViewController alloc]initWithFeedId:feed_id bgImageUrl:bkUrl];
+        }
             break;
         case 1:
             vc=[[ActivityDetailViewController alloc]init];
             break;
         case 2:
-            vc=[[MustReaddetialViewController alloc]init];
+        {
+            NSString *feed_id=[dic objectForKey:@"feed_id"];
+            vc=[[MustReaddetialViewController alloc]initWithFeedId:feed_id];
+        }
             break;
         default:
             break;
