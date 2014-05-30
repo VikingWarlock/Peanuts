@@ -10,6 +10,7 @@
 #import "AMPAvatarView.h"
 #import "UserCell.h"
 #import "PullRefreshTableView.h"
+#import "UIImageView+WebCache.h"
 
 @interface ActivityDetailUserViewController ()
 {
@@ -20,6 +21,8 @@
     NSMutableDictionary *isVerified4;
     NSMutableDictionary *d;
     BOOL isEdit;
+    
+    UIImageView *backImage;
 }
 @property (strong,nonatomic) UIView *header;
 @property (nonatomic,strong) PullRefreshTableView *tableview;
@@ -42,8 +45,14 @@
     [super viewDidLoad];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showEditButton)];
     [self.navigationItem setRightBarButtonItem:rightButton];
+    
+    backImage = [[UIImageView alloc] init];
+    __weak ActivityDetailUserViewController *weakself = self;
+    [backImage setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [weakself setBackgroundImage:image andBlurEnable:YES];
+    }];
+    
     self.tableview.allowsSelection = NO;
-    [self setBackgroundImage:self.bkImage andBlurEnable:YES];
     isEdit = NO;
     deletedIndexPath = [[NSIndexPath alloc] init];
 //    

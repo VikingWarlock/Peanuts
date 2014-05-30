@@ -7,9 +7,12 @@
 //
 
 #import "ActivityDetailInfoViewController.h"
+#import "UIImageView+WebCache.h"
 
 @interface ActivityDetailInfoViewController ()
-
+{
+    UIImageView *backImage;
+}
 @end
 
 @implementation ActivityDetailInfoViewController
@@ -26,7 +29,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setBackgroundImage:self.backImage andBlurEnable:YES];
+    backImage = [[UIImageView alloc] init];
+    __weak ActivityDetailInfoViewController *weakself = self;
+    [backImage setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [weakself setBackgroundImage:image andBlurEnable:YES];
+    }];
+    [self.mask.avatar setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].avatar_tiny_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     [self.view addSubview:self.mask];
     //[self.view addSubview:self.textView];
     [self.view addSubview:self.webView];
@@ -42,24 +50,12 @@
     [_webView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_webView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_webView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_mask][_webView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_mask,_webView)]];
-    [_webView loadHTMLString:self.description baseURL:nil];
+    [_webView loadHTMLString:[CoreData_Helper GetActivityEntity:self.feedid].descriptions baseURL:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-//    paragraphStyle.maximumLineHeight = 25;
-//    paragraphStyle.minimumLineHeight = 25;
-//    NSString *string = _textView.text;
-//    NSDictionary *ats = @{
-//                          NSFontAttributeName : [UIFont boldSystemFontOfSize:12],
-//                          NSForegroundColorAttributeName : [UIColor whiteColor],
-//                          NSParagraphStyleAttributeName : paragraphStyle,
-//                          };
-//    _textView.attributedText = [[NSAttributedString alloc] initWithString:string attributes:ats];
-    NSLog(@"%@",self.description);
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated

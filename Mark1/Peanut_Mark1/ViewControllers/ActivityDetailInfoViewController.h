@@ -14,7 +14,6 @@
 @property (nonatomic,strong) Mask *mask;
 @property (nonatomic,strong) UITextView *textView;
 @property (nonatomic,strong) UIWebView *webView;
-@property (nonatomic,strong) NSString *description;
-@property (nonatomic,strong) UIImage *backImage;
+@property (nonatomic,strong) NSString *feedid;
 
 @end

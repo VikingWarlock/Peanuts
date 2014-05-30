@@ -39,7 +39,6 @@
     NSMutableArray *sweepSpeed;
     NSMutableArray *downSpeed;
     
-    ActivityDetailViewController *callback;
 }
 @property (nonatomic,strong) PullRefreshTableView *progressingTableView;
 @property (nonatomic,strong) PullRefreshTableView *ReviewedTableView;
@@ -271,10 +270,7 @@
 {
     ActivityTableViewCell *cell = (ActivityTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] init];
-    callback = vc;
     vc.feedid = cell.feedid;
-    vc.picture.image = cell.picture.image;
-    vc.mask.avatar.image = cell.avatar.image;
     vc.mask.headline.text = cell.title.text;
     vc.mask.user.text = cell.user.text;
     vc.mask.Date.text = cell.Date.text;
@@ -343,6 +339,7 @@
             for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
                 [CoreData_Helper addActivityEntity:dic];
             }
+            NSLog(@"%@",[responseObject valueForKey:@"data"]);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
