@@ -25,6 +25,8 @@
 		51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */; };
 		51FBFD34192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FBFD33192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m */; };
 		51FBFD37192DF507009089FA /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FBFD36192DF507009089FA /* UserCell.m */; };
+		8813AA45193818B000CA8C94 /* UIImageView+ForBroswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DE03FB19372FD800E2B9AC /* UIImageView+ForBroswer.m */; };
+		8813AA46193818B000CA8C94 /* Peanut_PhotoBroswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DE03FE19373A3300E2B9AC /* Peanut_PhotoBroswer.m */; };
 		883E546A19339EDF00E8D2CE /* PhotoDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA817192E228B0043AF21 /* PhotoDetailEntity.m */; };
 		883E546F19339EDF00E8D2CE /* CoreData-Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C5E371932E57D008F885A /* CoreData-Helper.m */; };
 		885F6341192A4447007BAAE0 /* RequestPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 885F6340192A4447007BAAE0 /* RequestPackage.m */; };
@@ -71,8 +73,8 @@
 		88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02AB9191E724C001ABA96 /* SquareViewController.m */; };
 		88D02ABD191E726B001ABA96 /* imgCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D02ABC191E726B001ABA96 /* imgCollectionViewController.m */; };
 		88DE03F51935C8EE00E2B9AC /* ActivityEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DE03F41935C8EE00E2B9AC /* ActivityEntity.m */; };
-		88DE03FC19372FD800E2B9AC /* UIImageView+ForBroswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DE03FB19372FD800E2B9AC /* UIImageView+ForBroswer.m */; };
-		88DE03FF19373A3300E2B9AC /* Peanut_PhotoBroswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DE03FE19373A3300E2B9AC /* Peanut_PhotoBroswer.m */; };
+		D29EA96719372CEE001FEE36 /* NoReadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D29EA96619372CEE001FEE36 /* NoReadCell.m */; };
+		D29EA96A19372D0E001FEE36 /* DateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D29EA96919372D0E001FEE36 /* DateCell.m */; };
 		D2F32F081925D4A900E446D6 /* MustReadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F32F071925D4A900E446D6 /* MustReadTableViewCell.m */; };
 		D2F32F0B1925F88B00E446D6 /* like.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F091925F88B00E446D6 /* like.png */; };
 		D2F32F0C1925F88B00E446D6 /* comment.png in Resources */ = {isa = PBXBuildFile; fileRef = D2F32F0A1925F88B00E446D6 /* comment.png */; };
@@ -750,6 +752,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8813AA45193818B000CA8C94 /* UIImageView+ForBroswer.m in Sources */,
+				8813AA46193818B000CA8C94 /* Peanut_PhotoBroswer.m in Sources */,
 				F2434DD21934B711002D3426 /* SelfUser_ViewController.m in Sources */,
 				883E546A19339EDF00E8D2CE /* PhotoDetailEntity.m in Sources */,
 				883E546F19339EDF00E8D2CE /* CoreData-Helper.m in Sources */,
@@ -785,11 +789,9 @@
 				D2F32F081925D4A900E446D6 /* MustReadTableViewCell.m in Sources */,
 				885F6341192A4447007BAAE0 /* RequestPackage.m in Sources */,
 				F22D8FCA19248418005D2A1A /* PublishCommentTableViewCell.m in Sources */,
-				88DE03FF19373A3300E2B9AC /* Peanut_PhotoBroswer.m in Sources */,
 				887F2146191E310A009250D2 /* AMPAvatarView+helper.m in Sources */,
 				887F2143191E2EBF009250D2 /* UITableView+extra.m in Sources */,
 				51B47EA119330925000E47C6 /* MJRefreshConst.m in Sources */,
-				88DE03FC19372FD800E2B9AC /* UIImageView+ForBroswer.m in Sources */,
 				8881AC641925E4A700F9646B /* SNS_Helper.m in Sources */,
 				887F2125191DB91B009250D2 /* NetworkStack.m in Sources */,
 				F2B58DCE19264B7F009D6131 /* ShareViewController.m in Sources */,
