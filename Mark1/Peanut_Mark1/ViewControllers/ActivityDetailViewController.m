@@ -236,7 +236,7 @@
             ActivityDetailUserViewController *vc = [[ActivityDetailUserViewController alloc] init];
             vc.navigationItem.title = self.navigationItem.title;
             vc.feedid = _feedid;
-            vc.users = [users copy];
+            vc.users = [users mutableCopy];
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }

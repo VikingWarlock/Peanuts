@@ -9,7 +9,7 @@
 #import "SquareViewController.h"
 #import "imgCollectionViewController.h"
 #import "UIImageView+WebCache.h"
-#import "PullRefreshTableView.h"
+#import "MJRefresh.h"
 #import "CoreData-Helper.h"
 #import "PhotoSeriesEntity.h"
 
@@ -37,7 +37,7 @@
     NSArray * data;
 }
 
-@property (nonatomic,strong) PullRefreshTableView * tableView;
+@property (nonatomic,strong) UITableView * tableView;
 
 @end
 
@@ -54,7 +54,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    [self.tableView beginRefreshing];
+    [self.tableView headerBeginRefreshing];
 }
 
 - (void)viewDidLoad
@@ -71,18 +71,19 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
     
     __weak SquareViewController *weakSelf =self;
-    [_tableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullDownRefreshing:refreshView];
+    [_tableView addHeaderWithCallback:^{
+        [weakSelf pullDownRefreshing];
     }];
-    [_tableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullUpRefreshing:refreshView];
+    
+    [_tableView addFooterWithCallback:^{
+        [weakSelf pullUpRefreshing];
     }];
     // Do any additional setup after loading the view.
 }
 
--(PullRefreshTableView *)tableView{
+-(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[PullRefreshTableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.translatesAutoresizingMaskIntoConstraints = NO;
         _tableView.separatorColor = [UIColor clearColor];
         _tableView.allowsSelection = NO;
@@ -92,7 +93,7 @@
     return _tableView;
 }
 
--(void)pullDownRefreshing:(MJRefreshBaseView *)tableView{
+-(void)pullDownRefreshing{
     currentPage = 1;
     [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=photo_group_list" parameters:@{@"page":[NSString stringWithFormat:@"%d",currentPage],@"count":@"20"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
@@ -103,14 +104,14 @@
 //            }
             data = [[NSArray alloc]initWithArray:[responseObject valueForKey:@"data"]];
             [_tableView reloadData];
-            [tableView endRefreshing];
+            [_tableView headerEndRefreshing];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
     }];
 }
 
--(void)pullUpRefreshing:(MJRefreshBaseView *)tableView{
+-(void)pullUpRefreshing{
     [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=photo_group_list" parameters:@{@"page":[NSString stringWithFormat:@"%d",++currentPage],@"count":@"20"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
@@ -122,7 +123,7 @@
             [arr addObjectsFromArray:[responseObject valueForKey:@"data"]];
             data = arr;
             [_tableView reloadData];
-            [tableView endRefreshing];
+            [_tableView headerEndRefreshing];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
