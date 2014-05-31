@@ -15,7 +15,7 @@
 
 #define PRESENT_TITLE_COLOR [UIColor redColor]
 #define PAST_TITLE_COLOR [UIColor grayColor]
-#define COUNT_OF_PAGE 1
+#define COUNT_OF_PAGE 10
 @interface ActivityViewController ()
 {
     NSMutableArray *onlineArrayPrg;
@@ -103,6 +103,7 @@
     }];
     
     upPoint = CGPointMake(self.view.frame.size.width / 2,HEIGHT_OF_HEADER_OR_FOOTER + HEIGHT_OF_HEADER_OR_FOOTER / 2 + 1);
+    [self.progressingTableView headerBeginRefreshing];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -110,7 +111,6 @@
     [super viewWillAppear:animated];
     self.navigationItem.title = @"活动";
     ((UIViewController *)(self.navigationController.viewControllers)[[self.navigationController.viewControllers indexOfObject:self] - 1]).navigationItem.title = @"";
-    [self.progressingTableView headerBeginRefreshing];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

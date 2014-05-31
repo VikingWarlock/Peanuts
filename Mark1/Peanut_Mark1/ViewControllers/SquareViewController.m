@@ -54,7 +54,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
-    [self.tableView headerBeginRefreshing];
 }
 
 - (void)viewDidLoad
@@ -79,6 +78,7 @@
         [weakSelf pullUpRefreshing];
     }];
     // Do any additional setup after loading the view.
+    [self.tableView headerBeginRefreshing];
 }
 
 -(UITableView *)tableView{
