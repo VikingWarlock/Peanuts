@@ -9,4 +9,6 @@
 #import "BaseUIViewController.h"
 
 @interface ActivitDetailInterestedPeopleViewController : BaseUIViewController <UITableViewDataSource,UITableViewDelegate>
+@property (nonatomic,strong) NSMutableArray *interesteUsers;
+@property (nonatomic,strong) UIImage *backImage;
 @end

@@ -44,7 +44,7 @@
 {
     [super viewWillAppear:animated];
     self.title = @"必读";
-    [self.readTableView beginRefreshing];
+//    [self.readTableView beginRefreshing];
 }
 
 - (void)viewDidLoad
@@ -72,6 +72,14 @@
     [self.readTableView registerClass:[MustReadTableViewCell class] forCellReuseIdentifier:@"mustreadCell"];
     [self.readTableView registerClass:[NoReadCell class] forCellReuseIdentifier:@"noreadCell"];
     [self.readTableView registerClass:[DateCell class] forCellReuseIdentifier:@"dateCell"];
+    
+//    __weak MustReadViewController *weakSelf =self;
+//    [self.readTableView addHeaderWithCallback:^{
+//        [weakSelf pullDownBeginRefreshAction];
+//    }];
+//    [self.readTableView addFooterWithCallback:^{
+//        [weakSelf pullUpBeginRefreshAction];
+//    }];
     
 //    [self.readTableView setPullDownBeginRefreshAction:@selector(pullDownBeginRefreshAction)];
 //    [self.readTableView setPullUpBeginRefreshAction:@selector(pullUpBeginRefreshAction)];
@@ -222,7 +230,7 @@
 - (void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath*)indexPath
 {
     CGRect rect = [tableView convertRect:cell.frame toView:[tableView superview]];
-    if ([[cellinfo[indexPath.section] valueForKey:@"type"] isEqualToString:@"1"] && rect.origin.y <=0) {
+    if ([[cellinfo[indexPath.section] valueForKey:@"type"] isEqualToString:@"1"] && rect.origin.y <=20) {
         [datelabel setText:[cellinfo[indexPath.section] valueForKey:@"date"]];
     }
 }
@@ -230,13 +238,15 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGRect rect = [tableView convertRect:cell.frame toView:[tableView superview]];
-    if ([[cellinfo[indexPath.section] valueForKey:@"type"] isEqualToString:@"0"] && rect.origin.y <=0) {
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:[[data[[[cellinfo[indexPath.section] valueForKey:@"index"] intValue]] valueForKey:@"publish_time"] intValue]];
-        NSString *datestr = [formatter stringFromDate:date];
-        [datelabel setText:datestr];
-    }
-    else if ([[cellinfo[indexPath.section] valueForKey:@"type"] isEqualToString:@"2"]){
-        [datelabel setText:timeStr];
+    if (indexPath.section > 0) {
+        if ([[cellinfo[indexPath.section-1] valueForKey:@"type"] isEqualToString:@"2"]){
+            [datelabel setText:timeStr];
+        }
+        else if ([[cellinfo[indexPath.section] valueForKey:@"type"] isEqualToString:@"1"] && rect.origin.y <=20) {
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:[[data[[[cellinfo[indexPath.section-1] valueForKey:@"index"] intValue]] valueForKey:@"publish_time"] intValue]];
+            NSString *datestr = [formatter stringFromDate:date];
+            [datelabel setText:datestr];
+        }
     }
 }
 

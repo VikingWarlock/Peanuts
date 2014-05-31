@@ -47,7 +47,6 @@
         _imageView1.image = nil;
         _imageView1.contentMode = UIViewContentModeScaleAspectFill;
         _imageView1.clipsToBounds = YES;
-        _imageView1.backgroundColor = [UIColor redColor];
     }
     return _imageView1;
 }
@@ -59,7 +58,6 @@
         _imageView2.image = nil;
         _imageView2.contentMode = UIViewContentModeScaleAspectFill;
         _imageView2.clipsToBounds = YES;
-        _imageView2.backgroundColor = [UIColor greenColor];
     }
     return _imageView2;
 }
@@ -71,7 +69,6 @@
         _imageView3.image = nil;
         _imageView3.contentMode = UIViewContentModeScaleAspectFill;
         _imageView3.clipsToBounds = YES;
-        _imageView3.backgroundColor = [UIColor blueColor];
         
     }
     return _imageView3;

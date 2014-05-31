@@ -36,7 +36,7 @@
     self.borderWith = 4.0;
     self.borderColor = [UIColor whiteColor];
     
-    self.shadowRadius = 5.0;
+    self.shadowRadius = 0.0;
     self.shadowColor = [UIColor blackColor];
     
     self.layer.shadowOffset = CGSizeMake(0, 0);
