@@ -10,9 +10,10 @@
 #import "imgCollectionTableViewCell.h"
 #import "CommentViewController.h"
 #import "ShareViewController.h"
+#import "ImgBottomView.h"
 
-@interface imgCollectionViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate,Delegate_imgCell,Delegate_commentVC,Delegate_shareVC>
+@interface imgCollectionViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate,Delegate_imgCell,Delegate_commentVC,Delegate_shareVC,Delegate_imgBottomView>
 
-- (id)initWithFeedId:(int)feedId bgImageUrl:(NSURL *)url;
+- (id)initWithFeedId:(NSInteger)feedId bgImageUrl:(NSURL *)url;
 
 @end
