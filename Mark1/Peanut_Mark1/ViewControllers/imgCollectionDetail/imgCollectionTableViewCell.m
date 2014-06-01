@@ -92,6 +92,7 @@
     if ([self.delegate respondsToSelector:@selector(praiseBtnClickAtCell:)]) {
         [self.delegate praiseBtnClickAtCell:self];
     }
+    
 }
 
 -(UIButton *)commentBtn{

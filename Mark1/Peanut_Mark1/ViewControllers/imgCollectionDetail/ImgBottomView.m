@@ -95,14 +95,13 @@
                 [alertView show];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"aaaaaaaa");
         }];
         
     }
 }
 
 -(void)bottomShareBtnClick:(UIButton *)sender{
-    self.shareVC = [[ShareViewController alloc] init];
+    self.shareVC = [[ShareViewController alloc] initWithFeedId:feed_id];
     [self.delegate bottomShareBtnClick];
 
 }

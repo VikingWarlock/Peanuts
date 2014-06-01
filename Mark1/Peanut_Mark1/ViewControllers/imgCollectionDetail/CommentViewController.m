@@ -9,6 +9,7 @@
 #import "CommentViewController.h"
 #import "PublishCommentTableViewCell.h"
 #import "UIImageView+WebCache.h"
+#import "ShareViewController.h"
 
 
 @interface CommentViewController (){
@@ -26,14 +27,46 @@
 
 static NSString * cellIdentifier = @"cellIdentifier";
 
+//- (id)initWithGroupFeedId:(NSInteger)feedId{
+//    self = [super init];
+//    if (self) {
+//        feed_id = feedId;
+//        [self.view addSubview:self.bottomView];
+//        
+//        PhotoSeriesEntity * entity = [CoreData_Helper GetPhotoSeriesEntity:[NSString stringWithFormat:@"%ld",feed_id]];
+//        UIImageView * iv = [[UIImageView alloc]init];
+//        [iv setImageWithURL:[NSURL URLWithString:entity.cover_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+//            [self setBackgroundImage:image andBlurEnable:YES];
+//        }];
+//    }
+//    return self;
+//}
+
 - (id)initWithFeedId:(NSInteger)feedId{
     self = [super init];
     if (self) {
         feed_id = feedId;
         [self.view addSubview:self.bottomView];
+        
+
+        
+        PhotoSeriesEntity * entity = [CoreData_Helper GetPhotoSeriesEntity:[NSString stringWithFormat:@"%ld",feed_id]];
+        UIImageView * iv = [[UIImageView alloc]init];
+        if (entity!=nil) {
+        [iv setImageWithURL:[NSURL URLWithString:entity.cover_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [self setBackgroundImage:image andBlurEnable:YES];
+        }];}
+        else{
+            PhotoInfoEntity * entity2 = [CoreData_Helper GetPhotoEntity:[NSString stringWithFormat:@"%ld",feed_id]];
+            [iv setImageWithURL:[NSURL URLWithString:entity2.imageURL] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                [self setBackgroundImage:image andBlurEnable:YES];
+            }];
+        }
     }
     return self;
 }
+
+
 
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
@@ -45,7 +78,6 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [super viewDidLoad];
     
     
-    [self setBackgroundImage:[UIImage imageNamed:@"1.png"] andBlurEnable:YES];
     [self registerForKeyboardNotification];
     
     [self.view addSubview:self.tableView];
@@ -70,14 +102,17 @@ static NSString * cellIdentifier = @"cellIdentifier";
 }
 
 -(void)bottomShareBtnClick{
+    BOOL alreadyHasShareVC = 0;
     for (UIViewController * vc in self.navigationController.viewControllers) {
         if ([vc isKindOfClass:[ShareViewController class]]) {
-            [self.navigationController popViewControllerAnimated:YES];
+            alreadyHasShareVC = 1;
         }
-        else{
-            ShareViewController * sVC = [[ShareViewController alloc] init];
-            [self.navigationController pushViewController:sVC animated:YES];
-        }
+    }
+    if (alreadyHasShareVC) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        ShareViewController * vc = [[ShareViewController alloc]initWithFeedId:feed_id];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 
 }
@@ -92,6 +127,9 @@ static NSString * cellIdentifier = @"cellIdentifier";
         _tableView.separatorColor = [UIColor clearColor];
         _tableView.backgroundColor = [UIColor clearColor];
         _tableView.allowsSelection = NO;
+        
+        _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
+        [_tableView.tableFooterView setBackgroundColor:[UIColor clearColor]];
          
     }
     return _tableView;
@@ -140,6 +178,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
         return cell;
     }
 }
+
 
 -(void)replayBtnClickAtIndexPath:(NSIndexPath *)indexPath{
     selectedIndexPath = indexPath;

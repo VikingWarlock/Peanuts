@@ -23,6 +23,7 @@
 
 @property(nonatomic,assign) id<Delegate_commentVC>delegate;
 
--(id)initWithFeedId:(NSInteger)feedId;
+- (id)initWithFeedId:(NSInteger)feedId;
+- (id)initWithGroupFeedId:(NSInteger)feedId;
 
 @end

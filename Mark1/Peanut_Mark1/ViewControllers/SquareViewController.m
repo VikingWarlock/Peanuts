@@ -98,10 +98,10 @@
     [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=photo_group_list" parameters:@{@"page":[NSString stringWithFormat:@"%d",currentPage],@"count":@"20"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
-//            NSArray * arr = [responseObject valueForKey:@"data"];
-//            for (NSDictionary *dic in arr) {
-//                [CoreData_Helper addPhotoSeriesEntity:dic];
-//            }
+            NSArray * arr = [responseObject valueForKey:@"data"];
+            for (NSDictionary *dic in arr) {
+                [CoreData_Helper addPhotoSeriesEntity:dic];
+            }
             data = [[NSArray alloc]initWithArray:[responseObject valueForKey:@"data"]];
             [_tableView reloadData];
             [_tableView headerEndRefreshing];
@@ -115,13 +115,13 @@
     [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=photo_group_list" parameters:@{@"page":[NSString stringWithFormat:@"%d",++currentPage],@"count":@"20"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
-//            NSArray * arr = [responseObject valueForKey:@"data"];
-//            for (NSDictionary *dic in arr) {
-//                [CoreData_Helper addPhotoSeriesEntity:dic];
-//            }
-            NSMutableArray * arr = [[NSMutableArray alloc]initWithArray:data];
-            [arr addObjectsFromArray:[responseObject valueForKey:@"data"]];
-            data = arr;
+            NSArray * arr = [responseObject valueForKey:@"data"];
+            for (NSDictionary *dic in arr) {
+                [CoreData_Helper addPhotoSeriesEntity:dic];
+            }
+            NSMutableArray * temp = [[NSMutableArray alloc]initWithArray:data];
+            [temp addObjectsFromArray:[responseObject valueForKey:@"data"]];
+            data = temp;
             [_tableView reloadData];
             [_tableView footerEndRefreshing];
         }

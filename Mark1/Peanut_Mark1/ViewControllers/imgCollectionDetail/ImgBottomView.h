@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ShareViewController.h"
-//#import "CommentViewController.h"
+
 @class CommentViewController;
+@class ShareViewController;
 
 @protocol Delegate_imgBottomView <NSObject>
 

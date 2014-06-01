@@ -7,20 +7,40 @@
 //
 
 #import "ShareViewController.h"
+#import "CommentViewController.h"
+#import "UIImageView+WebCache.h"
 
-@interface ShareViewController ()
+@interface ShareViewController (){
+    NSInteger feed_id;
+}
 
 @property (nonatomic,strong) UITableView * tableView;
+@property(nonatomic,strong)ImgBottomView * bottomView;
+
 
 @end
 
 @implementation ShareViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithFeedId:(NSInteger)feedId
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    self = [super init];
     if (self) {
-        // Custom initialization
+        feed_id = feedId;
+        [self.view addSubview:self.bottomView];
+        
+        PhotoSeriesEntity * entity = [CoreData_Helper GetPhotoSeriesEntity:[NSString stringWithFormat:@"%ld",feed_id]];
+        UIImageView * iv = [[UIImageView alloc]init];
+        if (entity!=nil) {
+            [iv setImageWithURL:[NSURL URLWithString:entity.cover_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                [self setBackgroundImage:image andBlurEnable:YES];
+            }];}
+        else{
+            PhotoInfoEntity * entity2 = [CoreData_Helper GetPhotoEntity:[NSString stringWithFormat:@"%ld",feed_id]];
+            [iv setImageWithURL:[NSURL URLWithString:entity2.imageURL] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                [self setBackgroundImage:image andBlurEnable:YES];
+            }];
+        }
     }
     return self;
 }
@@ -28,7 +48,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setBackgroundImage:[UIImage imageNamed:@"1.png"] andBlurEnable:YES];
 
     [self.view addSubview:self.tableView];
     _tableView.allowsSelection = NO;
@@ -46,9 +65,41 @@
     // Do any additional setup after loading the view.
 }
 
+-(ImgBottomView *)bottomView{
+    if (!_bottomView) {
+        _bottomView = [[ImgBottomView alloc]initWithGroupFeedId:feed_id];
+        _bottomView.delegate = self;
+    }
+    return _bottomView;
+}
+
+-(void)bottomCommentBtnClick{
+    BOOL alreadyHasCommentVC = 0;
+    for (UIViewController * vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[CommentViewController class]]) {
+            alreadyHasCommentVC = 1;
+        }
+    }
+    if (alreadyHasCommentVC) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        CommentViewController * vc = [[CommentViewController alloc]initWithFeedId: feed_id];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+-(void)bottomShareBtnClick{
+
+    
+}
+
+
 -(UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] init];
+        
+        _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
+        [_tableView.tableFooterView setBackgroundColor:[UIColor clearColor]];
     }
     return _tableView;
 }
