@@ -9,21 +9,22 @@
 #import "ActivityDetailUserViewController.h"
 #import "AMPAvatarView.h"
 #import "UserCell.h"
-#import "PullRefreshTableView.h"
+#import "UIImageView+WebCache.h"
 
 @interface ActivityDetailUserViewController ()
 {
-    NSMutableArray *users;
     NSIndexPath *deletedIndexPath;
     NSMutableDictionary *isVerified1;
     NSMutableDictionary *isVerified2;
     NSMutableDictionary *isVerified3;
     NSMutableDictionary *isVerified4;
-    NSMutableDictionary *d;
+    //NSMutableDictionary *d;
     BOOL isEdit;
+    
+    UIImageView *backImage;
 }
 @property (strong,nonatomic) UIView *header;
-@property (nonatomic,strong) PullRefreshTableView *tableview;
+@property (nonatomic,strong) UITableView *tableview;
 @property (nonatomic,strong) UIAlertView *alertView;
 @end
 
@@ -33,7 +34,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.users = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -43,16 +44,22 @@
     [super viewDidLoad];
     UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemBookmarks target:self action:@selector(showEditButton)];
     [self.navigationItem setRightBarButtonItem:rightButton];
+    
+    backImage = [[UIImageView alloc] init];
+    __weak ActivityDetailUserViewController *weakself = self;
+    [backImage setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [weakself setBackgroundImage:image andBlurEnable:YES];
+    }];
+    
     self.tableview.allowsSelection = NO;
-    [self setBackgroundImage:[UIImage imageNamed:@"pic.jpg"] andBlurEnable:YES];
     isEdit = NO;
     deletedIndexPath = [[NSIndexPath alloc] init];
-    
-    isVerified1 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"1",@"isVerified", nil];
-    isVerified2 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"0",@"isVerified", nil];
-    isVerified3 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"0",@"isVerified", nil];
-    isVerified4 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"1",@"isVerified", nil];
-    users = [[NSMutableArray alloc] initWithObjects:isVerified1,isVerified2,isVerified3,isVerified4, nil];
+//    
+//    isVerified1 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"1",@"isVerified", nil];
+//    isVerified2 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"0",@"isVerified", nil];
+//    isVerified3 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"0",@"isVerified", nil];
+//    isVerified4 = [[NSMutableDictionary alloc] initWithObjectsAndKeys:@"1",@"isVerified", nil];
+//    users = [[NSMutableArray alloc] initWithObjects:isVerified1,isVerified2,isVerified3,isVerified4, nil];
     
     [self.view addSubview:self.header];
     [self.view addSubview:self.tableview];
@@ -67,20 +74,13 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableview)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_header][_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_header,_tableview)]];
     
-    __weak ActivityDetailUserViewController *weakSelf =self;
-    [self.tableview setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullDown:refreshView];
-    }];
-    [self.tableview setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullUp:refreshView];
-    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     ((UIViewController *)(self.navigationController.viewControllers)[[self.navigationController.viewControllers indexOfObject:self] - 1]).navigationItem.title = @"";
-    [self sortArrayByIsVerified];
+    //[self sortArrayByIsVerified];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -94,25 +94,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-    [self.tableview freeHeaderFooter];
-}
-
-#pragma mark -Network stuff
-
--(void)pullDown:(MJRefreshBaseView*)refreshView
-{
-    NSLog(@"this is pull down");
-    [refreshView endRefreshing];
-}
-
--(void)pullUp:(MJRefreshBaseView*)refreshView
-{
-    NSLog(@"this is pull up");
-    [refreshView endRefreshing];
-}
-
 #pragma mark -method
 
 - (void)addMember:(id)sender
@@ -120,21 +101,21 @@
     NSIndexPath *indexPath = [_tableview indexPathForCell:(UserCell *)((UIButton *)sender).superview.superview.superview];
     ((UserCell *)[_tableview cellForRowAtIndexPath:indexPath]).unverified.hidden = YES;
     ((UserCell *)[_tableview cellForRowAtIndexPath:indexPath]).passVerify.hidden = YES;
-    [users[indexPath.row] setValue:[NSString stringWithFormat:@"1"] forKey:@"isVerified"];
+    [_users[indexPath.row] setValue:[NSString stringWithFormat:@"1"] forKey:@"status"];
 }
 
 - (void)deleteMember
 {
-    [users removeObjectAtIndex:deletedIndexPath.row];
+    [_users removeObjectAtIndex:deletedIndexPath.row];
     [_tableview deleteRowsAtIndexPaths:@[deletedIndexPath] withRowAnimation:UITableViewRowAnimationFade];
 }
 
 - (void)showEditButton
 {
     isEdit = !isEdit;
-    for (int i = 0; i< [users count]; i++) {
-        if ([[users[i] valueForKey:@"isVerified"] boolValue] == NO && isEdit == YES) {
-            [users[i] setValue:[NSString stringWithFormat:@"%D",!isEdit] forKey:@"isVerified"];
+    for (int i = 0; i< [_users count]; i++) {
+        if ([[_users[i] valueForKey:@"status"] boolValue] == NO && isEdit == YES) {
+            [_users[i] setValue:[NSString stringWithFormat:@"%D",!isEdit] forKey:@"status"];
         }
     }
     [_tableview reloadData];
@@ -148,9 +129,9 @@
 
 - (void)sortArrayByIsVerified
 {
-    [users sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        int a = [[obj1 valueForKey:@"isVerified"] intValue];
-        int b = [[obj2 valueForKey:@"isVerified"] intValue];
+    [_users sortUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        int a = [[obj1 valueForKey:@"status"] intValue];
+        int b = [[obj2 valueForKey:@"status"] intValue];
         if (a > b)
             return NSOrderedDescending;
         else
@@ -164,18 +145,22 @@
 {
     static NSString *cellIdentifier = @"usercell";
     UserCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    cell.name.text = [_users[indexPath.row] valueForKey:@"uname"];
+    
+    
+    
     [cell.deleteMember addTarget:self action:@selector(showAlert:) forControlEvents:UIControlEventTouchUpInside];
     [cell.passVerify addTarget:self action:@selector(addMember:) forControlEvents:UIControlEventTouchUpInside];
     
-    cell.passVerify.hidden = [[users[indexPath.row] valueForKey:@"isVerified"] boolValue] || !isEdit;
+    cell.passVerify.hidden = [[_users[indexPath.row] valueForKey:@"status"] boolValue] || !isEdit;
     cell.deleteMember.hidden = !isEdit;
-    cell.unverified.hidden = [[users[indexPath.row] valueForKey:@"isVerified"] boolValue];
+    cell.unverified.hidden = [[_users[indexPath.row] valueForKey:@"status"] boolValue];
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [users count];
+    return [_users count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -214,10 +199,10 @@
     return _header;
 }
 
-- (PullRefreshTableView *)tableview
+- (UITableView *)tableview
 {
     if (!_tableview) {
-        _tableview = [[PullRefreshTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableview = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         [_tableview setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         _tableview.dataSource = self;
         _tableview.delegate = self;

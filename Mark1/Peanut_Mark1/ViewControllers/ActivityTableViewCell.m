@@ -93,7 +93,7 @@
         _picture.image = nil;
         _picture.clipsToBounds = YES;
         _picture.contentMode = UIViewContentModeScaleAspectFill;
-        _picture.backgroundColor = [UIColor redColor];
+        _picture.backgroundColor = [UIColor whiteColor];
     }
     return _picture;
 }
@@ -112,7 +112,7 @@
 {
     if (!_user) {
         _user = [[UILabel alloc] init];
-        _user.text = @"ZAKER";
+        _user.text = @"UnKnown!";
         _user.textColor = [UIColor grayColor];
         _user.font = [UIFont systemFontOfSize:8.0];
     }
@@ -124,7 +124,6 @@
     if (!_avatar) {
         _avatar = [[UIImageView alloc] init];
         _avatar.image = nil;
-        _avatar.backgroundColor = [UIColor blueColor];
     }
     return _avatar;
 }

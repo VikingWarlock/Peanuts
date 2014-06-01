@@ -10,12 +10,12 @@
 #import "PublicLib.h"
 #import "ActivityTableViewCell.h"
 #import "ActivityDetailViewController.h"
-#import "PullRefreshTableView.h"
+#import "MJRefresh.h"
 #import "CoreData-Helper.h"
 
 #define PRESENT_TITLE_COLOR [UIColor redColor]
 #define PAST_TITLE_COLOR [UIColor grayColor]
-#define COUNT_OF_PAGE 3
+#define COUNT_OF_PAGE 10
 @interface ActivityViewController ()
 {
     NSMutableArray *onlineArrayPrg;
@@ -35,11 +35,13 @@
     BOOL shouldLoadReviewedTableView;
     CGPoint upPoint;
     CGPoint downPoint;
+    UIView *separatorLine;
     NSMutableArray *sweepSpeed;
     NSMutableArray *downSpeed;
+    
 }
-@property (nonatomic,strong) PullRefreshTableView *progressingTableView;
-@property (nonatomic,strong) PullRefreshTableView *ReviewedTableView;
+@property (nonatomic,strong) UITableView *progressingTableView;
+@property (nonatomic,strong) UITableView *ReviewedTableView;
 @property (nonatomic,strong) UIView *progressingHeadView;
 @property (nonatomic,strong) UIView *ReviewedFooterView;
 @property (nonatomic,strong) CustomSegmentedControl *progressingSegmentedControl;
@@ -87,21 +89,21 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_progressingTableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_progressingTableView)]];
     
     __weak ActivityViewController *weakSelf =self;
-    [self.progressingTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullDownProgressing:refreshView IsOnline:YES IsProgressing:YES];
+    [self.progressingTableView addHeaderWithCallback:^{
+        [weakSelf pullDownProgressingIsOnline:YES IsProgressing:YES];
     }];
-    [self.progressingTableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullUpProgressing:refreshView IsOnline:YES IsProgressing:YES];
+    [self.progressingTableView addFooterWithCallback:^{
+        [weakSelf pullUpProgressingIsOnline:YES IsProgressing:YES];
     }];
-    [self.ReviewedTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullDownReviewed:refreshView IsOnline:YES IsProgressing:NO];
+    [self.ReviewedTableView addHeaderWithCallback:^{
+        [weakSelf pullDownReviewedIsOnline:YES IsProgressing:NO];
     }];
-    [self.ReviewedTableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullUpReviewed: refreshView IsOnline:YES IsProgressing:NO];
+    [self.ReviewedTableView addFooterWithCallback:^{
+        [weakSelf pullUpReviewedIsOnline:YES IsProgressing:NO];
     }];
-    
     
     upPoint = CGPointMake(self.view.frame.size.width / 2,HEIGHT_OF_HEADER_OR_FOOTER + HEIGHT_OF_HEADER_OR_FOOTER / 2 + 1);
+    [self.progressingTableView headerBeginRefreshing];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -109,7 +111,6 @@
     [super viewWillAppear:animated];
     self.navigationItem.title = @"活动";
     ((UIViewController *)(self.navigationController.viewControllers)[[self.navigationController.viewControllers indexOfObject:self] - 1]).navigationItem.title = @"";
-    [self.progressingTableView beginRefreshing];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -123,12 +124,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)dealloc
-{
-    [self.progressingTableView freeHeaderFooter];
-    [self.ReviewedTableView freeHeaderFooter];
-}
-
 #pragma mark -UITableView datasource and delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -137,10 +132,12 @@
     ActivityTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     if (tableView.tag == 0 && _progressingSegmentedControl.isOnline) {
-        [cell.picture setImageWithURL:[onlineArrayPrg[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] ];
-        [cell.avatar setImageWithURL:[onlineArrayPrg[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        [cell.picture setImageWithURL:[NSURL URLWithString:[onlineArrayPrg[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        [cell.avatar setImageWithURL:[[onlineArrayPrg[indexPath.section] valueForKey:@"user_info"] valueForKey:@"avatar_tiny"]];
+        cell.user.text = [[onlineArrayPrg[indexPath.section] valueForKey:@"user_info"] valueForKey:@"uname"];
         cell.Date.text = [self DateFromTimestamp:[onlineArrayPrg[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[onlineArrayPrg[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [onlineArrayPrg[indexPath.section] valueForKey:@"topic"];
+        cell.feedid = [onlineArrayPrg[indexPath.section] valueForKey:@"feed_id"];
         if ([[onlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
         {
             cell.type.text = @"线上活动";
@@ -155,10 +152,12 @@
         }
     }
     else if (tableView.tag == 0 && !_progressingSegmentedControl.isOnline) {
-        [cell.picture setImageWithURL:[offlineArrayPrg[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] ];
-        [cell.avatar setImageWithURL:[offlineArrayPrg[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        [cell.picture setImageWithURL:[NSURL URLWithString:[offlineArrayPrg[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        [cell.avatar setImageWithURL:[[offlineArrayPrg[indexPath.section] valueForKey:@"user_info"] valueForKey:@"avatar_tiny"]];
+        cell.user.text = [[offlineArrayPrg[indexPath.section] valueForKey:@"user_info"] valueForKey:@"uname"];
         cell.Date.text = [self DateFromTimestamp:[offlineArrayPrg[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[offlineArrayPrg[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [offlineArrayPrg[indexPath.section] valueForKey:@"topic"];
+        cell.feedid = [offlineArrayPrg[indexPath.section] valueForKey:@"feed_id"];
         if ([[offlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
         {
             cell.type.text = @"线上活动";
@@ -173,10 +172,12 @@
         }
     }
     else if (tableView.tag == 1 && _ReviewedSegmentedControl.isOnline) {
-        [cell.picture setImageWithURL:[onlineArrayReviewed[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] ];
-        [cell.avatar setImageWithURL:[onlineArrayReviewed[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        [cell.picture setImageWithURL:[NSURL URLWithString:[onlineArrayReviewed[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        [cell.avatar setImageWithURL:[[onlineArrayReviewed[indexPath.section] valueForKey:@"user_info"] valueForKey:@"avatar_tiny"]];
+        cell.user.text = [[onlineArrayReviewed[indexPath.section] valueForKey:@"user_info"] valueForKey:@"uname"];
         cell.Date.text = [self DateFromTimestamp:[onlineArrayReviewed[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[onlineArrayReviewed[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [onlineArrayReviewed[indexPath.section] valueForKey:@"topic"];
+        cell.feedid = [onlineArrayReviewed[indexPath.section] valueForKey:@"feed_id"];
         if ([[onlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
         {
             cell.type.text = @"线上活动";
@@ -191,10 +192,12 @@
         }
     }
     else if (tableView.tag == 1 && !_ReviewedSegmentedControl.isOnline) {
-        [cell.picture setImageWithURL:[offlineArrayReviewed[indexPath.section] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] ];
-        [cell.avatar setImageWithURL:[offlineArrayReviewed[indexPath.section] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"like.png"]];
+        [cell.picture setImageWithURL:[NSURL URLWithString:[offlineArrayReviewed[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        [cell.avatar setImageWithURL:[[offlineArrayReviewed[indexPath.section] valueForKey:@"user_info"] valueForKey:@"avatar_tiny"]];
+        cell.user.text = [[offlineArrayReviewed[indexPath.section] valueForKey:@"user_info"] valueForKey:@"uname"];
         cell.Date.text = [self DateFromTimestamp:[offlineArrayReviewed[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[offlineArrayReviewed[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [offlineArrayReviewed[indexPath.section] valueForKey:@"topic"];
+        cell.feedid = [offlineArrayReviewed[indexPath.section] valueForKey:@"feed_id"];
         if ([[offlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
         {
             cell.type.text = @"线上活动";
@@ -258,7 +261,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    ActivityTableViewCell *cell = (ActivityTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] init];
+    vc.feedid = cell.feedid;
+    vc.mask.headline.text = cell.title.text;
+    vc.mask.user.text = cell.user.text;
+    vc.mask.Date.text = cell.Date.text;
+    vc.mask.type.text = cell.type.text;
     [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -269,33 +278,31 @@
 {
     __weak ActivityViewController *weakSelf =self;
     if (isprogressing) {
-        [self.progressingTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView)
-        {
-            [weakSelf pullDownProgressing:refreshView IsOnline:isOnline IsProgressing:isprogressing];
+        [self.progressingTableView addHeaderWithCallback:^{
+            [weakSelf pullDownProgressingIsOnline:isOnline IsProgressing:isprogressing];
         }];
-        [self.progressingTableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView)
-         {
-             [weakSelf pullUpProgressing:refreshView IsOnline:isOnline IsProgressing:isprogressing];
-         }];
+        [self.progressingTableView addFooterWithCallback:^{
+            [weakSelf pullUpProgressingIsOnline:isOnline IsProgressing:isprogressing];
+        }];
         if (ispresenting) {
-            [_progressingTableView beginRefreshing];
+            [_progressingTableView headerBeginRefreshing];
         }
     }
         else
         {
-            [self.ReviewedTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-                [weakSelf pullDownReviewed:refreshView IsOnline:isOnline IsProgressing:isprogressing];
+            [self.ReviewedTableView addHeaderWithCallback:^{
+                [weakSelf pullDownReviewedIsOnline:isOnline IsProgressing:isprogressing];
             }];
-            [self.ReviewedTableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-                [weakSelf pullUpReviewed:refreshView IsOnline:isOnline IsProgressing:isprogressing];
+            [self.ReviewedTableView addFooterWithCallback:^{
+                [weakSelf pullUpReviewedIsOnline:isOnline IsProgressing:isprogressing];
             }];
             if (ispresenting) {
-                [_ReviewedTableView beginRefreshing];
+                [_ReviewedTableView headerBeginRefreshing];
         }
     }
 }
 
--(void)pullDownProgressing:(MJRefreshBaseView*)refreshView IsOnline:(BOOL)isOline IsProgressing:(BOOL)isprogressing
+-(void)pullDownProgressingIsOnline:(BOOL)isOline IsProgressing:(BOOL)isprogressing
 {
     unsigned int *page;
     
@@ -312,28 +319,26 @@
         {
             if (isOline) {
                 onlineArrayPrg = [[responseObject valueForKey:@"data"] mutableCopy];
-                for (NSDictionary *dic in onlineArrayPrg) {
-                    //[CoreData_Helper addActivityEntity:dic];
-                }
             }
             else
             {
                 offlineArrayPrg = [[responseObject valueForKey:@"data"] mutableCopy];;
-                for (NSDictionary *dic in offlineArrayPrg) {
-                    //[CoreData_Helper addActivityEntity:dic];
-                }
             }
             [_progressingTableView reloadData];
-            [refreshView endRefreshing];
+            [_progressingTableView headerEndRefreshing];
             *page = 2;
+            for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
+                [CoreData_Helper addActivityEntity:dic];
+            }
+            NSLog(@"%@",[responseObject valueForKey:@"data"]);
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
-        [refreshView endRefreshing];
+        [_progressingTableView headerEndRefreshing];
     }];
 }
 
--(void)pullUpProgressing:(MJRefreshBaseView*)refreshView IsOnline:(BOOL)isOline IsProgressing:(BOOL)isprogressing
+-(void)pullUpProgressingIsOnline:(BOOL)isOline IsProgressing:(BOOL)isprogressing
 {
     unsigned int *page = NULL;
     NSMutableArray *array;
@@ -354,33 +359,30 @@
             {
                 if (isOline) {
                     [onlineArrayPrg addObjectsFromArray:[responseObject valueForKey:@"data"]];
-                    for (NSDictionary *dic in onlineArrayPrg) {
-                        //[CoreData_Helper addActivityEntity:dic];
-                    }
                     (*page)++;
                 }
                 else
                 {
                     [offlineArrayPrg addObjectsFromArray:[responseObject valueForKey:@"data"]];
-                    for (NSDictionary *dic in offlineArrayPrg) {
-                        //[CoreData_Helper addActivityEntity:dic];
-                    }
                     (*page)++;
                 }
                 [_progressingTableView reloadData];
-                [refreshView endRefreshing];
+                [_progressingTableView footerEndRefreshing];
+                for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
+                    [CoreData_Helper addActivityEntity:dic];
+                }
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"%@",error);
-            [refreshView endRefreshing];
+            [_progressingTableView footerEndRefreshing];
         }];
             
     }
     else
-        [refreshView endRefreshing];
+        [_progressingTableView footerEndRefreshing];
 }
 
--(void)pullDownReviewed:(MJRefreshBaseView*)refreshView IsOnline:(BOOL)isOline IsProgressing:(BOOL)isprogressing
+-(void)pullDownReviewedIsOnline:(BOOL)isOline IsProgressing:(BOOL)isprogressing
 {
     unsigned int *page;
     
@@ -397,28 +399,25 @@
         {
             if (isOline) {
                 onlineArrayReviewed = [[responseObject valueForKey:@"data"] mutableCopy];
-                for (NSDictionary *dic in onlineArrayReviewed) {
-                    //[CoreData_Helper addActivityEntity:dic];
-                }
             }
             else
             {
                 offlineArrayReviewed = [[responseObject valueForKey:@"data"] mutableCopy];
-                for (NSDictionary *dic in offlineArrayReviewed) {
-                    //[CoreData_Helper addActivityEntity:dic];
-                }
             }
             *page = 2;
             [_ReviewedTableView reloadData];
-            [refreshView endRefreshing];
+            [_ReviewedTableView headerEndRefreshing];
+            for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
+                [CoreData_Helper addActivityEntity:dic];
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
-        [refreshView endRefreshing];
+        [_ReviewedTableView headerEndRefreshing];
     }];
 }
 
--(void)pullUpReviewed:(MJRefreshBaseView*)refreshView IsOnline:(BOOL)isOline IsProgressing:(BOOL)isprogressing
+-(void)pullUpReviewedIsOnline:(BOOL)isOline IsProgressing:(BOOL)isprogressing
 {
     unsigned int *page = NULL;
     NSMutableArray *array;
@@ -439,30 +438,27 @@
             {
                 if (isOline) {
                     [onlineArrayReviewed addObjectsFromArray:[responseObject valueForKey:@"data"]];
-                    for (NSDictionary *dic in onlineArrayPrg) {
-                        //[CoreData_Helper addActivityEntity:dic];
-                    }
                     (*page)++;
                 }
                 else
                 {
                     [offlineArrayReviewed addObjectsFromArray:[responseObject valueForKey:@"data"]];
-                    for (NSDictionary *dic in offlineArrayPrg) {
-                        //[CoreData_Helper addActivityEntity:dic];
-                    }
                     (*page)++;
                 }
                 [_ReviewedTableView reloadData];
-                [refreshView endRefreshing];
+                [_ReviewedTableView footerEndRefreshing];
+                for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
+                    [CoreData_Helper addActivityEntity:dic];
+                }
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"%@",error);
-            [refreshView endRefreshing];
+            [_ReviewedTableView footerEndRefreshing];
         }];
         
     }
     else
-        [refreshView endRefreshing];
+        [_ReviewedTableView footerEndRefreshing];
 }
 
 - (NSString *)DateFromTimestamp:(NSString *)beginTimestamp endTimestamp:(NSString *)endTimestamp
@@ -498,6 +494,7 @@
             _reviewed.textColor = PAST_TITLE_COLOR;
             _progressingSegmentedControl.isPresenting = YES;
             _ReviewedSegmentedControl.isPresenting = NO;
+            separatorLine.hidden =_progressingSegmentedControl.isPresenting;
         }
         else
         {
@@ -508,10 +505,12 @@
             _reviewed.textColor = PRESENT_TITLE_COLOR;
             _progressingSegmentedControl.isPresenting = NO;
             _ReviewedSegmentedControl.isPresenting = YES;
-            [_ReviewedTableView beginRefreshing];
+            [_ReviewedTableView headerBeginRefreshing];
         }
         _ReviewedTableView.frame = CGRectMake(0, recognizer.view.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
-    } completion:nil];
+    } completion:^(BOOL finished) {
+        separatorLine.hidden =_progressingSegmentedControl.isPresenting;
+    }];
 }
 
 - (void)handleTap2:(UITapGestureRecognizer *)recognizer
@@ -527,6 +526,7 @@
             _reviewed.textColor = PAST_TITLE_COLOR;
             _progressingSegmentedControl.isPresenting = YES;
             _ReviewedSegmentedControl.isPresenting = NO;
+            separatorLine.hidden =_progressingSegmentedControl.isPresenting;
             _ReviewedTableView.frame = CGRectMake(0, _ReviewedFooterView.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
         }
     } completion:nil];
@@ -574,7 +574,7 @@
         }
     }
     _ReviewedTableView.frame = CGRectMake(0, recognizer.view.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
-
+    separatorLine.hidden = YES;
     
     if(recognizer.state == UIGestureRecognizerStateEnded)
     {
@@ -587,7 +587,7 @@
                 _progressingSegmentedControl.isPresenting = NO;
                 _ReviewedSegmentedControl.isPresenting = YES;
                 if (oldStatus != status) {
-                    [_ReviewedTableView beginRefreshing];
+                    [_ReviewedTableView headerBeginRefreshing];
                 }
                 oldStatus = status;
             }
@@ -602,7 +602,9 @@
                 _ReviewedSegmentedControl.isPresenting = NO;
             }
             _ReviewedTableView.frame = CGRectMake(0, recognizer.view.frame.origin.y + HEIGHT_OF_HEADER_OR_FOOTER, self.view.frame.size.width, self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER * 2);
-        } completion:nil];
+        } completion:^(BOOL finished) {
+            separatorLine.hidden =_progressingSegmentedControl.isPresenting;
+        }];
     }
 }
 
@@ -641,15 +643,20 @@
         
         [_progressingHeadView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap2:)]];
 
+        
+        separatorLine = [[UIView alloc] initWithFrame:CGRectMake(0, _progressingHeadView.frame.size.height, self.view.frame.size.width, 1)];
+        separatorLine.backgroundColor = _progressingTableView.separatorColor;
+        separatorLine.hidden = YES;
+        [self.view addSubview:separatorLine];
     }
     return _progressingHeadView;
 }
 
-- (PullRefreshTableView *)progressingTableView
+- (UITableView *)progressingTableView
 {
     if(!_progressingTableView)
     {
-        _progressingTableView = [[PullRefreshTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _progressingTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _progressingTableView.delegate = self;
         _progressingTableView.dataSource = self;
         _progressingTableView.tag = 0;
@@ -695,11 +702,11 @@
     return _ReviewedFooterView;
 }
 
-- (PullRefreshTableView *)ReviewedTableView
+- (UITableView *)ReviewedTableView
 {
     if(!_ReviewedTableView)
     {
-        _ReviewedTableView = [[PullRefreshTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _ReviewedTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _ReviewedTableView.delegate = self;
         _ReviewedTableView.dataSource = self;
         _ReviewedTableView.tag = 1;

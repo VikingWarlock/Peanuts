@@ -10,4 +10,7 @@
 #import "BaseUIViewController.h"
 
 @interface ActivityDetailUserViewController : BaseUIViewController <UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
+@property (nonatomic,strong) NSMutableArray *users;
+@property (nonatomic,strong) NSString *feedid;
+
 @end

@@ -64,8 +64,15 @@
 -(void)setBackgroundImage:(UIImage *)bkimage andBlurEnable:(BOOL)enable
 {
     bkImageView=[[UIImageView alloc]init];
+    bkImageView.clipsToBounds = YES;
+    bkImageView.contentMode = UIViewContentModeScaleAspectFill;
+    
+    //将原来的fram改为用自动布局，否则在某些情况下会出现背景不能铺满整个屏幕 @张众
     [self.view addSubview:bkImageView];
-    [bkImageView setFrame:self.view.frame];
+    [bkImageView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[bkImageView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bkImageView)]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[bkImageView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(bkImageView)]];
+    
     if (enable) {
         self.bkImage=[bkimage darkened:0.5f andBlurredImage:16.f];
     }else

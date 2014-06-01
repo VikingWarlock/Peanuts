@@ -8,7 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseUIViewController.h"
+#import "Mask.h"
 
 @interface ActivityDetailInfoViewController : BaseUIViewController
+@property (nonatomic,strong) Mask *mask;
+@property (nonatomic,strong) UITextView *textView;
+@property (nonatomic,strong) UIWebView *webView;
+@property (nonatomic,strong) NSString *feedid;
 
 @end
