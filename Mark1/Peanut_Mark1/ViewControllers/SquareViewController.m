@@ -123,10 +123,11 @@
             [arr addObjectsFromArray:[responseObject valueForKey:@"data"]];
             data = arr;
             [_tableView reloadData];
-            [_tableView headerEndRefreshing];
+            [_tableView footerEndRefreshing];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
+        [_tableView footerEndRefreshing];
     }];
 }
 

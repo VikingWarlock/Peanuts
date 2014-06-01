@@ -163,15 +163,15 @@
                 [userinfo addObjectsFromArray:[[responseObject valueForKey:@"data"] valueForKey:@"user_info"]];
                 [self processData:data];
                 [_readTableView reloadData];
-                [_readTableView headerEndRefreshing];
+                [_readTableView footerEndRefreshing];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"%@",error);
-            [_readTableView headerEndRefreshing];
+            [_readTableView footerEndRefreshing];
         }];
     }
     else
-        [_readTableView headerEndRefreshing];
+        [_readTableView footerEndRefreshing];
 }
 
 #pragma mark UITableView datasource and delegate
