@@ -305,7 +305,7 @@
     
     switch (indexpath.row) {
         case 0:
-        vc=[[imgCollectionViewController alloc]initWithFeedId:feed_id bgImageUrl:bkUrl];
+            vc=[[imgCollectionViewController alloc]initWithFeedId:feed_id];// bgImageUrl:bkUrl];
             break;
         case 1:
             vc=[[ActivityDetailViewController alloc]init];

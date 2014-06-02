@@ -15,16 +15,14 @@
 
 @interface SquareControl : UIControl
 @property int feedId;
-@property NSURL *url;
 @end
 
 @implementation SquareControl
 
--(id)initWithFrame:(CGRect)frame withFeedId:(int)feedId imageUrl:(NSURL *)url{
+-(id)initWithFrame:(CGRect)frame withFeedId:(int)feedId{
     self = [super initWithFrame:frame];
     if (self) {
         self.feedId = feedId;
-        self.url = url;
     }
     return self;
 }
@@ -157,9 +155,9 @@
     [cell.contentView addSubview:imageView1];
     [cell.contentView addSubview:imageView2];
     
-    SquareControl * control1 = [[SquareControl alloc]initWithFrame:imageView1.frame withFeedId:[dic1[@"feed_id"] intValue] imageUrl:dic1[@"cover"]];
+    SquareControl * control1 = [[SquareControl alloc]initWithFrame:imageView1.frame withFeedId:[dic1[@"feed_id"] intValue] ];
     [control1 addTarget:self action:@selector(imageTapped:) forControlEvents:UIControlEventTouchUpInside];
-    SquareControl * control2 = [[SquareControl alloc]initWithFrame:imageView2.frame withFeedId:[dic2[@"feed_id"] intValue] imageUrl:dic2[@"cover"]];
+    SquareControl * control2 = [[SquareControl alloc]initWithFrame:imageView2.frame withFeedId:[dic2[@"feed_id"] intValue] ];
     [control2 addTarget:self action:@selector(imageTapped:) forControlEvents:UIControlEventTouchUpInside];
     [cell.contentView addSubview:control1];
     [cell.contentView addSubview:control2];
@@ -184,7 +182,7 @@
 }
 
 -(void)imageTapped:(SquareControl *)sender{
-    [self.NavigationController pushViewController:[[imgCollectionViewController alloc] initWithFeedId:sender.feedId bgImageUrl:sender.url] animated:YES];
+    [self.navigationController pushViewController:[[imgCollectionViewController alloc] initWithFeedId:sender.feedId] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning

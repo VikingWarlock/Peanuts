@@ -37,11 +37,12 @@
 
 static NSString * cellIdentifier = @"cellIdentifier";
 
-- (id)initWithFeedId:(NSInteger)feedId bgImageUrl:(NSURL *)url{
+- (id)initWithFeedId:(NSInteger)feedId{// bgImageUrl:(NSURL *)url{
     self = [super init];
     if (self) {
+        PhotoSeriesEntity * entity = [CoreData_Helper GetPhotoSeriesEntity:[NSString stringWithFormat:@"%ld",feedId]];
         UIImageView * iv = [[UIImageView alloc]initWithFrame:self.view.frame];
-        [iv setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [iv setImageWithURL:[NSURL URLWithString:entity.cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             [self setBackgroundImage:image andBlurEnable:YES];
         }];
         feed_id = feedId;
@@ -145,7 +146,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell1];
     NSMutableDictionary * rowData = [mutableData[indexPath.row] mutableCopy];
 //???
-    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Feed&act=digg" parameters:@{@"PHPSESSID":[NSString stringWithFormat:@"%@",[CoreData_Helper GetSelfUserInfEntity].uid],@"feed_id":[rowData objectForKey:@"feed_id"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Feed&act=digg" parameters:@{@"PHPSESSID":[NSString stringWithFormat:@"%@",USER_PHPSESSID],@"feed_id":[rowData objectForKey:@"feed_id"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         int digCount = [rowData[@"digg_count"] intValue];
         [rowData removeObjectForKey:@"digg_count"];
         [rowData setValue:[NSString stringWithFormat:@"%d",++digCount] forKey:@"digg_count"];
