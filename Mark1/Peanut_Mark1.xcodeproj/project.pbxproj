@@ -27,6 +27,9 @@
 		51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */; };
 		51FBFD34192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FBFD33192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m */; };
 		51FBFD37192DF507009089FA /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FBFD36192DF507009089FA /* UserCell.m */; };
+		8813AA45193818B000CA8C94 /* UIImageView+ForBroswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DE03FB19372FD800E2B9AC /* UIImageView+ForBroswer.m */; };
+		8813AA46193818B000CA8C94 /* Peanut_PhotoBroswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 88DE03FE19373A3300E2B9AC /* Peanut_PhotoBroswer.m */; };
+		8830CFF5193C4289001763FD /* NSDictionary+extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 8830CFF4193C4289001763FD /* NSDictionary+extra.m */; };
 		883E546A19339EDF00E8D2CE /* PhotoDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA817192E228B0043AF21 /* PhotoDetailEntity.m */; };
 		883E546F19339EDF00E8D2CE /* CoreData-Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C5E371932E57D008F885A /* CoreData-Helper.m */; };
 		885F6341192A4447007BAAE0 /* RequestPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 885F6340192A4447007BAAE0 /* RequestPackage.m */; };
@@ -140,6 +143,8 @@
 		881DA816192E228B0043AF21 /* PhotoDetailEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoDetailEntity.h; path = CoreData/PhotoDetailEntity.h; sourceTree = "<group>"; };
 		881DA817192E228B0043AF21 /* PhotoDetailEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoDetailEntity.m; path = CoreData/PhotoDetailEntity.m; sourceTree = "<group>"; };
 		881DA81C192E27A20043AF21 /* API_address.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = API_address.h; path = PublicLibrary/API_address.h; sourceTree = "<group>"; };
+		8830CFF3193C4289001763FD /* NSDictionary+extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+extra.h"; path = "PublicLibrary/NSDictionary+extra.h"; sourceTree = "<group>"; };
+		8830CFF4193C4289001763FD /* NSDictionary+extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+extra.m"; path = "PublicLibrary/NSDictionary+extra.m"; sourceTree = "<group>"; };
 		885F633F192A4447007BAAE0 /* RequestPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RequestPackage.h; path = Networks/RequestPackage.h; sourceTree = "<group>"; };
 		885F6340192A4447007BAAE0 /* RequestPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RequestPackage.m; path = Networks/RequestPackage.m; sourceTree = "<group>"; };
 		886C08921920F1EB00BD7E5F /* NetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkRequest.h; path = CoreData/NetworkRequest.h; sourceTree = "<group>"; };
@@ -212,6 +217,10 @@
 		88DC9F4A1932D48A00AE9E86 /* SelfUser_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SelfUser_ViewController.m; path = ViewControllers/SelfUser_ViewController.m; sourceTree = "<group>"; };
 		88DE03F31935C8EE00E2B9AC /* ActivityEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityEntity.h; path = CoreData/ActivityEntity.h; sourceTree = "<group>"; };
 		88DE03F41935C8EE00E2B9AC /* ActivityEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityEntity.m; path = CoreData/ActivityEntity.m; sourceTree = "<group>"; };
+		88DE03FA19372FD800E2B9AC /* UIImageView+ForBroswer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+ForBroswer.h"; path = "PublicLibrary/UIImageView+ForBroswer.h"; sourceTree = "<group>"; };
+		88DE03FB19372FD800E2B9AC /* UIImageView+ForBroswer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+ForBroswer.m"; path = "PublicLibrary/UIImageView+ForBroswer.m"; sourceTree = "<group>"; };
+		88DE03FD19373A3300E2B9AC /* Peanut_PhotoBroswer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Peanut_PhotoBroswer.h; path = BaseModel/Peanut_PhotoBroswer.h; sourceTree = "<group>"; };
+		88DE03FE19373A3300E2B9AC /* Peanut_PhotoBroswer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Peanut_PhotoBroswer.m; path = BaseModel/Peanut_PhotoBroswer.m; sourceTree = "<group>"; };
 		88E06FD819232317006B3EAC /* BlurTableViewCell_mark1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlurTableViewCell_mark1.h; path = BaseModel/BaseSmallOutlet/BlurTableViewCell_mark1.h; sourceTree = "<group>"; };
 		88E06FD919232317006B3EAC /* BlurTableViewCell_mark1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BlurTableViewCell_mark1.m; path = BaseModel/BaseSmallOutlet/BlurTableViewCell_mark1.m; sourceTree = "<group>"; };
 		88FF355C1923962B00E76BB2 /* PeanutTopViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PeanutTopViewController.h; path = ViewControllers/PeanutTopViewController.h; sourceTree = "<group>"; };
@@ -409,6 +418,8 @@
 				887F211D191DB85D009250D2 /* BaseNaviViewController.m */,
 				887F211F191DB88B009250D2 /* BaseUIViewController.h */,
 				887F2120191DB88B009250D2 /* BaseUIViewController.m */,
+				88DE03FD19373A3300E2B9AC /* Peanut_PhotoBroswer.h */,
+				88DE03FE19373A3300E2B9AC /* Peanut_PhotoBroswer.m */,
 			);
 			name = BaseModel;
 			sourceTree = "<group>";
@@ -481,6 +492,10 @@
 				887F2145191E310A009250D2 /* AMPAvatarView+helper.m */,
 				887F2122191DB8D7009250D2 /* PublicLib.h */,
 				881DA81C192E27A20043AF21 /* API_address.h */,
+				88DE03FA19372FD800E2B9AC /* UIImageView+ForBroswer.h */,
+				88DE03FB19372FD800E2B9AC /* UIImageView+ForBroswer.m */,
+				8830CFF3193C4289001763FD /* NSDictionary+extra.h */,
+				8830CFF4193C4289001763FD /* NSDictionary+extra.m */,
 			);
 			name = PublicLibrary;
 			sourceTree = "<group>";
@@ -744,7 +759,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8813AA45193818B000CA8C94 /* UIImageView+ForBroswer.m in Sources */,
+				8813AA46193818B000CA8C94 /* Peanut_PhotoBroswer.m in Sources */,
 				F2434DD21934B711002D3426 /* SelfUser_ViewController.m in Sources */,
+				8830CFF5193C4289001763FD /* NSDictionary+extra.m in Sources */,
 				883E546A19339EDF00E8D2CE /* PhotoDetailEntity.m in Sources */,
 				883E546F19339EDF00E8D2CE /* CoreData-Helper.m in Sources */,
 				8881AC6519267AF000F9646B /* imgCollectionTableViewCell.m in Sources */,
@@ -921,7 +939,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Siguang Huang (L3UC9F9BL5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
 				INFOPLIST_FILE = "Peanut_Mark1/Peanut_Mark1-Info.plist";
@@ -937,7 +955,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Siguang Huang (L3UC9F9BL5)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Peanut_Mark1/Peanut_Mark1-Prefix.pch";
 				INFOPLIST_FILE = "Peanut_Mark1/Peanut_Mark1-Info.plist";

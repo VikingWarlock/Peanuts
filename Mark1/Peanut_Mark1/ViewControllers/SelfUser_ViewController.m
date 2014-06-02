@@ -8,6 +8,7 @@
 
 #import "SelfUser_ViewController.h"
 #import "RequestPackage.h"
+#import "UserInfEntity.h"
 
 @interface SelfUser_ViewController ()<UITextFieldDelegate>
 {
@@ -84,15 +85,15 @@
         LoginDetail.text=USER_PHPSESSID;
         LoginDetail.frame=CGRectMake(60, 80, 220, 40);
         
+        UserInfEntity *item=[CoreData_Helper GetSelfUserInfEntity];
+        NSLog(@"%@",item.uname);
+        
         
         LoginButton =[UIButton buttonWithType:UIButtonTypeCustom];
         [LoginButton setTitle:@"登出" forState:UIControlStateNormal];
         [self.view addSubview:LoginButton];
         LoginButton.frame=CGRectMake(60, 160, 220, 40);
         [LoginButton addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        
     }
     
     

@@ -24,6 +24,7 @@
 #import <UIImageView+WebCache.h>
 #import "StaticDataManager.h"
 
+#import "Peanut_PhotoBroswer.h"
 
 
 @interface PeanutTopViewController ()<UITableViewDataSource,UITableViewDelegate,Delegate_BlurCellSlide>
@@ -299,7 +300,6 @@
     NSString*index=[IndexList objectAtIndex:indexpath.row];
     NSDictionary *dic=[[NSUserDefaults standardUserDefaults]objectForKey:index];
     NSURL *bkUrl=[NSURL URLWithString:[dic objectForKey:@"cover"]];
-    int feed_id=[[dic objectForKey:@"feed_id"]intValue];
     
     BaseUIViewController *vc;
     
@@ -311,7 +311,10 @@
             vc=[[ActivityDetailViewController alloc]init];
             break;
         case 2:
-            vc=[[MustReaddetialViewController alloc]init];
+        {
+            NSString *feed_id=[dic objectForKey:@"feed_id"];
+            vc=[[MustReaddetialViewController alloc]initWithFeedId:feed_id];
+        }
             break;
         default:
             break;
@@ -375,6 +378,7 @@
     {
         [[NSUserDefaults standardUserDefaults]setObject:dic forKey:mark];
     }
+    
     [manager downloadWithURL:[NSURL URLWithString:[dic objectForKey: @"cover"]] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
         nil;
     } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {

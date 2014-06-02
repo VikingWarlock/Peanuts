@@ -8,6 +8,8 @@
 
 #import "BaseUIViewController.h"
 #import <UIImage+BlurAndDarken.h>
+#import "Peanut_PhotoBroswer.h"
+
 
 @interface BaseUIViewController ()
 {
@@ -88,6 +90,17 @@
 
     return bkImageView;
 }
+
+-(void)dealloc
+{
+
+    //TODO 释放static的MWPhotoBroswer中的photos
+    [[Peanut_PhotoBroswer SharedObject]clearImgArray];
+    
+
+}
+
+
 /*
 -(BOOL)shouldAutorotate
 {

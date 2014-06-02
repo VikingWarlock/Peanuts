@@ -10,7 +10,7 @@
 #import <UIImage+BlurAndDarken.h>
 #import "imgCollectionTableViewCell.h"
 #import "UIImageView+WebCache.h"
-
+#import "UIImageView+ForBroswer.h"
 
 
 
@@ -227,7 +227,14 @@ static NSString * cellIdentifier = @"cellIdentifier";
     cell.delegate = self;
 
     NSDictionary * rowData = imgData[indexPath.row];
-    [cell.imgView setImageWithURL:rowData[@"imageUrl"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [cell.imgView setImageWithURL:rowData[@"imageUrl"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+   //TODO
+        if(cell)
+        {
+        [cell.imgView setDownloadedImage:image AndTarget:self ShouldUpdateImage:NO];
+        }
+        
+    }];
     cell.imgView.clipsToBounds = YES;
     cell.imgView.contentMode = UIViewContentModeScaleAspectFill;
     cell.titleLabel.text = rowData[@"description"];

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PeanutTopViewController.h"
+#import "Peanut_PhotoBroswer.h"
 
 @implementation AppDelegate
 
@@ -23,8 +24,7 @@
     [MagicalRecord setupCoreDataStack];
    
     [NetworkStack setup];
-    
-    
+    [Peanut_PhotoBroswer setup];
     
     [[NSUserDefaults standardUserDefaults]setAESKey:AES_Private_key];
     [[RequestPackage shareObject]FetchHomePage];
