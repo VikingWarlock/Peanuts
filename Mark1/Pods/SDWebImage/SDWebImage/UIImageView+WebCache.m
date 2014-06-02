@@ -51,6 +51,7 @@ static char operationArrayKey;
                 if (!wself) return;
                 if (image) {
                     wself.image = image;
+                    
                     [wself setNeedsLayout];
                 }
                 if (completedBlock && finished) {

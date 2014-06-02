@@ -8,11 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol BroswerDelegate <NSObject>
+
+
+@end
+
 @interface UIImageView (ForBroswer)
 
-@property (nonatomic,assign) BOOL downloaded;
 
--(void)setDownloadedImage:(UIImage *)image;
+@property (nonatomic,assign) BOOL downloaded;
+@property (nonatomic,weak) id<BroswerDelegate> delegate_broswer;
+@property (nonatomic,strong) id target;
+
+-(void)setDownloadedImage:(UIImage *)image AndTarget:(id)target ShouldUpdateImage:(BOOL)update;
+
 
 
 @end

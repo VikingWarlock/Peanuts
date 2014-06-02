@@ -296,23 +296,6 @@
 
 -(void)slideHaveBeenDoneAtIndexPath:(NSIndexPath *)indexpath
 {
-    switch (indexpath.row) {
-        case 0:
-        case 1:
-            [[Peanut_PhotoBroswer SharedObject]setImgArray:@[downloadedImage[@"cover"],downloadedImage[@"square"],downloadedImage[@"daily"]]];
-
-            break;
-        case 2:
-            [[Peanut_PhotoBroswer SharedObject]setImgArray:@[downloadedImage[@"cover"],downloadedImage[@"square"],downloadedImage[@"activity"],downloadedImage[@"daily"]]];
-
-        default:
-            break;
-    }
-    
-    [[Peanut_PhotoBroswer SharedObject]display:self];
-    
-    return ;
-    
     BlurTableViewCell_mark1 *cell=(BlurTableViewCell_mark1*)[tableview cellForRowAtIndexPath:indexpath];
     NSString*index=[IndexList objectAtIndex:indexpath.row];
     NSDictionary *dic=[[NSUserDefaults standardUserDefaults]objectForKey:index];

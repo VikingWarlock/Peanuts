@@ -94,9 +94,6 @@
         [self.view addSubview:LoginButton];
         LoginButton.frame=CGRectMake(60, 160, 220, 40);
         [LoginButton addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        
     }
     
     
