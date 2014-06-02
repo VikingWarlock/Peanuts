@@ -33,7 +33,7 @@
 - (void)baseInit {
     [self setBackgroundColor:[UIColor clearColor]];
     
-    self.borderWith = 4.0;
+    self.borderWith = 0.0;
     self.borderColor = [UIColor whiteColor];
     
     self.shadowRadius = 0.0;
