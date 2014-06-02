@@ -8,11 +8,14 @@
 
 #import "CommentViewController.h"
 #import "PublishCommentTableViewCell.h"
-#import "ImgBottomView.h"
+#import "UIImageView+WebCache.h"
+#import "ShareViewController.h"
+
 
 @interface CommentViewController (){
     NSIndexPath * selectedIndexPath;
-    int count;
+    NSInteger feed_id;
+    NSMutableArray * data;
 }
 
 @property(nonatomic,retain)UITableView * tableView;
@@ -24,22 +27,57 @@
 
 static NSString * cellIdentifier = @"cellIdentifier";
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+//- (id)initWithGroupFeedId:(NSInteger)feedId{
+//    self = [super init];
+//    if (self) {
+//        feed_id = feedId;
+//        [self.view addSubview:self.bottomView];
+//        
+//        PhotoSeriesEntity * entity = [CoreData_Helper GetPhotoSeriesEntity:[NSString stringWithFormat:@"%ld",feed_id]];
+//        UIImageView * iv = [[UIImageView alloc]init];
+//        [iv setImageWithURL:[NSURL URLWithString:entity.cover_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+//            [self setBackgroundImage:image andBlurEnable:YES];
+//        }];
+//    }
+//    return self;
+//}
+
+- (id)initWithFeedId:(NSInteger)feedId{
+    self = [super init];
     if (self) {
-        // Custom initialization
+        feed_id = feedId;
+        [self.view addSubview:self.bottomView];
+        
+
+        
+        PhotoSeriesEntity * entity = [CoreData_Helper GetPhotoSeriesEntity:[NSString stringWithFormat:@"%ld",feed_id]];
+        UIImageView * iv = [[UIImageView alloc]init];
+        if (entity!=nil) {
+        [iv setImageWithURL:[NSURL URLWithString:entity.cover_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [self setBackgroundImage:image andBlurEnable:YES];
+        }];}
+        else{
+            PhotoInfoEntity * entity2 = [CoreData_Helper GetPhotoEntity:[NSString stringWithFormat:@"%ld",feed_id]];
+            [iv setImageWithURL:[NSURL URLWithString:entity2.imageURL] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                [self setBackgroundImage:image andBlurEnable:YES];
+            }];
+        }
     }
     return self;
+}
+
+
+
+-(void)viewWillLayoutSubviews{
+    [super viewWillLayoutSubviews];
+    [self downloadWithFeedId:feed_id];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    count = 15;
     
-    [self setBackgroundImage:[UIImage imageNamed:@"1.png"] andBlurEnable:YES];
     [self registerForKeyboardNotification];
     
     [self.view addSubview:self.tableView];
@@ -53,18 +91,34 @@ static NSString * cellIdentifier = @"cellIdentifier";
 
 -(ImgBottomView *)bottomView{
     if (!_bottomView) {
-        _bottomView = [[ImgBottomView alloc]init];
-        [_bottomView.praiseBtn addTarget:self action:@selector(bottomPraiseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_bottomView.commentBtn addTarget:self action:@selector(bottomCommentBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_bottomView.shareBtn addTarget:self action:@selector(bottomShareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        _bottomView = [[ImgBottomView alloc]initWithGroupFeedId:feed_id];
+        _bottomView.delegate = self;
     }
     return _bottomView;
 }
 
+-(void)bottomCommentBtnClick{
+    
+}
+
+-(void)bottomShareBtnClick{
+    BOOL alreadyHasShareVC = 0;
+    for (UIViewController * vc in self.navigationController.viewControllers) {
+        if ([vc isKindOfClass:[ShareViewController class]]) {
+            alreadyHasShareVC = 1;
+        }
+    }
+    if (alreadyHasShareVC) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        ShareViewController * vc = [[ShareViewController alloc]initWithFeedId:feed_id];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
+}
+
 -(UITableView *)tableView{
     if (!_tableView) {
-//        CGRect rect = self.view.frame;
-//        rect.size.height -= 64;
         _tableView = [[UITableView alloc] init];
         [_tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
 
@@ -72,10 +126,10 @@ static NSString * cellIdentifier = @"cellIdentifier";
         _tableView.dataSource = self;
         _tableView.separatorColor = [UIColor clearColor];
         _tableView.backgroundColor = [UIColor clearColor];
-        
-        
-
         _tableView.allowsSelection = NO;
+        
+        _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
+        [_tableView.tableFooterView setBackgroundColor:[UIColor clearColor]];
          
     }
     return _tableView;
@@ -87,7 +141,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return count;
+    return [data count] + 1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -108,9 +162,13 @@ static NSString * cellIdentifier = @"cellIdentifier";
         if ([indexPath compare:selectedIndexPath] == NSOrderedSame && indexPath.row == selectedIndexPath.row) {
             [cell changeCell];
         }
-        cell.timeLabel.text = @"2014-05-14";
-        cell.commentLabel.text = @"aaa";
-        cell.userName.text = @"王孟琦";
+        NSDictionary * rowData = data[indexPath.row-1];
+        cell.timeLabel.text = [rowData objectForKey:@"time"];
+        cell.commentLabel.text = [rowData objectForKey:@"content"];
+        cell.userName.text = [rowData objectForKey:@"uname"];
+        UIImageView * iv = [[UIImageView alloc]init];
+        [iv setImageWithURL:[rowData objectForKey:@"avatar_tiny"]];
+        [cell.iconView setImage:iv.image];
         return cell;
 
     }
@@ -121,6 +179,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     }
 }
 
+
 -(void)replayBtnClickAtIndexPath:(NSIndexPath *)indexPath{
     selectedIndexPath = indexPath;
     [self.tableView reloadData];
@@ -130,7 +189,6 @@ static NSString * cellIdentifier = @"cellIdentifier";
     CommentTableViewCell * cell = (CommentTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath];
     if ([cell.deleteBtn.titleLabel.text isEqualToString:@"删除"]) {
 //        [self.tableView beginUpdates];
-        count--;
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
 //        [self.tableView endUpdates];
         [self.tableView reloadData];
@@ -161,6 +219,17 @@ static NSString * cellIdentifier = @"cellIdentifier";
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)downloadWithFeedId:(NSInteger)feedId{
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Comment&act=comment_list" parameters:@{@"feed_id":[NSString stringWithFormat:@"%ld",feedId],@"page":@"1",@"count":@"10"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        if ([[responseObject objectForKey:@"status"] isEqualToString:@"1"]) {
+            data = [[NSMutableArray alloc]initWithArray:[responseObject objectForKey:@"data"]];
+        [self.tableView reloadData];
+//        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
 }
 
 

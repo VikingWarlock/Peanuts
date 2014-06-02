@@ -11,7 +11,7 @@
 #import "DateCell.h"
 #import "MustReadTableViewCell.h"
 #import "MustReaddetialViewController.h"
-#import "PullRefreshTableView.h"
+#import "MJRefresh.h"
 #import "CoreData-Helper.h"
 #import "PublicLib.h"
 #define COUNT_OF_PAGE 5
@@ -26,7 +26,7 @@
     UILabel *datelabel;
 }
 @property (nonatomic,strong) UIView *dateHeadView;
-@property (nonatomic,strong) PullRefreshTableView *readTableView;
+@property (nonatomic,strong) UITableView *readTableView;
 @end
 
 @implementation MustReadViewController
@@ -84,25 +84,21 @@
 //    [self.readTableView setPullDownBeginRefreshAction:@selector(pullDownBeginRefreshAction)];
 //    [self.readTableView setPullUpBeginRefreshAction:@selector(pullUpBeginRefreshAction)];
     __weak MustReadViewController *weakSelf =self;
-    [_readTableView setPullDownBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullDownBeginRefreshAction:refreshView];
+    [_readTableView addHeaderWithCallback:^{
+        [weakSelf pullDownBeginRefreshAction];
     }];
-    [_readTableView setPullUpBeginRefreshBlock:^(MJRefreshBaseView *refreshView) {
-        [weakSelf pullUpBeginRefreshAction:refreshView];
+    
+    [_readTableView addFooterWithCallback:^{
+        [weakSelf pullUpBeginRefreshAction];
     }];
 
-    [self.readTableView beginRefreshing];
+    [self.readTableView headerBeginRefreshing];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)dealloc
-{
-    [self.readTableView freeHeaderFooter];
 }
 
 - (void)processData:(NSMutableArray *)sourcedata
@@ -139,7 +135,7 @@
     cellinfo = outdata;
 }
 
-- (void)pullDownBeginRefreshAction:(MJRefreshBaseView *)tableView
+- (void)pullDownBeginRefreshAction
 {
     [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Daily&act=dailyread_list" parameters:@{@"page":@"1",@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
@@ -148,15 +144,15 @@
             userinfo = [[[responseObject valueForKey:@"data"] valueForKey:@"user_info"] mutableCopy];
             [self processData:data];
             [_readTableView reloadData];
-            [tableView endRefreshing];
+            [_readTableView headerEndRefreshing];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
-        [tableView endRefreshing];
+        [_readTableView headerEndRefreshing];
     }];
 }
 
-- (void)pullUpBeginRefreshAction:(MJRefreshBaseView *)tableView
+- (void)pullUpBeginRefreshAction
 {
     unsigned int page = [data count]/COUNT_OF_PAGE+1;
     if ([data count]%COUNT_OF_PAGE == 0) {
@@ -167,15 +163,15 @@
                 [userinfo addObjectsFromArray:[[responseObject valueForKey:@"data"] valueForKey:@"user_info"]];
                 [self processData:data];
                 [_readTableView reloadData];
-                [tableView endRefreshing];
+                [_readTableView footerEndRefreshing];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"%@",error);
-            [tableView endRefreshing];
+            [_readTableView footerEndRefreshing];
         }];
     }
     else
-        [tableView endRefreshing];
+        [_readTableView footerEndRefreshing];
 }
 
 #pragma mark UITableView datasource and delegate
@@ -298,11 +294,11 @@
     }
     return _dateHeadView;
 }
-- (PullRefreshTableView *)readTableView
+- (UITableView *)readTableView
 {
     if(!_readTableView)
     {
-        _readTableView = [[PullRefreshTableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _readTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         [_readTableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         _readTableView.delegate = self;
         _readTableView.dataSource = self;

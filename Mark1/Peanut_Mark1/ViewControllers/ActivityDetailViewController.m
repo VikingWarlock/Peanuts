@@ -27,6 +27,8 @@
 @property (nonatomic,strong) UIImageView *interestImage;
 @property (nonatomic,strong) UIImageView *joinImage;
 @property (nonatomic,strong) UITableView *tableview;
+@property (nonatomic,strong) UIImageView *picture;
+
 
 @end
 
@@ -47,6 +49,7 @@
     [super viewDidLoad];
     [self getFirstPage];
     [self.picture setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    [self.mask.avatar setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].avatar_tiny_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
     [self.view addSubview:self.picture];
     [self.view addSubview:self.leftButton];
@@ -219,8 +222,7 @@
             vc.mask.user.text = self.mask.user.text;
             vc.mask.Date.text = self.mask.Date.text;
             vc.mask.type.text = self.mask.type.text;
-            vc.description = [CoreData_Helper GetActivityEntity:_feedid].descriptions;
-            vc.backImage = self.picture.image;
+            vc.feedid = _feedid;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
@@ -233,8 +235,8 @@
         {
             ActivityDetailUserViewController *vc = [[ActivityDetailUserViewController alloc] init];
             vc.navigationItem.title = self.navigationItem.title;
-            vc.bkImage = self.picture.image;
-            vc.users = [users copy];
+            vc.feedid = _feedid;
+            vc.users = [users mutableCopy];
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
@@ -243,7 +245,7 @@
             ActivitDetailInterestedPeopleViewController *vc = [[ActivitDetailInterestedPeopleViewController alloc] init];
             vc.navigationItem.title = self.navigationItem.title;
             vc.interesteUsers = [interesteUsers copy];
-            vc.bkImage = self.picture.image;
+            vc.feedid = _feedid;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
@@ -274,7 +276,6 @@
 {
     if (!_mask) {
         _mask = [[Mask alloc] init];
-        
     }
     return _mask;
 }

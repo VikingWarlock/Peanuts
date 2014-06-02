@@ -9,7 +9,6 @@
 #import "imgCollectionViewController.h"
 #import <UIImage+BlurAndDarken.h>
 #import "imgCollectionTableViewCell.h"
-#import "ImgBottomView.h"
 #import "UIImageView+WebCache.h"
 
 
@@ -25,7 +24,7 @@
     
     NSIndexPath * currentIndexPath;
     NSArray * imgData;
-    int feed_id;
+    NSInteger feed_id;
 }
 
 @property (nonatomic,strong)UITableView * tableView;
@@ -38,14 +37,16 @@
 
 static NSString * cellIdentifier = @"cellIdentifier";
 
-- (id)initWithFeedId:(int)feedId bgImageUrl:(NSURL *)url{
+- (id)initWithFeedId:(NSInteger)feedId bgImageUrl:(NSURL *)url{
     self = [super init];
     if (self) {
-//        [self downLoadWithFeedId:feedId];
         UIImageView * iv = [[UIImageView alloc]initWithFrame:self.view.frame];
-        [iv setImageWithURL:url];
-        [self setBackgroundImage:iv.image andBlurEnable:YES];
+        [iv setImageWithURL:url placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [self setBackgroundImage:image andBlurEnable:YES];
+        }];
         feed_id = feedId;
+        [self.view addSubview:self.bottomView];
+
     }
     return self;
 }
@@ -55,24 +56,21 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [self downLoadWithFeedId:feed_id];
 }
 
+
 - (void)viewDidLoad
 {
+
     [super viewDidLoad];
     
     [self.view setBackgroundColor:[UIColor whiteColor]];
 //    [self setBackgroundImage:[UIImage imageNamed:@"1.png"] andBlurEnable:YES];
     
     [self.view addSubview:self.tableView];
-    
 
-    [self.view addSubview:self.bottomView];
+    
     
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableView)]];
-    
-    
-    
-
     // Do any additional setup after loading the view.
 }
 
@@ -86,9 +84,11 @@ static NSString * cellIdentifier = @"cellIdentifier";
         _tableView.separatorColor = [UIColor whiteColor];
         [_tableView setBackgroundColor:[UIColor clearColor]];
         _tableView.allowsSelection = NO;
-        
-        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
+        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)];
         [_tableView.tableHeaderView setBackgroundColor:[UIColor clearColor]];
+        _tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
+        [_tableView.tableFooterView setBackgroundColor:[UIColor whiteColor]];
+        
         
         nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, _tableView.tableHeaderView.frame.size.height - 20, 60, 17)];
         nameLabel.textColor = [UIColor whiteColor];
@@ -105,73 +105,69 @@ static NSString * cellIdentifier = @"cellIdentifier";
         [_tableView.tableHeaderView addSubview:nameLabel];
         [_tableView.tableHeaderView addSubview:timeLabel];
 
-//        _tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 150)];
-//        [_tableView.tableHeaderView setBackgroundColor:[UIColor clearColor]];
-//   
-//        UILabel * nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(115, _tableView.tableHeaderView.frame.size.height - 20, 60, 17)];
-//        nameLabel.text = @"aaaaa";
-//        nameLabel.textColor = [UIColor whiteColor];
-//        
-//        CGRect rect = nameLabel.frame;
-//        rect.origin.x = nameLabel.frame.origin.x + nameLabel.frame.size.width + 20;
-//        rect.size.width = 100;
-//        UILabel * timeLabel = [[UILabel alloc] initWithFrame:rect];
-//        timeLabel.text = @"2014-05-13";
-//        timeLabel.textColor = [UIColor whiteColor];
-//        
-//        [_tableView updateWithAvatar:[UIImage imageNamed:@"iron.png"] And_X_Offset:30.0 AndSize:CGSizeMake(70, 70)];
-//
-//        
-//        [_tableView.tableHeaderView addSubview:nameLabel];
-//        [_tableView.tableHeaderView addSubview:timeLabel];
-        
-        
+    
     }
     return _tableView;
 }
 
 -(ImgBottomView *)bottomView{
     if (!_bottomView) {
-        _bottomView = [[ImgBottomView alloc]init];
-        [_bottomView.praiseBtn addTarget:self action:@selector(bottomPraiseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_bottomView.commentBtn addTarget:self action:@selector(bottomCommentBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [_bottomView.shareBtn addTarget:self action:@selector(bottomShareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        _bottomView = [[ImgBottomView alloc]initWithGroupFeedId:feed_id];
+        _bottomView.delegate = self;
+//        [_bottomView.praiseBtn addTarget:self action:@selector(bottomPraiseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//        [_bottomView.commentBtn addTarget:self action:@selector(bottomCommentBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//        [_bottomView.shareBtn addTarget:self action:@selector(bottomShareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _bottomView;
 }
 
--(void)bottomPraiseBtnClick:(UIButton *)sender{
+-(void)bottomPraiseBtnClick{
     self.bottomView.praiseBtn.backgroundColor = [UIColor redColor];
 }
 
--(void)bottomCommentBtnClick:(UIButton *)sender{
-    CommentViewController * vc = [[CommentViewController alloc]init];
-    vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
+-(void)bottomCommentBtnClick{
+    self.bottomView.commentVC.delegate = self;
+    [self.navigationController pushViewController:self.bottomView.commentVC animated:YES];
 }
 
--(void)bottomShareBtnClick:(UIButton *)sender{
-    ShareViewController *vc = [[ShareViewController alloc]init];
-    vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
+-(void)bottomShareBtnClick{
+    self.bottomView.shareVC.delegate = self;
+    [self.navigationController pushViewController:self.bottomView.shareVC animated:YES];
 }
+
 
 
 -(void)praiseBtnClickAtCell:(UITableViewCell *)cell{
+    NSMutableArray * mutableData = [[NSMutableArray alloc]initWithArray:imgData];
     imgCollectionTableViewCell * cell1 = (imgCollectionTableViewCell *)cell;
     NSInteger count = [cell1.praiseBtn.titleLabel.text integerValue];
     [cell1 setPraiseBtnTitle:++count];
+    NSIndexPath * indexPath = [self.tableView indexPathForCell:cell1];
+    NSMutableDictionary * rowData = [mutableData[indexPath.row] mutableCopy];
+//???
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Feed&act=digg" parameters:@{@"PHPSESSID":[NSString stringWithFormat:@"%@",[CoreData_Helper GetSelfUserInfEntity].uid],@"feed_id":[rowData objectForKey:@"feed_id"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        int digCount = [rowData[@"digg_count"] intValue];
+        [rowData removeObjectForKey:@"digg_count"];
+        [rowData setValue:[NSString stringWithFormat:@"%d",++digCount] forKey:@"digg_count"];
+        [mutableData replaceObjectAtIndex:indexPath.row withObject:rowData];
+        imgData = mutableData;
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+
 
 }
 
 -(void)commentBtnClickAtIndexPath:(NSIndexPath *)indexPath{
-    CommentViewController * VC = [[CommentViewController alloc] init];
+    int feedId = [[imgData[indexPath.row] objectForKey:@"feed_id"] intValue];
+    CommentViewController * VC = [[CommentViewController alloc] initWithFeedId:feedId];
     VC.delegate = self;
     currentIndexPath = indexPath;
     [self.navigationController pushViewController:VC animated:YES];
 }
 -(void)shareBtnClickAtIndexPath:(NSIndexPath *)indexPath{
-    ShareViewController * VC = [[ShareViewController alloc]init];
+    int feedId = [[imgData[indexPath.row] objectForKey:@"feed_id"] intValue];
+    ShareViewController * VC = [[ShareViewController alloc]initWithFeedId:feedId];
     VC.delegate = self;
     currentIndexPath = indexPath;
     [self.navigationController pushViewController:VC animated:YES];
@@ -197,6 +193,11 @@ static NSString * cellIdentifier = @"cellIdentifier";
         [alertView show];
     }
 }
+
+//-(void)ShouldChangeToShareVC{
+//    ShareViewController * vc = [[ShareViewController alloc]  init];
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 #pragma mark - shareVC delegate
 -(void)didShare{
@@ -230,9 +231,9 @@ static NSString * cellIdentifier = @"cellIdentifier";
     cell.imgView.contentMode = UIViewContentModeScaleAspectFill;
     cell.titleLabel.text = rowData[@"description"];
     cell.titleLabel.adjustsFontSizeToFitWidth = YES;
-    [cell.praiseBtn setTitle:[NSString stringWithFormat:@"%d",indexPath.row] forState:UIControlStateNormal];
-    [cell.commentBtn setTitle:[NSString stringWithFormat:@"%d",indexPath.row] forState:UIControlStateNormal];
-    [cell.shareBtn setTitle:[NSString stringWithFormat:@"%d",indexPath.row] forState:UIControlStateNormal];
+    [cell.praiseBtn setTitle:[NSString stringWithFormat:@"%d",[rowData[@"digg_count"] intValue]] forState:UIControlStateNormal];
+    [cell.commentBtn setTitle:[NSString stringWithFormat:@"%d",[rowData[@"comment_count"] intValue]] forState:UIControlStateNormal];
+    [cell.shareBtn setTitle:[NSString stringWithFormat:@"%d",[rowData[@"repost_count"] intValue]] forState:UIControlStateNormal];
 
     return cell;
 }
@@ -246,7 +247,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 30;
+    return 0.1;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -267,14 +268,16 @@ static NSString * cellIdentifier = @"cellIdentifier";
 }
 
 
--(void)downLoadWithFeedId:(int)feedId{
+-(void)downLoadWithFeedId:(NSInteger)feedId{
     
-    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=photo_group_info" parameters:@{@"feed_id":[NSString stringWithFormat:@"%d",feedId]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=photo_group_info" parameters:@{@"feed_id":[NSString stringWithFormat:@"%ld",feedId]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"]) {
             imgData = [[NSArray alloc]initWithArray:[[responseObject valueForKey:@"data"] valueForKey:@"photos"]];
             NSDictionary * userData = [[responseObject valueForKey:@"data"] valueForKey:@"user_info"];
             NSDictionary * seriesData = [[responseObject valueForKey:@"data"] valueForKey:@"photo_group"];
-            
+            for (NSDictionary * dic in imgData) {
+                [CoreData_Helper addPhotoEntity:dic];
+            }
             nameLabel.text = userData[@"uname"];
             nameLabel.adjustsFontSizeToFitWidth = YES;
             NSDate * date = [NSDate dateWithTimeIntervalSince1970:[seriesData[@"publish_time"] intValue]];
@@ -284,13 +287,10 @@ static NSString * cellIdentifier = @"cellIdentifier";
             timeLabel.text = [formatter stringFromDate:date];
             [self.tableView reloadData];
             
-//            UIImageView * bgTV = [[UIImageView alloc]initWithFrame:self.view.frame];
-//            [bgTV setImageWithURL:[seriesData valueForKey:@"cover"]];
-//            [self setBackgroundImage:bgTV.image andBlurEnable:YES];
-
             UIImageView * iconIV = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 50, 50)];
-            [iconIV setImageWithURL:userData[@"avatar_tiny"]];
-            [_tableView updateWithAvatar:iconIV.image And_X_Offset:30.0 AndSize:CGSizeMake(70, 70)];
+            [iconIV setImageWithURL:userData[@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                [_tableView updateWithAvatar:image And_X_Offset:30.0 AndSize:CGSizeMake(70, 70)];
+            }];
             
 
         }
@@ -299,38 +299,13 @@ static NSString * cellIdentifier = @"cellIdentifier";
     }];
 }
 
-//if (url) {
-//    __weak UIImageView *wself = self;
-//    id <SDWebImageOperation> operation = [SDWebImageManager.sharedManager downloadWithURL:url options:options progress:progressBlock completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished) {
-//        if (!wself) return;
-//        dispatch_main_sync_safe(^{
-//            if (!wself) return;
-//            if (image) {
-//                wself.image = image;
-//                [wself setNeedsLayout];
-//            }
-//            if (completedBlock && finished) {
-//                completedBlock(image, error, cacheType);
-//            }
-//        });
-//    }];
-//    objc_setAssociatedObject(self, &operationKey, operation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-//}
+
 
 //- (void)dealloc
 //{
 //    [self.tableView freeHeaderFooter];
 //}
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

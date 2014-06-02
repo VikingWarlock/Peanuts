@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CommentViewController.h"
+
+@class CommentViewController;
+@class ShareViewController;
 
 @protocol Delegate_imgBottomView <NSObject>
 
 -(void)bottomCommentBtnClick;
+-(void)bottomShareBtnClick;
 
 @end
 
@@ -20,7 +23,10 @@
 @property (nonatomic,strong)UIButton * praiseBtn;
 @property (nonatomic,strong)UIButton * commentBtn;
 @property (nonatomic,strong)UIButton * shareBtn;
+@property (nonatomic,strong)ShareViewController * shareVC;
 @property (nonatomic,strong)CommentViewController * commentVC;
 @property (nonatomic,assign)id<Delegate_imgBottomView>delegate;
+
+- (id)initWithGroupFeedId:(NSInteger)feedId;
 
 @end

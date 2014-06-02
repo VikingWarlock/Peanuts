@@ -16,6 +16,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _imgView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 300, 400)];
+        _imgView.clipsToBounds = YES;
+        _imgView.contentMode = UIViewContentModeScaleAspectFill;
 
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(_imgView.frame.origin.x, _imgView.frame.origin.y + _imgView.frame.size.height + 5, 50, 20)];
 
@@ -39,11 +41,11 @@
 
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_imgView]-10-|" options:0 metrics:nil views:dic]];
         [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-10-[_titleLabel]-30-[_praiseBtn(==50)]-10-[_commentBtn(==50)]-10-[_shareBtn(==50)]-10-|" options:0 metrics:nil views:dic]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_titleLabel(==20)]-10-|"] options:0 metrics:nil views:dic]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_titleLabel(==20)]|"] options:0 metrics:nil views:dic]];
 //        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_detailBtn(==20)]|"] options:0 metrics:nil views:dic]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_praiseBtn(==20)]-10-|"] options:0 metrics:nil views:dic]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_commentBtn(==20)]-10-|"] options:0 metrics:nil views:dic]];
-        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_shareBtn(==20)]-10-|"] options:0 metrics:nil views:dic]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_praiseBtn(==20)]|"] options:0 metrics:nil views:dic]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_commentBtn(==20)]|"] options:0 metrics:nil views:dic]];
+        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-40-[_imgView]-10-[_shareBtn(==20)]|"] options:0 metrics:nil views:dic]];
         
         praiseCount = 0;
         commentCount = 0;
@@ -90,6 +92,7 @@
     if ([self.delegate respondsToSelector:@selector(praiseBtnClickAtCell:)]) {
         [self.delegate praiseBtnClickAtCell:self];
     }
+    
 }
 
 -(UIButton *)commentBtn{

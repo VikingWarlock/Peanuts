@@ -10,14 +10,20 @@
 #import "BaseUIViewController.h"
 #import "CommentTableViewCell.h"
 #import "PublishCommentTableViewCell.h"
+#import "ImgBottomView.h"
+
 
 @protocol Delegate_commentVC <NSObject>
 
 -(void)DidPublishOneComment;
+//-(void)ShouldChangeToShareVC;
 @end
 
-@interface CommentViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate,Delegate_CommentCell,Delegate_publishCommentCell>
+@interface CommentViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate,Delegate_CommentCell,Delegate_publishCommentCell,Delegate_imgBottomView>
 
 @property(nonatomic,assign) id<Delegate_commentVC>delegate;
+
+- (id)initWithFeedId:(NSInteger)feedId;
+- (id)initWithGroupFeedId:(NSInteger)feedId;
 
 @end

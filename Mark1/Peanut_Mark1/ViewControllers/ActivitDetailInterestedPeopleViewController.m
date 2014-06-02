@@ -9,9 +9,11 @@
 #import "ActivitDetailInterestedPeopleViewController.h"
 #import "UserCell.h"
 #import "UIImageView+WebCache.h"
+#import "UIImageView+WebCache.h"
 
 @interface ActivitDetailInterestedPeopleViewController ()
 {
+    UIImageView *backImage;
 }
 @property (strong,nonatomic) UIView *header;
 @property (nonatomic,strong) UITableView *tableview;
@@ -33,7 +35,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setBackgroundImage:self.bkImage andBlurEnable:YES];
+    backImage = [[UIImageView alloc] init];
+    __weak ActivitDetailInterestedPeopleViewController *weakself = self;
+    [backImage setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        [weakself setBackgroundImage:image andBlurEnable:YES];
+    }];
     self.tableview.allowsSelection = NO;
     
     [self.view addSubview:self.header];

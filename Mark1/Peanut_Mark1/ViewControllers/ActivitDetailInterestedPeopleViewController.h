@@ -10,5 +10,6 @@
 
 @interface ActivitDetailInterestedPeopleViewController : BaseUIViewController <UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic,strong) NSMutableArray *interesteUsers;
-@property (nonatomic,strong) UIImage *backImage;
+@property (nonatomic,strong) NSString *feedid;
+
 @end

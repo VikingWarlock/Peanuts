@@ -10,12 +10,17 @@
 #import "CommentViewController.h"
 #import "ShareViewController.h"
 
-@implementation ImgBottomView
+@implementation ImgBottomView{
+    NSInteger feed_id;
+    BOOL isPraised;
+}
 
-- (id)init
+- (id)initWithGroupFeedId:(NSInteger)feedId
 {
     self = [super init];
     if (self) {
+        isPraised = NO;
+        feed_id = feedId ;
         self.frame = CGRectMake(0, [UIScreen mainScreen].applicationFrame.size.height - 80, [UIScreen mainScreen].applicationFrame.size.width, 80);
         [self setBackgroundColor:[UIColor whiteColor]];
         self.alpha = 0.7;
@@ -53,11 +58,53 @@
     return self;
 }
 
+-(NSString *)getUid{
+    UserInfEntity * entity = [CoreData_Helper GetSelfUserInfEntity];
+    return entity.uid;
+}
+
 -(void)bottomCommentBtnClick:(UIButton *)sender{
-    self.commentVC = [[CommentViewController alloc]init];
+    self.commentVC = [[CommentViewController alloc]initWithFeedId:feed_id];
     [self.delegate bottomCommentBtnClick];
 }
 
+-(void)bottomPraiseBtnClick:(UIButton *)sender{//怎么获取自己的UID???
+    AFHTTPRequestOperationManager * NetworkManager = [[AFHTTPRequestOperationManager alloc]init];
+    if (isPraised) {
+        [NetworkManager POST:Peanut_Cancel_Dig_Something parameters:@{@"PHPSESSID":@"5",@"feed_id":[NSString stringWithFormat:@"%ld",feed_id]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([[responseObject objectForKey:@"info"] isEqualToString:@"success"]) {
+                UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:nil message:@"取消成功!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alertView show];
+                isPraised = 0;
+            }else{
+                UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:nil message:@"取消失败!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alertView show];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
+    }else{
+        [NetworkManager POST:Peanut_Dig_Something parameters:@{@"PHPSESSID":[self getUid],@"feed_id":[NSString stringWithFormat:@"%ld",feed_id]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([[responseObject objectForKey:@"info"] isEqualToString:@"success"]) {
+                UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:nil message:@"点赞成功!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alertView show];
+                isPraised = 1;
+                NSLog(@"%@",[[responseObject objectForKey:@"data"] objectForKey:@"diggNum"]);
+            }else{
+                UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:nil message:@"点赞失败!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alertView show];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        }];
+        
+    }
+}
+
+-(void)bottomShareBtnClick:(UIButton *)sender{
+    self.shareVC = [[ShareViewController alloc] initWithFeedId:feed_id];
+    [self.delegate bottomShareBtnClick];
+
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

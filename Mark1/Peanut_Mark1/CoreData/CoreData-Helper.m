@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 viking warlock. All rights reserved.
 //
 
+#define NULL_TO_NIL(obj) ({ __typeof__ (obj) __obj = (obj); __obj == [NSNull null] ? nil : obj; })
+
 #import "CoreData-Helper.h"
 
 
@@ -27,7 +29,7 @@
     item.is_report=[parameter objectForKey:@"is_repost"];
     item.publish_time=[parameter objectForKey:@"publish_time"];
     item.recommend_count=[parameter objectForKey:@"recommend"];
-    item.recomment_content=[parameter objectForKey:@"recommend_content"];
+    item.recomment_content= NULL_TO_NIL([parameter objectForKey:@"recommend_content"]);
     item.repost_count=[parameter objectForKey:@"repost_count"];
     item.uid=[parameter objectForKey:@"uid"];
     item.group_feed_id=[parameter objectForKey:@"group_feed_id"];
@@ -52,7 +54,7 @@
     
     item.is_repost=[parameter objectForKey:@"is_post"];
     item.publish_time=[parameter objectForKey:@"publish_time"];
-    item.recommend_content=[parameter objectForKey:@"recommend_content"];
+    item.recommend_content=NULL_TO_NIL([parameter objectForKey:@"recommend_content"]);
     item.recommend_count=[parameter objectForKey:@"recommend"];
     item.repost_count=[parameter objectForKey:@"repost_count"];
     item.topic=[parameter objectForKey:@"topic"];

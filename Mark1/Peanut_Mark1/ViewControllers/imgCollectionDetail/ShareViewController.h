@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "PublishCommentTableViewCell.h"
 #import "BaseUIViewController.h"
+#import "ImgBottomView.h"
+
 
 @protocol Delegate_shareVC <NSObject>
 
@@ -17,7 +19,10 @@
 @end
 
 
-@interface ShareViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate,Delegate_publishCommentCell>
+@interface ShareViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate,Delegate_publishCommentCell,Delegate_imgBottomView>
 @property (nonatomic,assign) id<Delegate_shareVC>delegate;
+
+
+- (id)initWithFeedId:(NSInteger)feedId;
 
 @end
