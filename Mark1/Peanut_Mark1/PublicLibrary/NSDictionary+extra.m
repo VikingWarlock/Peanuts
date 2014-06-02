@@ -12,7 +12,7 @@
 
 -(NSString*)StringForKey:(NSString *)key
 {
-    if ([self objectForKey:key]) {
+    if (![[[self objectForKey:key] class]isSubclassOfClass:[NSNull class]]) {
         return [self objectForKey:key];
     }else
         return @"null";

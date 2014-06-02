@@ -8,6 +8,7 @@
 
 #import "SelfUser_ViewController.h"
 #import "RequestPackage.h"
+#import "UserInfEntity.h"
 
 @interface SelfUser_ViewController ()<UITextFieldDelegate>
 {
@@ -83,6 +84,9 @@
         LoginDetail.backgroundColor=[UIColor clearColor];
         LoginDetail.text=USER_PHPSESSID;
         LoginDetail.frame=CGRectMake(60, 80, 220, 40);
+        
+        UserInfEntity *item=[CoreData_Helper GetSelfUserInfEntity];
+        NSLog(@"%@",item.uname);
         
         
         LoginButton =[UIButton buttonWithType:UIButtonTypeCustom];

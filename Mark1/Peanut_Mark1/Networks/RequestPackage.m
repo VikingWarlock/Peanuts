@@ -51,7 +51,7 @@ static RequestPackage * PublicObject;
         
         if ([[response objectForKey:@"status"]integerValue]==1) {
             [[NSUserDefaults standardUserDefaults]encryptValue:[[response objectForKey:@"data"]objectForKey:USER_Token] withKey:USER_Token];
-            
+            [[NSUserDefaults standardUserDefaults]encryptValue:[[[response objectForKey:@"data"] objectForKey:@"user_info"] objectForKey:@"uid"] withKey:USER_UID_Fetch];
             [CoreData_Helper addUserInfoEntity:[[response objectForKey:@"data"] objectForKey:@"user_info"]];
             
             RTAlertView *alert=[[RTAlertView alloc]initWithTitle:@"Note" message:@"Login Succeed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
