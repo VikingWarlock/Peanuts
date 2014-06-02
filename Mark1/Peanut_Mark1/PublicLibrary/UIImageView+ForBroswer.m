@@ -23,7 +23,10 @@ static const void *target_=&target_;
 -(void)setDownloadedImage:(UIImage *)image AndTarget:(id)target ShouldUpdateImage:(BOOL)update
 {
     if (update) {
-        [self setImage:image];        
+        [self setImage:image];
+    }
+    if ([self downloaded]==YES) {
+        return;
     }
     [self setDownloaded:YES];
     [[Peanut_PhotoBroswer SharedObject]addPhoto:image];
@@ -60,6 +63,11 @@ static const void *target_=&target_;
 {
     BaseUIViewController *base=target;
     objc_setAssociatedObject(self, target_, base, OBJC_ASSOCIATION_ASSIGN);
+}
+
+-(void)dealloc
+{
+    [self setDownloaded:NO];
 }
 
 @end

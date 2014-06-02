@@ -116,7 +116,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peanut_Mark1/ViewControllers/imgCollectionViewController.m"
@@ -132,7 +132,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peanut_Mark1/ViewControllers/imgCollectionViewController.m"
@@ -359,13 +359,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Peanut_Mark1/CoreData/CoreData-Helper.m"
-            timestampString = "423381478.312614"
+            filePath = "Peanut_Mark1/ViewControllers/imgCollectionViewController.m"
+            timestampString = "423385909.761754"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "+addPhotoSeriesEntity:"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -375,13 +375,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Peanut_Mark1/CoreData/CoreData-Helper.m"
-            timestampString = "423381479.102759"
+            filePath = "Peanut_Mark1/PublicLibrary/UIImageView+ForBroswer.m"
+            timestampString = "423386055.075898"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "+addPhotoSeriesEntity:"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "-setDownloadedImage:AndTarget:ShouldUpdateImage:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -391,13 +391,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Peanut_Mark1/CoreData/CoreData-Helper.m"
-            timestampString = "423381479.978628"
+            filePath = "Peanut_Mark1/PublicLibrary/UIImageView+ForBroswer.m"
+            timestampString = "423386055.985924"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "+addPhotoSeriesEntity:"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "-setDownloadedImage:AndTarget:ShouldUpdateImage:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -407,13 +407,61 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Peanut_Mark1/CoreData/CoreData-Helper.m"
-            timestampString = "423381490.155303"
+            filePath = "Peanut_Mark1/PublicLibrary/UIImageView+ForBroswer.m"
+            timestampString = "423386057.395571"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "+addPhotoSeriesEntity:"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "-setDownloadedImage:AndTarget:ShouldUpdateImage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Peanut_Mark1/PublicLibrary/UIImageView+ForBroswer.m"
+            timestampString = "423386058.869489"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "-setDownloadedImage:AndTarget:ShouldUpdateImage:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Peanut_Mark1/PublicLibrary/UIImageView+ForBroswer.m"
+            timestampString = "423386086.543045"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "-downloaded"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Peanut_Mark1/PublicLibrary/UIImageView+ForBroswer.m"
+            timestampString = "423386089.96047"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "-setDownloaded:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
