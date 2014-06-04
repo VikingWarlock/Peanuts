@@ -123,7 +123,7 @@
     item.abstraction=[parameter StringForKey:@"abstraction"];
     item.comment_count=[parameter StringForKey:@"comment_count"];
     item.content=[parameter StringForKey:@"content"];
-    item.cover_url=[parameter StringForKey:@"cover_url"];
+    item.cover_url=[parameter StringForKey:@"cover"];
     item.dig_count=[parameter StringForKey:@"digg_count"];
     item.feed_id=[parameter StringForKey:@"feed_id"];
     item.is_report=[parameter StringForKey:@"is_report"];
