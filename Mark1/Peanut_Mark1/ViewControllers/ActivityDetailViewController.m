@@ -13,6 +13,8 @@
 #import "BottomView.h"
 #import "CustomCell.h"
 #import "CoreData-Helper.h"
+#import "imgCollectionViewController.h"
+
 @interface ActivityDetailViewController ()
 {
     NSMutableArray *pictures;
@@ -39,7 +41,7 @@
     self = [super init];
     if (self)
     {
-        
+        _feedid = [NSString stringWithFormat:@"%D",feedId];
     }
     return self;
 }
@@ -97,7 +99,6 @@
 }
 
 #pragma mark -network stuff
-
 - (void)getFirstPage
 {   //活动作品
     [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_work_list" parameters:@{@"page":@"1",@"count":@"10",@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -172,6 +173,50 @@
     }];
 }
 
+- (void)joinActivity:(id)sender
+{
+    if ([_join.text isEqualToString:@"我要参加"])
+    {
+        _join.text = @"已参加";
+        _joinImage.image = [UIImage imageNamed:@"1.png"];
+    }
+    else if ([_join.text isEqualToString:@"已参加"])
+    {
+        _join.text = @"我要参加";
+        _joinImage.image = [UIImage imageNamed:@"2.png"];
+    }
+    else
+    {
+        _join.text = @"未知错误";
+    }
+}
+
+- (void)likeActivity:(id)sender
+{
+    NSLog(@"%@,%@",USER_PHPSESSID,_feedid);
+
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_love" parameters:@{@"PHPSESSID":@"222",@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@",responseObject);
+        if ([_interest.text isEqualToString:@"我感兴趣"])
+        {
+            _interest.text = @"已感兴趣";
+            _interestImage.image = [UIImage imageNamed:@"1.png"];
+        }
+        else if ([_interest.text isEqualToString:@"已感兴趣"])
+        {
+            _interest.text = @"我感兴趣";
+            _interestImage.image = [UIImage imageNamed:@"2.png"];
+        }
+        else
+        {
+            _interest.text = @"未知错误";
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
+
 #pragma mark -tableView datasource and delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -228,6 +273,9 @@
         }
         case 1:
         {
+            imgCollectionViewController *vc = [[imgCollectionViewController alloc] initWithFeedId:[_feedid integerValue]];
+            vc.navigationItem.title = self.navigationItem.title;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
 
         }
@@ -298,6 +346,8 @@
         [_leftButton addConstraint:[NSLayoutConstraint constraintWithItem:_join attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_joinImage attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
         
         [_leftButton addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-45-[_joinImage]-6-[_join]-45-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_joinImage,_join)]];
+        
+        [_leftButton addTarget:self action:@selector(joinActivity:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _leftButton;
 }
@@ -320,9 +370,13 @@
         [_rightButton addConstraint:[NSLayoutConstraint constraintWithItem:_interest attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_interestImage attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
         
         [_rightButton addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-45-[_interestImage]-6-[_interest]-45-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_interestImage,_interest)]];
+        
+        [_rightButton addTarget:self action:@selector(likeActivity:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _rightButton;
 }
+
+@synthesize join = _join;
 
 - (UILabel *)join
 {

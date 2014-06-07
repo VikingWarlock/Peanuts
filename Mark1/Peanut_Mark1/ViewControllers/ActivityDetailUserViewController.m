@@ -172,8 +172,16 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    NSLog(@"\n\n\n\n\n%@ , %@ , %@  \n\n\n\n\n",USER_PHPSESSID,_feedid,[_users[deletedIndexPath.row] valueForKey:@"uid"]);
     if (buttonIndex == 1) {
-        [self deleteMember];
+        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_user_delete" parameters:@{@"PHPSESSID":USER_PHPSESSID,@"feed_id":_feedid,@"delete_uid":[_users[deletedIndexPath.row] valueForKey:@"uid"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"%@",responseObject);
+            if ([[responseObject valueForKey:@"status"] boolValue] == YES) {
+                [self deleteMember];
+            }
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@",error);
+        }];
     }
 }
 
