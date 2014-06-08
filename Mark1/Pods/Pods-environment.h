@@ -100,7 +100,7 @@
 #define COCOAPODS_POD_AVAILABLE_PSTCollectionView
 #define COCOAPODS_VERSION_MAJOR_PSTCollectionView 1
 #define COCOAPODS_VERSION_MINOR_PSTCollectionView 2
-#define COCOAPODS_VERSION_PATCH_PSTCollectionView 0
+#define COCOAPODS_VERSION_PATCH_PSTCollectionView 1
 
 // RBBAnimation
 #define COCOAPODS_POD_AVAILABLE_RBBAnimation

@@ -243,6 +243,7 @@
     BlurTableViewCell_mark1 *cell=[tableview dequeueReusableCellWithIdentifier:@"mark1Cell" forIndexPath:indexPath];
     
     NSString *name=[IndexList objectAtIndex:indexPath.row];
+    
     if ([downloadedImage objectForKey:name]!=nil) {
         [cell SetupWithBackImage:[downloadedImage objectForKey:name] AtIndexpath:indexPath AndInitPosition:(indexPath.row%2) AndDelegate:self];
     }else
@@ -304,9 +305,10 @@
     BaseUIViewController *vc;
     
     switch (indexpath.row) {
-        case 0:
-            vc=[[imgCollectionViewController alloc]initWithFeedId:feed_id];// bgImageUrl:bkUrl];
-            break;
+        case 0:{
+            NSString *feed_id=[dic objectForKey:@"feed_id"];
+            vc=[[imgCollectionViewController alloc]initWithFeedId:[feed_id integerValue]];// bgImageUrl:bkUrl];
+            break;}
         case 1:
             vc=[[ActivityDetailViewController alloc]init];
             break;
