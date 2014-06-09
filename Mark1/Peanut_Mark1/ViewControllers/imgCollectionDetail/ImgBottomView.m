@@ -71,7 +71,7 @@
 -(void)bottomPraiseBtnClick:(UIButton *)sender{//怎么获取自己的UID???
     AFHTTPRequestOperationManager * NetworkManager = [[AFHTTPRequestOperationManager alloc]init];
     if (isPraised) {
-        [NetworkManager POST:Peanut_Cancel_Dig_Something parameters:@{@"PHPSESSID":@"5",@"feed_id":[NSString stringWithFormat:@"%ld",feed_id]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [NetworkManager POST:Peanut_Cancel_Dig_Something parameters:@{@"PHPSESSID":USER_PHPSESSID,@"feed_id":[NSString stringWithFormat:@"%ld",feed_id]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([[responseObject objectForKey:@"info"] isEqualToString:@"success"]) {
                 UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:nil message:@"取消成功!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alertView show];
@@ -84,7 +84,7 @@
             
         }];
     }else{
-        [NetworkManager POST:Peanut_Dig_Something parameters:@{@"PHPSESSID":[self getUid],@"feed_id":[NSString stringWithFormat:@"%ld",feed_id]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [NetworkManager POST:Peanut_Dig_Something parameters:@{@"PHPSESSID":USER_PHPSESSID,@"feed_id":[NSString stringWithFormat:@"%ld",feed_id]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([[responseObject objectForKey:@"info"] isEqualToString:@"success"]) {
                 UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:nil message:@"点赞成功!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alertView show];
