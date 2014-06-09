@@ -243,6 +243,7 @@
     BlurTableViewCell_mark1 *cell=[tableview dequeueReusableCellWithIdentifier:@"mark1Cell" forIndexPath:indexPath];
     
     NSString *name=[IndexList objectAtIndex:indexPath.row];
+    
     if ([downloadedImage objectForKey:name]!=nil) {
         [cell SetupWithBackImage:[downloadedImage objectForKey:name] AtIndexpath:indexPath AndInitPosition:(indexPath.row%2) AndDelegate:self];
     }else

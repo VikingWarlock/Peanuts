@@ -7,11 +7,10 @@
 //
 
 #import "MustReaddetialViewController.h"
+#import "CoreData-Helper.h"
 @interface MustReaddetialViewController ()
 {
     NSString *feed_id;
-    NSDictionary *data;
-    NSDictionary *userinfo;
     BOOL loading;
 }
 @end
@@ -85,27 +84,49 @@
 
 - (void)downLoadWithFeedId:(NSString *)feedId
 {
-    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Daily&act=daily" parameters:@{@"feed_id":[NSString stringWithFormat:@"%@",feedId]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
-        {
-            NSLog(@"%@",feed_id);
-//            NSLog(@"%@",responseObject);
-            data = [responseObject valueForKey:@"data"];
-            userinfo = [[responseObject valueForKey:@"data"] valueForKey:@"user_info"];
-            [self.picture setImageWithURL:data[@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-            [self setTitle:data[@"title"]];
-            [self.atitle setText:data[@"title"]];
-            [self.avatar setImageWithURL:userinfo[@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-            [self.user setText:userinfo[@"uname"]];
-            [self.like setTitle:data[@"digg_count"] forState:UIControlStateNormal];
-            [self.comment setTitle:data[@"comment_count"] forState:UIControlStateNormal];
-            NSString *html = data[@"content"];
-            NSString *imghtml = [html stringByReplacingOccurrencesOfString:@"class=\"post-img\">" withString:@"style=\"width:300px;\" class=\"post-img\">"];
-            [self.content loadHTMLString:imghtml baseURL:nil];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
-    }];
+    MustReadEntity *data;
+    UserInfEntity *userinfo;
+    data = [CoreData_Helper GetMustReadEntity:feed_id];
+    userinfo = [CoreData_Helper GetUserInfEntity:data.uid];
+    if (data != nil) {
+        [self.picture setImageWithURL:(NSURL *)data.cover_url placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        [self setTitle:data.title];
+        [self.atitle setText:data.title];
+        [self.avatar setImageWithURL:(NSURL *)userinfo.avatar_tiny placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        [self.user setText:userinfo.uname];
+        [self.like setTitle:data.dig_count forState:UIControlStateNormal];
+        [self.comment setTitle:data.comment_count forState:UIControlStateNormal];
+        NSString *html = data.content;
+        NSString *imghtml = [html stringByReplacingOccurrencesOfString:@"class=\"post-img\">" withString:@"style=\"width:300px;\" class=\"post-img\">"];
+        [self.content loadHTMLString:imghtml baseURL:nil];
+    }
+    else {
+        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Daily&act=daily" parameters:@{@"feed_id":[NSString stringWithFormat:@"%@",feedId]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
+            {
+//                NSLog(@"%@",feed_id);
+                NSLog(@"%@",responseObject);
+                NSDictionary *data;
+                NSDictionary *userinfo;
+                data = [responseObject valueForKey:@"data"];
+                userinfo = [[responseObject valueForKey:@"data"] valueForKey:@"user_info"];
+                [CoreData_Helper addMustReadEntity:data];
+                [CoreData_Helper addUserInfoEntity:userinfo];
+                [self.picture setImageWithURL:data[@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+                [self setTitle:data[@"title"]];
+                [self.atitle setText:data[@"title"]];
+                [self.avatar setImageWithURL:userinfo[@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+                [self.user setText:userinfo[@"uname"]];
+                [self.like setTitle:data[@"digg_count"] forState:UIControlStateNormal];
+                [self.comment setTitle:data[@"comment_count"] forState:UIControlStateNormal];
+                NSString *html = data[@"content"];
+                NSString *imghtml = [html stringByReplacingOccurrencesOfString:@"class=\"post-img\">" withString:@"style=\"width:300px;\" class=\"post-img\">"];
+                [self.content loadHTMLString:imghtml baseURL:nil];
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@",error);
+        }];
+    }
 }
 
 - (UIImageView *)picture

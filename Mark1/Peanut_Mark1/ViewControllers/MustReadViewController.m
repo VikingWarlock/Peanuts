@@ -14,7 +14,7 @@
 #import "MJRefresh.h"
 #import "CoreData-Helper.h"
 #import "PublicLib.h"
-#define COUNT_OF_PAGE 5
+#define COUNT_OF_PAGE 10
 @interface MustReadViewController ()
 {
     NSDateFormatter *formatter;
@@ -142,6 +142,12 @@
         {
             data = [[responseObject valueForKey:@"data"] mutableCopy];
             userinfo = [[[responseObject valueForKey:@"data"] valueForKey:@"user_info"] mutableCopy];
+            for (NSDictionary *dic in data) {
+                [CoreData_Helper addMustReadEntity:dic];
+            }
+            for (NSDictionary *dic in userinfo) {
+                [CoreData_Helper addUserInfoEntity:dic];
+            }
             [self processData:data];
             [_readTableView reloadData];
             [_readTableView headerEndRefreshing];
@@ -161,6 +167,12 @@
             {
                 [data addObjectsFromArray:[responseObject valueForKey:@"data"]];
                 [userinfo addObjectsFromArray:[[responseObject valueForKey:@"data"] valueForKey:@"user_info"]];
+                for (NSDictionary *dic in data) {
+                    [CoreData_Helper addMustReadEntity:dic];
+                }
+                for (NSDictionary *dic in userinfo) {
+                    [CoreData_Helper addUserInfoEntity:dic];
+                }
                 [self processData:data];
                 [_readTableView reloadData];
                 [_readTableView footerEndRefreshing];

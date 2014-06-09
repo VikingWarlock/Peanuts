@@ -110,6 +110,7 @@
 {
     UIImageView *imgView=[[UIImageView alloc]initWithImage:self.BKImage];
     [imgView setContentMode:UIViewContentModeScaleAspectFill];
+    [imgView setClipsToBounds:YES];
     [self addSubview:imgView];
     imgView.frame=CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     bluredImage=[self darkened:0.5f andBlurredImage:18.f blendModeFilterName:@"CIMultiplyBlendMode" :[imgView captureView]];
