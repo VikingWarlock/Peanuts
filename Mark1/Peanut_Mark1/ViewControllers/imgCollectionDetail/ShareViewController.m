@@ -125,6 +125,14 @@
 }
 
 -(void)publishCommentBtnClick{
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Feed&act=repost" parameters:@{@"PHPSESSID": [NSString stringWithFormat:@"%@",USER_PHPSESSID],@"content":@"aaa",@"feed_id":[NSString stringWithFormat:@"%ld",feed_id]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject objectForKey:@"info"] isEqualToString:@"success"]) {
+            UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:nil message:@"转发成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alertView show];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
     [self.delegate didShare];
 }
 
