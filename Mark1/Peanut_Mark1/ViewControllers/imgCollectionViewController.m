@@ -52,6 +52,19 @@ static NSString * cellIdentifier = @"cellIdentifier";
     return self;
 }
 
+-(id)initWithFeedId:(NSInteger)feedId bgImageUrl:(NSURL *)url{
+    self = [super init];
+    if (self) {
+        UIImageView * iv = [[UIImageView alloc]init];
+        [iv setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [self setBackgroundImage:image andBlurEnable:YES];
+        }];
+        feed_id = feedId;
+        [self.view addSubview:self.bottomView];
+    }
+    return self;
+}
+
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     [self downLoadWithFeedId:feed_id];

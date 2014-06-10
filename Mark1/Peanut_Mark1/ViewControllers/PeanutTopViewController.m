@@ -308,7 +308,7 @@
         case 0:
         {
             NSString *feed_id=[dic objectForKey:@"feed_id"];
-            vc=[[imgCollectionViewController alloc]initWithFeedId:feed_id];// bgImageUrl:bkUrl];
+            vc=[[imgCollectionViewController alloc]initWithFeedId:[feed_id integerValue] bgImageUrl:bkUrl];
         }
             break;
         case 1:

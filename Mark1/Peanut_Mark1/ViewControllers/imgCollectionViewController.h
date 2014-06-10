@@ -15,5 +15,6 @@
 @interface imgCollectionViewController : BaseUIViewController<UITableViewDataSource,UITableViewDelegate,Delegate_imgCell,Delegate_commentVC,Delegate_shareVC,Delegate_imgBottomView>
 
 - (id)initWithFeedId:(NSInteger)feedId;// bgImageUrl:(NSURL *)url;
+-(id)initWithFeedId:(NSInteger)feedId bgImageUrl:(NSURL *)url;
 
 @end
