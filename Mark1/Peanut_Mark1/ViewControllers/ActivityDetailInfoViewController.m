@@ -121,6 +121,11 @@
 {
     if (!_mask) {
         _mask = [[Mask alloc] init];
+        _mask.headline.text = [CoreData_Helper GetActivityEntity:self.feedid].topic;
+        _mask.user.text = [CoreData_Helper GetUserInfEntity:[CoreData_Helper GetActivityEntity:self.feedid].uid].uname;
+        _mask.Date.text = [CoreData_Helper DateFromTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].begin_time endTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].end_time];
+        _mask.typeText = [CoreData_Helper GetActivityEntity:self.feedid].activityType;
+        [_mask.avatar setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].avatar_tiny_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     }
     return _mask;
 }

@@ -138,18 +138,7 @@
         cell.Date.text = [self DateFromTimestamp:[onlineArrayPrg[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[onlineArrayPrg[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [onlineArrayPrg[indexPath.section] valueForKey:@"topic"];
         cell.feedid = [onlineArrayPrg[indexPath.section] valueForKey:@"feed_id"];
-        if ([[onlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
-        {
-            cell.type.text = @"线上活动";
-        }
-        else if([[onlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 1)
-        {
-            cell.type.text = @"线下活动";
-        }
-        else
-        {
-            cell.type.text = @"未知错误";
-        }
+        cell.typeText = [onlineArrayPrg[indexPath.section] valueForKey:@"activityType"];
     }
     else if (tableView.tag == 0 && !_progressingSegmentedControl.isOnline) {
         [cell.picture setImageWithURL:[NSURL URLWithString:[offlineArrayPrg[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
@@ -158,18 +147,7 @@
         cell.Date.text = [self DateFromTimestamp:[offlineArrayPrg[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[offlineArrayPrg[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [offlineArrayPrg[indexPath.section] valueForKey:@"topic"];
         cell.feedid = [offlineArrayPrg[indexPath.section] valueForKey:@"feed_id"];
-        if ([[offlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
-        {
-            cell.type.text = @"线上活动";
-        }
-        else if([[offlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 1)
-        {
-            cell.type.text = @"线下活动";
-        }
-        else
-        {
-            cell.type.text = @"未知错误";
-        }
+        cell.typeText = [offlineArrayPrg[indexPath.section] valueForKey:@"activityType"];
     }
     else if (tableView.tag == 1 && _ReviewedSegmentedControl.isOnline) {
         [cell.picture setImageWithURL:[NSURL URLWithString:[onlineArrayReviewed[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
@@ -178,18 +156,7 @@
         cell.Date.text = [self DateFromTimestamp:[onlineArrayReviewed[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[onlineArrayReviewed[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [onlineArrayReviewed[indexPath.section] valueForKey:@"topic"];
         cell.feedid = [onlineArrayReviewed[indexPath.section] valueForKey:@"feed_id"];
-        if ([[onlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
-        {
-            cell.type.text = @"线上活动";
-        }
-        else if([[onlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 1)
-        {
-            cell.type.text = @"线下活动";
-        }
-        else
-        {
-            cell.type.text = @"未知错误";
-        }
+        cell.typeText = [onlineArrayReviewed[indexPath.section] valueForKey:@"activityType"];
     }
     else if (tableView.tag == 1 && !_ReviewedSegmentedControl.isOnline) {
         [cell.picture setImageWithURL:[NSURL URLWithString:[offlineArrayReviewed[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
@@ -198,18 +165,7 @@
         cell.Date.text = [self DateFromTimestamp:[offlineArrayReviewed[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[offlineArrayReviewed[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [offlineArrayReviewed[indexPath.section] valueForKey:@"topic"];
         cell.feedid = [offlineArrayReviewed[indexPath.section] valueForKey:@"feed_id"];
-        if ([[offlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
-        {
-            cell.type.text = @"线上活动";
-        }
-        else if([[offlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 1)
-        {
-            cell.type.text = @"线下活动";
-        }
-        else
-        {
-            cell.type.text = @"未知错误";
-        }
+        cell.typeText = [offlineArrayReviewed[indexPath.section] valueForKey:@"activityType"];
     }
     
     return cell;
@@ -264,10 +220,7 @@
     ActivityTableViewCell *cell = (ActivityTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] init];
     vc.feedid = cell.feedid;
-    vc.mask.headline.text = cell.title.text;
-    vc.mask.user.text = cell.user.text;
-    vc.mask.Date.text = cell.Date.text;
-    vc.mask.type.text = cell.type.text;
+
     [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -329,6 +282,7 @@
             *page = 2;
             for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
                 [CoreData_Helper addActivityEntity:dic];
+                [CoreData_Helper addUserInfoEntity:[dic objectForKey:@"user_info"]];
             }
             NSLog(@"%@",[responseObject valueForKey:@"data"]);
         }
@@ -370,6 +324,7 @@
                 [_progressingTableView footerEndRefreshing];
                 for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
                     [CoreData_Helper addActivityEntity:dic];
+                    [CoreData_Helper addUserInfoEntity:[dic objectForKey:@"user_info"]];
                 }
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -409,6 +364,7 @@
             [_ReviewedTableView headerEndRefreshing];
             for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
                 [CoreData_Helper addActivityEntity:dic];
+                [CoreData_Helper addUserInfoEntity:[dic objectForKey:@"user_info"]];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -449,6 +405,7 @@
                 [_ReviewedTableView footerEndRefreshing];
                 for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
                     [CoreData_Helper addActivityEntity:dic];
+                    [CoreData_Helper addUserInfoEntity:[dic objectForKey:@"user_info"]];
                 }
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

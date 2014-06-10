@@ -9,8 +9,7 @@
 #import "ActivitDetailInterestedPeopleViewController.h"
 #import "UserCell.h"
 #import "UIImageView+WebCache.h"
-#import "UIImageView+WebCache.h"
-
+#import "CoreData-Helper.h"
 @interface ActivitDetailInterestedPeopleViewController ()
 {
     UIImageView *backImage;

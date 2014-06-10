@@ -133,6 +133,22 @@
     return _type;
 }
 
+- (void)setTypeText:(NSString *)typeText
+{
+    _typeText = typeText;
+    if ([_typeText isEqualToString:@"0"]) {
+        self.type.text = @"线上活动";
+    }
+    else if ([_typeText isEqualToString:@"1"])
+    {
+        self.type.text = @"线下活动";
+    }
+    else
+    {
+        self.type.text = @"未知错误";
+    }
+}
+
 - (UIImageView *)flag
 {
     if (!_flag) {

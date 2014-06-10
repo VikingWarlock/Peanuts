@@ -46,13 +46,22 @@
     return self;
 }
 
+- (id)initWithFeedId:(id)feedId
+{
+    self = [super init];
+    if (self)
+    {
+        _feedid = feedId;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self getFirstPage];
     [self.picture setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    [self.mask.avatar setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].avatar_tiny_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    
+
     [self.view addSubview:self.picture];
     [self.view addSubview:self.leftButton];
     [self.view addSubview:self.rightButton];
@@ -119,6 +128,9 @@
                 [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView2 setImageWithURL:[NSURL URLWithString:[pictures[1] valueForKey:@"cover"]]];
                 [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView3 setImageWithURL:[NSURL URLWithString:[pictures[2] valueForKey:@"cover"]]];
             }
+            for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
+                [CoreData_Helper addPhotoSeriesEntity:dic];
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
@@ -143,6 +155,9 @@
                 [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView2 setImageWithURL:[NSURL URLWithString:[users[1] valueForKey:@"avatar_small"]]];
                 [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView3 setImageWithURL:[NSURL URLWithString:[users[2] valueForKey:@"avatar_small"]]];
             }
+            for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
+                [CoreData_Helper addUserInfoEntity:dic];
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
@@ -166,6 +181,9 @@
                 [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView1 setImageWithURL:[NSURL URLWithString: [interesteUsers[0] valueForKey:@"avatar_small"]]];
                 [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView2 setImageWithURL:[NSURL URLWithString:[interesteUsers[1] valueForKey:@"avatar_small"]]];
                 [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView3 setImageWithURL:[NSURL URLWithString:[interesteUsers[2] valueForKey:@"avatar_small"]]];
+            }
+            for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
+                [CoreData_Helper addUserInfoEntity:dic];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -266,11 +284,6 @@
         {
             ActivityDetailInfoViewController *vc = [[ActivityDetailInfoViewController alloc] init];
             vc.navigationItem.title = self.navigationItem.title;
-            vc.mask.avatar.image = self.mask.avatar.image;
-            vc.mask.headline.text = self.mask.headline.text;
-            vc.mask.user.text = self.mask.user.text;
-            vc.mask.Date.text = self.mask.Date.text;
-            vc.mask.type.text = self.mask.type.text;
             vc.feedid = _feedid;
             [self.navigationController pushViewController:vc animated:YES];
             break;
@@ -328,6 +341,11 @@
 {
     if (!_mask) {
         _mask = [[Mask alloc] init];
+        _mask.headline.text = [CoreData_Helper GetActivityEntity:self.feedid].topic;
+        _mask.user.text = [CoreData_Helper GetUserInfEntity:[CoreData_Helper GetActivityEntity:self.feedid].uid].uname;
+        _mask.Date.text = [CoreData_Helper DateFromTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].begin_time endTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].end_time];
+        _mask.typeText = [CoreData_Helper GetActivityEntity:self.feedid].activityType;
+        [_mask.avatar setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].avatar_tiny_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     }
     return _mask;
 }
