@@ -175,27 +175,31 @@
 
 - (void)joinActivity:(id)sender
 {
-    if ([_join.text isEqualToString:@"我要参加"])
-    {
-        _join.text = @"已参加";
-        _joinImage.image = [UIImage imageNamed:@"1.png"];
-    }
-    else if ([_join.text isEqualToString:@"已参加"])
-    {
-        _join.text = @"我要参加";
-        _joinImage.image = [UIImage imageNamed:@"2.png"];
-    }
-    else
-    {
-        _join.text = @"未知错误";
-    }
+    NSLog(@"%@,%@",USER_PHPSESSID,_feedid);
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_join" parameters:@{@"PHPSESSID":USER_PHPSESSID,@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"%@",responseObject);
+        if ([_join.text isEqualToString:@"我要参加"])
+        {
+            _join.text = @"已参加";
+            _joinImage.image = [UIImage imageNamed:@"1.png"];
+        }
+        else if ([_join.text isEqualToString:@"已参加"])
+        {
+            _join.text = @"我要参加";
+            _joinImage.image = [UIImage imageNamed:@"2.png"];
+        }
+        else
+        {
+            _join.text = @"未知错误";
+        }
+    }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
 }
 
 - (void)likeActivity:(id)sender
 {
-    NSLog(@"%@,%@",USER_PHPSESSID,_feedid);
-
-    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_love" parameters:@{@"PHPSESSID":@"222",@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_love" parameters:@{@"PHPSESSID":USER_PHPSESSID,@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@",responseObject);
         if ([_interest.text isEqualToString:@"我感兴趣"])
         {
