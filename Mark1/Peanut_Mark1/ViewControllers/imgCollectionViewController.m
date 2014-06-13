@@ -52,6 +52,19 @@ static NSString * cellIdentifier = @"cellIdentifier";
     return self;
 }
 
+-(id)initWithFeedId:(NSInteger)feedId bgImageUrl:(NSURL *)url{
+    self = [super init];
+    if (self) {
+        UIImageView * iv = [[UIImageView alloc]init];
+        [iv setImageWithURL:url completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [self setBackgroundImage:image andBlurEnable:YES];
+        }];
+        feed_id = feedId;
+        [self.view addSubview:self.bottomView];
+    }
+    return self;
+}
+
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
     [self downLoadWithFeedId:feed_id];
@@ -122,9 +135,9 @@ static NSString * cellIdentifier = @"cellIdentifier";
     return _bottomView;
 }
 
--(void)bottomPraiseBtnClick{
-    self.bottomView.praiseBtn.backgroundColor = [UIColor redColor];
-}
+//-(void)bottomPraiseBtnClick{
+//    self.bottomView.praiseBtn.backgroundColor = [UIColor redColor];
+//}
 
 -(void)bottomCommentBtnClick{
     self.bottomView.commentVC.delegate = self;
@@ -145,13 +158,15 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [cell1 setPraiseBtnTitle:++count];
     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell1];
     NSMutableDictionary * rowData = [mutableData[indexPath.row] mutableCopy];
-//???
-    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Feed&act=digg" parameters:@{@"PHPSESSID":[NSString stringWithFormat:@"%@",USER_PHPSESSID],@"feed_id":[rowData objectForKey:@"feed_id"]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        int digCount = [rowData[@"digg_count"] intValue];
-        [rowData removeObjectForKey:@"digg_count"];
-        [rowData setValue:[NSString stringWithFormat:@"%d",++digCount] forKey:@"digg_count"];
-        [mutableData replaceObjectAtIndex:indexPath.row withObject:rowData];
-        imgData = mutableData;
+    
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Feed&act=digg" parameters:@{USER_Token:USER_PHPSESSID,@"feed_id":[NSString stringWithFormat:@"%d",[[rowData objectForKey:@"feed_id"] intValue]]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([[responseObject objectForKey:@"info"] isEqualToString:@"success"]) {
+            int digCount = [rowData[@"digg_count"] intValue];
+            [rowData removeObjectForKey:@"digg_count"];
+            [rowData setValue:[NSString stringWithFormat:@"%d",++digCount] forKey:@"digg_count"];
+            [mutableData replaceObjectAtIndex:indexPath.row withObject:rowData];
+            imgData = mutableData;
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
     }];
@@ -165,6 +180,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     VC.delegate = self;
     currentIndexPath = indexPath;
     [self.navigationController pushViewController:VC animated:YES];
+    currentIndexPath = nil;
 }
 -(void)shareBtnClickAtIndexPath:(NSIndexPath *)indexPath{
     int feedId = [[imgData[indexPath.row] objectForKey:@"feed_id"] intValue];
@@ -172,6 +188,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     VC.delegate = self;
     currentIndexPath = indexPath;
     [self.navigationController pushViewController:VC animated:YES];
+    currentIndexPath = nil;
 }
 
 
@@ -180,7 +197,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 #pragma mark - commentVC delegate
 -(void)DidPublishOneComment{
     if (currentIndexPath == nil) {
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"评论成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"组图评论成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alertView show];
     }else{
         imgCollectionTableViewCell * cell = (imgCollectionTableViewCell *)[self.tableView cellForRowAtIndexPath:currentIndexPath];
@@ -195,10 +212,6 @@ static NSString * cellIdentifier = @"cellIdentifier";
     }
 }
 
-//-(void)ShouldChangeToShareVC{
-//    ShareViewController * vc = [[ShareViewController alloc]  init];
-//    [self.navigationController pushViewController:vc animated:YES];
-//}
 
 #pragma mark - shareVC delegate
 -(void)didShare{
@@ -208,8 +221,8 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [cell.shareBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateSelected];
     [cell.shareBtn setTitle:[NSString stringWithFormat:@"%d",count] forState:UIControlStateHighlighted];
     
-    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"转发成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alertView show];
+//    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:nil message:@"转发成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//    [alertView show];
 }
 
 
