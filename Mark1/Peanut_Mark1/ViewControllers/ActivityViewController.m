@@ -431,7 +431,7 @@
 
 #pragma mark -status switch
 
-- (void)handleTap:(UITapGestureRecognizer *)recognizer
+- (void)handleTap:(UITapGestureRecognizer *)recognizer//顶部的tableview的点击事件
 {
     downPoint = CGPointMake(self.view.frame.size.width / 2,self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER / 2);
 
@@ -470,14 +470,14 @@
     }];
 }
 
-- (void)handleTap2:(UITapGestureRecognizer *)recognizer
+- (void)handleTap2:(UITapGestureRecognizer *)recognizer//底部的tableview的点击事件
 {
     downPoint = CGPointMake(self.view.frame.size.width / 2,self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER / 2);
     
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         if (status == NO) {
             _ReviewedFooterView.center = downPoint;
-            status = !status;
+            status = !status;//1代表展示正在进行的活动，0代表展示往期活动
             oldStatus = status;
             _progressing.textColor = PRESENT_TITLE_COLOR;
             _reviewed.textColor = PAST_TITLE_COLOR;
@@ -490,7 +490,7 @@
     
 }
 
-- (void)handlePan:(UIPanGestureRecognizer *)recognizer
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer//底部的tableview拖拽事件
 {
     downPoint = CGPointMake(self.view.frame.size.width / 2,self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER / 2);
     static long i = 0;

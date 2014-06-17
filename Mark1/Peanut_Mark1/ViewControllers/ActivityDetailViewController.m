@@ -290,11 +290,10 @@
         }
         case 1:
         {
-            imgCollectionViewController *vc = [[imgCollectionViewController alloc] initWithFeedId:[_feedid integerValue]];
+            imgCollectionViewController *vc = [[imgCollectionViewController alloc] initWithFeedId:[@"162" integerValue] bgImageUrl:[NSURL URLWithString:[CoreData_Helper GetPhotoSeriesEntity:@"162"].cover_url]];
             vc.navigationItem.title = self.navigationItem.title;
-            [self.navigationController pushViewController:vc animated:YES];
+            //[self.navigationController pushViewController:vc animated:YES];
             break;
-
         }
         case 2:
         {
