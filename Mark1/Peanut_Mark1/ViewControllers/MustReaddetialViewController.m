@@ -48,10 +48,10 @@
     [_content setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_content]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_content)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_content]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_content)]];
-//    if (self.picture.image == nil) {
-//        [self downLoadWithFeedId:feed_id];
-//    }
-    [self downLoadWithFeedId:feed_id];
+    if (self.picture.image == nil) {
+        [self downLoadWithFeedId:feed_id];
+    }
+//    [self downLoadWithFeedId:feed_id];
     ImgBottomView *bottomview = [[ImgBottomView alloc] initWithGroupFeedId:[feed_id intValue]];
     [self.view addSubview:bottomview];
     //    [self.view addSubview:self.picture];

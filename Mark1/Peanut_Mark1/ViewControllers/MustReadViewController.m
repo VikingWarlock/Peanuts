@@ -193,16 +193,16 @@
     if ([[cellinfo[indexPath.section] valueForKey:@"type"] isEqualToString:@"0"]) {
         int index = [[cellinfo[indexPath.section] valueForKey:@"index"] intValue];
         MustReaddetialViewController *detialView = [[MustReaddetialViewController alloc] initWithFeedId:[data[index] valueForKey:@"feed_id"]];
-//        [detialView.picture setImageWithURL:[data[index] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-//        [detialView setTitle:[data[index] valueForKey:@"title"]];
-//        [detialView.atitle setText:[data[index] valueForKey:@"title"]];
-//        [detialView.avatar setImageWithURL:[userinfo[index] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-//        [detialView.user setText:[userinfo[index] valueForKey:@"uname"]];
-//        [detialView.like setTitle:[data[index] valueForKey:@"digg_count"] forState:UIControlStateNormal];
-//        [detialView.comment setTitle:[data[index] valueForKey:@"comment_count"] forState:UIControlStateNormal];
-//        NSString *html = [data[index] valueForKey:@"content"];
-//        NSString *imghtml = [html stringByReplacingOccurrencesOfString:@"class=\"post-img\">" withString:@"style=\"width:300px;\" class=\"post-img\">"];
-//        [detialView.content loadHTMLString:imghtml baseURL:nil];
+        [detialView.picture setImageWithURL:[data[index] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        [detialView setTitle:[data[index] valueForKey:@"title"]];
+        [detialView.atitle setText:[data[index] valueForKey:@"title"]];
+        [detialView.avatar setImageWithURL:[userinfo[index] valueForKey:@"avatar_tiny"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        [detialView.user setText:[userinfo[index] valueForKey:@"uname"]];
+        [detialView.like setTitle:[data[index] valueForKey:@"digg_count"] forState:UIControlStateNormal];
+        [detialView.comment setTitle:[data[index] valueForKey:@"comment_count"] forState:UIControlStateNormal];
+        NSString *html = [data[index] valueForKey:@"content"];
+        NSString *imghtml = [html stringByReplacingOccurrencesOfString:@"class=\"post-img\">" withString:@"style=\"width:300px;\" class=\"post-img\">"];
+        [detialView.content loadHTMLString:imghtml baseURL:nil];
         [self.readTableView deselectRowAtIndexPath:indexPath animated:YES];
         [self.NavigationController pushViewController:detialView animated:YES];
     }
