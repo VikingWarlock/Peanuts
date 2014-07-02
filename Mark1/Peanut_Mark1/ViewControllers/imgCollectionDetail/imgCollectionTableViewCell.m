@@ -77,11 +77,15 @@
     if (!_praiseBtn) {
         _praiseBtn = [[UIButton alloc] initWithFrame:CGRectMake(160, _titleLabel.frame.origin.y, 50, 20)];
         
-        [_praiseBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateNormal];
-        [_praiseBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateSelected];
-        [_praiseBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateHighlighted];
-        [_praiseBtn setBackgroundColor:[UIColor yellowColor]];
+        [_praiseBtn setImage:[UIImage imageNamed:@"imgCollection_praise.png"] forState:UIControlStateNormal];
+        [_praiseBtn setImage:[UIImage imageNamed:@"imgCollection_praise.png"] forState:UIControlStateSelected];
+        [_praiseBtn setImage:[UIImage imageNamed:@"imgCollection_praise.png"] forState:UIControlStateHighlighted];
         [_praiseBtn setTitle:[NSString stringWithFormat:@"%d",praiseCount] forState:UIControlStateNormal];
+        [_praiseBtn.titleLabel setFont:[UIFont systemFontOfSize:17]];
+        [_praiseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+        [_praiseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_praiseBtn setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+        
         [_praiseBtn addTarget:self action:@selector(praiseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
 
     }
@@ -101,10 +105,20 @@
         rect.origin.x += _praiseBtn.frame.size.width;
         _commentBtn = [[UIButton alloc] initWithFrame:rect];
 
-        [_commentBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateNormal];
-        [_commentBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateSelected];
-        [_commentBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateHighlighted];
+        [_commentBtn setImage:[UIImage imageNamed:@"imgCollection_comment.png"] forState:UIControlStateSelected];
+        [_commentBtn setImage:[UIImage imageNamed:@"imgCollection_comment.png"] forState:UIControlStateNormal];
+        [_commentBtn setImage:[UIImage imageNamed:@"imgCollection_comment.png"] forState:UIControlStateHighlighted];
+        
+        [_commentBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
+
+//        [_commentBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateNormal];
+//        [_commentBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateSelected];
+//        [_commentBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateHighlighted];
         [_commentBtn setTitle:[NSString stringWithFormat:@"%d",commentCount] forState:UIControlStateNormal];
+        [_commentBtn.titleLabel setFont:[UIFont systemFontOfSize:17]];
+        [_commentBtn setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+        [_commentBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_commentBtn setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
         
         [_commentBtn addTarget:self action:@selector(commentBtnClick:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -149,12 +163,18 @@
         _shareBtn = [[UIButton alloc] initWithFrame:rect];
 
         [_shareBtn addTarget:self action:@selector(shareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [_shareBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateNormal];
-        [_shareBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateSelected];
-        [_shareBtn setBackgroundImage:[UIImage imageNamed:@"1.png"] forState:UIControlStateHighlighted];
+
+        [_shareBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
+        [_shareBtn setImage:[UIImage imageNamed:@"imgCollection_share.png"] forState:UIControlStateNormal];
+        [_shareBtn setImage:[UIImage imageNamed:@"imgCollection_share.png"] forState:UIControlStateSelected];
+        [_shareBtn setImage:[UIImage imageNamed:@"imgCollection_share.png"] forState:UIControlStateHighlighted];
         
         [_shareBtn setTitle:[NSString stringWithFormat:@"%d",shareCount] forState:UIControlStateNormal];
+        [_shareBtn.titleLabel setFont:[UIFont systemFontOfSize:17]];
+        [_shareBtn setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+        [_shareBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_shareBtn setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+        
     }
     return _shareBtn;
 }

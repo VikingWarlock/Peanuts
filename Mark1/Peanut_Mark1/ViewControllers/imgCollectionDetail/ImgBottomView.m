@@ -27,9 +27,9 @@
         
         _praiseBtn = [[UIButton alloc] initWithFrame:CGRectMake(10, 0, (self.frame.size.width - 20)/3, self.frame.size.height)];
         _praiseBtn.contentEdgeInsets = UIEdgeInsetsMake(4, 30, 47, 30);
-        [_praiseBtn setImage:[UIImage imageNamed:@"praise.png"] forState:UIControlStateNormal];
-        [_praiseBtn setImage:[UIImage imageNamed:@"praise.png"] forState:UIControlStateHighlighted];
-        [_praiseBtn setImage:[UIImage imageNamed:@"praise.png"] forState:UIControlStateSelected];
+        [_praiseBtn setImage:[UIImage imageNamed:@"bottom_praise.png"] forState:UIControlStateNormal];
+        [_praiseBtn setImage:[UIImage imageNamed:@"bottom_praise.png"] forState:UIControlStateHighlighted];
+        [_praiseBtn setImage:[UIImage imageNamed:@"bottom_praise.png"] forState:UIControlStateSelected];
         
         CGRect rect = _praiseBtn.frame;
         rect.origin.x += rect.size.width;
@@ -42,9 +42,9 @@
         rect.origin.x += rect.size.width;
         _shareBtn = [[UIButton alloc] initWithFrame:rect];
         _shareBtn.contentEdgeInsets = _praiseBtn.contentEdgeInsets;
-        [_shareBtn setImage:[UIImage imageNamed:@"share.png"] forState:UIControlStateNormal];
-        [_shareBtn setImage:[UIImage imageNamed:@"share.png"] forState:UIControlStateHighlighted];
-        [_shareBtn setImage:[UIImage imageNamed:@"share.png"] forState:UIControlStateSelected];
+        [_shareBtn setImage:[UIImage imageNamed:@"bottom_share.png"] forState:UIControlStateNormal];
+        [_shareBtn setImage:[UIImage imageNamed:@"bottom_share.png"] forState:UIControlStateHighlighted];
+        [_shareBtn setImage:[UIImage imageNamed:@"bottom_share.png"] forState:UIControlStateSelected];
         
         [self.praiseBtn addTarget:self action:@selector(bottomPraiseBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.commentBtn addTarget:self action:@selector(bottomCommentBtnClick:) forControlEvents:UIControlEventTouchUpInside];
