@@ -182,7 +182,7 @@
 -(void)setNavigationBarForOther
 {
     [[self.NavigationController navigationBar]setTranslucent:NO];
-    [[self.NavigationController navigationBar]setBarTintColor:[UIColor redColor]];
+    [[self.NavigationController navigationBar]setBarTintColor:Dark_Red];
 }
 
 
@@ -206,7 +206,6 @@
     {
     [self reset_NavigationBar];
     }
-    
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -345,7 +344,7 @@
         }
             break;
         case 1:
-            vc=[[ActivityDetailViewController alloc]init];
+            vc=[[ActivityDetailViewController alloc] initWithFeedId:[dic objectForKey:@"feed_id"]];
             break;
         case 2:
         {

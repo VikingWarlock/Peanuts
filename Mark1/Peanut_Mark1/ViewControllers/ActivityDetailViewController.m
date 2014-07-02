@@ -13,6 +13,8 @@
 #import "BottomView.h"
 #import "CustomCell.h"
 #import "CoreData-Helper.h"
+#import "imgCollectionViewController.h"
+
 @interface ActivityDetailViewController ()
 {
     NSMutableArray *pictures;
@@ -39,7 +41,17 @@
     self = [super init];
     if (self)
     {
-        
+        _feedid = [NSString stringWithFormat:@"%D",feedId];
+    }
+    return self;
+}
+
+- (id)initWithFeedId:(id)feedId
+{
+    self = [super init];
+    if (self)
+    {
+        _feedid = feedId;
     }
     return self;
 }
@@ -49,8 +61,14 @@
     [super viewDidLoad];
     [self getFirstPage];
     [self.picture setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
-    [self.mask.avatar setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].avatar_tiny_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:[UIImage imageNamed:@"activity－detial-upload.png"] forState:UIControlStateNormal];
+    [button addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    button.frame = CGRectMake(0, 0, 18, 18);
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [self.navigationItem setRightBarButtonItem:rightButton];
+
     [self.view addSubview:self.picture];
     [self.view addSubview:self.leftButton];
     [self.view addSubview:self.rightButton];
@@ -83,6 +101,8 @@
     [super viewWillAppear:animated];
     self.navigationItem.title = _mask.headline.text;
     ((UIViewController *)(self.navigationController.viewControllers)[[self.navigationController.viewControllers indexOfObject:self] - 1]).navigationItem.title = @"";
+    
+    NSLog(@"\n\nfeed_id:%@\n PHPSESSID:%@\n\n",self.feedid,USER_PHPSESSID);
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -97,7 +117,6 @@
 }
 
 #pragma mark -network stuff
-
 - (void)getFirstPage
 {   //活动作品
     [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_work_list" parameters:@{@"page":@"1",@"count":@"10",@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -117,6 +136,9 @@
                 [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView1 setImageWithURL:[NSURL URLWithString:[pictures[0] valueForKey:@"cover"]]];
                 [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView2 setImageWithURL:[NSURL URLWithString:[pictures[1] valueForKey:@"cover"]]];
                 [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]]).imageView3 setImageWithURL:[NSURL URLWithString:[pictures[2] valueForKey:@"cover"]]];
+            }
+            for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
+                [CoreData_Helper addPhotoSeriesEntity:dic];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -142,13 +164,16 @@
                 [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView2 setImageWithURL:[NSURL URLWithString:[users[1] valueForKey:@"avatar_small"]]];
                 [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:2 inSection:0]]).imageView3 setImageWithURL:[NSURL URLWithString:[users[2] valueForKey:@"avatar_small"]]];
             }
+            for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
+                [CoreData_Helper addUserInfoEntity:dic];
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
     }];
     
     //感兴趣的人
-    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_love_list" parameters:@{@"page":@"1",@"count":@"10",@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_love_list" parameters:@{@"page":@"1",@"count":@"10",@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {NSLog(@"\n\nresponseObject:%@\n\n",[responseObject valueForKey:@"data"]);
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
             interesteUsers = [responseObject valueForKey:@"data"];
@@ -166,10 +191,73 @@
                 [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView2 setImageWithURL:[NSURL URLWithString:[interesteUsers[1] valueForKey:@"avatar_small"]]];
                 [((CustomCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:0]]).imageView3 setImageWithURL:[NSURL URLWithString:[interesteUsers[2] valueForKey:@"avatar_small"]]];
             }
+            for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
+                [CoreData_Helper addUserInfoEntity:dic];
+            }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
     }];
+}
+
+- (void)joinActivity:(id)sender
+{
+    if (USER_PHPSESSID == NULL) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"请先登录！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        alertView.alertViewStyle = UIAlertViewStyleDefault;
+        [alertView show];
+    }else
+    {
+        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_join" parameters:@{@"PHPSESSID":USER_PHPSESSID,@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"%@",responseObject);
+            if ([_join.text isEqualToString:@"我要参加"])
+            {
+                _join.text = @"已参加";
+                _joinImage.image = [UIImage imageNamed:@"activity－detial-joined.png"];
+            }
+            else if ([_join.text isEqualToString:@"已参加"])
+            {
+                _join.text = @"我要参加";
+                _joinImage.image = [UIImage imageNamed:@"activity－detial-join.png"];
+            }
+            else
+            {
+                _join.text = @"未知错误";
+            }
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@",error);
+        }];
+    }
+}
+
+- (void)likeActivity:(id)sender
+{
+    if (USER_PHPSESSID == NULL) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:@"请先登录！" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        alertView.alertViewStyle = UIAlertViewStyleDefault;
+        [alertView show];
+    }else
+    {
+        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_love" parameters:@{@"PHPSESSID":USER_PHPSESSID,@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"%@",responseObject);
+            if ([_interest.text isEqualToString:@"我感兴趣"])
+            {
+                _interest.text = @"已感兴趣";
+                _interestImage.image = [UIImage imageNamed:@"activity－detial-hearte.png"];
+            }
+            else if ([_interest.text isEqualToString:@"已感兴趣"])
+            {
+                _interest.text = @"我感兴趣";
+                _interestImage.image = [UIImage imageNamed:@"activity－detial-heart.png"];
+            }
+            else
+            {
+                _interest.text = @"未知错误";
+            }
+        }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"%@",error);
+        }];
+    }
 }
 
 #pragma mark -tableView datasource and delegate
@@ -217,19 +305,16 @@
         {
             ActivityDetailInfoViewController *vc = [[ActivityDetailInfoViewController alloc] init];
             vc.navigationItem.title = self.navigationItem.title;
-            vc.mask.avatar.image = self.mask.avatar.image;
-            vc.mask.headline.text = self.mask.headline.text;
-            vc.mask.user.text = self.mask.user.text;
-            vc.mask.Date.text = self.mask.Date.text;
-            vc.mask.type.text = self.mask.type.text;
             vc.feedid = _feedid;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 1:
         {
+            imgCollectionViewController *vc = [[imgCollectionViewController alloc] initWithFeedId:[@"162" integerValue] bgImageUrl:[NSURL URLWithString:[CoreData_Helper GetPhotoSeriesEntity:@"162"].cover_url]];
+            vc.navigationItem.title = self.navigationItem.title;
+            //[self.navigationController pushViewController:vc animated:YES];
             break;
-
         }
         case 2:
         {
@@ -276,6 +361,11 @@
 {
     if (!_mask) {
         _mask = [[Mask alloc] init];
+        _mask.headline.text = [CoreData_Helper GetActivityEntity:self.feedid].topic;
+        _mask.user.text = [CoreData_Helper GetUserInfEntity:[CoreData_Helper GetActivityEntity:self.feedid].uid].uname;
+        _mask.Date.text = [CoreData_Helper DateFromTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].begin_time endTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].end_time];
+        _mask.typeText = [CoreData_Helper GetActivityEntity:self.feedid].activityType;
+        [_mask.avatar setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].avatar_tiny_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     }
     return _mask;
 }
@@ -284,7 +374,7 @@
 {
     if (!_leftButton) {
         _leftButton = [[UIButton alloc] init];
-        _leftButton.backgroundColor = [UIColor purpleColor];
+        _leftButton.backgroundColor = DarkPink;
         
         [_leftButton addSubview:self.join];
         [_leftButton addSubview:self.joinImage];
@@ -298,6 +388,8 @@
         [_leftButton addConstraint:[NSLayoutConstraint constraintWithItem:_join attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_joinImage attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
         
         [_leftButton addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-45-[_joinImage]-6-[_join]-45-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_joinImage,_join)]];
+        
+        [_leftButton addTarget:self action:@selector(joinActivity:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _leftButton;
 }
@@ -306,7 +398,7 @@
 {
     if (!_rightButton) {
         _rightButton = [[UIButton alloc] init];
-        _rightButton.backgroundColor = [UIColor brownColor];
+        _rightButton.backgroundColor = LightPink;
         
         [_rightButton addSubview:self.interest];
         [_rightButton addSubview:self.interestImage];
@@ -320,9 +412,13 @@
         [_rightButton addConstraint:[NSLayoutConstraint constraintWithItem:_interest attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:_interestImage attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
         
         [_rightButton addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-45-[_interestImage]-6-[_interest]-45-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_interestImage,_interest)]];
+        
+        [_rightButton addTarget:self action:@selector(likeActivity:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _rightButton;
 }
+
+@synthesize join = _join;
 
 - (UILabel *)join
 {
@@ -350,8 +446,7 @@
 {
     if (!_interestImage) {
         _interestImage = [[UIImageView alloc] init];
-        _interestImage.image = nil;
-        _interestImage.backgroundColor = [UIColor yellowColor];
+        _interestImage.image = [UIImage imageNamed:@"activity－detial-heart.png"];
     }
     return _interestImage;
 }
@@ -360,8 +455,7 @@
 {
     if (!_joinImage) {
         _joinImage = [[UIImageView alloc] init];
-        _joinImage.image = nil;
-        _joinImage.backgroundColor = [UIColor greenColor];
+        _joinImage.image = [UIImage imageNamed:@"activity－detial-join.png"];
     }
     return _joinImage;
 }

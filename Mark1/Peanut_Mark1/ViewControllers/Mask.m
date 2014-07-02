@@ -116,8 +116,7 @@
 {
     if (!_calendar) {
         _calendar = [[UIImageView alloc] init];
-        _calendar.image = nil;
-        _calendar.backgroundColor = [UIColor orangeColor];
+        _calendar.image = [UIImage imageNamed:@"activity-detail-info-calendar.png"];
     }
     return _calendar;
 }
@@ -133,12 +132,27 @@
     return _type;
 }
 
+- (void)setTypeText:(NSString *)typeText
+{
+    _typeText = typeText;
+    if ([_typeText isEqualToString:@"0"]) {
+        self.type.text = @"线上活动";
+    }
+    else if ([_typeText isEqualToString:@"1"])
+    {
+        self.type.text = @"线下活动";
+    }
+    else
+    {
+        self.type.text = @"未知错误";
+    }
+}
+
 - (UIImageView *)flag
 {
     if (!_flag) {
         _flag = [[UIImageView alloc] init];
-        _flag.image = nil;
-        _flag.backgroundColor = [UIColor greenColor];
+        _flag.image = [UIImage imageNamed:@"activity-detail-info-location.png"];
     }
     return _flag;
 }

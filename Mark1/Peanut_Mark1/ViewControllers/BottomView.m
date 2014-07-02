@@ -24,16 +24,16 @@
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_praiseBtn(20)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_praiseBtn)]];
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_praiseBtn attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
         
-        [_commentBtn setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_commentBtn(20)]-45-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_commentBtn)]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_commentBtn(20)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_commentBtn)]];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:_commentBtn attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
-        
         [_shareBtn setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_shareBtn(20)]-45-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_shareBtn)]];
         [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_shareBtn(20)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_shareBtn)]];
-        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_shareBtn(20)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_shareBtn)]];
         [self addConstraint:[NSLayoutConstraint constraintWithItem:_shareBtn attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
-        [self addConstraint:[NSLayoutConstraint constraintWithItem:_shareBtn attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0 ]];
+        
+        [_commentBtn setTranslatesAutoresizingMaskIntoConstraints:NO];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_commentBtn(20)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_commentBtn)]];
+        [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[_commentBtn(20)]" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_commentBtn)]];
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:_commentBtn attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0 ]];
+        [self addConstraint:[NSLayoutConstraint constraintWithItem:_commentBtn attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationGreaterThanOrEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0 ]];
 
     }
     return self;
@@ -43,7 +43,7 @@
 {
     if (!_praiseBtn) {
         _praiseBtn = [[UIButton alloc] init];
-        _praiseBtn.backgroundColor = [UIColor greenColor];
+        [_praiseBtn setBackgroundImage:[UIImage imageNamed:@"activity－detial-like.png"] forState:UIControlStateNormal];
     }
     return _praiseBtn;
 }
@@ -52,7 +52,7 @@
 {
     if (!_commentBtn) {
         _commentBtn = [[UIButton alloc] init];
-        _commentBtn.backgroundColor = [UIColor redColor];
+        [_commentBtn setBackgroundImage:[UIImage imageNamed:@"activity－detial-comment.png"] forState:UIControlStateNormal];
     }
     return _commentBtn;
 }
@@ -61,7 +61,7 @@
 {
     if (!_shareBtn) {
         _shareBtn = [[UIButton alloc] init];
-        _shareBtn.backgroundColor = [UIColor blueColor];
+        [_shareBtn setBackgroundImage:[UIImage imageNamed:@"activity－detial-share.png"] forState:UIControlStateNormal];
     }
     return _shareBtn;
 }

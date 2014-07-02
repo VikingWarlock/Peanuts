@@ -16,5 +16,6 @@
 @property (nonatomic,strong) UILabel *user;
 @property (nonatomic,strong) UILabel *Date;
 @property (nonatomic,strong) UILabel *type;
+@property (nonatomic,strong) NSString *typeText;
 
 @end

@@ -13,7 +13,7 @@
 #import "MJRefresh.h"
 #import "CoreData-Helper.h"
 
-#define PRESENT_TITLE_COLOR [UIColor redColor]
+#define PRESENT_TITLE_COLOR Dark_Red
 #define PAST_TITLE_COLOR [UIColor grayColor]
 #define COUNT_OF_PAGE 10
 @interface ActivityViewController ()
@@ -75,8 +75,8 @@
 {
     
     [super viewDidLoad];
-    UIBarButtonItem *Button=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:nil];
-    [self.navigationItem setRightBarButtonItem:Button];
+//    UIBarButtonItem *Button=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:nil];
+//    [self.navigationItem setRightBarButtonItem:Button];
     [self.view addSubview:self.progressingTableView];
     [self.view addSubview:self.progressingHeadView];
     [self.view addSubview:self.ReviewedFooterView];
@@ -138,18 +138,7 @@
         cell.Date.text = [self DateFromTimestamp:[onlineArrayPrg[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[onlineArrayPrg[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [onlineArrayPrg[indexPath.section] valueForKey:@"topic"];
         cell.feedid = [onlineArrayPrg[indexPath.section] valueForKey:@"feed_id"];
-        if ([[onlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
-        {
-            cell.type.text = @"线上活动";
-        }
-        else if([[onlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 1)
-        {
-            cell.type.text = @"线下活动";
-        }
-        else
-        {
-            cell.type.text = @"未知错误";
-        }
+        cell.typeText = [onlineArrayPrg[indexPath.section] valueForKey:@"activityType"];
     }
     else if (tableView.tag == 0 && !_progressingSegmentedControl.isOnline) {
         [cell.picture setImageWithURL:[NSURL URLWithString:[offlineArrayPrg[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
@@ -158,18 +147,7 @@
         cell.Date.text = [self DateFromTimestamp:[offlineArrayPrg[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[offlineArrayPrg[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [offlineArrayPrg[indexPath.section] valueForKey:@"topic"];
         cell.feedid = [offlineArrayPrg[indexPath.section] valueForKey:@"feed_id"];
-        if ([[offlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
-        {
-            cell.type.text = @"线上活动";
-        }
-        else if([[offlineArrayPrg[indexPath.section] valueForKey:@"activityType"] intValue] == 1)
-        {
-            cell.type.text = @"线下活动";
-        }
-        else
-        {
-            cell.type.text = @"未知错误";
-        }
+        cell.typeText = [offlineArrayPrg[indexPath.section] valueForKey:@"activityType"];
     }
     else if (tableView.tag == 1 && _ReviewedSegmentedControl.isOnline) {
         [cell.picture setImageWithURL:[NSURL URLWithString:[onlineArrayReviewed[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
@@ -178,18 +156,7 @@
         cell.Date.text = [self DateFromTimestamp:[onlineArrayReviewed[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[onlineArrayReviewed[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [onlineArrayReviewed[indexPath.section] valueForKey:@"topic"];
         cell.feedid = [onlineArrayReviewed[indexPath.section] valueForKey:@"feed_id"];
-        if ([[onlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
-        {
-            cell.type.text = @"线上活动";
-        }
-        else if([[onlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 1)
-        {
-            cell.type.text = @"线下活动";
-        }
-        else
-        {
-            cell.type.text = @"未知错误";
-        }
+        cell.typeText = [onlineArrayReviewed[indexPath.section] valueForKey:@"activityType"];
     }
     else if (tableView.tag == 1 && !_ReviewedSegmentedControl.isOnline) {
         [cell.picture setImageWithURL:[NSURL URLWithString:[offlineArrayReviewed[indexPath.section] valueForKey:@"cover"] ] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
@@ -198,18 +165,7 @@
         cell.Date.text = [self DateFromTimestamp:[offlineArrayReviewed[indexPath.section] valueForKey:@"begin_time"] endTimestamp:[offlineArrayReviewed[indexPath.section] valueForKey:@"end_time"] ];
         cell.title.text = [offlineArrayReviewed[indexPath.section] valueForKey:@"topic"];
         cell.feedid = [offlineArrayReviewed[indexPath.section] valueForKey:@"feed_id"];
-        if ([[offlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 0)
-        {
-            cell.type.text = @"线上活动";
-        }
-        else if([[offlineArrayReviewed[indexPath.section] valueForKey:@"activityType"] intValue] == 1)
-        {
-            cell.type.text = @"线下活动";
-        }
-        else
-        {
-            cell.type.text = @"未知错误";
-        }
+        cell.typeText = [offlineArrayReviewed[indexPath.section] valueForKey:@"activityType"];
     }
     
     return cell;
@@ -264,10 +220,7 @@
     ActivityTableViewCell *cell = (ActivityTableViewCell *)[tableView cellForRowAtIndexPath:indexPath];
     ActivityDetailViewController *vc = [[ActivityDetailViewController alloc] init];
     vc.feedid = cell.feedid;
-    vc.mask.headline.text = cell.title.text;
-    vc.mask.user.text = cell.user.text;
-    vc.mask.Date.text = cell.Date.text;
-    vc.mask.type.text = cell.type.text;
+
     [self.navigationController pushViewController:vc animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -314,7 +267,7 @@
         page = &offlinePagePrg;
     }
     
-    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
             if (isOline) {
@@ -329,6 +282,7 @@
             *page = 2;
             for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
                 [CoreData_Helper addActivityEntity:dic];
+                [CoreData_Helper addUserInfoEntity:[dic objectForKey:@"user_info"]];
             }
             NSLog(@"%@",[responseObject valueForKey:@"data"]);
         }
@@ -354,7 +308,7 @@
     
     if ([array count]%COUNT_OF_PAGE == 0) {//如果一页没填满就不刷新
         
-        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":[NSString stringWithFormat:@"%D",*page],@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":[NSString stringWithFormat:@"%D",*page],@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
             {
                 if (isOline) {
@@ -370,6 +324,7 @@
                 [_progressingTableView footerEndRefreshing];
                 for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
                     [CoreData_Helper addActivityEntity:dic];
+                    [CoreData_Helper addUserInfoEntity:[dic objectForKey:@"user_info"]];
                 }
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -393,8 +348,7 @@
     {
         page = &offlinePageReviewed;
     }
-    
-    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
             if (isOline) {
@@ -409,6 +363,7 @@
             [_ReviewedTableView headerEndRefreshing];
             for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
                 [CoreData_Helper addActivityEntity:dic];
+                [CoreData_Helper addUserInfoEntity:[dic objectForKey:@"user_info"]];
             }
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -433,7 +388,7 @@
     
     if ([array count]%COUNT_OF_PAGE == 0) {//如果一页没填满就不刷新
         
-        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":[NSString stringWithFormat:@"%D",*page],@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":[NSString stringWithFormat:@"%D",*page],@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
             {
                 if (isOline) {
@@ -449,6 +404,7 @@
                 [_ReviewedTableView footerEndRefreshing];
                 for (NSDictionary *dic in [responseObject valueForKey:@"data"]) {
                     [CoreData_Helper addActivityEntity:dic];
+                    [CoreData_Helper addUserInfoEntity:[dic objectForKey:@"user_info"]];
                 }
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -474,7 +430,7 @@
 
 #pragma mark -status switch
 
-- (void)handleTap:(UITapGestureRecognizer *)recognizer
+- (void)handleTap:(UITapGestureRecognizer *)recognizer//顶部的tableview的点击事件
 {
     downPoint = CGPointMake(self.view.frame.size.width / 2,self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER / 2);
 
@@ -513,14 +469,14 @@
     }];
 }
 
-- (void)handleTap2:(UITapGestureRecognizer *)recognizer
+- (void)handleTap2:(UITapGestureRecognizer *)recognizer//底部的tableview的点击事件
 {
     downPoint = CGPointMake(self.view.frame.size.width / 2,self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER / 2);
     
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         if (status == NO) {
             _ReviewedFooterView.center = downPoint;
-            status = !status;
+            status = !status;//1代表展示正在进行的活动，0代表展示往期活动
             oldStatus = status;
             _progressing.textColor = PRESENT_TITLE_COLOR;
             _reviewed.textColor = PAST_TITLE_COLOR;
@@ -533,7 +489,7 @@
     
 }
 
-- (void)handlePan:(UIPanGestureRecognizer *)recognizer
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer//底部的tableview拖拽事件
 {
     downPoint = CGPointMake(self.view.frame.size.width / 2,self.view.frame.size.height - HEIGHT_OF_HEADER_OR_FOOTER / 2);
     static long i = 0;

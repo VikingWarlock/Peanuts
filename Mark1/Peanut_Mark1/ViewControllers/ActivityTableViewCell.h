@@ -18,5 +18,6 @@
 @property (nonatomic,strong) UILabel *Date;
 @property (nonatomic,strong) UILabel *type;
 @property (nonatomic,strong) NSString *feedid;
+@property (nonatomic,strong) NSString *typeText;
 
 @end

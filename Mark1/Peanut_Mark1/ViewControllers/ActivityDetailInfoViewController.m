@@ -51,6 +51,7 @@
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_webView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_webView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_mask][_webView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_mask,_webView)]];
     [_webView loadHTMLString:[CoreData_Helper GetActivityEntity:self.feedid].descriptions baseURL:nil];
+    NSLog(@"%@",[CoreData_Helper GetActivityEntity:self.feedid].descriptions);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -80,12 +81,51 @@
 }
 */
 
+#pragma mark -webview delegate
+
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    //拦截网页图片  并修改图片大小
+    [webView stringByEvaluatingJavaScriptFromString:
+     @"var script = document.createElement('script');"
+     "script.type = 'text/javascript';"
+     "script.text = \"function ResizeImages() { "
+     "var myimg,oldwidth,oldheight;"
+     "var maxwidth=300;" //缩放系数
+//     "var OriginImage=new Image();"
+     "for(i=0;i <document.images.length;i++){"
+     "myimg = document.images[i];"
+//     "OriginImage.src=myimg.src;"
+     //     "if(myimg.width > maxwidth){"
+     "oldwidth = myimg.width;"
+     "oldheight = myimg.height;"
+     "myimg.style.width = maxwidth;"
+     "myimg.style.height = oldheight * (maxwidth/oldwidth);"
+     "myimg.width = maxwidth;"
+     "myimg.height = oldheight * (maxwidth/oldwidth);"
+     //     "}"
+     "}"
+     "}\";"
+     "document.getElementsByTagName('head')[0].appendChild(script);"];
+    
+    [webView stringByEvaluatingJavaScriptFromString:@"ResizeImages();"];
+    
+    [_webView.scrollView setContentSize:CGSizeMake(0, _webView.scrollView.contentSize.height)];
+}
+
+
 #pragma mark lazy initialization
 
 - (Mask *)mask
 {
     if (!_mask) {
         _mask = [[Mask alloc] init];
+        _mask.headline.text = [CoreData_Helper GetActivityEntity:self.feedid].topic;
+        _mask.user.text = [CoreData_Helper GetUserInfEntity:[CoreData_Helper GetActivityEntity:self.feedid].uid].uname;
+        _mask.Date.text = [CoreData_Helper DateFromTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].begin_time endTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].end_time];
+        _mask.typeText = [CoreData_Helper GetActivityEntity:self.feedid].activityType;
+        [_mask.avatar setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].avatar_tiny_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     }
     return _mask;
 }

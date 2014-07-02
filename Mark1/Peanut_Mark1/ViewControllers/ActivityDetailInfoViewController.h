@@ -10,7 +10,7 @@
 #import "BaseUIViewController.h"
 #import "Mask.h"
 
-@interface ActivityDetailInfoViewController : BaseUIViewController
+@interface ActivityDetailInfoViewController : BaseUIViewController <UIWebViewDelegate>
 @property (nonatomic,strong) Mask *mask;
 @property (nonatomic,strong) UITextView *textView;
 @property (nonatomic,strong) UIWebView *webView;

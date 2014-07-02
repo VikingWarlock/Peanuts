@@ -14,4 +14,5 @@
 @property (nonatomic,strong) NSString *feedid;
 @property (strong,nonatomic) Mask *mask;
 - (id)initWithFeedId:(int)feedId bgImageUrl:(NSURL *)url;
+- (id)initWithFeedId:(id)feedId;
 @end

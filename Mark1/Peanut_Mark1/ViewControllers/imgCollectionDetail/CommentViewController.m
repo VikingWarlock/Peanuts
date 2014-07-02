@@ -205,7 +205,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
     PublishCommentTableViewCell * cell = (PublishCommentTableViewCell*)[self.tableView cellForRowAtIndexPath:index];
     NSDictionary * dic = @{@"PHPSESSID":[NSString stringWithFormat:@"%@",USER_PHPSESSID],@"content":cell.commentView.text,@"to_uid":@""};
     [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Feed&act=comment" parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([[responseObject objectForKey:@"info"] isEqualToString:@"success"]) {
+        if ([[responseObject objectForKey:@"status"] intValue] == 1) {
             UIAlertView * alertView = [[UIAlertView alloc]initWithTitle:nil message:@"评论成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alertView show];
             [self downloadWithFeedId:feed_id];
