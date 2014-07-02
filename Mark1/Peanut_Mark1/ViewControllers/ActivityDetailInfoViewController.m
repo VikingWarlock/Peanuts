@@ -36,7 +36,6 @@
     [backImage setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
         [weakself setBackgroundImage:image andBlurEnable:YES];
     }];
-    [self.mask.avatar setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].avatar_tiny_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     [self.view addSubview:self.mask];
     //[self.view addSubview:self.textView];
     [self.view addSubview:self.webView];
@@ -126,7 +125,7 @@
         _mask.user.text = [CoreData_Helper GetUserInfEntity:[CoreData_Helper GetActivityEntity:self.feedid].uid].uname;
         _mask.Date.text = [CoreData_Helper DateFromTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].begin_time endTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].end_time];
         _mask.typeText = [CoreData_Helper GetActivityEntity:self.feedid].activityType;
-        [_mask.avatar setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].avatar_tiny_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        [_mask.avatar setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetUserInfEntity:[CoreData_Helper GetActivityEntity:self.feedid].uid].avatar_tiny] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     }
     return _mask;
 }
