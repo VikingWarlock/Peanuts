@@ -65,7 +65,7 @@
 		51B90CFF1963D92800C7046C /* upload-camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 51B90CD51963D92800C7046C /* upload-camera.png */; };
 		51B90D001963D92800C7046C /* upload-check.png in Resources */ = {isa = PBXBuildFile; fileRef = 51B90CD61963D92800C7046C /* upload-check.png */; };
 		51B90D011963D92800C7046C /* upload-check2.png in Resources */ = {isa = PBXBuildFile; fileRef = 51B90CD71963D92800C7046C /* upload-check2.png */; };
-		51B90D051964141B00C7046C /* activity－detial-hearted.png in Resources */ = {isa = PBXBuildFile; fileRef = 51B90D041964141B00C7046C /* activity－detial-hearted.png */; };
+		51B90D071964147400C7046C /* activity－detial-hearte.png in Resources */ = {isa = PBXBuildFile; fileRef = 51B90D061964147400C7046C /* activity－detial-hearte.png */; };
 		51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */; };
 		51FBFD34192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FBFD33192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.m */; };
 		51FBFD37192DF507009089FA /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 51FBFD36192DF507009089FA /* UserCell.m */; };
@@ -216,7 +216,7 @@
 		51B90CD51963D92800C7046C /* upload-camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload-camera.png"; sourceTree = "<group>"; };
 		51B90CD61963D92800C7046C /* upload-check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload-check.png"; sourceTree = "<group>"; };
 		51B90CD71963D92800C7046C /* upload-check2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "upload-check2.png"; sourceTree = "<group>"; };
-		51B90D041964141B00C7046C /* activity－detial-hearted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity－detial-hearted.png"; sourceTree = "<group>"; };
+		51B90D061964147400C7046C /* activity－detial-hearte.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "activity－detial-hearte.png"; sourceTree = "<group>"; };
 		51EFD0F019252D1600F5CC9D /* ActivityTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityTableViewCell.h; path = ViewControllers/ActivityTableViewCell.h; sourceTree = "<group>"; };
 		51EFD0F119252D1600F5CC9D /* ActivityTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActivityTableViewCell.m; path = ViewControllers/ActivityTableViewCell.m; sourceTree = "<group>"; };
 		51FBFD32192DF4A8009089FA /* ActivitDetailInterestedPeopleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivitDetailInterestedPeopleViewController.h; path = ViewControllers/ActivitDetailInterestedPeopleViewController.h; sourceTree = "<group>"; };
@@ -419,7 +419,7 @@
 				51B90CB71963D92800C7046C /* activity-detail-user-edit2.png */,
 				51B90CB81963D92800C7046C /* activity－detial-comment.png */,
 				51B90CB91963D92800C7046C /* activity－detial-heart.png */,
-				51B90D041964141B00C7046C /* activity－detial-hearted.png */,
+				51B90D061964147400C7046C /* activity－detial-hearte.png */,
 				51B90CBB1963D92800C7046C /* activity－detial-join.png */,
 				51B90CBC1963D92800C7046C /* activity－detial-joined.png */,
 				51B90CBD1963D92800C7046C /* activity－detial-like.png */,
@@ -836,7 +836,6 @@
 				51B90CE21963D92800C7046C /* activity－detial-comment.png in Resources */,
 				51B90CE31963D92800C7046C /* activity－detial-heart.png in Resources */,
 				51B90CDA1963D92800C7046C /* activity-detail-info-calendar.png in Resources */,
-				51B90D051964141B00C7046C /* activity－detial-hearted.png in Resources */,
 				51B90CF51963D92800C7046C /* imgCollection-comment-share.png in Resources */,
 				51B90CFA1963D92800C7046C /* individualCenter-mine-reply.png in Resources */,
 				51B90CFF1963D92800C7046C /* upload-camera.png in Resources */,
@@ -844,6 +843,7 @@
 				51B90CEA1963D92800C7046C /* activity－detial-upload.png in Resources */,
 				887F2116191D411D009250D2 /* Podfile in Resources */,
 				51B90CEB1963D92800C7046C /* camera.png in Resources */,
+				51B90D071964147400C7046C /* activity－detial-hearte.png in Resources */,
 				51B90CE91963D92800C7046C /* activity－detial-share.png in Resources */,
 				887F214D191E4590009250D2 /* 1.png in Resources */,
 				5122365F193A1A6A00831D93 /* MJRefresh.bundle in Resources */,
