@@ -8,7 +8,9 @@
 
 #import "PublishCommentTableViewCell.h"
 
-@implementation PublishCommentTableViewCell
+@implementation PublishCommentTableViewCell{
+    UIImage * image;
+}
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -110,9 +112,13 @@
 -(UIButton *)confirmBtn{
     if (!_confirmBtn) {
         _confirmBtn = [[UIButton alloc]initWithFrame:CGRectMake(160, 124, 12, 12)];
-        [_confirmBtn setTitle:@"*" forState:UIControlStateNormal];
+//        [_confirmBtn setTitle:@"*" forState:UIControlStateNormal];
         [_confirmBtn setBackgroundColor:[UIColor clearColor]];
         [_confirmBtn.layer setBorderColor:[UIColor whiteColor].CGColor];
+        image =[UIImage imageNamed:@"yes.png"];
+        [_confirmBtn setBackgroundImage:image forState:UIControlStateNormal];
+        [_confirmBtn setBackgroundImage:image forState:UIControlStateSelected];
+        [_confirmBtn setBackgroundImage:image forState:UIControlStateHighlighted];
         [_confirmBtn.layer setBorderWidth:1.0f];
         [_confirmBtn addTarget:self action:@selector(confirmBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         _confirmBtn.enabled = YES;
@@ -122,15 +128,16 @@
 
 -(void)confirmBtnClick:(UIButton *)sender{
     //
-    if ([sender.titleLabel.text isEqualToString:@"*"]) {
-        [sender setTitle:@"~" forState:UIControlStateSelected];
-        [sender setTitle:@"~" forState:UIControlStateHighlighted];
-        [sender setTitle:@"~" forState:UIControlStateNormal];
+    if (image!=nil) {
+        [sender setBackgroundImage:nil forState:UIControlStateNormal];
+        [sender setBackgroundImage:nil forState:UIControlStateHighlighted];
+        [sender setBackgroundImage:nil forState:UIControlStateSelected];
+        image = nil;
     }else{
-        [sender setTitle:@"*" forState:UIControlStateSelected];
-        [sender setTitle:@"*" forState:UIControlStateHighlighted];
-        [sender setTitle:@"*" forState:UIControlStateNormal];
-
+        image = [UIImage imageNamed:@"yes.png"];
+        [sender setBackgroundImage:image forState:UIControlStateNormal];
+        [sender setBackgroundImage:image forState:UIControlStateHighlighted];
+        [sender setBackgroundImage:image forState:UIControlStateSelected];
     }
 
 }
