@@ -68,6 +68,11 @@
 		8830CFF5193C4289001763FD /* NSDictionary+extra.m in Sources */ = {isa = PBXBuildFile; fileRef = 8830CFF4193C4289001763FD /* NSDictionary+extra.m */; };
 		883E546A19339EDF00E8D2CE /* PhotoDetailEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 881DA817192E228B0043AF21 /* PhotoDetailEntity.m */; };
 		883E546F19339EDF00E8D2CE /* CoreData-Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C5E371932E57D008F885A /* CoreData-Helper.m */; };
+		8850AC1C19642AAA00CCB291 /* PersonalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8850AC1B19642AAA00CCB291 /* PersonalViewController.m */; };
+		8850AC1F19642C9C00CCB291 /* login_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8850AC1D19642C9C00CCB291 /* login_button@2x.png */; };
+		8850AC2019642C9C00CCB291 /* logo_loginPage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8850AC1E19642C9C00CCB291 /* logo_loginPage@2x.png */; };
+		8850AC23196430F500CCB291 /* Peanuts_Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8850AC22196430F500CCB291 /* Peanuts_Helper.m */; };
+		8850AC251964397800CCB291 /* accept_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8850AC241964397800CCB291 /* accept_button@2x.png */; };
 		885F6341192A4447007BAAE0 /* RequestPackage.m in Sources */ = {isa = PBXBuildFile; fileRef = 885F6340192A4447007BAAE0 /* RequestPackage.m */; };
 		886C08941920F1EB00BD7E5F /* NetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 886C08931920F1EB00BD7E5F /* NetworkRequest.m */; };
 		887F20E7191D4051009250D2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 887F20E6191D4051009250D2 /* Foundation.framework */; };
@@ -239,6 +244,13 @@
 		881DA81C192E27A20043AF21 /* API_address.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = API_address.h; path = PublicLibrary/API_address.h; sourceTree = "<group>"; };
 		8830CFF3193C4289001763FD /* NSDictionary+extra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+extra.h"; path = "PublicLibrary/NSDictionary+extra.h"; sourceTree = "<group>"; };
 		8830CFF4193C4289001763FD /* NSDictionary+extra.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+extra.m"; path = "PublicLibrary/NSDictionary+extra.m"; sourceTree = "<group>"; };
+		8850AC1A19642AAA00CCB291 /* PersonalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PersonalViewController.h; path = ViewControllers/PersonalViewController.h; sourceTree = "<group>"; };
+		8850AC1B19642AAA00CCB291 /* PersonalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PersonalViewController.m; path = ViewControllers/PersonalViewController.m; sourceTree = "<group>"; };
+		8850AC1D19642C9C00CCB291 /* login_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login_button@2x.png"; path = "img/login_button@2x.png"; sourceTree = "<group>"; };
+		8850AC1E19642C9C00CCB291 /* logo_loginPage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logo_loginPage@2x.png"; path = "img/logo_loginPage@2x.png"; sourceTree = "<group>"; };
+		8850AC21196430F500CCB291 /* Peanuts_Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Peanuts_Helper.h; path = BaseModel/Peanuts_Helper.h; sourceTree = "<group>"; };
+		8850AC22196430F500CCB291 /* Peanuts_Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Peanuts_Helper.m; path = BaseModel/Peanuts_Helper.m; sourceTree = "<group>"; };
+		8850AC241964397800CCB291 /* accept_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "accept_button@2x.png"; path = "img/accept_button@2x.png"; sourceTree = "<group>"; };
 		885F633F192A4447007BAAE0 /* RequestPackage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RequestPackage.h; path = Networks/RequestPackage.h; sourceTree = "<group>"; };
 		885F6340192A4447007BAAE0 /* RequestPackage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RequestPackage.m; path = Networks/RequestPackage.m; sourceTree = "<group>"; };
 		886C08921920F1EB00BD7E5F /* NetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetworkRequest.h; path = CoreData/NetworkRequest.h; sourceTree = "<group>"; };
@@ -479,6 +491,15 @@
 			path = img/icon;
 			sourceTree = "<group>";
 		};
+		8850AC1619642A5900CCB291 /* PersonalViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8850AC1A19642AAA00CCB291 /* PersonalViewController.h */,
+				8850AC1B19642AAA00CCB291 /* PersonalViewController.m */,
+			);
+			name = PersonalViewController;
+			sourceTree = "<group>";
+		};
 		8870BE5C1924FE1B00233614 /* SNSPartOutlet */ = {
 			isa = PBXGroup;
 			children = (
@@ -586,6 +607,7 @@
 		887F2118191DB787009250D2 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				8850AC1619642A5900CCB291 /* PersonalViewController */,
 				887F2130191DF569009250D2 /* SquareViewController */,
 				887F212F191DF55F009250D2 /* MustReadViewController */,
 				887F212E191DF3CC009250D2 /* imgCollection */,
@@ -655,6 +677,8 @@
 				88DE03FB19372FD800E2B9AC /* UIImageView+ForBroswer.m */,
 				8830CFF3193C4289001763FD /* NSDictionary+extra.h */,
 				8830CFF4193C4289001763FD /* NSDictionary+extra.m */,
+				8850AC21196430F500CCB291 /* Peanuts_Helper.h */,
+				8850AC22196430F500CCB291 /* Peanuts_Helper.m */,
 			);
 			name = PublicLibrary;
 			sourceTree = "<group>";
@@ -736,6 +760,9 @@
 		887F2147191E4585009250D2 /* img */ = {
 			isa = PBXGroup;
 			children = (
+				8850AC241964397800CCB291 /* accept_button@2x.png */,
+				8850AC1D19642C9C00CCB291 /* login_button@2x.png */,
+				8850AC1E19642C9C00CCB291 /* logo_loginPage@2x.png */,
 				88BDFB341964205C003C21CF /* activity_button.png */,
 				88BDFB351964205C003C21CF /* MustRead_button.png */,
 				88BDFB361964205C003C21CF /* peanuts_title@2x.png */,
@@ -892,6 +919,7 @@
 				51B90CEF1963D92800C7046C /* home-reading.png in Resources */,
 				51B90D011963D92800C7046C /* upload-check2.png in Resources */,
 				D2F32F0B1925F88B00E446D6 /* like.png in Resources */,
+				8850AC1F19642C9C00CCB291 /* login_button@2x.png in Resources */,
 				51B90CE51963D92800C7046C /* activity－detial-join.png in Resources */,
 				F2BE8B0C1964189C00607CB7 /* bottom_praise.png in Resources */,
 				887F2151191E4590009250D2 /* pic.jpg in Resources */,
@@ -901,6 +929,7 @@
 				887F214E191E4590009250D2 /* 2.png in Resources */,
 				51B90CF01963D92800C7046C /* home-user.png in Resources */,
 				88BDFB3E1964205C003C21CF /* search_button@2x.png in Resources */,
+				8850AC251964397800CCB291 /* accept_button@2x.png in Resources */,
 				51B90CF81963D92800C7046C /* individualCenter-mine-dig.png in Resources */,
 				51B90CE01963D92800C7046C /* activity-detail-user-edit.png in Resources */,
 				51B90CE71963D92800C7046C /* activity－detial-like.png in Resources */,
@@ -920,6 +949,7 @@
 				51B90CD81963D92800C7046C /* activity-location.png in Resources */,
 				51B90CE81963D92800C7046C /* activity－detial-liked.png in Resources */,
 				51B90CE61963D92800C7046C /* activity－detial-joined.png in Resources */,
+				8850AC2019642C9C00CCB291 /* logo_loginPage@2x.png in Resources */,
 				51B90CDD1963D92800C7046C /* activity-detail-pics-like.png in Resources */,
 				51B90CDF1963D92800C7046C /* activity-detail-pics-share.png in Resources */,
 				F2BD699F196420760044F335 /* imgCollection_praise.png in Resources */,
@@ -998,6 +1028,7 @@
 				F2F8BF1F1924EFE6000A3CED /* PeanutTopViewController.m in Sources */,
 				8896668819348AD600138572 /* UserInfEntity.m in Sources */,
 				51223662193A1A6A00831D93 /* MJRefreshFooterView.m in Sources */,
+				8850AC1C19642AAA00CCB291 /* PersonalViewController.m in Sources */,
 				D29EA96719372CEE001FEE36 /* NoReadCell.m in Sources */,
 				8896668519348AD600138572 /* PhotoSeriesEntity.m in Sources */,
 				51EFD0F219252D1600F5CC9D /* ActivityTableViewCell.m in Sources */,
@@ -1008,6 +1039,7 @@
 				88D02ABA191E724C001ABA96 /* SquareViewController.m in Sources */,
 				887F213C191DF9D2009250D2 /* UIView+extra.m in Sources */,
 				88D02AB4191E721C001ABA96 /* ActivityViewController.m in Sources */,
+				8850AC23196430F500CCB291 /* Peanuts_Helper.m in Sources */,
 				D2F32F12192607ED00E446D6 /* MustReaddetialViewController.m in Sources */,
 				8896668219348AD600138572 /* PhotoInfoEntity.m in Sources */,
 				887F213B191DF9D2009250D2 /* UIImage+extra.m in Sources */,

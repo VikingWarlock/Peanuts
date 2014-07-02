@@ -20,7 +20,7 @@
 #import "MustReaddetialViewController.h"
 
 #import "SelfUser_ViewController.h"
-
+#import "PersonalViewController.h"
 #import <UIImageView+WebCache.h>
 #import "StaticDataManager.h"
 
@@ -173,9 +173,17 @@
 
 -(void)LeftButton
 {
-    SelfUser_ViewController *vc=[[SelfUser_ViewController alloc]init];
-//    [vc setBackgroundImage:[self.view captureView] andBlurEnable:YES];
+    UIViewController *vc;
+    if ([USER_PHPSESSID length]<=0) {
+    vc=[[SelfUser_ViewController alloc]init];
+    }
+    else
+    {
+    vc=[[PersonalViewController alloc]init];
+    }
+    
     [self.NavigationController pushViewController:vc animated:YES];
+
 }
 
 

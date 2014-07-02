@@ -333,13 +333,10 @@
 
     if (overFlow==nil) {
         overFlow=[[UIImageView alloc]initWithImage:item];
-        
         [Slider addSubview:overFlow];
-        
         [overFlow setContentMode:UIViewContentModeScaleAspectFit];
         overFlow.backgroundColor=[UIColor clearColor];
         overFlow.frame=CGRectMake(Slider.frame.size.width*0.25, Slider.frame.size.height*0.2, Slider.frame.size.width*0.5, Slider.frame.size.height*0.6);
-      
         [Slider bringSubviewToFront:overFlow];
         
     }else
