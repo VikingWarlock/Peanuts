@@ -142,7 +142,7 @@
     
     if (titleView==nil) {
         titleView =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"peanuts_title.png"]];
-        [titleView setContentMode:UIViewContentModeCenter];
+        [titleView setContentMode:UIViewContentModeScaleAspectFit];
         [titleView setClipsToBounds:NO];
         [self.navigationItem setTitleView:titleView];
     }else
