@@ -51,6 +51,11 @@ typedef NS_ENUM(NSInteger, Cell_Init_Direction) {
  */
 -(void)backToOriginWithAnimate:(BOOL)animate;
 
+/**
+ *
+ *
+ */
+-(void)insertBlurView:(UIImage*)item;
 
 
 
