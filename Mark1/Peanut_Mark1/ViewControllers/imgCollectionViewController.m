@@ -154,18 +154,31 @@ static NSString * cellIdentifier = @"cellIdentifier";
 -(void)praiseBtnClickAtCell:(UITableViewCell *)cell{
     NSMutableArray * mutableData = [[NSMutableArray alloc]initWithArray:imgData];
     imgCollectionTableViewCell * cell1 = (imgCollectionTableViewCell *)cell;
-    NSInteger count = [cell1.praiseBtn.titleLabel.text integerValue];
-    [cell1 setPraiseBtnTitle:++count];
+//    NSInteger count = [cell1.praiseBtn.titleLabel.text integerValue];
+//    [cell1 setPraiseBtnTitle:++count];
     NSIndexPath * indexPath = [self.tableView indexPathForCell:cell1];
-    NSMutableDictionary * rowData = [mutableData[indexPath.row] mutableCopy];
-    
+    NSMutableDictionary * rowData = mutableData[indexPath.row];
+//
     [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Feed&act=digg" parameters:@{USER_Token:USER_PHPSESSID,@"feed_id":[NSString stringWithFormat:@"%d",[[rowData objectForKey:@"feed_id"] intValue]]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        if ([[responseObject objectForKey:@"info"] isEqualToString:@"success"]) {
-            int digCount = [rowData[@"digg_count"] intValue];
-            [rowData removeObjectForKey:@"digg_count"];
-            [rowData setValue:[NSString stringWithFormat:@"%d",++digCount] forKey:@"digg_count"];
-            [mutableData replaceObjectAtIndex:indexPath.row withObject:rowData];
-            imgData = mutableData;
+        int digCount = [rowData[@"digg_count"] intValue];
+        if ([[responseObject objectForKey:@"status"] intValue] == 1) {
+            [cell1 setPraiseBtnTitle:++digCount];
+//            rowData[@"digg_count"] = [NSString stringWithFormat:@"%d",digCount];
+            UIAlertView * alter = [[UIAlertView alloc]initWithTitle:nil message:@"点赞成功" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alter show];
+        }
+        else
+        {
+            [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Feed&act=deldigg" parameters:@{USER_Token:USER_PHPSESSID,@"feed_id":[NSString stringWithFormat:@"%d",[[rowData objectForKey:@"feed_id"] intValue]]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                int digCount = [rowData[@"digg_count"] intValue];
+                [cell1 setPraiseBtnTitle:--digCount];
+//                rowData[@"digg_count"] = [NSString stringWithFormat:@"%d",digCount];
+                UIAlertView * alter = [[UIAlertView alloc]initWithTitle:nil message:@"取消成功!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alter show];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                
+            }];
+
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
