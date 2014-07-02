@@ -73,7 +73,7 @@
 {
     if (!_user) {
         _user = [[UILabel alloc] init];
-        _user.text = @"ZAKER";
+        _user.text = @"未知";
         _user.textColor = [UIColor whiteColor];
         _user.font = [UIFont boldSystemFontOfSize:10];
     }
@@ -96,7 +96,7 @@
 {
     if (!_avatar) {
         _avatar = [[UIImageView alloc] init];
-        _avatar.image = nil;
+        _avatar.image = [UIImage imageNamed:@"placeholder.png"];
     }
     return _avatar;
 }
@@ -106,7 +106,7 @@
     if (!_Date) {
         _Date = [[UILabel alloc] init];
         _Date.textColor = [UIColor whiteColor];
-        _Date.text = @"2014/05/12 - 2014/11/02";
+        _Date.text = @"1970/01/01 - 1970/01/01";
         _Date.font = [UIFont boldSystemFontOfSize:10];
     }
     return _Date;
@@ -126,7 +126,7 @@
     if (!_type) {
         _type = [[UILabel alloc] init];
         _type.textColor = [UIColor whiteColor];
-        _type.text = @"线上活动";
+        _type.text = @"未知错误";
         _type.font = [UIFont boldSystemFontOfSize:10];
     }
     return _type;
