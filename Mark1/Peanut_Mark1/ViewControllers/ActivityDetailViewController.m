@@ -51,7 +51,8 @@
     self = [super init];
     if (self)
     {
-        _feedid = feedId;
+        _feedid = [NSString stringWithFormat:@"%@",feedId];
+        
     }
     return self;
 }
@@ -59,6 +60,30 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if ([CoreData_Helper GetActivityEntity:_feedid] == nil) {
+        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity" parameters:@{@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             if ([[responseObject valueForKey:@"status"] intValue] == 1)
+             {
+                 NSDictionary *dic = [responseObject valueForKey:@"data"];
+                 [CoreData_Helper addActivityEntity:dic];
+                 [CoreData_Helper addUserInfoEntity:[dic objectForKey:@"user_info"]];
+                 
+                 [self.picture setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+                 self.mask.headline.text = [CoreData_Helper GetActivityEntity:self.feedid].topic;
+                 self.mask.user.text = [CoreData_Helper GetUserInfEntity:[CoreData_Helper GetActivityEntity:self.feedid].uid].uname;
+                 self.mask.Date.text = [CoreData_Helper DateFromTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].begin_time endTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].end_time];
+                 self.mask.typeText = [CoreData_Helper GetActivityEntity:self.feedid].activityType;
+                 [self.mask.avatar setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].avatar_tiny_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+                 self.navigationItem.title = _mask.headline.text;
+             }
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"%@",error);
+         }];
+    }
+
+    
     [self getFirstPage];
     [self.picture setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
     
@@ -361,11 +386,13 @@
 {
     if (!_mask) {
         _mask = [[Mask alloc] init];
-        _mask.headline.text = [CoreData_Helper GetActivityEntity:self.feedid].topic;
-        _mask.user.text = [CoreData_Helper GetUserInfEntity:[CoreData_Helper GetActivityEntity:self.feedid].uid].uname;
-        _mask.Date.text = [CoreData_Helper DateFromTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].begin_time endTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].end_time];
-        _mask.typeText = [CoreData_Helper GetActivityEntity:self.feedid].activityType;
-        [_mask.avatar setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].avatar_tiny_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        if ([CoreData_Helper GetActivityEntity:self.feedid] != nil) {
+            _mask.headline.text = [CoreData_Helper GetActivityEntity:self.feedid].topic;
+            _mask.user.text = [CoreData_Helper GetUserInfEntity:[CoreData_Helper GetActivityEntity:self.feedid].uid].uname;
+            _mask.Date.text = [CoreData_Helper DateFromTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].begin_time endTimestamp:[CoreData_Helper GetActivityEntity:self.feedid].end_time];
+            _mask.typeText = [CoreData_Helper GetActivityEntity:self.feedid].activityType;
+            [_mask.avatar setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].avatar_tiny_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+        }
     }
     return _mask;
 }
