@@ -101,6 +101,8 @@
     [super viewWillAppear:animated];
     self.navigationItem.title = _mask.headline.text;
     ((UIViewController *)(self.navigationController.viewControllers)[[self.navigationController.viewControllers indexOfObject:self] - 1]).navigationItem.title = @"";
+    
+    NSLog(@"\n\nfeed_id:%@\n PHPSESSID:%@\n\n",self.feedid,USER_PHPSESSID);
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -171,7 +173,7 @@
     }];
     
     //感兴趣的人
-    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_love_list" parameters:@{@"page":@"1",@"count":@"10",@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_love_list" parameters:@{@"page":@"1",@"count":@"10",@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {NSLog(@"\n\nresponseObject:%@\n\n",[responseObject valueForKey:@"data"]);
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
             interesteUsers = [responseObject valueForKey:@"data"];
@@ -200,18 +202,17 @@
 
 - (void)joinActivity:(id)sender
 {
-    NSLog(@"%@,%@",USER_PHPSESSID,_feedid);
     [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_join" parameters:@{@"PHPSESSID":USER_PHPSESSID,@"feed_id":_feedid} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@",responseObject);
         if ([_join.text isEqualToString:@"我要参加"])
         {
             _join.text = @"已参加";
-            _joinImage.image = [UIImage imageNamed:@"1.png"];
+            _joinImage.image = [UIImage imageNamed:@"activity－detial-joined.png"];
         }
         else if ([_join.text isEqualToString:@"已参加"])
         {
             _join.text = @"我要参加";
-            _joinImage.image = [UIImage imageNamed:@"2.png"];
+            _joinImage.image = [UIImage imageNamed:@"activity－detial-join.png"];
         }
         else
         {
@@ -229,12 +230,12 @@
         if ([_interest.text isEqualToString:@"我感兴趣"])
         {
             _interest.text = @"已感兴趣";
-            _interestImage.image = [UIImage imageNamed:@"1.png"];
+            _interestImage.image = [UIImage imageNamed:@"activity－detial-hearted.png"];
         }
         else if ([_interest.text isEqualToString:@"已感兴趣"])
         {
             _interest.text = @"我感兴趣";
-            _interestImage.image = [UIImage imageNamed:@"2.png"];
+            _interestImage.image = [UIImage imageNamed:@"activity－detial-heart.png"];
         }
         else
         {

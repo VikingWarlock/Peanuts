@@ -196,7 +196,7 @@
         UILabel *label = [[UILabel alloc] init];
         label.text = @"活动用户";
         label.textAlignment = NSTextAlignmentLeft;
-        label.textColor = [UIColor redColor];
+        label.textColor = Dark_Red;
         label.font = [UIFont systemFontOfSize:12];
         [_header addSubview:label];
         [label setTranslatesAutoresizingMaskIntoConstraints:NO];

@@ -267,7 +267,7 @@
         page = &offlinePagePrg;
     }
     
-    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
             if (isOline) {
@@ -308,7 +308,7 @@
     
     if ([array count]%COUNT_OF_PAGE == 0) {//如果一页没填满就不刷新
         
-        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":[NSString stringWithFormat:@"%D",*page],@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":[NSString stringWithFormat:@"%D",*page],@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
             {
                 if (isOline) {
@@ -348,8 +348,7 @@
     {
         page = &offlinePageReviewed;
     }
-    
-    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":@"1",@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
         {
             if (isOline) {
@@ -389,7 +388,7 @@
     
     if ([array count]%COUNT_OF_PAGE == 0) {//如果一页没填满就不刷新
         
-        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":[NSString stringWithFormat:@"%D",*page],@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",!isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Activity&act=activity_list" parameters:@{@"page":[NSString stringWithFormat:@"%D",*page],@"count":[NSString stringWithFormat:@"%d",COUNT_OF_PAGE],@"activityType":[NSString stringWithFormat:@"%d",!isOline],@"isCurrent":[NSString stringWithFormat:@"%d",isprogressing]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"])
             {
                 if (isOline) {
