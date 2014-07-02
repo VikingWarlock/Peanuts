@@ -143,8 +143,7 @@
 {
     if (!_calendar) {
         _calendar = [[UIImageView alloc] init];
-        _calendar.image = nil;
-        _calendar.backgroundColor = [UIColor orangeColor];
+        _calendar.image = [UIImage imageNamed:@"activity-calendar"];
     }
     return _calendar;
 }
@@ -180,8 +179,7 @@
 {
     if (!_flag) {
         _flag = [[UIImageView alloc] init];
-        _flag.image = nil;
-        _flag.backgroundColor = [UIColor greenColor];
+        _flag.image = [UIImage imageNamed:@"activity-location"];
     }
     return _flag;
 }

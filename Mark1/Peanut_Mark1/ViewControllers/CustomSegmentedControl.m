@@ -7,17 +7,24 @@
 //
 
 #import "CustomSegmentedControl.h"
+@interface CustomSegmentedControl()
+{
+    BOOL tag1;
+    BOOL tag2;
+}
 
+@end
 @implementation CustomSegmentedControl
-#define SELECTED_COLOR [UIColor redColor]
-#define NOT_SELECTED_COLOR [UIColor grayColor]
-#define SELECTED_COLOR_GRAY [UIColor darkGrayColor]
-#define NOT_SELECTED_COLOR_GRAY [UIColor lightGrayColor]
+#define SELECTED_COLOR Dark_Red
+#define NOT_SELECTED_COLOR [UIColor colorWithRed:218.0/255.0 green:218.0/255.0 blue:218.0/255.0 alpha:1]
+#define SELECTED_COLOR_GRAY [UIColor colorWithRed:178.0/255.0 green:178.0/255.0 blue:178.0/255.0 alpha:1]
+#define NOT_SELECTED_COLOR_GRAY [UIColor colorWithRed:218.0/255.0 green:218.0/255.0 blue:218.0/255.0 alpha:1]
 
 - (id)initWithisProgressing:(BOOL)isProgressing
 {
     self = [super init];
     if (self) {
+        tag1 = 
         _isOnline = YES;
         [self addSubview:self.leftButton];
         [self addSubview:self.rightButton];
@@ -35,11 +42,15 @@
 
 - (void)switchStatus:(id)sender
 {
-    if (((UIButton *)sender).backgroundColor == NOT_SELECTED_COLOR || ((UIButton *)sender).backgroundColor == NOT_SELECTED_COLOR_GRAY) {
+    if (((UIButton *)sender).titleLabel.tag == 0) {
         UIColor *temp = _leftButton.backgroundColor;
         _leftButton.backgroundColor = _rightButton.backgroundColor;
         _rightButton.backgroundColor = temp;
         _isOnline = ((UIButton *)sender).tag;
+        
+        int tempTag = _rightButton.titleLabel.tag;
+        _rightButton.titleLabel.tag = _leftButton.titleLabel.tag;
+        _leftButton.titleLabel.tag = tempTag;
         [self.delegate ClickedButtonIsOnline:_isOnline IsPresenting:_isPresenting IsProgressing:_isProgressing];
     }
 }
@@ -51,11 +62,17 @@
         if (_isOnline == YES) {
             _leftButton.backgroundColor = SELECTED_COLOR;
             _rightButton.backgroundColor = NOT_SELECTED_COLOR;
+            
+            _leftButton.titleLabel.tag = 1;
+            _rightButton.titleLabel.tag = 0;
         }
         else
         {
             _leftButton.backgroundColor = NOT_SELECTED_COLOR;
             _rightButton.backgroundColor = SELECTED_COLOR;
+            
+            _leftButton.titleLabel.tag = 0;
+            _rightButton.titleLabel.tag = 1;
         }
     }
     else
@@ -63,11 +80,17 @@
         if (_isOnline == YES) {
             _leftButton.backgroundColor = SELECTED_COLOR_GRAY;
             _rightButton.backgroundColor = NOT_SELECTED_COLOR_GRAY;
+            
+            _leftButton.titleLabel.tag = 1;
+            _rightButton.titleLabel.tag = 0;
         }
         else
         {
             _leftButton.backgroundColor = NOT_SELECTED_COLOR_GRAY;
             _rightButton.backgroundColor = SELECTED_COLOR_GRAY;
+            
+            _leftButton.titleLabel.tag = 0;
+            _rightButton.titleLabel.tag = 1;
         }
     }
 }
@@ -82,6 +105,7 @@
         _leftButton.backgroundColor = SELECTED_COLOR;
         [_leftButton addTarget:self action:@selector(switchStatus:) forControlEvents:UIControlEventTouchUpInside];
         _leftButton.tag = 1;
+        _leftButton.titleLabel.tag = 1;
     }
     return _leftButton;
 }
@@ -96,6 +120,7 @@
         _rightButton.backgroundColor = NOT_SELECTED_COLOR;
         [_rightButton addTarget:self action:@selector(switchStatus:) forControlEvents:UIControlEventTouchUpInside];
         _rightButton.tag = 0;
+        _rightButton.titleLabel.tag = 0;
     }
     return _rightButton;
 }

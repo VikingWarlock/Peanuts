@@ -13,6 +13,7 @@
 @interface ActivitDetailInterestedPeopleViewController ()
 {
     UIImageView *backImage;
+    NSMutableArray *avatars;
 }
 @property (strong,nonatomic) UIView *header;
 @property (nonatomic,strong) UITableView *tableview;
@@ -35,6 +36,7 @@
 {
     [super viewDidLoad];
     backImage = [[UIImageView alloc] init];
+    avatars = [[NSMutableArray alloc] initWithCapacity:10];
     __weak ActivitDetailInterestedPeopleViewController *weakself = self;
     [backImage setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
         [weakself setBackgroundImage:image andBlurEnable:YES];
@@ -53,6 +55,8 @@
     [_tableview setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_tableview)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_header][_tableview]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_header,_tableview)]];
+    
+    //[self getAvatar];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -94,6 +98,19 @@
     return 70;
 }
 
+#pragma mark -network
+
+- (void)getAvatar
+{
+    for (NSDictionary *dic in _interesteUsers) {
+        UIImageView *imageview = [[UIImageView alloc] init];
+        [imageview setImageWithURL:[NSURL URLWithString:[dic valueForKey:@"avatar_tiny"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [avatars addObject:image];
+            ((UserCell *)[_tableview cellForRowAtIndexPath:[NSIndexPath indexPathForItem:1 inSection:0]]).avatar.image = image;
+        }];
+    }
+}
+
 #pragma mark -lazy initialization
 
 - (UIView *)header
@@ -105,7 +122,7 @@
         UILabel *label = [[UILabel alloc] init];
         label.text = @"感兴趣的人";
         label.textAlignment = NSTextAlignmentLeft;
-        label.textColor = [UIColor redColor];
+        label.textColor = Dark_Red;
         label.font = [UIFont systemFontOfSize:12];
         [_header addSubview:label];
         [label setTranslatesAutoresizingMaskIntoConstraints:NO];
