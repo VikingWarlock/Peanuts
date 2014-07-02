@@ -19,9 +19,12 @@
     UIPanGestureRecognizer *gesture;
     UIView *Slider;
     UIImageView *imageInSlider;
+    UIImageView *imgView;
     Cell_Init_Direction init_dir;
     
     UIImage *bluredImage;
+    UIImageView *overFlow;
+    
     
     CGPoint startingPoint;
     CGPoint originPoint;
@@ -37,18 +40,35 @@
     self.BKImage=[bkImage copy];
     [self setupLayout];
     
+    [self updateConstraints];
+    
+    bluredImage=[self darkened:0.5f andBlurredImage:18.f blendModeFilterName:@"CIMultiplyBlendMode" :self.BKImage];
 
     
     self.Delegate_Blur=delegate;
     
-    Slider=[[UIView alloc]init];
-    
-    imageInSlider=[[UIImageView alloc]initWithImage:bluredImage];
-    Slider.clipsToBounds=YES;
-    [self addSubview:Slider];
-    [Slider addSubview:imageInSlider];
+    if (Slider==nil) {
+        Slider=[[UIView alloc]init];
+        [self addSubview:Slider];
 
-    [Slider setBackgroundColor:[UIColor lightGrayColor]];
+    }else
+    {
+    
+    }
+    
+    
+    if(imageInSlider==nil)
+    {
+    imageInSlider=[[UIImageView alloc]initWithImage:bluredImage];
+        [Slider addSubview:imageInSlider];
+    }
+    else
+    {
+        imageInSlider.image=bluredImage;
+    }
+    
+    Slider.clipsToBounds=YES;
+    [Slider setBackgroundColor:[UIColor clearColor]];
     
     gestureEnable=YES;
     
@@ -80,8 +100,12 @@
     imageInSlider.clipsToBounds=YES;
     [imageInSlider setFrame:CGRectMake(-Slider.frame.origin.x, 0, self.frame.size.width, self.frame.size.height)];
     
+    if (gesture==nil) {
+        gesture=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(GestureHandle:)];
+    }else
+    {
+    }
     
-    gesture=[[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(GestureHandle:)];
     gesture.delegate=self;
     [Slider addGestureRecognizer:gesture];
     [Slider setUserInteractionEnabled:YES];
@@ -108,12 +132,22 @@
  
 -(void)setupLayout
 {
-    UIImageView *imgView=[[UIImageView alloc]initWithImage:self.BKImage];
+    if (imgView==nil) {
+        imgView=[[UIImageView alloc]initWithImage:self.BKImage];
+        [self addSubview:imgView];
+    }else
+    {
+        imgView.image=self.BKImage;
+    }
     [imgView setContentMode:UIViewContentModeScaleAspectFill];
     [imgView setClipsToBounds:YES];
-    [self addSubview:imgView];
     imgView.frame=CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-    bluredImage=[self darkened:0.5f andBlurredImage:18.f blendModeFilterName:@"CIMultiplyBlendMode" :[imgView captureView]];
+
+    [imgView setNeedsDisplay];
+    [imgView setNeedsLayout];
+    [self setNeedsDisplay];
+    [self setNeedsLayout];
+    
     
 }
 
@@ -231,8 +265,11 @@
 
 -(void)sliderConfig
 {
-    [Slider clipsToBounds];
+ //   [Slider clipsToBounds];
     Slider.contentMode=UIViewContentModeScaleAspectFill;
+ //   [imageInSlider clipsToBounds];
+    imageInSlider.contentMode=UIViewContentModeScaleAspectFill;
+    
 }
 
 
@@ -290,6 +327,29 @@
     return blurredAndDarkenedImage;
 }
 
+
+-(void)insertBlurView:(UIImage *)item
+{
+
+    if (overFlow==nil) {
+        overFlow=[[UIImageView alloc]initWithImage:item];
+        
+        [Slider addSubview:overFlow];
+        
+        [overFlow setContentMode:UIViewContentModeScaleAspectFit];
+        overFlow.backgroundColor=[UIColor clearColor];
+        overFlow.frame=CGRectMake(Slider.frame.size.width*0.25, Slider.frame.size.height*0.2, Slider.frame.size.width*0.5, Slider.frame.size.height*0.6);
+      
+        [Slider bringSubviewToFront:overFlow];
+        
+    }else
+    {
+
+    }
+    
+
+
+}
 
 
 

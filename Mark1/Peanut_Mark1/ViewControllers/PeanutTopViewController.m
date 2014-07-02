@@ -39,6 +39,8 @@
     UIImageView *HeadimageView;
     NSArray *IndexList;
     
+    UIImageView *titleView;
+    
     SDImageCache *ImageCache;
     
 }
@@ -136,21 +138,30 @@
     [self.NavigationController.navigationBar setBackgroundImage:[[UIImage alloc]init] forBarMetrics:UIBarMetricsDefault];
     [self.NavigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     [self.NavigationController.navigationBar setBackgroundColor:[UIColor clearColor]];
-    self.navigationItem.title=@"花生米";
-
+//    self.navigationItem.title=@"花生米";
+    
+    if (titleView==nil) {
+        titleView =[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"peanuts_title.png"]];
+        [titleView setContentMode:UIViewContentModeScaleAspectFit];
+        [titleView setClipsToBounds:NO];
+        [self.navigationItem setTitleView:titleView];
+    }else
+        [self.navigationItem setTitleView:titleView];
     
 
-    backGroundImageColor=[[[self.view getClipView:CGRectMake(0, 0, 320, 40)] captureView]averageColor];
+  //  backGroundImageColor=[[[self.view getClipView:CGRectMake(0, 0, 320, 40)] captureView]averageColor];
     
     
     [self.NavigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName: backGroundImageColor==nil?[UIColor whiteColor]:[backGroundImageColor invertedColor]}];
     
     
-    UIBarButtonItem *userButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(LeftButton)];
+//    UIBarButtonItem *userButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(LeftButton)];
+    UIBarButtonItem *userButton=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"person_button.png"] style:UIBarButtonItemStylePlain target:self action:@selector(LeftButton)];
+  //  [userButton setImage:[UIImage imageNamed:@"person_button.png"]];
     
     
-    UIBarButtonItem *searchButton=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:nil];
-
+    UIBarButtonItem *searchButton=[[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"search_button.png"] style:UIBarButtonItemStylePlain target:self action:nil];
+    
     
     [[self navigationItem]setLeftBarButtonItem:userButton];
     [[self navigationItem]setRightBarButtonItem:searchButton];
@@ -163,7 +174,7 @@
 -(void)LeftButton
 {
     SelfUser_ViewController *vc=[[SelfUser_ViewController alloc]init];
-    [vc setBackgroundImage:[self.view captureView] andBlurEnable:YES];
+//    [vc setBackgroundImage:[self.view captureView] andBlurEnable:YES];
     [self.NavigationController pushViewController:vc animated:YES];
 }
 
@@ -249,6 +260,28 @@
     {
     [cell SetupWithBackImage:[UIImage imageNamed:@"placeholder.png"] AtIndexpath:indexPath AndInitPosition:(indexPath.row%2) AndDelegate:self];
     }
+    
+    switch (indexPath.row) {
+        case 0:
+        {
+            [cell insertBlurView:[UIImage imageNamed:@"square_button.png"]];
+            break;
+        }
+        case 1:
+        {
+            [cell insertBlurView:[UIImage imageNamed:@"activity_button.png"]];
+            break;
+        }
+        case 2:
+        {
+            [cell insertBlurView:[UIImage imageNamed:@"MustRead_button.png"]];
+            break;
+        }
+        default:
+            break;
+    }
+    
+    
     return cell;
 }
 
