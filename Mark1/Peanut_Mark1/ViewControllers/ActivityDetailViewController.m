@@ -243,7 +243,7 @@
             if ([_interest.text isEqualToString:@"我感兴趣"])
             {
                 _interest.text = @"已感兴趣";
-                _interestImage.image = [UIImage imageNamed:@"activity－detial-hearted.png"];
+                _interestImage.image = [UIImage imageNamed:@"activity－detial-hearte.png"];
             }
             else if ([_interest.text isEqualToString:@"已感兴趣"])
             {
