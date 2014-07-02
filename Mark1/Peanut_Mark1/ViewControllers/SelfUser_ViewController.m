@@ -18,7 +18,9 @@
     BOOL Logined;
     UIImageView *logoView;
     UIButton *SignUp;
-    
+    UIButton *bigButton;
+    BOOL needSignUp;
+    NSInteger errorID;
 }
 @end
 
@@ -43,7 +45,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    errorID=0;
+    needSignUp=YES;
     self.navigationItem.title=@"编辑资料";
     [self.view setBackgroundColor:[UIColor blackColor]];
     
@@ -63,57 +66,86 @@
         [control addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
         
         
-        UserName_Field=[[UITextField alloc]init];
-        Password_Field=[[UITextField alloc]init];
-        [self.view addSubview:UserName_Field];
-        [self.view addSubview:Password_Field];
-        
-        UserName_Field.backgroundColor=[UIColor clearColor];
-        Password_Field.backgroundColor=[UIColor clearColor];
+    UserName_Field=[[UITextField alloc]init];
+    Password_Field=[[UITextField alloc]init];
+    Confirm_Field=[[UITextField alloc]init];
+    [self.view addSubview:UserName_Field];
+    [self.view addSubview:Password_Field];
+    
+    
+    UserName_Field.backgroundColor=[UIColor clearColor];
+    Password_Field.backgroundColor=[UIColor clearColor];
+    Confirm_Field.backgroundColor=[UIColor clearColor];
+
     
     UserName_Field.layer.cornerRadius=5.f;
     Password_Field.layer.cornerRadius=5.f;
+    Confirm_Field.layer.cornerRadius=5.f;
+    
+    
     UserName_Field.layer.borderWidth=1.f;
     Password_Field.layer.borderWidth=1.f;
+    Confirm_Field.layer.borderWidth=1.f;
     
     UserName_Field.layer.borderColor=[[UIColor whiteColor]CGColor];
     Password_Field.layer.borderColor=[[UIColor whiteColor]CGColor];
-    
+    Confirm_Field.layer.borderColor=[[UIColor whiteColor]CGColor];
     
     UserName_Field.adjustsFontSizeToFitWidth=YES;
     Password_Field.adjustsFontSizeToFitWidth=YES;
-        
+    Confirm_Field.adjustsFontSizeToFitWidth=YES;
+    
     UIColor *color=[UIColor whiteColor];
     [UserName_Field setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"  用户名" attributes:@{NSForegroundColorAttributeName: color}]];
     [Password_Field setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"  密码" attributes:@{NSForegroundColorAttributeName:color}]];
     
+    [Confirm_Field setAttributedPlaceholder:[[NSAttributedString alloc] initWithString:@"  确认密码" attributes:@{NSForegroundColorAttributeName:color}]];
+     
         UserName_Field.frame=CGRectMake(self.view.frame.size.width*0.15, self.view.frame.size.height*0.45, self.view.frame.size.width*0.7, 44);
     
         Password_Field.frame=CGRectMake(self.view.frame.size.width*0.15, self.view.frame.size.height*0.55, self.view.frame.size.width*0.7, 44);
     
-        Password_Field.secureTextEntry=YES;
+    Password_Field.secureTextEntry=YES;
+    Confirm_Field.secureTextEntry=YES;
         
         
-        UserName_Field.tintColor=[UIColor whiteColor];
-        Password_Field.tintColor=[UIColor whiteColor];
-        UserName_Field.textColor=[UIColor whiteColor];
-        Password_Field.textColor=[UIColor whiteColor];
-        
+    UserName_Field.tintColor=[UIColor whiteColor];
+    Password_Field.tintColor=[UIColor whiteColor];
+    Confirm_Field.tintColor=[UIColor whiteColor];
     
-        
-        
+    UserName_Field.textColor=[UIColor whiteColor];
+    Password_Field.textColor=[UIColor whiteColor];
+    Confirm_Field.textColor=[UIColor whiteColor];
+    
+    bigButton=[UIButton buttonWithType:UIButtonTypeCustom];
+    [bigButton setTitle:@"登录" forState:UIControlStateNormal];
+    [bigButton setTitle:@"登录" forState:UIControlStateHighlighted];
+    [self.view addSubview:bigButton];
+    [bigButton setBackgroundColor:[UIColor whiteColor]];
+    [bigButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [bigButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
+    
+    
+    [bigButton setFrame:CGRectMake(self.view.frame.size.width*0.15, self.view.frame.size.height*0.65, self.view.frame.size.width*0.7, 44)];
+    [bigButton addTarget:self action:@selector(handleBigButton) forControlEvents:UIControlEventTouchUpInside];
+    
         UserName_Field.delegate=self;
         Password_Field.delegate=self;
+        Confirm_Field.delegate=self;
+    
         
-        UserName_Field.returnKeyType=UIReturnKeyNext;
-        Password_Field.returnKeyType=UIReturnKeyDone;
+    UserName_Field.returnKeyType=UIReturnKeyNext;
+    Password_Field.returnKeyType=UIReturnKeyDone;
+    Confirm_Field.returnKeyType=UIReturnKeyDone;
+    
     
     SignUp=[UIButton buttonWithType:UIButtonTypeSystem];
     [SignUp setTintColor:[UIColor whiteColor]];
     [SignUp setTitle:@"没有账号?" forState:UIControlStateNormal];
     [SignUp setTitle:@"没有账号?" forState:UIControlStateHighlighted];
+    [SignUp addTarget:self action:@selector(signUp_action) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:SignUp];
-    SignUp.frame=CGRectMake(self.view.frame.size.width/2-50, self.view.frame.size.height*0.7,100,30);
+    SignUp.frame=CGRectMake(self.view.frame.size.width/2-50, self.view.frame.size.height*0.75,100,30);
     
     // Do any additional setup after loading the view.
 }
@@ -182,17 +214,56 @@
     else
     {
         RTAlertView *alert=[[RTAlertView alloc]initWithTitle:@"错误" message:@"用户名或密码不完整" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil];
+        errorID=1;
         [alert show];
     }
     
 }
 
+-(void)signupProcedure
+{
+    if ([UserName_Field.text length]>0 && [Password_Field.text length]>0 && [Confirm_Field.text length]>0) {
+        
+        if ([Confirm_Field.text isEqualToString:Password_Field.text]) {
+            [[RequestPackage shareObject]SignUpWithUsername:UserName_Field.text andPassword:Password_Field.text];
+        }else
+        {
+            RTAlertView *alert=[[RTAlertView alloc]initWithTitle:@"错误" message:@"确认密码与密码不一致" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil];
+            errorID=2;
+            [alert show];
+        }
+    }
+    else
+    {
+        RTAlertView *alert=[[RTAlertView alloc]initWithTitle:@"错误" message:@"用户名或密码不完整" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil];
+        errorID=1;
+        [alert show];
+    }
+    
+}
+
+
+
 -(void)alertView:(RTAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if ([UserName_Field.text length]<=0) {
-        [UserName_Field becomeFirstResponder];
+    if (errorID==1) {
+        if ([UserName_Field.text length]<=0) {
+            [UserName_Field becomeFirstResponder];
+        }else
+            if ([Password_Field.text length]<=0) {
+                [Password_Field becomeFirstResponder];
+            }else
+            {
+                [Confirm_Field becomeFirstResponder];
+            }
     }else
-        [Password_Field becomeFirstResponder];
+    if (errorID==2)
+    {
+        Confirm_Field.text=@"";
+        [Confirm_Field becomeFirstResponder];
+    }
+    
+    errorID=0;
 }
 
 -(void)moveViewto:(CGRect)frame
@@ -213,6 +284,57 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+-(void)signUp_action
+{
+    
+    if (needSignUp) {
+        [self.view addSubview:Confirm_Field];
+        Confirm_Field.frame=CGRectMake(self.view.frame.size.width*0.15, self.view.frame.size.height*0.65, self.view.frame.size.width*0.7, 44);
+        Confirm_Field.alpha=0;
+        [UIView animateWithDuration:0.3f animations:^{
+            Confirm_Field.alpha=1;
+            bigButton.frame=CGRectOffset(bigButton.frame, 0, 60);
+            SignUp.frame=CGRectOffset(SignUp.frame, 0, 60);
+        }];
+        needSignUp=!needSignUp;
+        Password_Field.returnKeyType=UIReturnKeyNext;
+        [SignUp setTitle:@"已有账号?" forState:UIControlStateNormal];
+        [SignUp setTitle:@"已有账号?" forState:UIControlStateHighlighted];
+        [bigButton setTitle:@"注册" forState:UIControlStateNormal];
+        [bigButton setTitle:@"注册" forState:UIControlStateHighlighted];
+
+    }else
+    {
+        Confirm_Field.alpha=1;
+        [UIView animateWithDuration:0.3f animations:^{
+            Confirm_Field.alpha=0;
+            bigButton.frame=CGRectOffset(bigButton.frame, 0, -60);
+            SignUp.frame=CGRectOffset(SignUp.frame, 0, -60);
+        }];
+        needSignUp=!needSignUp;
+        [Confirm_Field removeFromSuperview];
+        Password_Field.returnKeyType=UIReturnKeyDone;
+        [SignUp setTitle:@"没有账号?" forState:UIControlStateNormal];
+        [SignUp setTitle:@"没有账号?" forState:UIControlStateHighlighted];
+        [bigButton setTitle:@"登录" forState:UIControlStateNormal];
+        [bigButton setTitle:@"登录" forState:UIControlStateHighlighted];
+    }
+
+}
+
+-(void)handleBigButton
+{
+    if (needSignUp) {
+        [self loginProcedure];
+    }else
+    {
+        [self signupProcedure];
+    }
+    
+}
+
 
 /*
 #pragma mark - Navigation

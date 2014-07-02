@@ -64,6 +64,29 @@ static RequestPackage * PublicObject;
     
 }
 
+-(void)SignUpWithUsername:(NSString *)username andPassword:(NSString *)passwd
+{
+    AFHTTPRequestOperationManager *manager=[AFHTTPRequestOperationManager manager];
+    NSDictionary *parameter=@{@"username": username,@"password":passwd};
+    [manager POST:Peanut_Login_Address parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        //NSDictionary *response=[NSJSONSerialization JSONObjectWithData:responseObject options:kNilOptions error:&error];
+        
+        NSDictionary *response=responseObject;
+        
+        if ([[response objectForKey:@"status"]integerValue]==1) {
+            [[NSUserDefaults standardUserDefaults]encryptValue:[[response objectForKey:@"data"]objectForKey:USER_Token] withKey:USER_Token];
+            [[NSUserDefaults standardUserDefaults]encryptValue:[[[response objectForKey:@"data"] objectForKey:@"user_info"] objectForKey:@"uid"] withKey:USER_UID_Fetch];
+            [CoreData_Helper addUserInfoEntity:[[response objectForKey:@"data"] objectForKey:@"user_info"]];
+            
+            RTAlertView *alert=[[RTAlertView alloc]initWithTitle:@"Note" message:@"Login Succeed" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+
+
+}
 
 -(void)Logout
 {

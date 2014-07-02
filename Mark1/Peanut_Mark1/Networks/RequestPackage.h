@@ -14,6 +14,9 @@
 
 -(void)LoginWithUsername:(NSString*)username andPassword:(NSString*)passwd;
 
+-(void)SignUpWithUsername:(NSString*)username andPassword:(NSString*)passwd;
+
+
 //-(void)LoginFromCookie;
 
 -(void)Logout;

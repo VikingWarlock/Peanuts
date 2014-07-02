@@ -12,7 +12,7 @@
 {
     UITextField *UserName_Field;
     UITextField *Password_Field;
-    UIButton *LoginButton;
+    UITextField *Confirm_Field;
     UILabel *LoginDetail;
     
 }
