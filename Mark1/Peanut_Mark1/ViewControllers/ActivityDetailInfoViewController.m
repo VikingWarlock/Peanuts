@@ -12,6 +12,7 @@
 @interface ActivityDetailInfoViewController ()
 {
     UIImageView *backImage;
+    BOOL loading;
 }
 @end
 
@@ -29,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    loading = YES;
     backImage = [[UIImageView alloc] init];
     __weak ActivityDetailInfoViewController *weakself = self;
     [backImage setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
@@ -50,8 +52,11 @@
     [_webView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_webView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_webView)]];
     [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_mask][_webView]|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_mask,_webView)]];
-    [_webView loadHTMLString:[CoreData_Helper GetActivityEntity:self.feedid].descriptions baseURL:nil];
-    NSLog(@"%@",[CoreData_Helper GetActivityEntity:self.feedid].descriptions);
+    
+    NSString *html = [CoreData_Helper GetActivityEntity:self.feedid].descriptions;
+    NSString *imghtml = [html stringByReplacingOccurrencesOfString:@"class=\"post-img\">" withString:@"style=\"width:300px;\" class=\"post-img\">"];
+    [_webView loadHTMLString:imghtml baseURL:nil];
+    NSLog(@"%@",imghtml);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -70,19 +75,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 #pragma mark -webview delegate
 
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    loading = NO;
+}
+
+- (BOOL)webView:(UIWebView*)webView shouldStartLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType {
+    return loading;
+}
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
@@ -93,25 +95,24 @@
      "script.text = \"function ResizeImages() { "
      "var myimg,oldwidth,oldheight;"
      "var maxwidth=300;" //缩放系数
-//     "var OriginImage=new Image();"
+     "var OriginImage=new Image();"
      "for(i=0;i <document.images.length;i++){"
      "myimg = document.images[i];"
-//     "OriginImage.src=myimg.src;"
+     "OriginImage.src=myimg.src;"
      //     "if(myimg.width > maxwidth){"
-     "oldwidth = myimg.width;"
-     "oldheight = myimg.height;"
+     "oldwidth = OriginImage.width;"
+     "oldheight = OriginImage.height;"
      "myimg.style.width = maxwidth;"
      "myimg.style.height = oldheight * (maxwidth/oldwidth);"
-     "myimg.width = maxwidth;"
-     "myimg.height = oldheight * (maxwidth/oldwidth);"
+     //     "myimg.width = maxwidth;"
+     //     "myimg.height = oldheight * (maxwidth/oldwidth);"
      //     "}"
      "}"
      "}\";"
-     "document.getElementsByTagName('head')[0].appendChild(script);"];
+     "document.getElementsByTagName('head')[0].appendChild(script);"
+     "document.body.style.color='#FFFFFF'"];
     
-    [webView stringByEvaluatingJavaScriptFromString:@"ResizeImages();"];
-    
-    [_webView.scrollView setContentSize:CGSizeMake(0, _webView.scrollView.contentSize.height)];
+    [webView stringByEvaluatingJavaScriptFromString:@"ResizeImages();"];    
 }
 
 
@@ -134,6 +135,7 @@
 {
     if (!_webView) {
         _webView = [[UIWebView alloc] init];
+        _webView.delegate = self;
         _webView.backgroundColor = [UIColor clearColor];
         _webView.opaque = NO;
     }
