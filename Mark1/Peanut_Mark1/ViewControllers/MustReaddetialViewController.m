@@ -8,6 +8,8 @@
 
 #import "MustReaddetialViewController.h"
 #import "CoreData-Helper.h"
+#import "ImgBottomView.h"
+
 @interface MustReaddetialViewController ()
 {
     NSString *feed_id;
@@ -49,6 +51,9 @@
     if (self.picture.image == nil) {
         [self downLoadWithFeedId:feed_id];
     }
+//    [self downLoadWithFeedId:feed_id];
+    ImgBottomView *bottomview = [[ImgBottomView alloc] initWithGroupFeedId:[feed_id intValue]];
+    [self.view addSubview:bottomview];
     //    [self.view addSubview:self.picture];
     //    [self.view addSubview:self.content];
     //
@@ -265,7 +270,7 @@
         //        _content.autoresizingMask = UIViewAutoresizingFlexibleHeight;
         //[_content setEditable:NO];
         //[_content setSelectable:NO];
-        _content.scrollView.contentInset = UIEdgeInsetsMake(255, 0, 0, 0);
+        _content.scrollView.contentInset = UIEdgeInsetsMake(255, 0, 40, 0);
         //_content.scalesPageToFit = NO;
     }
     return _content;

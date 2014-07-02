@@ -191,8 +191,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[cellinfo[indexPath.section] valueForKey:@"type"] isEqualToString:@"0"]) {
-        MustReaddetialViewController *detialView = [[MustReaddetialViewController alloc] init];
         int index = [[cellinfo[indexPath.section] valueForKey:@"index"] intValue];
+        MustReaddetialViewController *detialView = [[MustReaddetialViewController alloc] initWithFeedId:[data[index] valueForKey:@"feed_id"]];
         [detialView.picture setImageWithURL:[data[index] valueForKey:@"cover"] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
         [detialView setTitle:[data[index] valueForKey:@"title"]];
         [detialView.atitle setText:[data[index] valueForKey:@"title"]];
