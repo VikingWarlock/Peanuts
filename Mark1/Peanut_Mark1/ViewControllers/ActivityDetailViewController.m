@@ -61,6 +61,13 @@
     [super viewDidLoad];
     [self getFirstPage];
     [self.picture setImageWithURL:[NSURL URLWithString:[CoreData_Helper GetActivityEntity:self.feedid].cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"]];
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:[UIImage imageNamed:@"activity－detial-upload.png"] forState:UIControlStateNormal];
+    [button addTarget:self action:nil forControlEvents:UIControlEventTouchUpInside];
+    button.frame = CGRectMake(0, 0, 18, 18);
+    UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:button];
+    [self.navigationItem setRightBarButtonItem:rightButton];
 
     [self.view addSubview:self.picture];
     [self.view addSubview:self.leftButton];
@@ -353,7 +360,7 @@
 {
     if (!_leftButton) {
         _leftButton = [[UIButton alloc] init];
-        _leftButton.backgroundColor = [UIColor purpleColor];
+        _leftButton.backgroundColor = DarkPink;
         
         [_leftButton addSubview:self.join];
         [_leftButton addSubview:self.joinImage];
@@ -377,7 +384,7 @@
 {
     if (!_rightButton) {
         _rightButton = [[UIButton alloc] init];
-        _rightButton.backgroundColor = [UIColor brownColor];
+        _rightButton.backgroundColor = LightPink;
         
         [_rightButton addSubview:self.interest];
         [_rightButton addSubview:self.interestImage];
@@ -425,8 +432,7 @@
 {
     if (!_interestImage) {
         _interestImage = [[UIImageView alloc] init];
-        _interestImage.image = nil;
-        _interestImage.backgroundColor = [UIColor yellowColor];
+        _interestImage.image = [UIImage imageNamed:@"activity－detial-heart.png"];
     }
     return _interestImage;
 }
@@ -435,8 +441,7 @@
 {
     if (!_joinImage) {
         _joinImage = [[UIImageView alloc] init];
-        _joinImage.image = nil;
-        _joinImage.backgroundColor = [UIColor greenColor];
+        _joinImage.image = [UIImage imageNamed:@"activity－detial-join.png"];
     }
     return _joinImage;
 }

@@ -13,7 +13,7 @@
 #import "MJRefresh.h"
 #import "CoreData-Helper.h"
 
-#define PRESENT_TITLE_COLOR [UIColor redColor]
+#define PRESENT_TITLE_COLOR Dark_Red
 #define PAST_TITLE_COLOR [UIColor grayColor]
 #define COUNT_OF_PAGE 10
 @interface ActivityViewController ()
@@ -75,8 +75,8 @@
 {
     
     [super viewDidLoad];
-    UIBarButtonItem *Button=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:nil];
-    [self.navigationItem setRightBarButtonItem:Button];
+//    UIBarButtonItem *Button=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:nil];
+//    [self.navigationItem setRightBarButtonItem:Button];
     [self.view addSubview:self.progressingTableView];
     [self.view addSubview:self.progressingHeadView];
     [self.view addSubview:self.ReviewedFooterView];
