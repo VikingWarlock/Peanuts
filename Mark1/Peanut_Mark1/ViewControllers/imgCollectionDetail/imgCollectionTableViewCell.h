@@ -30,8 +30,7 @@
 @property (nonatomic,strong) UIButton * shareBtn;
 @property (nonatomic,strong) NSIndexPath *currentIndexPath;
 @property (nonatomic,assign)id<Delegate_imgCell>delegate;
-
-
+@property (nonatomic,assign) BOOL haveSet;
 
 -(void)setConstraintsWithBool:(BOOL)isFirstRow;
 -(void)removeConstraintWithBool:(BOOL)isFirstRow;;

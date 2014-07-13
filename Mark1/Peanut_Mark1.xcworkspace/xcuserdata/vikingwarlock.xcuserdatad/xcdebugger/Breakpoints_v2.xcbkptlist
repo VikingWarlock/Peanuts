@@ -120,12 +120,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peanut_Mark1/ViewControllers/imgCollectionViewController.m"
-            timestampString = "423384178.083694"
+            timestampString = "426945181.89906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "285"
-            endingLineNumber = "285"
-            landmarkName = "-downLoadWithFeedId:"
+            startingLineNumber = "317"
+            endingLineNumber = "317"
+            landmarkName = "-tableView:heightForFooterInSection:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -136,12 +136,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peanut_Mark1/ViewControllers/imgCollectionViewController.m"
-            timestampString = "423384178.083694"
+            timestampString = "426945181.89906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
-            landmarkName = "-downLoadWithFeedId:"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -344,12 +344,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peanut_Mark1/ViewControllers/imgCollectionViewController.m"
-            timestampString = "423385909.761754"
+            timestampString = "426945181.89906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "240"
+            endingLineNumber = "240"
+            landmarkName = "-didShare"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -360,45 +360,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peanut_Mark1/PublicLibrary/UIImageView+ForBroswer.m"
-            timestampString = "423386055.075898"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "-setDownloadedImage:AndTarget:ShouldUpdateImage:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Peanut_Mark1/PublicLibrary/UIImageView+ForBroswer.m"
-            timestampString = "423386055.985924"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "-setDownloadedImage:AndTarget:ShouldUpdateImage:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Peanut_Mark1/PublicLibrary/UIImageView+ForBroswer.m"
-            timestampString = "423386057.395571"
+            timestampString = "426938460.158281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "29"
             endingLineNumber = "29"
-            landmarkName = "-setDownloadedImage:AndTarget:ShouldUpdateImage:"
-            landmarkType = "5">
+            landmarkName = "@implementation UIImageView(ForBroswer)"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -408,13 +376,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peanut_Mark1/PublicLibrary/UIImageView+ForBroswer.m"
-            timestampString = "423386058.869489"
+            timestampString = "426938460.158281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "-setDownloadedImage:AndTarget:ShouldUpdateImage:"
-            landmarkType = "5">
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "@implementation UIImageView(ForBroswer)"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Peanut_Mark1/PublicLibrary/UIImageView+ForBroswer.m"
+            timestampString = "426938460.158281"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "@implementation UIImageView(ForBroswer)"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Peanut_Mark1/PublicLibrary/UIImageView+ForBroswer.m"
+            timestampString = "426938460.158281"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "@implementation UIImageView(ForBroswer)"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -424,13 +424,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peanut_Mark1/PublicLibrary/UIImageView+ForBroswer.m"
-            timestampString = "423386086.543045"
+            timestampString = "426938460.158281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "-downloaded"
-            landmarkType = "5">
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "@implementation UIImageView(ForBroswer)"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -440,13 +440,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peanut_Mark1/PublicLibrary/UIImageView+ForBroswer.m"
-            timestampString = "423386089.96047"
+            timestampString = "426938460.158281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
-            landmarkName = "-setDownloaded:"
-            landmarkType = "5">
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "@implementation UIImageView(ForBroswer)"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -532,7 +532,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peanut_Mark1/ViewControllers/PeanutTopViewController.m"
@@ -568,11 +568,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peanut_Mark1/ViewControllers/SelfUser_ViewController.m"
-            timestampString = "426001784.559146"
+            timestampString = "426002126.709331"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "-textFieldShouldReturn:"
             landmarkType = "5">
          </BreakpointContent>
@@ -584,11 +584,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peanut_Mark1/ViewControllers/SelfUser_ViewController.m"
-            timestampString = "426001784.559146"
+            timestampString = "426002126.709331"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "185"
-            endingLineNumber = "185"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "-textFieldDidBeginEditing:"
             landmarkType = "5">
          </BreakpointContent>
@@ -600,12 +600,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Peanut_Mark1/ViewControllers/SelfUser_ViewController.m"
-            timestampString = "426001784.559146"
+            timestampString = "426002126.709331"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "-textFieldDidEndEditing:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Peanut_Mark1/ViewControllers/imgCollectionViewController.m"
+            timestampString = "426945181.89906"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
+            landmarkName = "-setupTouchupInside:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Peanut_Mark1/ViewControllers/imgCollectionViewController.m"
+            timestampString = "426945233.066815"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "392"
+            endingLineNumber = "392"
+            landmarkName = "-setupWithPhotostoCell:andIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Peanut_Mark1/ViewControllers/imgCollectionViewController.m"
+            timestampString = "426945233.066815"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "349"
+            endingLineNumber = "349"
+            landmarkName = "-downLoadWithFeedId:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Peanut_Mark1/ViewControllers/imgCollectionViewController.m"
+            timestampString = "426945181.89906"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

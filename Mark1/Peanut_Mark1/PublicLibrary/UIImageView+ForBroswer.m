@@ -6,9 +6,10 @@
 //  Copyright (c) 2014 viking warlock. All rights reserved.
 //
 #import <objc/runtime.h>
+/*
 static const void *downloaded_=&downloaded_;
 static const void *target_=&target_;
-
+*/
 
 #import "UIImageView+ForBroswer.h"
 #import "BaseUIViewController.h"
@@ -16,6 +17,9 @@ static const void *target_=&target_;
 
 @implementation UIImageView (ForBroswer)
 
+
+
+/*
 @dynamic downloaded;
 @dynamic delegate_broswer;
 @dynamic target;
@@ -69,5 +73,7 @@ static const void *target_=&target_;
 {
     [self setDownloaded:NO];
 }
+*/
+
 
 @end

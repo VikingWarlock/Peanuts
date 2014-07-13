@@ -11,10 +11,10 @@
 #import "imgCollectionTableViewCell.h"
 #import "UIImageView+WebCache.h"
 #import "UIImageView+ForBroswer.h"
+#import <MWPhotoBrowser.h>
 
 
-
-@interface imgCollectionViewController (){
+@interface imgCollectionViewController ()<MWPhotoBrowserDelegate>{
     UIButton * praiseBtn;
     UIButton * commentBtn;
     UIButton * shareBtn;
@@ -25,6 +25,10 @@
     NSIndexPath * currentIndexPath;
     NSArray * imgData;
     NSInteger feed_id;
+    
+    NSMutableArray *photoList;
+    UIControl *control;
+    
 }
 
 @property (nonatomic,strong)UITableView * tableView;
@@ -40,7 +44,7 @@ static NSString * cellIdentifier = @"cellIdentifier";
 - (id)initWithFeedId:(NSInteger)feedId{// bgImageUrl:(NSURL *)url{
     self = [super init];
     if (self) {
-        PhotoSeriesEntity * entity = [CoreData_Helper GetPhotoSeriesEntity:[NSString stringWithFormat:@"%ld",feedId]];
+        PhotoSeriesEntity * entity = [CoreData_Helper GetPhotoSeriesEntity:[NSString stringWithFormat:@"%d",feedId]];
         UIImageView * iv = [[UIImageView alloc]initWithFrame:self.view.frame];
         [iv setImageWithURL:[NSURL URLWithString:entity.cover_url] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
             [self setBackgroundImage:image andBlurEnable:YES];
@@ -76,6 +80,9 @@ static NSString * cellIdentifier = @"cellIdentifier";
 
     [super viewDidLoad];
     
+    photoList=[NSMutableArray array];
+    
+
     [self.view setBackgroundColor:[UIColor whiteColor]];
 //    [self setBackgroundImage:[UIImage imageNamed:@"1.png"] andBlurEnable:YES];
     
@@ -251,13 +258,14 @@ static NSString * cellIdentifier = @"cellIdentifier";
     cell.currentIndexPath = indexPath;
     
     cell.delegate = self;
+    
 
     NSDictionary * rowData = imgData[indexPath.row];
     [cell.imgView setImageWithURL:rowData[@"imageUrl"] placeholderImage:[UIImage imageNamed:@"placeholder.png"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
    //TODO
-        if(cell)
+        if(cell!=nil)
         {
-        [cell.imgView setDownloadedImage:image AndTarget:self ShouldUpdateImage:NO];
+            [cell.imgView setImage:image];
         }
         
     }];
@@ -268,9 +276,33 @@ static NSString * cellIdentifier = @"cellIdentifier";
     [cell.praiseBtn setTitle:[NSString stringWithFormat:@"%d",[rowData[@"digg_count"] intValue]] forState:UIControlStateNormal];
     [cell.commentBtn setTitle:[NSString stringWithFormat:@"%d",[rowData[@"comment_count"] intValue]] forState:UIControlStateNormal];
     [cell.shareBtn setTitle:[NSString stringWithFormat:@"%d",[rowData[@"repost_count"] intValue]] forState:UIControlStateNormal];
+    [self setupWithPhotostoCell:cell andIndexPath:indexPath];
 
     return cell;
 }
+
+-(void)setupTouchupInside:(UIControl*)sender
+{
+    MWPhotoBrowser *browser=[[MWPhotoBrowser alloc]initWithDelegate:self];
+    
+    browser.displayActionButton = YES; // Show action button to allow sharing, copying, etc (defaults to YES)
+    browser.displayNavArrows = NO; // Whether to display left and right nav arrows on toolbar (defaults to NO)
+    browser.displaySelectionButtons = NO; // Whether selection buttons are shown on each image (defaults to NO)
+    browser.zoomPhotosToFill = YES; // Images that almost fill the screen will be initially zoomed to fill (defaults to YES)
+    browser.alwaysShowControls = NO; // Allows to control whether the bars and controls are always visible or whether they fade away to show the photo full (defaults to NO)
+    browser.enableGrid = YES; // Whether to allow the viewing of all the photo thumbnails on a grid (defaults to YES)
+    browser.startOnGrid = NO; // Whether to start on the grid of thumbnails instead of the first photo (defaults to NO)
+    
+    
+    // Optionally set the current visible photo before displaying
+    [browser setCurrentPhotoIndex:sender.tag];
+    
+    // Present
+    [self.navigationController pushViewController:browser animated:YES];
+
+    
+}
+
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [imgData count];
@@ -304,9 +336,16 @@ static NSString * cellIdentifier = @"cellIdentifier";
 
 -(void)downLoadWithFeedId:(NSInteger)feedId{
     
-    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=photo_group_info" parameters:@{@"feed_id":[NSString stringWithFormat:@"%ld",feedId]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [NetworkManager POST:@"http://112.124.10.151:82/index.php?app=mobile&mod=Square&act=photo_group_info" parameters:@{@"feed_id":[NSString stringWithFormat:@"%d",feedId]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([[responseObject valueForKey:@"info"] isEqualToString:@"success"]) {
             imgData = [[NSArray alloc]initWithArray:[[responseObject valueForKey:@"data"] valueForKey:@"photos"]];
+            NSLog(@"%@",imgData);
+            [photoList removeAllObjects];
+            for(NSDictionary * item in imgData)
+            {
+                [photoList addObject:[MWPhoto photoWithURL:[NSURL URLWithString:[item objectForKey:@"imageUrl"]]]];
+            }
+            
             NSDictionary * userData = [[responseObject valueForKey:@"data"] valueForKey:@"user_info"];
             NSDictionary * seriesData = [[responseObject valueForKey:@"data"] valueForKey:@"photo_group"];
             for (NSDictionary * dic in imgData) {
@@ -333,6 +372,33 @@ static NSString * cellIdentifier = @"cellIdentifier";
     }];
 }
 
+
+
+#pragma  MWPhotoDelegate
+- (NSUInteger)numberOfPhotosInPhotoBrowser:(MWPhotoBrowser *)photoBrowser {
+    return photoList.count;
+}
+
+- (id <MWPhoto>)photoBrowser:(MWPhotoBrowser *)photoBrowser photoAtIndex:(NSUInteger)index {
+    if (index < photoList.count)
+        return [photoList objectAtIndex:index];
+    return nil;
+}
+
+
+-(void)setupWithPhotostoCell:(imgCollectionTableViewCell*)cell andIndexPath:(NSIndexPath*)indexpath;
+{
+    if (cell.haveSet==NO) {
+        UIControl *cont=[[UIControl alloc]init];
+        [cell addSubview:cont];
+        cont.frame=cell.frame;
+        cont.tag=indexpath.row;
+        [cont addTarget:self action:@selector(setupTouchupInside:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.imageView setUserInteractionEnabled:YES];
+        [cell setUserInteractionEnabled:YES];
+        cell.haveSet=YES;
+    }
+}
 
 
 //- (void)dealloc
